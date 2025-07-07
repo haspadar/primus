@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<ruleset name="Matcher Project">
+<ruleset name="Mono Project">
     <description>PHP_CodeSniffer rules for Mono</description>
 
     <files>

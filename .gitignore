@@ -36,6 +36,3 @@ coverage/
 
 # Php metrics
 /build/
-
-# Deptrac cache
-/.deptrac.cache
