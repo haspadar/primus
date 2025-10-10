@@ -1,6 +1,6 @@
 <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="docs/primus-banner-dark.svg">
-    <source media="(prefers-color-scheme: light)" srcset="docs/primus-banner-light.svg">
+    <source media="(prefers-color-scheme: dark)" srcset="docs/primus-banner-light.svg">
+    <source media="(prefers-color-scheme: light)" srcset="docs/primus-banner-dark.svg">
     <img alt="Primus logo" width="280" src="docs/primus-banner-light.svg">
 </picture>
 
