@@ -8,9 +8,9 @@ declare(strict_types=1);
 
 namespace Primus\Tests\Scalar;
 
-use Primus\Scalar\ScalarOf;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
+use Primus\Scalar\ScalarOf;
 
 final class ScalarOfTest extends TestCase
 {

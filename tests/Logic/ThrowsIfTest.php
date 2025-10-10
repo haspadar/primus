@@ -8,12 +8,12 @@ declare(strict_types=1);
 
 namespace Primus\Tests\Logic;
 
+use PHPUnit\Framework\Attributes\Test;
+use PHPUnit\Framework\TestCase;
 use Primus\Exception;
 use Primus\Logic\No;
 use Primus\Logic\ThrowsIf;
 use Primus\Logic\Yes;
-use PHPUnit\Framework\Attributes\Test;
-use PHPUnit\Framework\TestCase;
 
 final class ThrowsIfTest extends TestCase
 {

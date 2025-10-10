@@ -8,10 +8,10 @@ declare(strict_types=1);
 
 namespace Primus\Tests\Iterable;
 
-use Primus\Iterable\Mapped;
-use Primus\Iterable\SequenceOf;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
+use Primus\Iterable\Mapped;
+use Primus\Iterable\SequenceOf;
 
 final class MappedTest extends TestCase
 {

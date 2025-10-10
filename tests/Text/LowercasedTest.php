@@ -8,10 +8,10 @@ declare(strict_types=1);
 
 namespace Primus\Tests\Text;
 
-use Primus\Text\Lowercased;
-use Primus\Text\TextOf;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
+use Primus\Text\Lowercased;
+use Primus\Text\TextOf;
 
 final class LowercasedTest extends TestCase
 {

@@ -8,9 +8,9 @@ declare(strict_types=1);
 
 namespace Primus\Tests\Logic;
 
-use Primus\Logic\Yes;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
+use Primus\Logic\Yes;
 
 final class YesTest extends TestCase
 {

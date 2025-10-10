@@ -8,10 +8,10 @@ declare(strict_types=1);
 
 namespace Primus\Tests\Logic;
 
-use Primus\Logic\IsUrl;
-use Primus\Text\TextOf;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
+use Primus\Logic\IsUrl;
+use Primus\Text\TextOf;
 
 final class IsUrlTest extends TestCase
 {
