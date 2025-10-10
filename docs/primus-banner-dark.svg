@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 256" width="280" height="64">
+    <g stroke="#111" fill="none" stroke-width="12">
+        <circle cx="128" cy="128" r="100"/>
+        <rect x="92" y="114" width="72" height="72"/>
+        <polygon points="92,96 164,96 128,46" fill="#f97316" stroke="#111" stroke-width="2"/>
+    </g>
+
+    <text x="250" y="160" dominant-baseline="middle"
+          font-family="Inter, system-ui, sans-serif"
+          font-size="120" font-weight="700"
+          fill="#111" letter-spacing="2">
+        Primus
+    </text>
+
+    <circle cx="386" cy="112" r="10" fill="#f97316"/>
+</svg>
