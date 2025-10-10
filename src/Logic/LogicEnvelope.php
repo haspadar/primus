@@ -6,9 +6,9 @@
  */
 declare(strict_types=1);
 
-namespace Mono\Logic;
+namespace Primus\Logic;
 
-use Mono\Text\Text;
+use Primus\Text\Text;
 
 /**
  * Envelope for {@see Logic}, delegating the call to the origin.

@@ -1,5 +1,5 @@
 {
-  "name": "haspadar/mono",
+  "name": "haspadar/primus",
   "description": "Primitive wrappers for PHP: strong typing for strings, ints, arrays, and more",
   "type": "library",
   "license": "MIT",
@@ -21,19 +21,19 @@
   "prefer-stable": true,
   "autoload": {
     "psr-4": {
-      "Mono\\": "src/"
+      "Primus\\": "src/"
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "Mono\\Tests\\": "tests/"
+      "Primus\\Tests\\": "tests/"
     }
   },
   "scripts": {
     "test": "phpunit --order-by=random --random-order-seed=$(date +%s)",
     "test-coverage": "XDEBUG_MODE=coverage php -d memory_limit=512M ./vendor/bin/phpunit --coverage-clover=coverage.xml --coverage-filter=src",
     "test-coverage-html": "XDEBUG_MODE=coverage php -d memory_limit=512M ./vendor/bin/phpunit --coverage-html=coverage-report --coverage-filter=src",
-    "analyze": "phpstan analyse src",
+    "analyze": "phpstan analyse",
     "analyze-changed": "git diff --name-only origin/main...HEAD | grep '\\.php$' | xargs -r vendor/bin/phpstan analyse",
     "psalm": "./vendor/bin/psalm",
     "psalm:shepherd": "./vendor/bin/psalm --shepherd --no-diff --stats --output-format=github",
@@ -41,7 +41,7 @@
     "fix-test": "PHP_CS_FIXER_IGNORE_ENV=1 vendor/bin/php-cs-fixer fix --dry-run --diff",
     "fix-changed": "git diff --name-only origin/main...HEAD | grep '\\.php$' | xargs -r vendor/bin/php-cs-fixer fix --dry-run --diff --allow-risky=yes",
     "infection": "XDEBUG_MODE=coverage vendor/bin/infection --threads=4 --only-covered",
-    "mutations": "php -d memory_limit=1024M ./vendor/bin/infection --show-mutations",
+    "mutations": "XDEBUG_MODE=coverage php -d memory_limit=1024M ./vendor/bin/infection --threads=4 --only-covered --show-mutations",
     "metrics": "phpmetrics --report-html=build/phpmetrics-report src",
     "refactor": "rector",
     "test-refactor": "rector --dry-run",

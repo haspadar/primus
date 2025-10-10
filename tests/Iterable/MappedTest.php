@@ -6,10 +6,10 @@
  */
 declare(strict_types=1);
 
-namespace Mono\Tests\Iterable;
+namespace Primus\Tests\Iterable;
 
-use Mono\Iterable\Mapped;
-use Mono\Iterable\SequenceOf;
+use Primus\Iterable\Mapped;
+use Primus\Iterable\SequenceOf;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 

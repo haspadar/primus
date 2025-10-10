@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace Mono\Text;
+namespace Primus\Text;
 
 /**
  * {@see Text} sanitized for HTML output.

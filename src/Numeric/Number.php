@@ -5,9 +5,9 @@
  */
 declare(strict_types=1);
 
-namespace Mono\Numeric;
+namespace Primus\Numeric;
 
-use Mono\Scalar\Scalar;
+use Primus\Scalar\Scalar;
 
 /**
  * @template T of int|float|string

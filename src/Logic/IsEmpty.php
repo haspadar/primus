@@ -6,9 +6,9 @@
  */
 declare(strict_types=1);
 
-namespace Mono\Logic;
+namespace Primus\Logic;
 
-use Mono\Text\Trimmed;
+use Primus\Text\Trimmed;
 
 /**
  * {@see Logic} that returns true if the text is empty or whitespace-only.

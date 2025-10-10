@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace Mono\Text;
+namespace Primus\Text;
 
 /**
  * Envelope for {@see Text}, delegating all calls to the origin.

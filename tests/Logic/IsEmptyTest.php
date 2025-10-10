@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Mono\Tests\Logic;
+namespace Primus\Tests\Logic;
 
-use Mono\Logic\IsEmpty;
-use Mono\Text\TextOf;
+use Primus\Logic\IsEmpty;
+use Primus\Text\TextOf;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;

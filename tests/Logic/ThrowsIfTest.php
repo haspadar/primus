@@ -6,12 +6,12 @@
  */
 declare(strict_types=1);
 
-namespace Mono\Tests\Logic;
+namespace Primus\Tests\Logic;
 
-use Mono\Exception;
-use Mono\Logic\No;
-use Mono\Logic\ThrowsIf;
-use Mono\Logic\Yes;
+use Primus\Exception;
+use Primus\Logic\No;
+use Primus\Logic\ThrowsIf;
+use Primus\Logic\Yes;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 

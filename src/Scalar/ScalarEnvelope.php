@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace Mono\Scalar;
+namespace Primus\Scalar;
 
 /**
  * Envelope for {@see Scalar}, delegating all calls to the origin.

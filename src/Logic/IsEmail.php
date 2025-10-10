@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace Mono\Logic;
+namespace Primus\Logic;
 
 /**
  * {@see Logic} that returns true if the text is a valid email.

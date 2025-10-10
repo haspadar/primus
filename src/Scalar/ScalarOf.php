@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace Mono\Scalar;
+namespace Primus\Scalar;
 
 /**
  * A scalar that wraps a deferred computation.

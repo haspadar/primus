@@ -6,9 +6,9 @@
  */
 declare(strict_types=1);
 
-namespace Mono\Tests\Logic;
+namespace Primus\Tests\Logic;
 
-use Mono\Logic\No;
+use Primus\Logic\No;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 

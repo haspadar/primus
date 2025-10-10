@@ -6,9 +6,9 @@
  */
 declare(strict_types=1);
 
-namespace Mono\Logic;
+namespace Primus\Logic;
 
-use Mono\Text\Text;
+use Primus\Text\Text;
 
 /**
  * {@see Logic} that returns true if a {@see Text} is a valid URL.

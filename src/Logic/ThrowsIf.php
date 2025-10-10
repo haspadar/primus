@@ -6,9 +6,9 @@
  */
 declare(strict_types=1);
 
-namespace Mono\Logic;
+namespace Primus\Logic;
 
-use Mono\Exception;
+use Primus\Exception;
 
 /**
  * Throws an exception if a {@see Logic} condition is met or not met.

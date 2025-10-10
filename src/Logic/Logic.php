@@ -6,9 +6,9 @@
  */
 declare(strict_types=1);
 
-namespace Mono\Logic;
+namespace Primus\Logic;
 
-use Mono\Scalar\Scalar;
+use Primus\Scalar\Scalar;
 
 /**
  * A logical boolean component.

@@ -6,10 +6,10 @@
  */
 declare(strict_types=1);
 
-namespace Mono\Tests\Logic;
+namespace Primus\Tests\Logic;
 
-use Mono\Logic\IsUrl;
-use Mono\Text\TextOf;
+use Primus\Logic\IsUrl;
+use Primus\Text\TextOf;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 

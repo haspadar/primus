@@ -6,10 +6,10 @@
  */
 declare(strict_types=1);
 
-namespace Mono\Text;
+namespace Primus\Text;
 
-use Mono\Scalar\ScalarEnvelope;
-use Mono\Scalar\ScalarOf;
+use Primus\Scalar\ScalarEnvelope;
+use Primus\Scalar\ScalarOf;
 
 /**
  * Length of {@see Text}, measured in multibyte characters.

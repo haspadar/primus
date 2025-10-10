@@ -6,9 +6,9 @@
  */
 declare(strict_types=1);
 
-namespace Mono\Text;
+namespace Primus\Text;
 
-use Mono\Exception;
+use Primus\Exception;
 
 /**
  * {@see Text} truncated from the right.

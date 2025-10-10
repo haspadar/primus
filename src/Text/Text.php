@@ -6,9 +6,9 @@
  */
 declare(strict_types=1);
 
-namespace Mono\Text;
+namespace Primus\Text;
 
-use Mono\Scalar\Scalar;
+use Primus\Scalar\Scalar;
 
 /**
  * Represents a string value.

@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace Mono;
+namespace Primus;
 
 final class Exception extends \Exception
 {

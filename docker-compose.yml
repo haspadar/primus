@@ -3,13 +3,13 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: mono-app
+    container_name: primus-app
     volumes:
       - ./:/app
     environment:
       XDEBUG_MODE: develop,debug,coverage
       XDEBUG_CONFIG: client_host=host.docker.internal
-      PHP_IDE_CONFIG: serverName=mono
+      PHP_IDE_CONFIG: serverName=primus
       COMPOSER_MEMORY_LIMIT: -1
     working_dir: /app
     tty: true

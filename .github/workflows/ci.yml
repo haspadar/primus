@@ -55,6 +55,6 @@ jobs:
         uses: codecov/codecov-action@v5
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
-          slug: haspadar/mono
+          slug: haspadar/primus
           files: coverage.xml
           fail_ci_if_error: true

@@ -6,9 +6,9 @@
  */
 declare(strict_types=1);
 
-namespace Mono\Tests\Scalar;
+namespace Primus\Tests\Scalar;
 
-use Mono\Scalar\ScalarOf;
+use Primus\Scalar\ScalarOf;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 

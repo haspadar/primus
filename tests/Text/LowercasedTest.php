@@ -6,10 +6,10 @@
  */
 declare(strict_types=1);
 
-namespace Mono\Tests\Text;
+namespace Primus\Tests\Text;
 
-use Mono\Text\Lowercased;
-use Mono\Text\TextOf;
+use Primus\Text\Lowercased;
+use Primus\Text\TextOf;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 

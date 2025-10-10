@@ -1,22 +1,22 @@
-# 🧊 Mono
+# <img src="docs/logo.svg" width="36" alt="Primus logo" style="vertical-align: -6px;"> Primus
 
 [![PHP Version](https://img.shields.io/badge/PHP-8.4-blue)](https://www.php.net/releases/8.4/)
 [![Code Style](https://img.shields.io/badge/Code%20Style-PSR--12-blue)](https://github.com/FriendsOfPHP/PHP-CS-Fixer)
-[![CI](https://github.com/haspadar/mono/actions/workflows/ci.yml/badge.svg)](https://github.com/haspadar/mono/actions/workflows/ci.yml)
+[![CI](https://github.com/haspadar/primus/actions/workflows/ci.yml/badge.svg)](https://github.com/haspadar/primus/actions/workflows/ci.yml)
 [![PHP Metrics](https://img.shields.io/badge/Metrics-phpmetrics%203.0-blue)](https://phpmetrics.org/)
 
-[![Tests](https://img.shields.io/badge/Tests-Passing-brightgreen)](https://github.com/haspadar/mono/actions/workflows/ci.yml)
-[![Coverage](https://codecov.io/gh/haspadar/mono/branch/main/graph/badge.svg)](https://codecov.io/gh/haspadar/mono)
+[![Tests](https://img.shields.io/badge/Tests-Passing-brightgreen)](https://github.com/haspadar/primus/actions/workflows/ci.yml)
+[![Coverage](https://codecov.io/gh/haspadar/primus/branch/main/graph/badge.svg)](https://codecov.io/gh/haspadar/primus)
 [![PHPStan Level](https://img.shields.io/badge/PHPStan-Level%209-brightgreen)](https://phpstan.org/)
 [![Psalm](https://img.shields.io/badge/psalm-level%208-brightgreen)](https://psalm.dev)
-[![Psalm Type Coverage](https://shepherd.dev/github/haspadar/mono/coverage.svg)](https://shepherd.dev/github/haspadar/mono)
+[![Psalm Type Coverage](https://shepherd.dev/github/haspadar/primus/coverage.svg)](https://shepherd.dev/github/haspadar/primus)
 [![Mutation MSI](https://img.shields.io/badge/Mutation%20MSI-100%25-brightgreen)](https://infection.github.io/)
 
 ---
 
 ## 📦 About
 
-**Mono** is a library of immutable value objects that wrap primitive types like `string`, `int`, `bool`, and `array`.
+**Primus** is a library of immutable value objects that wrap primitive types like `string`, `int`, `bool`, and `array`.
 
 Instead of passing around loose values, you use small, self-contained wrappers like:
 
@@ -43,9 +43,9 @@ Inspired by [Elegant Objects](https://www.yegor256.com/elegant-objects.html) and
 ## ✨ Example
 
 ```php
-use Mono\Text\Lowercased;
-use Mono\Text\TruncatedRight;
-use Mono\Text\Trimmed;
+use Primus\Text\Lowercased;
+use Primus\Text\TruncatedRight;
+use Primus\Text\Trimmed;
 
 $text = new TruncatedRight(
     new Lowercased(
@@ -93,7 +93,7 @@ Every push and pull request is checked via GitHub Actions:
 ## 📥 Installation
 
 ```bash
-composer require haspadar/mono
+composer require haspadar/primus
 ```
 
 Requires PHP 8.4
