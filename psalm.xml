@@ -13,4 +13,8 @@
         </ignoreFiles>
     </projectFiles>
 
+    <plugins>
+        <pluginClass class="Haspadar\PsalmEoRules\Plugin" />
+    </plugins>
+
 </psalm>

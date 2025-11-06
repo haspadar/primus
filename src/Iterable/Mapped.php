@@ -23,7 +23,7 @@ use Closure;
  * @template TOut
  * @extends SequenceEnvelope<TOut>
  */
-final class Mapped extends SequenceEnvelope
+final readonly class Mapped extends SequenceEnvelope
 {
     /**
      * @param Closure(TIn): TOut $fn

@@ -9,6 +9,7 @@ declare(strict_types=1);
 namespace Primus\Iterable;
 
 use Iterator;
+use Override;
 
 /**
  * Base class for {@see Sequence} implementations.
@@ -16,7 +17,7 @@ use Iterator;
  * @template T
  * @implements Sequence<T>
  */
-abstract class SequenceEnvelope implements Sequence
+abstract readonly class SequenceEnvelope implements Sequence
 {
     /**
      * @param Sequence<T> $origin
@@ -26,9 +27,9 @@ abstract class SequenceEnvelope implements Sequence
     }
 
     /**
-     * @return \Iterator<int, T>
+     * @return Iterator<int, T>
      */
-    #[\Override]
+    #[Override]
     public function getIterator(): Iterator
     {
         return $this->origin->getIterator();

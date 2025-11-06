@@ -15,13 +15,13 @@ use Primus\Scalar\ScalarOf;
  * Length of {@see Text}, measured in multibyte characters.
  *
  * Example:
- * $length = new LengthOf(new TextOf('Café Noël'));
+ * $length = new LengthOfText(new TextOf('Café Noël'));
  * echo $length->value(); // 9
  *
  * @extends ScalarEnvelope<int>
- * @psalm-pure
+ *
  */
-final readonly class LengthOf extends ScalarEnvelope
+final readonly class LengthOfText extends ScalarEnvelope
 {
     public function __construct(Text $origin)
     {

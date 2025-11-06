@@ -10,38 +10,35 @@ namespace Primus\Tests\Text;
 
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
-use Primus\Text\LengthOf;
+use Primus\Tests\Constraint\HasSize;
 use Primus\Text\TextOf;
 
-final class LengthOfTest extends TestCase
+final class LengthOfTextTest extends TestCase
 {
     #[Test]
     public function returnsLengthFiveWhenTextIsAscii(): void
     {
-        $this->assertSame(
-            5,
-            new LengthOf(new TextOf('hello'))->value(),
-            'Expected length 5 for ASCII string "hello"'
+        self::assertThat(
+            new TextOf('hello'),
+            new HasSize(5)
         );
     }
 
     #[Test]
     public function returnsLengthFiveWhenTextContainsDiacritics(): void
     {
-        $this->assertSame(
-            5,
-            new LengthOf(new TextOf('àéîöü'))->value(),
-            'Expected length 5 for multibyte string "àéîöü"'
+        self::assertThat(
+            new TextOf('àéîöü'),
+            new HasSize(5)
         );
     }
 
     #[Test]
     public function returnsZeroWhenTextIsEmpty(): void
     {
-        $this->assertSame(
-            0,
-            new LengthOf(new TextOf(''))->value(),
-            'Expected length 0 for empty string'
+        self::assertThat(
+            new TextOf(''),
+            new HasSize(0)
         );
     }
 }

@@ -48,10 +48,6 @@ Inspired by [Elegant Objects](https://www.yegor256.com/elegant-objects.html) and
 ## ✨ Example
 
 ```php
-use Primus\Text\Lowercased;
-use Primus\Text\TruncatedRight;
-use Primus\Text\Trimmed;
-
 $text = new TruncatedRight(
     new Lowercased(
         new Trimmed("  Hello, world!  ")
@@ -59,7 +55,7 @@ $text = new TruncatedRight(
     5
 );
 
-echo $text->toString(); // "hello"
+echo $text->value(); // "hello"
 ```
 
 Each wrapper adds one behavior:
@@ -73,7 +69,7 @@ All wrappers implement the same interface and can be freely composed.
 
 ## 🧱 Modules
 
-- **Text** — `Trimmed`, `Uppercased`, `Lowercased`, `TruncatedRight`, `HtmlSanitized`, `LengthOf`, `Preview`, `TextOf`
+- **Text** — `Trimmed`, `Uppered`, `Lowered`, `Sub`, `WithoutTags`, `LengthOfText`, `Abbreviated`, `TextOf`
 - **Logic** — `Yes`, `No`, `ThrowsIf`, `IsEmpty`, `IsEmail`, `IsUuid`, `LogicEnvelope`
 - **Iterable** — `Sequence`, `SequenceOf`, `Mapped`, `Filtered`
 - **Number** — *(coming soon)* `Positive`, `NonZero`, `Rounded`, etc.
@@ -92,6 +88,20 @@ Every push and pull request is checked via GitHub Actions:
 - ✅ Mutation testing with [Infection](https://infection.github.io)
 - ✅ Composer validation, platform checks, security audit
 - ✅ Automatic refactoring via [Rector](https://github.com/rectorphp/rector)
+
+---
+
+## 🧩 Static Analysis Rules
+
+Primus enforces [Elegant Objects](https://www.yegor256.com/elegant-objects.html) design principles using  
+[`haspadar/psalm-eo-rules`](https://github.com/haspadar/psalm-eo-rules) — a custom Psalm plugin that forbids:
+
+- `static` methods and properties
+- `null`, `isset()`, and `empty()`
+- non-`readonly` mutable state
+- traits and inheritance misuse
+
+These checks guarantee immutability and strict object boundaries across all modules.
 
 ---
 

@@ -10,6 +10,7 @@ namespace Primus\Tests\Text;
 
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
+use Primus\Tests\Constraint\HasValue;
 use Primus\Text\TextOf;
 
 final class TextOfTest extends TestCase
@@ -17,20 +18,18 @@ final class TextOfTest extends TestCase
     #[Test]
     public function returnsOriginalTextWhenValueIsRequested(): void
     {
-        $this->assertSame(
-            'hello',
-            new TextOf('hello')->value(),
-            'Expected TextOf to return original string "hello"'
+        self::assertThat(
+            new TextOf('hello'),
+            new HasValue('hello')
         );
     }
 
     #[Test]
     public function castsToStringCorrectly(): void
     {
-        $this->assertSame(
-            'world',
-            (string) new TextOf('world'),
-            'Expected TextOf to cast to "world"'
+        self::assertThat(
+            new TextOf('world'),
+            new HasValue((string) 'world')
         );
     }
 }

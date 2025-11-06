@@ -14,12 +14,11 @@ namespace Primus\Text;
  * Converts the given text to uppercase using multibyte support.
  *
  * Example:
- * $text = new Uppercased(new TextOf('touché résumé'));
+ * $text = new Uppered(new TextOf('touché résumé'));
  * echo $text->value(); // 'TOUCHÉ RÉSUMÉ'
  *
- * @psalm-pure
  */
-final readonly class Uppercased extends TextEnvelope
+final readonly class Uppered extends TextEnvelope
 {
     public function __construct(Text $origin)
     {

@@ -8,37 +8,41 @@ declare(strict_types=1);
 
 namespace Primus\Scalar;
 
+use Closure;
+use Override;
+
 /**
- * A scalar that wraps a deferred computation.
+ * A scalar created from a closure.
  *
- * Accepts a lazily evaluated value via a closure and returns it upon demand.
- * Serves as the main entry point for functional scalar composition.
+ * Wraps a zero-argument closure and evaluates it lazily when value() is called.
+ * This is the primary way to create scalars from deferred computations.
+ *
+ * The closure is evaluated on every call to value() unless wrapped in a
+ * caching decorator like Sticky.
  *
  * Example:
- * $scalar = new ScalarOf(fn() => 2 + 2);
- * echo $scalar->value(); // 4
+ *     $scalar = new ScalarOf(fn() => 2 + 2);
+ *     echo $scalar->value(); // 4
  *
  * @template T
  * @implements Scalar<T>
- * @psalm-pure
  * @since 0.1
  */
 final readonly class ScalarOf implements Scalar
 {
     /**
-     * @param \Closure(): T $value
+     * @param Closure(): T $closure
      */
-    public function __construct(
-        private \Closure $value
-    ) {
+    public function __construct(private Closure $closure)
+    {
     }
 
     /**
      * @return T
      */
-    #[\Override]
-    public function value(): mixed
+    #[Override]
+    public function value()
     {
-        return ($this->value)();
+        return ($this->closure)();
     }
 }

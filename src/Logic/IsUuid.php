@@ -13,7 +13,6 @@ namespace Primus\Logic;
  *
  * Matches 8-4-4-4-12 pattern with correct version and variant bits.
  *
- * @psalm-pure
  */
 final readonly class IsUuid extends LogicEnvelope
 {

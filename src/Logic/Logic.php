@@ -16,7 +16,7 @@ use Primus\Scalar\Scalar;
  * Represents a boolean condition.
  *
  * @extends Scalar<bool>
- * @psalm-pure
+ *
  */
 interface Logic extends Scalar
 {

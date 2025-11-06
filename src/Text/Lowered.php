@@ -14,13 +14,12 @@ namespace Primus\Text;
  * Converts the given text to lowercase using multibyte support.
  *
  * Example:
- * $text = new Lowercased(new TextOf('CAFÉ & TÜRKİYE'));
+ * $text = new Lowered(new TextOf('CAFÉ & TÜRKİYE'));
  * echo $text->value(); // 'café & türkiye'
  *
- * @psalm-pure
  * @since 0.1
  */
-final readonly class Lowercased extends TextEnvelope
+final readonly class Lowered extends TextEnvelope
 {
     public function __construct(Text $origin)
     {

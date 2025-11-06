@@ -13,7 +13,6 @@ use Primus\Text\Trimmed;
 /**
  * {@see Logic} that returns true if the text is empty or whitespace-only.
  *
- * @psalm-pure
  */
 final readonly class IsEmpty extends LogicEnvelope
 {

@@ -22,7 +22,7 @@ use Iterator;
  *
  * @template T
  * @implements Sequence<T>
- * @psalm-pure
+ *
  * @since 0.1
  */
 final readonly class SequenceOf implements Sequence

@@ -14,13 +14,12 @@ namespace Primus\Text;
  * Pads the text to the specified length with the given character using {@see str_pad()}.
  *
  * Example:
- * $text = new PaddedRight(new TextOf('foo'), 6, '.');
+ * $text = new RightPadded(new TextOf('foo'), 6, '.');
  * echo $text->value(); // 'foo...'
  *
- * @psalm-pure
  * @since 0.1
  */
-final readonly class PaddedRight extends TextEnvelope
+final readonly class RightPadded extends TextEnvelope
 {
     public function __construct(
         Text $origin,
@@ -32,8 +31,7 @@ final readonly class PaddedRight extends TextEnvelope
                 str_pad(
                     $origin->value(),
                     $length,
-                    $padChar,
-                    STR_PAD_RIGHT
+                    $padChar
                 )
             )
         );

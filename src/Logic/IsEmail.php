@@ -11,7 +11,6 @@ namespace Primus\Logic;
 /**
  * {@see Logic} that returns true if the text is a valid email.
  *
- * @psalm-pure
  */
 final readonly class IsEmail extends LogicEnvelope
 {

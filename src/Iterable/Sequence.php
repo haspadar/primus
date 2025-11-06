@@ -16,7 +16,7 @@ use Traversable;
  *
  * @template T
  * @extends IteratorAggregate<int, T>
- * @psalm-pure
+ *
  * @since 0.1
  */
 interface Sequence extends IteratorAggregate

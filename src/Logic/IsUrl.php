@@ -17,7 +17,6 @@ use Primus\Text\Text;
  * new IsUrl(new TextOf("https://example.com")) → true
  * new IsUrl(new TextOf("not-a-url")) → false
  *
- * @psalm-pure
  */
 final readonly class IsUrl extends LogicEnvelope
 {
