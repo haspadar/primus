@@ -27,7 +27,7 @@ use Primus\Text\Text;
  */
 final class HasSize extends Constraint
 {
-    public function __construct(private int $expected)
+    public function __construct(private readonly int $expected)
     {
     }
 

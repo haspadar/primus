@@ -20,7 +20,7 @@ use Primus\Scalar\Scalar;
  */
 final class HasScalarValue extends Constraint
 {
-    public function __construct(private int|float|string|bool $expected)
+    public function __construct(private readonly int|float|string|bool $expected)
     {
     }
 

@@ -24,8 +24,8 @@ final class EqualToTest extends TestCase
     {
         self::assertThat(
             new EqualTo(
-                new ScalarOf(fn () => 42),
-                new ScalarOf(fn () => 42)
+                new ScalarOf(fn (): int => 42),
+                new ScalarOf(fn (): int => 42)
             ),
             new HasBoolValue(true)
         );
@@ -36,8 +36,8 @@ final class EqualToTest extends TestCase
     {
         self::assertThat(
             new EqualTo(
-                new ScalarOf(fn () => 'foo'),
-                new ScalarOf(fn () => 'bar')
+                new ScalarOf(fn (): string => 'foo'),
+                new ScalarOf(fn (): string => 'bar')
             ),
             new HasBoolValue(false)
         );
@@ -48,8 +48,8 @@ final class EqualToTest extends TestCase
     {
         self::assertThat(
             new EqualTo(
-                new ScalarOf(fn () => ''),
-                new ScalarOf(fn () => '')
+                new ScalarOf(fn (): string => ''),
+                new ScalarOf(fn (): string => '')
             ),
             new HasBoolValue(true)
         );

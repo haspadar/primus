@@ -19,7 +19,7 @@ final class IsUrlTest extends TestCase
     public function returnsTrueWhenTextIsValidUrl(): void
     {
         $this->assertTrue(
-            new IsUrl(new TextOf('https://example.com'))->value(),
+            (new IsUrl(new TextOf('https://example.com')))->value(),
             'Expected true for valid URL "https://example.com"'
         );
     }
@@ -28,7 +28,7 @@ final class IsUrlTest extends TestCase
     public function returnsFalseWhenTextIsInvalidUrl(): void
     {
         $this->assertFalse(
-            new IsUrl(new TextOf('not-a-valid-url'))->value(),
+            (new IsUrl(new TextOf('not-a-valid-url')))->value(),
             'Expected false for invalid URL "not-a-valid-url"'
         );
     }
@@ -37,7 +37,7 @@ final class IsUrlTest extends TestCase
     public function returnsTrueForHttpUrl(): void
     {
         $this->assertTrue(
-            new IsUrl(new TextOf('http://example.com'))->value(),
+            (new IsUrl(new TextOf('http://example.com')))->value(),
             'Expected true for HTTP URL'
         );
     }
@@ -46,7 +46,7 @@ final class IsUrlTest extends TestCase
     public function returnsFalseForEmptyString(): void
     {
         $this->assertFalse(
-            new IsUrl(new TextOf(''))->value(),
+            (new IsUrl(new TextOf('')))->value(),
             'Expected false for empty string'
         );
     }

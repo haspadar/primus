@@ -24,8 +24,8 @@ final class LessThanTest extends TestCase
     {
         self::assertThat(
             new LessThan(
-                new ScalarOf(fn () => 3),
-                new ScalarOf(fn () => 8)
+                new ScalarOf(fn (): int => 3),
+                new ScalarOf(fn (): int => 8)
             ),
             new HasBoolValue(true)
         );
@@ -36,8 +36,8 @@ final class LessThanTest extends TestCase
     {
         self::assertThat(
             new LessThan(
-                new ScalarOf(fn () => 5),
-                new ScalarOf(fn () => 5)
+                new ScalarOf(fn (): int => 5),
+                new ScalarOf(fn (): int => 5)
             ),
             new HasBoolValue(false)
         );
@@ -48,8 +48,8 @@ final class LessThanTest extends TestCase
     {
         self::assertThat(
             new LessThan(
-                new ScalarOf(fn () => 9),
-                new ScalarOf(fn () => 2)
+                new ScalarOf(fn (): int => 9),
+                new ScalarOf(fn (): int => 2)
             ),
             new HasBoolValue(false)
         );

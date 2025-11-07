@@ -21,7 +21,7 @@ final class HasScalarValues extends Constraint
     /**
      * @param array<int|float|string|bool> $expected
      */
-    public function __construct(private array $expected)
+    public function __construct(private readonly array $expected)
     {
     }
 

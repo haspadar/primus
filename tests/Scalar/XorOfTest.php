@@ -26,8 +26,8 @@ final class XorOfTest extends TestCase
     {
         self::assertThat(
             new XorOf(
-                new ScalarOf(fn () => true),
-                new ScalarOf(fn () => false),
+                new ScalarOf(fn (): true => true),
+                new ScalarOf(fn (): false => false),
             ),
             new HasBoolValue(true),
         );
@@ -38,8 +38,8 @@ final class XorOfTest extends TestCase
     {
         self::assertThat(
             new XorOf(
-                new ScalarOf(fn () => true),
-                new ScalarOf(fn () => true),
+                new ScalarOf(fn (): true => true),
+                new ScalarOf(fn (): true => true),
             ),
             new HasBoolValue(false),
         );
@@ -50,8 +50,8 @@ final class XorOfTest extends TestCase
     {
         self::assertThat(
             new XorOf(
-                new ScalarOf(fn () => false),
-                new ScalarOf(fn () => false),
+                new ScalarOf(fn (): false => false),
+                new ScalarOf(fn (): false => false),
             ),
             new HasBoolValue(false),
         );
@@ -62,9 +62,9 @@ final class XorOfTest extends TestCase
     {
         self::assertThat(
             new XorOf(
-                new ScalarOf(fn () => true),
-                new ScalarOf(fn () => false),
-                new ScalarOf(fn () => true),
+                new ScalarOf(fn (): true => true),
+                new ScalarOf(fn (): false => false),
+                new ScalarOf(fn (): true => true),
             ),
             new HasBoolValue(false),
         );

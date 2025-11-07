@@ -25,7 +25,7 @@ final class TextOfScalarTest extends TestCase
     public function returnsValueFromScalar(): void
     {
         self::assertThat(
-            new TextOfScalar(new ScalarOf(fn () => 'hello')),
+            new TextOfScalar(new ScalarOf(fn (): string => 'hello')),
             new HasTextValue('hello')
         );
     }

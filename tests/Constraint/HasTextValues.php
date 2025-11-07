@@ -32,7 +32,7 @@ final class HasTextValues extends Constraint
     /**
      * @param string[] $expected Expected string values.
      */
-    public function __construct(private array $expected)
+    public function __construct(private readonly array $expected)
     {
     }
 

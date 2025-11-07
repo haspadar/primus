@@ -30,7 +30,7 @@ use Primus\Text\Text;
  */
 final class MatchesPattern extends Constraint
 {
-    public function __construct(private string $pattern)
+    public function __construct(private readonly string $pattern)
     {
     }
 

@@ -16,7 +16,7 @@ final class IsEmptyTest extends TestCase
     public function returnsFalseWhenTextIsNonEmpty(): void
     {
         $this->assertFalse(
-            new IsEmpty(new TextOf('hello'))->value(),
+            (new IsEmpty(new TextOf('hello')))->value(),
             'Expected false for non-empty string "hello"'
         );
     }
@@ -25,7 +25,7 @@ final class IsEmptyTest extends TestCase
     public function returnsFalseWhenTextContainsSpaces(): void
     {
         $this->assertFalse(
-            new IsEmpty(new TextOf('  valid  '))->value(),
+            (new IsEmpty(new TextOf('  valid  ')))->value(),
             'Expected false for string with surrounding spaces'
         );
     }
@@ -35,7 +35,7 @@ final class IsEmptyTest extends TestCase
     public function returnsTrueWhenTextIsEmpty(string $input): void
     {
         $this->assertTrue(
-            new IsEmpty(new TextOf($input))->value(),
+            (new IsEmpty(new TextOf($input)))->value(),
             'Expected true for empty-like string: "' . \addcslashes($input, "\t\n\r") . '"'
         );
     }

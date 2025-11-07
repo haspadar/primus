@@ -27,7 +27,7 @@ use Throwable;
  */
 final class Throws extends Constraint
 {
-    public function __construct(private string $expected)
+    public function __construct(private readonly string $expected)
     {
     }
 
@@ -57,7 +57,7 @@ final class Throws extends Constraint
             $other->value();
             return "\nExpected exception: {$this->expected}\nBut no exception was thrown.";
         } catch (Throwable $e) {
-            return "\nExpected exception: {$this->expected}\nBut was:            " . get_class($e);
+            return "\nExpected exception: {$this->expected}\nBut was:            " . $e::class;
         }
     }
 }

@@ -24,8 +24,8 @@ final class GreaterThanTest extends TestCase
     {
         self::assertThat(
             new GreaterThan(
-                new ScalarOf(fn () => 10),
-                new ScalarOf(fn () => 5)
+                new ScalarOf(fn (): int => 10),
+                new ScalarOf(fn (): int => 5)
             ),
             new HasBoolValue(true)
         );
@@ -36,8 +36,8 @@ final class GreaterThanTest extends TestCase
     {
         self::assertThat(
             new GreaterThan(
-                new ScalarOf(fn () => 7),
-                new ScalarOf(fn () => 7)
+                new ScalarOf(fn (): int => 7),
+                new ScalarOf(fn (): int => 7)
             ),
             new HasBoolValue(false)
         );
@@ -48,8 +48,8 @@ final class GreaterThanTest extends TestCase
     {
         self::assertThat(
             new GreaterThan(
-                new ScalarOf(fn () => 3),
-                new ScalarOf(fn () => 8)
+                new ScalarOf(fn (): int => 3),
+                new ScalarOf(fn (): int => 8)
             ),
             new HasBoolValue(false)
         );

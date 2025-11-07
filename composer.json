@@ -4,20 +4,20 @@
   "type": "library",
   "license": "MIT",
   "require": {
-    "php": "8.4.*"
+    "php": "8.2.*"
   },
   "require-dev": {
-    "roave/security-advisories": "dev-latest",
-    "phpunit/phpunit": "^12.2",
-    "phpstan/phpstan": "^2.1",
-    "nunomaduro/collision": "^8.8",
-    "vimeo/psalm": "^6.10",
+    "vimeo/psalm": "^6.13",
     "infection/infection": "^0.29.14",
-    "phpmetrics/phpmetrics": "^3.0",
-    "rector/rector": "^2.1",
+    "phpunit/phpunit": "^10.5",
+    "phpstan/phpstan": "^2.0",
+    "rector/rector": "^2.0",
     "friendsofphp/php-cs-fixer": "^3",
+    "nunomaduro/collision": "^8.0",
+    "phpmetrics/phpmetrics": "^3.0",
     "haspadar/psalm-eo-rules": "dev-main"
   },
+
   "minimum-stability": "RC",
   "prefer-stable": true,
   "autoload": {
@@ -38,8 +38,8 @@
     "analyze-changed": "git diff --name-only origin/main...HEAD | grep '\\.php$' | xargs -r vendor/bin/phpstan analyse",
     "psalm": "./vendor/bin/psalm --no-cache",
     "psalm:shepherd": "./vendor/bin/psalm --shepherd --no-diff --stats --output-format=github",
-    "fix": "PHP_CS_FIXER_IGNORE_ENV=1 vendor/bin/php-cs-fixer fix",
-    "fix-test": "PHP_CS_FIXER_IGNORE_ENV=1 vendor/bin/php-cs-fixer fix --dry-run --diff",
+    "fix": "vendor/bin/php-cs-fixer fix",
+    "fix-test": "vendor/bin/php-cs-fixer fix --dry-run --diff",
     "fix-changed": "git diff --name-only origin/main...HEAD | grep '\\.php$' | xargs -r vendor/bin/php-cs-fixer fix --dry-run --diff --allow-risky=yes",
     "infection": "XDEBUG_MODE=coverage vendor/bin/infection --threads=4 --only-covered",
     "mutations": "XDEBUG_MODE=coverage php -d memory_limit=1024M ./vendor/bin/infection --threads=4 --only-covered --show-mutations",

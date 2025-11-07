@@ -27,15 +27,11 @@ use Iterator;
  */
 final readonly class SequenceOf implements Sequence
 {
-    /** @var list<T> */
-    private array $items;
-
     /**
      * @param list<T> $items
      */
-    public function __construct(array $items)
+    public function __construct(private array $items)
     {
-        $this->items = $items;
     }
 
     /** @return Iterator<int, T> */

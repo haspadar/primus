@@ -25,7 +25,7 @@ final class ScalarOfTest extends TestCase
     public function returnsEvaluatedValue(): void
     {
         self::assertThat(
-            new ScalarOf(fn () => 42),
+            new ScalarOf(fn (): int => 42),
             new HasScalarValue(42)
         );
     }
@@ -35,13 +35,13 @@ final class ScalarOfTest extends TestCase
     {
         $called = false;
 
-        new ScalarOf(function () use (&$called): int {
+        (new ScalarOf(function () use (&$called): int {
             $called = true;
             return 1;
-        })->value();
+        }))->value();
 
         self::assertThat(
-            new ScalarOf(fn () => $called),
+            new ScalarOf(fn (): bool => $called),
             new HasBoolValue(true)
         );
     }

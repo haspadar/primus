@@ -17,7 +17,7 @@ final class IsAlphanumericTest extends TestCase
     public function returnsTrueWhenTextIsAlphanumeric(string $input): void
     {
         $this->assertTrue(
-            new IsAlphanumeric(new TextOf($input))->value(),
+            (new IsAlphanumeric(new TextOf($input)))->value(),
             'Expected true for alphanumeric string "' . $input . '"'
         );
     }
@@ -27,7 +27,7 @@ final class IsAlphanumericTest extends TestCase
     public function returnsFalseWhenTextIsNotAlphanumeric(string $input): void
     {
         $this->assertFalse(
-            new IsAlphanumeric(new TextOf($input))->value(),
+            (new IsAlphanumeric(new TextOf($input)))->value(),
             'Expected false for non-alphanumeric string: "' . $input . '"'
         );
     }

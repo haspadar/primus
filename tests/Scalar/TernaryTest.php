@@ -27,7 +27,7 @@ final class TernaryTest extends TestCase
     {
         self::assertThat(
             new Ternary(
-                new ScalarOf(fn () => true),
+                new ScalarOf(fn (): true => true),
                 new Constant('yes'),
                 new Constant('no')
             ),
@@ -40,7 +40,7 @@ final class TernaryTest extends TestCase
     {
         self::assertThat(
             new Ternary(
-                new ScalarOf(fn () => false),
+                new ScalarOf(fn (): false => false),
                 new Constant('yes'),
                 new Constant('no')
             ),

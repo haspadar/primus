@@ -23,7 +23,7 @@ final class NotTest extends TestCase
     public function returnsFalseWhenConditionTrue(): void
     {
         self::assertThat(
-            new Not(new ScalarOf(fn () => true)),
+            new Not(new ScalarOf(fn (): true => true)),
             new HasBoolValue(false)
         );
     }
@@ -32,7 +32,7 @@ final class NotTest extends TestCase
     public function returnsTrueWhenConditionFalse(): void
     {
         self::assertThat(
-            new Not(new ScalarOf(fn () => false)),
+            new Not(new ScalarOf(fn (): false => false)),
             new HasBoolValue(true)
         );
     }

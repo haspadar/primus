@@ -19,6 +19,6 @@ final readonly class IsEmpty extends LogicEnvelope
     #[\Override]
     public function value(): bool
     {
-        return new Trimmed($this->text)->value() === '';
+        return (new Trimmed($this->text))->value() === '';
     }
 }

@@ -35,7 +35,7 @@ final readonly class Abbreviated extends TextEnvelope
             return;
         }
 
-        $truncated = new Sub($origin, 0, $limit - 1)->value() . '…';
+        $truncated = (new Sub($origin, 0, $limit - 1))->value() . '…';
         parent::__construct(new TextOf($truncated));
     }
 }

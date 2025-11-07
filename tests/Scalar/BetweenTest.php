@@ -24,9 +24,9 @@ final class BetweenTest extends TestCase
     {
         self::assertThat(
             new Between(
-                new ScalarOf(fn () => 5),
-                new ScalarOf(fn () => 1),
-                new ScalarOf(fn () => 10)
+                new ScalarOf(fn (): int => 5),
+                new ScalarOf(fn (): int => 1),
+                new ScalarOf(fn (): int => 10)
             ),
             new HasBoolValue(true)
         );
@@ -37,9 +37,9 @@ final class BetweenTest extends TestCase
     {
         self::assertThat(
             new Between(
-                new ScalarOf(fn () => 1),
-                new ScalarOf(fn () => 1),
-                new ScalarOf(fn () => 10)
+                new ScalarOf(fn (): int => 1),
+                new ScalarOf(fn (): int => 1),
+                new ScalarOf(fn (): int => 10)
             ),
             new HasBoolValue(false)
         );
@@ -50,9 +50,9 @@ final class BetweenTest extends TestCase
     {
         self::assertThat(
             new Between(
-                new ScalarOf(fn () => 10),
-                new ScalarOf(fn () => 1),
-                new ScalarOf(fn () => 10)
+                new ScalarOf(fn (): int => 10),
+                new ScalarOf(fn (): int => 1),
+                new ScalarOf(fn (): int => 10)
             ),
             new HasBoolValue(false)
         );
@@ -63,9 +63,9 @@ final class BetweenTest extends TestCase
     {
         self::assertThat(
             new Between(
-                new ScalarOf(fn () => -2),
-                new ScalarOf(fn () => 1),
-                new ScalarOf(fn () => 10)
+                new ScalarOf(fn (): int => -2),
+                new ScalarOf(fn (): int => 1),
+                new ScalarOf(fn (): int => 10)
             ),
             new HasBoolValue(false)
         );
@@ -76,9 +76,9 @@ final class BetweenTest extends TestCase
     {
         self::assertThat(
             new Between(
-                new ScalarOf(fn () => 15),
-                new ScalarOf(fn () => 1),
-                new ScalarOf(fn () => 10)
+                new ScalarOf(fn (): int => 15),
+                new ScalarOf(fn (): int => 1),
+                new ScalarOf(fn (): int => 10)
             ),
             new HasBoolValue(false)
         );

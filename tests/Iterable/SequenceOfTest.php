@@ -33,7 +33,7 @@ final class SequenceOfTest extends TestCase
     public function returnsArrayFromIterator(): void
     {
         self::assertThat(
-            iterator_to_array(new SequenceOf(['x', 'y'])->getIterator()),
+            iterator_to_array((new SequenceOf(['x', 'y']))->getIterator()),
             new HasScalarValues(['x', 'y'])
         );
     }
@@ -42,7 +42,7 @@ final class SequenceOfTest extends TestCase
     public function returnsEmptyArrayFromEmptyIterator(): void
     {
         self::assertThat(
-            iterator_to_array(new SequenceOf([])->getIterator()),
+            iterator_to_array((new SequenceOf([]))->getIterator()),
             new HasScalarValues([])
         );
     }

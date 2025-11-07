@@ -24,13 +24,13 @@ final class StickyTest extends TestCase
     #[Test]
     public function cachesValue(): void
     {
-        $scalar = new Sticky(new ScalarOf(fn () => uniqid('', true)));
+        $scalar = new Sticky(new ScalarOf(fn (): string => uniqid('', true)));
 
         $firstCall = $scalar->value();
         $secondCall = $scalar->value();
 
         self::assertThat(
-            new ScalarOf(fn () => $firstCall === $secondCall),
+            new ScalarOf(fn (): bool => $firstCall === $secondCall),
             new HasScalarValue(true)
         );
     }
@@ -39,7 +39,7 @@ final class StickyTest extends TestCase
     public function returnsStoredValue(): void
     {
         self::assertThat(
-            new Sticky(new ScalarOf(fn () => 42)),
+            new Sticky(new ScalarOf(fn (): int => 42)),
             new HasScalarValue(42)
         );
     }

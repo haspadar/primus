@@ -25,7 +25,7 @@ final class FilteredTest extends TestCase
     public function keepsOnlyEvenNumbers(): void
     {
         self::assertThat(
-            new Filtered(fn (int $x) => $x % 2 === 0, new SequenceOf([1, 2, 3, 4])),
+            new Filtered(fn (int $x): bool => $x % 2 === 0, new SequenceOf([1, 2, 3, 4])),
             new HasScalarValues([2, 4])
         );
     }

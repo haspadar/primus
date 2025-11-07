@@ -21,7 +21,7 @@ use Primus\Scalar\Scalar;
  */
 final class HasBoolValue extends Constraint
 {
-    public function __construct(private bool $expected)
+    public function __construct(private readonly bool $expected)
     {
     }
 

@@ -5,7 +5,7 @@
 </picture>
 <br><br>
 
-[![PHP Version](https://img.shields.io/badge/PHP-8.4-blue)](https://www.php.net/releases/8.4/)
+[![PHP Version](https://img.shields.io/badge/PHP-8.2-blue)](https://www.php.net/releases/8.2/)
 [![Code Style](https://img.shields.io/badge/Code%20Style-PSR--12-blue)](https://github.com/FriendsOfPHP/PHP-CS-Fixer)
 [![CI](https://github.com/haspadar/primus/actions/workflows/ci.yml/badge.svg)](https://github.com/haspadar/primus/actions/workflows/ci.yml)
 [![PHP Metrics](https://img.shields.io/badge/Metrics-phpmetrics%203.0-blue)](https://phpmetrics.org/)
@@ -111,7 +111,7 @@ These checks guarantee immutability and strict object boundaries across all modu
 composer require haspadar/primus
 ```
 
-Requires PHP 8.4
+Requires PHP 8.2
 
 ---
 

@@ -21,7 +21,7 @@ use Primus\Text\Text;
  */
 final class HasTextValue extends Constraint
 {
-    public function __construct(private string $expected)
+    public function __construct(private readonly string $expected)
     {
     }
 
