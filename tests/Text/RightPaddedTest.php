@@ -8,12 +8,17 @@ declare(strict_types=1);
 
 namespace Primus\Tests\Text;
 
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
-use Primus\Tests\Constraint\HasValue;
+use Primus\Tests\Constraint\HasTextValue;
 use Primus\Text\RightPadded;
 use Primus\Text\TextOf;
 
+/**
+ * @since 0.2
+ */
+#[CoversClass(RightPadded::class)]
 final class RightPaddedTest extends TestCase
 {
     #[Test]
@@ -21,7 +26,7 @@ final class RightPaddedTest extends TestCase
     {
         self::assertThat(
             new RightPadded(new TextOf('12'), 5, '0'),
-            new HasValue('12000')
+            new HasTextValue('12000')
         );
     }
 
@@ -30,7 +35,7 @@ final class RightPaddedTest extends TestCase
     {
         self::assertThat(
             new RightPadded(new TextOf('abc'), 6, ' '),
-            new HasValue('abc   ')
+            new HasTextValue('abc   ')
         );
     }
 
@@ -39,7 +44,7 @@ final class RightPaddedTest extends TestCase
     {
         self::assertThat(
             new RightPadded(new TextOf('foobar'), 4, '*'),
-            new HasValue('foobar')
+            new HasTextValue('foobar')
         );
     }
 
@@ -48,7 +53,7 @@ final class RightPaddedTest extends TestCase
     {
         self::assertThat(
             new RightPadded(new TextOf(''), 3, '.'),
-            new HasValue('...')
+            new HasTextValue('...')
         );
     }
 }

@@ -8,12 +8,17 @@ declare(strict_types=1);
 
 namespace Primus\Tests\Text;
 
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
-use Primus\Tests\Constraint\HasValues;
+use Primus\Tests\Constraint\HasTextValues;
 use Primus\Text\Split;
 use Primus\Text\TextOf;
 
+/**
+ * @since 0.2
+ */
+#[CoversClass(Split::class)]
 final class SplitTest extends TestCase
 {
     #[Test]
@@ -21,7 +26,7 @@ final class SplitTest extends TestCase
     {
         self::assertThat(
             (new Split(',', new TextOf('a,b,c')))->value(),
-            new HasValues(['a', 'b', 'c'])
+            new HasTextValues(['a', 'b', 'c'])
         );
     }
 
@@ -30,7 +35,7 @@ final class SplitTest extends TestCase
     {
         self::assertThat(
             (new Split(',', new TextOf('abc')))->value(),
-            new HasValues(['abc'])
+            new HasTextValues(['abc'])
         );
     }
 
@@ -39,7 +44,7 @@ final class SplitTest extends TestCase
     {
         self::assertThat(
             (new Split(',', new TextOf('')))->value(),
-            new HasValues([''])
+            new HasTextValues([''])
         );
     }
 
@@ -48,7 +53,7 @@ final class SplitTest extends TestCase
     {
         self::assertThat(
             (new Split('—', new TextOf('a—b—c')))->value(),
-            new HasValues(['a', 'b', 'c'])
+            new HasTextValues(['a', 'b', 'c'])
         );
     }
 
@@ -57,7 +62,7 @@ final class SplitTest extends TestCase
     {
         self::assertThat(
             (new Split(',', new TextOf('a,,b,')))->value(),
-            new HasValues(['a', '', 'b', ''])
+            new HasTextValues(['a', '', 'b', ''])
         );
     }
 }

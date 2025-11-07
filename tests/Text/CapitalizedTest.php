@@ -8,12 +8,17 @@ declare(strict_types=1);
 
 namespace Primus\Tests\Text;
 
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
-use Primus\Tests\Constraint\HasValue;
+use Primus\Tests\Constraint\HasTextValue;
 use Primus\Text\Capitalized;
 use Primus\Text\TextOf;
 
+/**
+ * @since 0.2
+ */
+#[CoversClass(Capitalized::class)]
 final class CapitalizedTest extends TestCase
 {
     #[Test]
@@ -21,7 +26,7 @@ final class CapitalizedTest extends TestCase
     {
         self::assertThat(
             new Capitalized(new TextOf('hello')),
-            new HasValue('Hello')
+            new HasTextValue('Hello')
         );
     }
 
@@ -30,7 +35,7 @@ final class CapitalizedTest extends TestCase
     {
         self::assertThat(
             new Capitalized(new TextOf('World')),
-            new HasValue('World')
+            new HasTextValue('World')
         );
     }
 
@@ -39,7 +44,7 @@ final class CapitalizedTest extends TestCase
     {
         self::assertThat(
             new Capitalized(new TextOf('ёлка')),
-            new HasValue('Ёлка')
+            new HasTextValue('Ёлка')
         );
     }
 
@@ -48,7 +53,7 @@ final class CapitalizedTest extends TestCase
     {
         self::assertThat(
             new Capitalized(new TextOf('')),
-            new HasValue('')
+            new HasTextValue('')
         );
     }
 
@@ -57,7 +62,7 @@ final class CapitalizedTest extends TestCase
     {
         self::assertThat(
             new Capitalized(new TextOf('hello WORLD')),
-            new HasValue('Hello WORLD')
+            new HasTextValue('Hello WORLD')
         );
     }
 }

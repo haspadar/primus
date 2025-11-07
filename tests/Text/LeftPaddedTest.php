@@ -8,12 +8,17 @@ declare(strict_types=1);
 
 namespace Primus\Tests\Text;
 
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
-use Primus\Tests\Constraint\HasValue;
+use Primus\Tests\Constraint\HasTextValue;
 use Primus\Text\LeftPadded;
 use Primus\Text\TextOf;
 
+/**
+ * @since 0.2
+ */
+#[CoversClass(LeftPadded::class)]
 final class LeftPaddedTest extends TestCase
 {
     #[Test]
@@ -21,7 +26,7 @@ final class LeftPaddedTest extends TestCase
     {
         self::assertThat(
             new LeftPadded(new TextOf('foo'), 6, '.'),
-            new HasValue('...foo')
+            new HasTextValue('...foo')
         );
     }
 
@@ -30,7 +35,7 @@ final class LeftPaddedTest extends TestCase
     {
         self::assertThat(
             new LeftPadded(new TextOf('foobar'), 3, '.'),
-            new HasValue('foobar')
+            new HasTextValue('foobar')
         );
     }
 
@@ -39,7 +44,7 @@ final class LeftPaddedTest extends TestCase
     {
         self::assertThat(
             new LeftPadded(new TextOf('bar'), 6, ' '),
-            new HasValue('   bar')
+            new HasTextValue('   bar')
         );
     }
 
@@ -48,7 +53,7 @@ final class LeftPaddedTest extends TestCase
     {
         self::assertThat(
             new LeftPadded(new TextOf(''), 6, '.'),
-            new HasValue('......')
+            new HasTextValue('......')
         );
     }
 }

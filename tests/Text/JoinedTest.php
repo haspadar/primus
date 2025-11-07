@@ -9,12 +9,17 @@ declare(strict_types=1);
 namespace Primus\Tests\Text;
 
 use Generator;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
-use Primus\Tests\Constraint\HasValue;
+use Primus\Tests\Constraint\HasTextValue;
 use Primus\Text\Joined;
 use Primus\Text\TextOf;
 
+/**
+ * @since 0.2
+ */
+#[CoversClass(Joined::class)]
 final class JoinedTest extends TestCase
 {
     #[Test]
@@ -22,7 +27,7 @@ final class JoinedTest extends TestCase
     {
         self::assertThat(
             new Joined(', ', [new TextOf('a'), new TextOf('b'), new TextOf('c')]),
-            new HasValue('a, b, c')
+            new HasTextValue('a, b, c')
         );
     }
 
@@ -31,7 +36,7 @@ final class JoinedTest extends TestCase
     {
         self::assertThat(
             new Joined('', [new TextOf('a'), new TextOf('b'), new TextOf('c')]),
-            new HasValue('abc')
+            new HasTextValue('abc')
         );
     }
 
@@ -40,7 +45,7 @@ final class JoinedTest extends TestCase
     {
         self::assertThat(
             new Joined(', ', [new TextOf('solo')]),
-            new HasValue('solo')
+            new HasTextValue('solo')
         );
     }
 
@@ -49,7 +54,7 @@ final class JoinedTest extends TestCase
     {
         self::assertThat(
             new Joined(', ', []),
-            new HasValue('')
+            new HasTextValue('')
         );
     }
 
@@ -61,9 +66,10 @@ final class JoinedTest extends TestCase
                 yield 'x' => new TextOf('A');
                 yield 'y' => new TextOf('B');
             })()),
-            new HasValue('A-B')
+            new HasTextValue('A-B')
         );
     }
+
     #[Test]
     public function joinsIteratorWithDuplicateKeys(): void
     {
@@ -75,7 +81,7 @@ final class JoinedTest extends TestCase
                     yield 0 => new TextOf('second');
                 })()
             ),
-            new HasValue('first,second')
+            new HasTextValue('first,second')
         );
     }
 }

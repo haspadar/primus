@@ -8,12 +8,17 @@ declare(strict_types=1);
 
 namespace Primus\Tests\Text;
 
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
-use Primus\Tests\Constraint\HasValue;
+use Primus\Tests\Constraint\HasTextValue;
 use Primus\Text\Repeated;
 use Primus\Text\TextOf;
 
+/**
+ * @since 0.2
+ */
+#[CoversClass(Repeated::class)]
 final class RepeatedTest extends TestCase
 {
     #[Test]
@@ -21,7 +26,7 @@ final class RepeatedTest extends TestCase
     {
         self::assertThat(
             new Repeated(new TextOf('xo'), 3),
-            new HasValue('xoxoxo')
+            new HasTextValue('xoxoxo')
         );
     }
 
@@ -30,7 +35,7 @@ final class RepeatedTest extends TestCase
     {
         self::assertThat(
             new Repeated(new TextOf('abc'), 0),
-            new HasValue('')
+            new HasTextValue('')
         );
     }
 
@@ -39,7 +44,7 @@ final class RepeatedTest extends TestCase
     {
         self::assertThat(
             new Repeated(new TextOf('abc'), -2),
-            new HasValue('')
+            new HasTextValue('')
         );
     }
 
@@ -48,7 +53,7 @@ final class RepeatedTest extends TestCase
     {
         self::assertThat(
             new Repeated(new TextOf(''), 5),
-            new HasValue('')
+            new HasTextValue('')
         );
     }
 
@@ -57,7 +62,7 @@ final class RepeatedTest extends TestCase
     {
         self::assertThat(
             new Repeated(new TextOf('a'), 5),
-            new HasValue('aaaaa')
+            new HasTextValue('aaaaa')
         );
     }
 }

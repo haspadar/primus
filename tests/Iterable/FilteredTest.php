@@ -8,25 +8,25 @@ declare(strict_types=1);
 
 namespace Primus\Tests\Iterable;
 
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Primus\Iterable\Filtered;
 use Primus\Iterable\SequenceOf;
+use Primus\Tests\Constraint\HasScalarValues;
 
+/**
+ * @since 0.2
+ */
+#[CoversClass(Filtered::class)]
 final class FilteredTest extends TestCase
 {
     #[Test]
     public function keepsOnlyEvenNumbers(): void
     {
-        $this->assertSame(
-            [2, 4],
-            iterator_to_array(
-                new Filtered(
-                    fn (int $x) => $x % 2 === 0,
-                    new SequenceOf([1, 2, 3, 4])
-                )
-            ),
-            'Expected to keep only even numbers'
+        self::assertThat(
+            new Filtered(fn (int $x) => $x % 2 === 0, new SequenceOf([1, 2, 3, 4])),
+            new HasScalarValues([2, 4])
         );
     }
 }

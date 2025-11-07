@@ -1,5 +1,9 @@
 <?php
 
+/*
+ * SPDX-FileCopyrightText: Copyright (c) 2025 Kanstantsin Mesnik
+ * SPDX-License-Identifier: MIT
+ */
 declare(strict_types=1);
 
 namespace Primus\Tests\Constraint;
@@ -8,12 +12,25 @@ use PHPUnit\Framework\Constraint\Constraint;
 use Primus\Text\Text;
 
 /**
- * Проверяет, что iterable<Text> имеет ожидаемые значения.
+ * Asserts that an iterable of {@see Text} contains the expected string values.
+ *
+ * Example:
+ * self::assertThat(
+ *     [new TextOf('a'), new TextOf('b')],
+ *     new HasValues(['a', 'b'])
+ * );
+ *
+ * Output on failure:
+ * Failed asserting that iterable has values ["a","b"]
+ * Expected: ["a","b"]
+ * But was:  ["a","c"]
+ *
+ * @since 0.2
  */
-final class HasValues extends Constraint
+final class HasTextValues extends Constraint
 {
     /**
-     * @param string[] $expected
+     * @param string[] $expected Expected string values.
      */
     public function __construct(private array $expected)
     {

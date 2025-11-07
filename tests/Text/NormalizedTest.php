@@ -8,12 +8,19 @@ declare(strict_types=1);
 
 namespace Primus\Tests\Text;
 
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
-use Primus\Tests\Constraint\HasValue;
+use Primus\Tests\Constraint\HasTextValue;
+use Primus\Tests\Constraint\Throws;
 use Primus\Text\Normalized;
 use Primus\Text\TextOf;
+use RuntimeException;
 
+/**
+ * @since 0.2
+ */
+#[CoversClass(Normalized::class)]
 final class NormalizedTest extends TestCase
 {
     #[Test]
@@ -21,7 +28,7 @@ final class NormalizedTest extends TestCase
     {
         self::assertThat(
             new Normalized(new TextOf('Hello   world')),
-            new HasValue('Hello world')
+            new HasTextValue('Hello world')
         );
     }
 
@@ -30,7 +37,7 @@ final class NormalizedTest extends TestCase
     {
         self::assertThat(
             new Normalized(new TextOf("A\tB\nC")),
-            new HasValue('A B C')
+            new HasTextValue('A B C')
         );
     }
 
@@ -39,7 +46,7 @@ final class NormalizedTest extends TestCase
     {
         self::assertThat(
             new Normalized(new TextOf("   Hello world   ")),
-            new HasValue('Hello world')
+            new HasTextValue('Hello world')
         );
     }
 
@@ -48,7 +55,7 @@ final class NormalizedTest extends TestCase
     {
         self::assertThat(
             new Normalized(new TextOf("α β  γ")),
-            new HasValue('α β γ')
+            new HasTextValue('α β γ')
         );
     }
 
@@ -57,7 +64,16 @@ final class NormalizedTest extends TestCase
     {
         self::assertThat(
             new Normalized(new TextOf(" \n\t ")),
-            new HasValue('')
+            new HasTextValue('')
+        );
+    }
+
+    #[Test]
+    public function throwsExceptionOnMalformedUtf8(): void
+    {
+        self::assertThat(
+            new Normalized(new TextOf("\xC3")),
+            new Throws(RuntimeException::class)
         );
     }
 }

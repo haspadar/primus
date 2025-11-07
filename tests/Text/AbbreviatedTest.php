@@ -8,12 +8,17 @@ declare(strict_types=1);
 
 namespace Primus\Tests\Text;
 
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
-use Primus\Tests\Constraint\HasValue;
+use Primus\Tests\Constraint\HasTextValue;
 use Primus\Text\Abbreviated;
 use Primus\Text\TextOf;
 
+/**
+ * @since 0.2
+ */
+#[CoversClass(Abbreviated::class)]
 final class AbbreviatedTest extends TestCase
 {
     #[Test]
@@ -21,7 +26,7 @@ final class AbbreviatedTest extends TestCase
     {
         self::assertThat(
             new Abbreviated(new TextOf('short'), 10),
-            new HasValue('short')
+            new HasTextValue('short')
         );
     }
 
@@ -30,7 +35,7 @@ final class AbbreviatedTest extends TestCase
     {
         self::assertThat(
             new Abbreviated(new TextOf('exactly10!'), 10),
-            new HasValue('exactly10!')
+            new HasTextValue('exactly10!')
         );
     }
 
@@ -39,7 +44,7 @@ final class AbbreviatedTest extends TestCase
     {
         self::assertThat(
             new Abbreviated(new TextOf('this is a long string'), 10),
-            new HasValue('this is a…')
+            new HasTextValue('this is a…')
         );
     }
 
@@ -48,7 +53,7 @@ final class AbbreviatedTest extends TestCase
     {
         self::assertThat(
             new Abbreviated(new TextOf('emoji 😊 test ok'), 8),
-            new HasValue('emoji 😊…')
+            new HasTextValue('emoji 😊…')
         );
     }
 
@@ -57,7 +62,7 @@ final class AbbreviatedTest extends TestCase
     {
         self::assertThat(
             new Abbreviated(new TextOf(str_repeat('a', 100))),
-            new HasValue(str_repeat('a', 49) . '…')
+            new HasTextValue(str_repeat('a', 49) . '…')
         );
     }
 
@@ -66,7 +71,7 @@ final class AbbreviatedTest extends TestCase
     {
         self::assertThat(
             new Abbreviated(new TextOf('abcdef'), 1),
-            new HasValue('…')
+            new HasTextValue('…')
         );
     }
 
@@ -75,7 +80,7 @@ final class AbbreviatedTest extends TestCase
     {
         self::assertThat(
             new Abbreviated(new TextOf('abcdef'), 0),
-            new HasValue('')
+            new HasTextValue('')
         );
     }
 }

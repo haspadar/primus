@@ -8,12 +8,17 @@ declare(strict_types=1);
 
 namespace Primus\Tests\Text;
 
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
-use Primus\Tests\Constraint\HasValue;
+use Primus\Tests\Constraint\HasTextValue;
 use Primus\Text\Replaced;
 use Primus\Text\TextOf;
 
+/**
+ * @since 0.2
+ */
+#[CoversClass(Replaced::class)]
 final class ReplacedTest extends TestCase
 {
     #[Test]
@@ -21,7 +26,7 @@ final class ReplacedTest extends TestCase
     {
         self::assertThat(
             new Replaced(new TextOf('Hello, world!'), 'world', 'friend'),
-            new HasValue('Hello, friend!')
+            new HasTextValue('Hello, friend!')
         );
     }
 
@@ -34,7 +39,7 @@ final class ReplacedTest extends TestCase
                 ['<b>', '</b>', '&'],
                 ['', '', 'and']
             ),
-            new HasValue('Hello and bye')
+            new HasTextValue('Hello and bye')
         );
     }
 
@@ -43,7 +48,7 @@ final class ReplacedTest extends TestCase
     {
         self::assertThat(
             new Replaced(new TextOf('unchanged'), 'zzz', 'xxx'),
-            new HasValue('unchanged')
+            new HasTextValue('unchanged')
         );
     }
 
@@ -52,7 +57,7 @@ final class ReplacedTest extends TestCase
     {
         self::assertThat(
             new Replaced(new TextOf(''), 'a', 'b'),
-            new HasValue('')
+            new HasTextValue('')
         );
     }
 }

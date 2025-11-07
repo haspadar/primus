@@ -8,12 +8,17 @@ declare(strict_types=1);
 
 namespace Primus\Tests\Text;
 
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
-use Primus\Tests\Constraint\HasValue;
+use Primus\Tests\Constraint\HasTextValue;
 use Primus\Text\TextOf;
 use Primus\Text\TrimmedLeft;
 
+/**
+ * @since 0.2
+ */
+#[CoversClass(TrimmedLeft::class)]
 final class TrimmedLeftTest extends TestCase
 {
     #[Test]
@@ -21,7 +26,7 @@ final class TrimmedLeftTest extends TestCase
     {
         self::assertThat(
             new TrimmedLeft(new TextOf('   hello world  ')),
-            new HasValue('hello world  ')
+            new HasTextValue('hello world  ')
         );
     }
 
@@ -30,7 +35,7 @@ final class TrimmedLeftTest extends TestCase
     {
         self::assertThat(
             new TrimmedLeft(new TextOf('hello')),
-            new HasValue('hello')
+            new HasTextValue('hello')
         );
     }
 
@@ -39,7 +44,7 @@ final class TrimmedLeftTest extends TestCase
     {
         self::assertThat(
             new TrimmedLeft(new TextOf("  Hello")), // em spaces (U+2003)
-            new HasValue('Hello')
+            new HasTextValue('Hello')
         );
     }
 
@@ -48,7 +53,7 @@ final class TrimmedLeftTest extends TestCase
     {
         self::assertThat(
             new TrimmedLeft(new TextOf('   ')),
-            new HasValue('')
+            new HasTextValue('')
         );
     }
 
@@ -57,7 +62,7 @@ final class TrimmedLeftTest extends TestCase
     {
         self::assertThat(
             new TrimmedLeft(new TextOf(' hi  ')),
-            new HasValue('hi  ')
+            new HasTextValue('hi  ')
         );
     }
 }

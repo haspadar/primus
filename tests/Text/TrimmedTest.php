@@ -8,12 +8,17 @@ declare(strict_types=1);
 
 namespace Primus\Tests\Text;
 
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
-use Primus\Tests\Constraint\HasValue;
+use Primus\Tests\Constraint\HasTextValue;
 use Primus\Text\TextOf;
 use Primus\Text\Trimmed;
 
+/**
+ * @since 0.2
+ */
+#[CoversClass(Trimmed::class)]
 final class TrimmedTest extends TestCase
 {
     #[Test]
@@ -21,7 +26,7 @@ final class TrimmedTest extends TestCase
     {
         self::assertThat(
             new Trimmed(new TextOf('  hello  world  ')),
-            new HasValue('hello  world')
+            new HasTextValue('hello  world')
         );
     }
 
@@ -30,7 +35,7 @@ final class TrimmedTest extends TestCase
     {
         self::assertThat(
             new Trimmed(new TextOf('   ')),
-            new HasValue('')
+            new HasTextValue('')
         );
     }
 }

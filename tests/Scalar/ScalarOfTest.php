@@ -8,24 +8,30 @@ declare(strict_types=1);
 
 namespace Primus\Tests\Scalar;
 
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Primus\Scalar\ScalarOf;
+use Primus\Tests\Constraint\HasBoolValue;
+use Primus\Tests\Constraint\HasScalarValue;
 
+/**
+ * @since 0.2
+ */
+#[CoversClass(ScalarOf::class)]
 final class ScalarOfTest extends TestCase
 {
     #[Test]
-    public function returnsValueWhenClosureIsEvaluated(): void
+    public function returnsEvaluatedValue(): void
     {
-        self::assertSame(
-            42,
-            new ScalarOf(fn () => 42)->value(),
-            'ScalarOf should return the result of the closure.'
+        self::assertThat(
+            new ScalarOf(fn () => 42),
+            new HasScalarValue(42)
         );
     }
 
     #[Test]
-    public function callsClosureWhenValueCalled(): void
+    public function invokesClosureWhenValueIsCalled(): void
     {
         $called = false;
 
@@ -34,7 +40,9 @@ final class ScalarOfTest extends TestCase
             return 1;
         })->value();
 
-        self::assertTrue($called, 'ScalarOf should call the closure when value() is invoked.');
+        self::assertThat(
+            new ScalarOf(fn () => $called),
+            new HasBoolValue(true)
+        );
     }
-
 }

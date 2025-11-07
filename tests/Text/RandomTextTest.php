@@ -8,12 +8,17 @@ declare(strict_types=1);
 
 namespace Primus\Tests\Text;
 
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Primus\Tests\Constraint\HasSize;
 use Primus\Tests\Constraint\MatchesPattern;
 use Primus\Text\RandomText;
 
+/**
+ * @since 0.2
+ */
+#[CoversClass(RandomText::class)]
 final class RandomTextTest extends TestCase
 {
     #[Test]
@@ -37,9 +42,8 @@ final class RandomTextTest extends TestCase
     #[Test]
     public function supportsMultibyteAlphabet(): void
     {
-        $alphabet = '🙂🚀🔥';
         self::assertThat(
-            new RandomText(5, $alphabet),
+            new RandomText(5, '🙂🚀🔥'),
             new MatchesPattern('/^[🙂🚀🔥]+$/u')
         );
     }
@@ -47,8 +51,10 @@ final class RandomTextTest extends TestCase
     #[Test]
     public function lengthAlwaysExact(): void
     {
-        $text = new RandomText(20, 'ab');
-        self::assertThat($text, new HasSize(20));
+        self::assertThat(
+            new RandomText(20, 'ab'),
+            new HasSize(20)
+        );
     }
 
     #[Test]

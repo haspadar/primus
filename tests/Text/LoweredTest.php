@@ -8,12 +8,17 @@ declare(strict_types=1);
 
 namespace Primus\Tests\Text;
 
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
-use Primus\Tests\Constraint\HasValue;
+use Primus\Tests\Constraint\HasTextValue;
 use Primus\Text\Lowered;
 use Primus\Text\TextOf;
 
+/**
+ * @since 0.2
+ */
+#[CoversClass(Lowered::class)]
 final class LoweredTest extends TestCase
 {
     #[Test]
@@ -21,7 +26,7 @@ final class LoweredTest extends TestCase
     {
         self::assertThat(
             new Lowered(new TextOf('HELLO')),
-            new HasValue('hello')
+            new HasTextValue('hello')
         );
     }
 
@@ -30,7 +35,7 @@ final class LoweredTest extends TestCase
     {
         self::assertThat(
             new Lowered(new TextOf('HeLLo WoRLD')),
-            new HasValue('hello world')
+            new HasTextValue('hello world')
         );
     }
 
@@ -39,7 +44,7 @@ final class LoweredTest extends TestCase
     {
         self::assertThat(
             new Lowered(new TextOf('ÀÉÎÖÜ')),
-            new HasValue('àéîöü')
+            new HasTextValue('àéîöü')
         );
     }
 }

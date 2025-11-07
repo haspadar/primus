@@ -8,12 +8,17 @@ declare(strict_types=1);
 
 namespace Primus\Tests\Text;
 
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
-use Primus\Tests\Constraint\HasValue;
+use Primus\Tests\Constraint\HasTextValue;
 use Primus\Text\HtmlEscaped;
 use Primus\Text\TextOf;
 
+/**
+ * @since 0.2
+ */
+#[CoversClass(HtmlEscaped::class)]
 final class HtmlEscapedTest extends TestCase
 {
     #[Test]
@@ -21,7 +26,7 @@ final class HtmlEscapedTest extends TestCase
     {
         self::assertThat(
             new HtmlEscaped(new TextOf('<b>John & "Jane"</b>')),
-            new HasValue('&lt;b&gt;John &amp; &quot;Jane&quot;&lt;/b&gt;')
+            new HasTextValue('&lt;b&gt;John &amp; &quot;Jane&quot;&lt;/b&gt;')
         );
     }
 
@@ -30,7 +35,7 @@ final class HtmlEscapedTest extends TestCase
     {
         self::assertThat(
             new HtmlEscaped(new TextOf('Hello world')),
-            new HasValue('Hello world')
+            new HasTextValue('Hello world')
         );
     }
 
@@ -39,7 +44,7 @@ final class HtmlEscapedTest extends TestCase
     {
         self::assertThat(
             new HtmlEscaped(new TextOf('')),
-            new HasValue('')
+            new HasTextValue('')
         );
     }
 }

@@ -11,30 +11,22 @@ namespace Primus\Tests\Text;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
+use Primus\Scalar\ScalarOf;
 use Primus\Tests\Constraint\HasTextValue;
-use Primus\Text\TextOf;
+use Primus\Text\TextOfScalar;
 
 /**
  * @since 0.2
  */
-#[CoversClass(TextOf::class)]
-final class TextOfTest extends TestCase
+#[CoversClass(TextOfScalar::class)]
+final class TextOfScalarTest extends TestCase
 {
     #[Test]
-    public function returnsOriginalTextWhenValueIsRequested(): void
+    public function returnsValueFromScalar(): void
     {
         self::assertThat(
-            new TextOf('hello'),
+            new TextOfScalar(new ScalarOf(fn () => 'hello')),
             new HasTextValue('hello')
-        );
-    }
-
-    #[Test]
-    public function castsToStringCorrectly(): void
-    {
-        self::assertThat(
-            new TextOf('world'),
-            new HasTextValue('world')
         );
     }
 }
