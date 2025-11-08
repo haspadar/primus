@@ -19,6 +19,7 @@ jobs:
         with:
           php-version: '8.2'
           coverage: xdebug
+          extensions: mbstring, dom, json
 
       - name: Install dependencies
         run: composer install --prefer-dist --no-progress --no-suggest
@@ -39,10 +40,16 @@ jobs:
         run: composer test
 
       - name: Coverage
-        run: composer test-coverage
+        run: |
+          vendor/bin/phpunit \
+            --coverage-xml=coverage-xml \
+            --log-junit=coverage-xml/junit.xml
 
       - name: Infection
-        run: composer infection
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          vendor/bin/infection --threads=4 --logger-github --coverage=coverage-xml
 
       - name: Metrics
         run: composer metrics
@@ -55,5 +62,5 @@ jobs:
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           slug: haspadar/primus
-          files: coverage.xml
+          files: coverage-xml/index.xml
           fail_ci_if_error: true

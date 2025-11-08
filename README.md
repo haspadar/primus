@@ -5,17 +5,13 @@
 </picture>
 <br><br>
 
-[![PHP Version](https://img.shields.io/badge/PHP-8.2-blue)](https://www.php.net/releases/8.2/)
-[![Code Style](https://img.shields.io/badge/Code%20Style-PSR--12-blue)](https://github.com/FriendsOfPHP/PHP-CS-Fixer)
 [![CI](https://github.com/haspadar/primus/actions/workflows/ci.yml/badge.svg)](https://github.com/haspadar/primus/actions/workflows/ci.yml)
-[![PHP Metrics](https://img.shields.io/badge/Metrics-phpmetrics%203.0-blue)](https://phpmetrics.org/)
-
-[![Tests](https://img.shields.io/badge/Tests-Passing-brightgreen)](https://github.com/haspadar/primus/actions/workflows/ci.yml)
 [![Coverage](https://codecov.io/gh/haspadar/primus/branch/main/graph/badge.svg)](https://codecov.io/gh/haspadar/primus)
+[![Infection MSI](https://img.shields.io/endpoint?url=https://badge-api.stryker-mutator.io/github.com/haspadar/primus/main)](https://infection.github.io)
 [![PHPStan Level](https://img.shields.io/badge/PHPStan-Level%209-brightgreen)](https://phpstan.org/)
 [![Psalm](https://img.shields.io/badge/psalm-level%208-brightgreen)](https://psalm.dev)
-[![Psalm Type Coverage](https://shepherd.dev/github/haspadar/primus/coverage.svg)](https://shepherd.dev/github/haspadar/primus)
-[![Mutation MSI](https://img.shields.io/badge/Mutation%20MSI-100%25-brightgreen)](https://infection.github.io/)
+
+
 
 ---
 
