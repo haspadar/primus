@@ -46,10 +46,9 @@ jobs:
             --log-junit=coverage-xml/junit.xml
 
       - name: Infection
+        run: composer infection
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          vendor/bin/infection --threads=4 --logger-github --coverage=coverage-xml
+          INFECTION_DASHBOARD_API_KEY: ${{ secrets.STRYKER_DASHBOARD_API_KEY }}
 
       - name: Metrics
         run: composer metrics
