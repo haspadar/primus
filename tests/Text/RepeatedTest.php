@@ -63,4 +63,13 @@ final class RepeatedTest extends TestCase
             new HasTextValue('aaaaa')
         );
     }
+
+    #[Test]
+    public function repeatsUnicodeText(): void
+    {
+        self::assertThat(
+            new Repeated(new TextOf('🔥'), 3),
+            new HasTextValue('🔥🔥🔥')
+        );
+    }
 }

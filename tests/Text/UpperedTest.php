@@ -45,4 +45,40 @@ final class UpperedTest extends TestCase
             new HasTextValue('ÀÉÎÖÜ')
         );
     }
+
+    #[Test]
+    public function returnsEmptyStringWhenInputIsEmpty(): void
+    {
+        self::assertThat(
+            new Uppered(new TextOf('')),
+            new HasTextValue('')
+        );
+    }
+
+    #[Test]
+    public function returnsSameTextWhenAlreadyUppercase(): void
+    {
+        self::assertThat(
+            new Uppered(new TextOf('ALREADY')),
+            new HasTextValue('ALREADY')
+        );
+    }
+
+    #[Test]
+    public function leavesSpecialCharactersUnchanged(): void
+    {
+        self::assertThat(
+            new Uppered(new TextOf('test@123!')),
+            new HasTextValue('TEST@123!')
+        );
+    }
+
+    #[Test]
+    public function returnsSameWhenTextContainsOnlyWhitespace(): void
+    {
+        self::assertThat(
+            new Uppered(new TextOf('   ')),
+            new HasTextValue('   ')
+        );
+    }
 }

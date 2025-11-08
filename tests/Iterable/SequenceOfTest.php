@@ -19,7 +19,7 @@ use Primus\Tests\Constraint\HasScalarValues;
 final class SequenceOfTest extends TestCase
 {
     #[Test]
-    public function returnsArrayFromIterator(): void
+    public function returnsValuesWhenIterated(): void
     {
         self::assertThat(
             iterator_to_array((new SequenceOf(['x', 'y']))->getIterator()),
@@ -28,7 +28,7 @@ final class SequenceOfTest extends TestCase
     }
 
     #[Test]
-    public function returnsEmptyArrayFromEmptyIterator(): void
+    public function returnsEmptyWhenIteratedOverEmptySequence(): void
     {
         self::assertThat(
             iterator_to_array((new SequenceOf([]))->getIterator()),
@@ -37,7 +37,7 @@ final class SequenceOfTest extends TestCase
     }
 
     #[Test]
-    public function returnsSameArrayFromValue(): void
+    public function returnsArrayWhenValueCalled(): void
     {
         self::assertThat(
             (new SequenceOf(['one', 'two']))->value(),
