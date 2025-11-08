@@ -33,7 +33,7 @@
   "scripts": {
     "test": "phpunit --order-by=random --random-order-seed=$(date +%s)",
     "test-coverage": "XDEBUG_MODE=coverage php -d memory_limit=512M ./vendor/bin/phpunit --coverage-clover=coverage.xml --coverage-filter=src",
-    "test-coverage-html": "XDEBUG_MODE=coverage php -d memory_limit=512M ./vendor/bin/phpunit --coverage-html=coverage-report",
+    "test-coverage-html": "XDEBUG_MODE=coverage php -d memory_limit=512M ./vendor/bin/phpunit --coverage-html=coverage-report --coverage-filter=src",
     "analyze": "phpstan analyse",
     "analyze-changed": "git diff --name-only origin/main...HEAD | grep '\\.php$' | xargs -r vendor/bin/phpstan analyse",
     "psalm": "./vendor/bin/psalm --no-cache",

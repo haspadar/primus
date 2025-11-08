@@ -40,10 +40,7 @@ jobs:
         run: composer test
 
       - name: Coverage
-        run: |
-          vendor/bin/phpunit \
-            --coverage-xml=coverage-xml \
-            --log-junit=coverage-xml/junit.xml
+        run: composer test-coverage
 
       - name: Infection
         run: composer infection
