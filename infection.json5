@@ -1,14 +1,19 @@
 {
-    "$schema": "vendor/infection/infection/resources/schema.json",
-    "source": {
-        "directories": [
-            "src"
-        ],
-        "excludes": [
-            "vendor"
-        ]
-    },
-    "mutators": {
-        "@default": true
+  "$schema": "vendor/infection/infection/resources/schema.json",
+  "source": {
+    "directories": [
+      "src"
+    ],
+    "excludes": [
+      "vendor"
+    ]
+  },
+  "logs": {
+    "stryker": {
+      "badge": "/^main$/"
     }
+  },
+  "mutators": {
+    "@default": true
+  }
 }
