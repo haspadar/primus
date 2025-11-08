@@ -27,6 +27,7 @@ Thumbs.db
 coverage.txt
 coverage.xml
 coverage/
+coverage-xml/
 /coverage-report/
 /coverage_report.txt
 
