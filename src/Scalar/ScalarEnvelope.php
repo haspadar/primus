@@ -8,13 +8,18 @@ declare(strict_types=1);
 
 namespace Primus\Scalar;
 
+use Override;
+use Primus\Exception;
+
 /**
- * Envelope for {@see Scalar}, delegating all calls to the origin.
+ * Base class for scalar decorators.
  *
- * Useful as a base class for scalar decorators.
+ * Envelope for {@see Scalar}, delegating all calls to the origin.
+ * Used as a parent for classes like {@see Sticky} or {@see Ternary}.
  *
  * @template T
  * @implements Scalar<T>
+ * @since 0.1
  */
 abstract readonly class ScalarEnvelope implements Scalar
 {
@@ -26,10 +31,11 @@ abstract readonly class ScalarEnvelope implements Scalar
     }
 
     /**
+     * @throws Exception
      * @return T
      */
-    #[\Override]
-    public function value()
+    #[Override]
+    final public function value()
     {
         return $this->origin->value();
     }

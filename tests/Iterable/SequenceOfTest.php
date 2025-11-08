@@ -11,36 +11,37 @@ namespace Primus\Tests\Iterable;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Primus\Iterable\SequenceOf;
+use Primus\Tests\Constraint\HasScalarValues;
 
+/**
+ * @since 0.2
+ */
 final class SequenceOfTest extends TestCase
 {
     #[Test]
-    public function returnsArrayInValue(): void
+    public function returnsValuesWhenIterated(): void
     {
-        $this->assertSame(
-            ['a', 'b'],
-            new SequenceOf(['a', 'b'])->value(),
-            'Expected value() to return original array'
+        self::assertThat(
+            iterator_to_array((new SequenceOf(['x', 'y']))->getIterator()),
+            new HasScalarValues(['x', 'y'])
         );
     }
 
     #[Test]
-    public function returnsArrayFromIterator(): void
+    public function returnsEmptyWhenIteratedOverEmptySequence(): void
     {
-        $this->assertSame(
-            ['x', 'y'],
-            iterator_to_array(new SequenceOf(['x', 'y'])->getIterator()),
-            'Expected getIterator() to yield original array'
+        self::assertThat(
+            iterator_to_array((new SequenceOf([]))->getIterator()),
+            new HasScalarValues([])
         );
     }
 
     #[Test]
-    public function returnsEmptyArrayFromEmptyIterator(): void
+    public function returnsArrayWhenValueCalled(): void
     {
-        $this->assertSame(
-            [],
-            iterator_to_array(new SequenceOf([])->getIterator()),
-            'Expected getIterator() to yield empty array'
+        self::assertThat(
+            (new SequenceOf(['one', 'two']))->value(),
+            new HasScalarValues(['one', 'two'])
         );
     }
 }

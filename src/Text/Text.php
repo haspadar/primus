@@ -8,6 +8,7 @@ declare(strict_types=1);
 
 namespace Primus\Text;
 
+use Override;
 use Primus\Scalar\Scalar;
 
 /**
@@ -22,6 +23,6 @@ interface Text extends Scalar
     /**
      * Returns the string value represented by this object.
      */
-    #[\Override]
+    #[Override]
     public function value(): string;
 }

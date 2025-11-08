@@ -5,7 +5,7 @@
 </picture>
 <br><br>
 
-[![PHP Version](https://img.shields.io/badge/PHP-8.4-blue)](https://www.php.net/releases/8.4/)
+[![PHP Version](https://img.shields.io/badge/PHP-8.2-blue)](https://www.php.net/releases/8.2/)
 [![Code Style](https://img.shields.io/badge/Code%20Style-PSR--12-blue)](https://github.com/FriendsOfPHP/PHP-CS-Fixer)
 [![CI](https://github.com/haspadar/primus/actions/workflows/ci.yml/badge.svg)](https://github.com/haspadar/primus/actions/workflows/ci.yml)
 [![PHP Metrics](https://img.shields.io/badge/Metrics-phpmetrics%203.0-blue)](https://phpmetrics.org/)
@@ -25,8 +25,8 @@
 
 Instead of passing around loose values, you use small, self-contained wrappers like:
 
-- `Lowercased`, `Trimmed`, `TruncatedRight` (strings)
-- `Yes`, `IsEmail`, `ThrowsIf` (logic)
+- `Lowered`, `Trimmed`, `Sub` (strings)
+- `Yes`, `No`, `IsEmpty`, `IsEmail`, `IsUuid`, `LogicEnvelope` (logic)
 - `Mapped`, `SequenceOf` (collections)
 
 Each class encapsulates one behavior and can be composed with others to form robust, intention-revealing objects.
@@ -48,18 +48,14 @@ Inspired by [Elegant Objects](https://www.yegor256.com/elegant-objects.html) and
 ## ✨ Example
 
 ```php
-use Primus\Text\Lowercased;
-use Primus\Text\TruncatedRight;
-use Primus\Text\Trimmed;
-
-$text = new TruncatedRight(
-    new Lowercased(
+$text = new Sub(
+    new Lowered(
         new Trimmed("  Hello, world!  ")
     ),
     5
 );
 
-echo $text->toString(); // "hello"
+echo $text->value(); // "hello"
 ```
 
 Each wrapper adds one behavior:
@@ -73,7 +69,7 @@ All wrappers implement the same interface and can be freely composed.
 
 ## 🧱 Modules
 
-- **Text** — `Trimmed`, `Uppercased`, `Lowercased`, `TruncatedRight`, `HtmlSanitized`, `LengthOf`, `Preview`, `TextOf`
+- **Text** — `Trimmed`, `Uppered`, `Lowered`, `Sub`, `WithoutTags`, `LengthOfText`, `Abbreviated`, `TextOf`
 - **Logic** — `Yes`, `No`, `ThrowsIf`, `IsEmpty`, `IsEmail`, `IsUuid`, `LogicEnvelope`
 - **Iterable** — `Sequence`, `SequenceOf`, `Mapped`, `Filtered`
 - **Number** — *(coming soon)* `Positive`, `NonZero`, `Rounded`, etc.
@@ -95,13 +91,27 @@ Every push and pull request is checked via GitHub Actions:
 
 ---
 
+## 🧩 Static Analysis Rules
+
+Primus enforces [Elegant Objects](https://www.yegor256.com/elegant-objects.html) design principles using  
+[`haspadar/psalm-eo-rules`](https://github.com/haspadar/psalm-eo-rules) — a custom Psalm plugin that forbids:
+
+- `static` methods and properties
+- `null`, `isset()`, and `empty()`
+- non-`readonly` mutable state
+- traits and inheritance misuse
+
+These checks guarantee immutability and strict object boundaries across all modules.
+
+---
+
 ## 📥 Installation
 
 ```bash
 composer require haspadar/primus
 ```
 
-Requires PHP 8.4
+Requires PHP 8.2
 
 ---
 

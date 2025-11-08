@@ -8,6 +8,8 @@ declare(strict_types=1);
 
 namespace Primus\Text;
 
+use Override;
+
 /**
  * Envelope for {@see Text}, delegating all calls to the origin.
  *
@@ -18,7 +20,7 @@ abstract readonly class TextEnvelope implements Text
     {
     }
 
-    #[\Override]
+    #[Override]
     public function value(): string
     {
         return $this->origin->value();

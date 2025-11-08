@@ -13,7 +13,6 @@ namespace Primus\Logic;
  *
  * Useful in testing or as a default negative condition.
  *
- * @psalm-pure
  * @internal
  */
 final readonly class No implements Logic

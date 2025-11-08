@@ -14,7 +14,7 @@ namespace Primus\Iterable;
  * @template T
  * @extends SequenceEnvelope<T>
  */
-final class Filtered extends SequenceEnvelope
+final readonly class Filtered extends SequenceEnvelope
 {
     /**
      * @param callable(T): bool $predicate

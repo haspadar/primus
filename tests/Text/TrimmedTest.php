@@ -10,28 +10,30 @@ namespace Primus\Tests\Text;
 
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
+use Primus\Tests\Constraint\HasTextValue;
 use Primus\Text\TextOf;
 use Primus\Text\Trimmed;
 
+/**
+ * @since 0.2
+ */
 final class TrimmedTest extends TestCase
 {
     #[Test]
     public function returnsTextWithoutLeadingAndTrailingSpaces(): void
     {
-        $this->assertSame(
-            'hello  world',
-            new Trimmed(new TextOf('  hello  world  '))->value(),
-            'Expected leading and trailing spaces to be removed'
+        self::assertThat(
+            new Trimmed(new TextOf('  hello  world  ')),
+            new HasTextValue('hello  world')
         );
     }
 
     #[Test]
     public function returnsEmptyStringWhenInputIsWhitespaceOnly(): void
     {
-        $this->assertSame(
-            '',
-            new Trimmed(new TextOf('   '))->value(),
-            'Expected empty string when input contains only spaces'
+        self::assertThat(
+            new Trimmed(new TextOf('   ')),
+            new HasTextValue('')
         );
     }
 }

@@ -19,7 +19,6 @@ namespace Primus\Logic;
  * new IsNumeric(new TextOf("1e10")) → true
  * new IsNumeric(new TextOf("abc")) → false
  *
- * @psalm-pure
  */
 final readonly class IsNumeric extends LogicEnvelope
 {

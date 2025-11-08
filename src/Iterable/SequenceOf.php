@@ -22,20 +22,16 @@ use Iterator;
  *
  * @template T
  * @implements Sequence<T>
- * @psalm-pure
+ *
  * @since 0.1
  */
 final readonly class SequenceOf implements Sequence
 {
-    /** @var list<T> */
-    private array $items;
-
     /**
      * @param list<T> $items
      */
-    public function __construct(array $items)
+    public function __construct(private array $items)
     {
-        $this->items = $items;
     }
 
     /** @return Iterator<int, T> */

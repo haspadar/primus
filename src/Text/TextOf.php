@@ -8,10 +8,10 @@ declare(strict_types=1);
 
 namespace Primus\Text;
 
+use Override;
+
 /**
  * Text of a plain string.
- *
- * @psalm-pure
  */
 final readonly class TextOf implements Text
 {
@@ -19,14 +19,8 @@ final readonly class TextOf implements Text
     {
     }
 
-    #[\Override]
+    #[Override]
     public function value(): string
-    {
-        return $this->value;
-    }
-
-    #[\Override]
-    public function __toString(): string
     {
         return $this->value;
     }

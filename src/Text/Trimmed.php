@@ -17,7 +17,6 @@ namespace Primus\Text;
  * $text = new Trimmed(new TextOf('  hello  '));
  * echo $text->value(); // 'hello'
  *
- * @psalm-pure
  * @since 0.1
  */
 final readonly class Trimmed extends TextEnvelope

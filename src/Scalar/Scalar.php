@@ -8,20 +8,24 @@ declare(strict_types=1);
 
 namespace Primus\Scalar;
 
+use Primus\Exception;
+
 /**
  * Represents a lazily-evaluated value of any type.
  *
  * Serves as a generic interface for deferred computation and value composition.
- * Used as a base abstraction for all primitive-like types (Text, Logic, Number, etc).
+ * Used as a base abstraction for all primitive-like types (Text, Number, etc).
  *
  * @template T
- * @psalm-pure
+ * @since 0.1
  */
 interface Scalar
 {
     /**
      * Returns the computed value.
      *
+     * @noinspection ReturnTypeCanBeDeclaredInspection
+     * @throws Exception if the value cannot be computed
      * @return T The value represented by this scalar.
      */
     public function value();

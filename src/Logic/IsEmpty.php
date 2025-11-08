@@ -13,13 +13,12 @@ use Primus\Text\Trimmed;
 /**
  * {@see Logic} that returns true if the text is empty or whitespace-only.
  *
- * @psalm-pure
  */
 final readonly class IsEmpty extends LogicEnvelope
 {
     #[\Override]
     public function value(): bool
     {
-        return new Trimmed($this->text)->value() === '';
+        return (new Trimmed($this->text))->value() === '';
     }
 }

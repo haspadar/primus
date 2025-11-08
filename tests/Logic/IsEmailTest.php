@@ -17,7 +17,7 @@ final class IsEmailTest extends TestCase
     public function returnsTrueWhenTextIsValidEmail(string $email): void
     {
         $this->assertTrue(
-            new IsEmail(new TextOf($email))->value(),
+            (new IsEmail(new TextOf($email)))->value(),
             'Expected true for valid email: "' . $email . '"'
         );
     }
@@ -27,7 +27,7 @@ final class IsEmailTest extends TestCase
     public function returnsFalseWhenTextIsInvalidEmail(string $email): void
     {
         $this->assertFalse(
-            new IsEmail(new TextOf($email))->value(),
+            (new IsEmail(new TextOf($email)))->value(),
             'Expected false for invalid email: "' . $email . '"'
         );
     }

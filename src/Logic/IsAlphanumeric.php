@@ -14,7 +14,6 @@ namespace Primus\Logic;
  * Example:
  * new IsAlphanumeric(new TextOf("abc123")) → true
  *
- * @psalm-pure
  */
 final readonly class IsAlphanumeric extends LogicEnvelope
 {

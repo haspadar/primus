@@ -13,7 +13,6 @@ use Primus\Text\Text;
 /**
  * Envelope for {@see Logic}, delegating the call to the origin.
  *
- * @psalm-pure
  */
 abstract readonly class LogicEnvelope implements Logic
 {
