@@ -3,7 +3,6 @@
   "description": "Primitive wrappers for PHP: strong typing for strings, ints, arrays, and more",
   "type": "library",
   "license": "MIT",
-  "version": "0.2.0",
   "require": {
     "php": "8.2.*"
   },

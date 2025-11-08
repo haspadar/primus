@@ -8,17 +8,17 @@ declare(strict_types=1);
 
 namespace Primus\Tests\Text;
 
-use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Primus\Tests\Constraint\HasTextValue;
+use Primus\Tests\Constraint\Throws;
 use Primus\Text\TextOf;
 use Primus\Text\TrimmedRight;
+use RuntimeException;
 
 /**
  * @since 0.2
  */
-#[CoversClass(TrimmedRight::class)]
 final class TrimmedRightTest extends TestCase
 {
     #[Test]
@@ -63,6 +63,15 @@ final class TrimmedRightTest extends TestCase
         self::assertThat(
             new TrimmedRight(new TextOf('  hi')),
             new HasTextValue('  hi')
+        );
+    }
+
+    #[Test]
+    public function throwsExceptionOnMalformedUtf8(): void
+    {
+        self::assertThat(
+            (new TrimmedRight(new TextOf("\xC3"))),
+            new Throws(RuntimeException::class)
         );
     }
 }

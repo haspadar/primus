@@ -58,7 +58,7 @@ final class XorOfTest extends TestCase
     }
 
     #[Test]
-    public function returnsTrueWhenOddNumberTrue(): void
+    public function returnsFalseWhenEvenNumberTrue(): void
     {
         self::assertThat(
             new XorOf(

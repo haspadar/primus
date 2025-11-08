@@ -8,7 +8,6 @@ declare(strict_types=1);
 
 namespace Primus\Tests\Scalar;
 
-use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Primus\Scalar\Constant;
@@ -17,7 +16,6 @@ use Primus\Tests\Constraint\HasScalarValue;
 /**
  * @since 0.2
  */
-#[CoversClass(Constant::class)]
 final class ConstantTest extends TestCase
 {
     #[Test]

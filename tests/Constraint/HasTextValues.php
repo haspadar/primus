@@ -17,7 +17,7 @@ use Primus\Text\Text;
  * Example:
  * self::assertThat(
  *     [new TextOf('a'), new TextOf('b')],
- *     new HasValues(['a', 'b'])
+ *     new HasTextValues(['a', 'b'])
  * );
  *
  * Output on failure:
@@ -38,7 +38,7 @@ final class HasTextValues extends Constraint
 
     public function toString(): string
     {
-        return 'has values ' . json_encode($this->expected, JSON_UNESCAPED_UNICODE);
+        return 'has text values ' . json_encode($this->expected, JSON_UNESCAPED_UNICODE);
     }
 
     protected function matches($other): bool

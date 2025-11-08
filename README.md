@@ -25,8 +25,8 @@
 
 Instead of passing around loose values, you use small, self-contained wrappers like:
 
-- `Lowercased`, `Trimmed`, `TruncatedRight` (strings)
-- `Yes`, `IsEmail`, `ThrowsIf` (logic)
+- `Lowered`, `Trimmed`, `Sub` (strings)
+- `Yes`, `No`, `IsEmpty`, `IsEmail`, `IsUuid`, `LogicEnvelope` (logic)
 - `Mapped`, `SequenceOf` (collections)
 
 Each class encapsulates one behavior and can be composed with others to form robust, intention-revealing objects.
@@ -48,8 +48,8 @@ Inspired by [Elegant Objects](https://www.yegor256.com/elegant-objects.html) and
 ## ✨ Example
 
 ```php
-$text = new TruncatedRight(
-    new Lowercased(
+$text = new Sub(
+    new Lowered(
         new Trimmed("  Hello, world!  ")
     ),
     5

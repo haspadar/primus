@@ -8,7 +8,6 @@ declare(strict_types=1);
 
 namespace Primus\Tests\Text;
 
-use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Primus\Tests\Constraint\HasTextValues;
@@ -18,7 +17,6 @@ use Primus\Text\TextOf;
 /**
  * @since 0.2
  */
-#[CoversClass(Split::class)]
 final class SplitTest extends TestCase
 {
     #[Test]

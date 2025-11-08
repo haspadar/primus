@@ -20,13 +20,13 @@ use Throwable;
  *     new Throws(\RuntimeException::class)
  * );
  *
- * Output on failure:
- * Failed asserting that object throws RuntimeException
- *
  * @since 0.2
  */
 final class Throws extends Constraint
 {
+    private ?Throwable $caughtException = null;
+    private bool $exceptionThrown = false;
+
     public function __construct(private readonly string $expected)
     {
     }
@@ -40,8 +40,11 @@ final class Throws extends Constraint
     {
         try {
             $other->value();
+            $this->exceptionThrown = false;
             return false;
         } catch (Throwable $e) {
+            $this->caughtException = $e;
+            $this->exceptionThrown = true;
             return is_a($e, $this->expected);
         }
     }
@@ -53,11 +56,10 @@ final class Throws extends Constraint
 
     protected function additionalFailureDescription($other): string
     {
-        try {
-            $other->value();
+        if (!$this->exceptionThrown) {
             return "\nExpected exception: {$this->expected}\nBut no exception was thrown.";
-        } catch (Throwable $e) {
-            return "\nExpected exception: {$this->expected}\nBut was:            " . $e::class;
         }
+
+        return "\nExpected exception: {$this->expected}\nBut was:            " . $this->caughtException::class;
     }
 }

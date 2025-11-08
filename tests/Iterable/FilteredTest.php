@@ -8,7 +8,6 @@ declare(strict_types=1);
 
 namespace Primus\Tests\Iterable;
 
-use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Primus\Iterable\Filtered;
@@ -18,7 +17,6 @@ use Primus\Tests\Constraint\HasScalarValues;
 /**
  * @since 0.2
  */
-#[CoversClass(Filtered::class)]
 final class FilteredTest extends TestCase
 {
     #[Test]

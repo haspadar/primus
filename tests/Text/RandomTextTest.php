@@ -8,7 +8,6 @@ declare(strict_types=1);
 
 namespace Primus\Tests\Text;
 
-use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Primus\Tests\Constraint\HasSize;
@@ -18,7 +17,6 @@ use Primus\Text\RandomText;
 /**
  * @since 0.2
  */
-#[CoversClass(RandomText::class)]
 final class RandomTextTest extends TestCase
 {
     #[Test]

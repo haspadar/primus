@@ -8,7 +8,6 @@ declare(strict_types=1);
 
 namespace Primus\Tests\Text;
 
-use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Primus\Tests\Constraint\HasTextValue;
@@ -20,7 +19,6 @@ use RuntimeException;
 /**
  * @since 0.2
  */
-#[CoversClass(Normalized::class)]
 final class NormalizedTest extends TestCase
 {
     #[Test]

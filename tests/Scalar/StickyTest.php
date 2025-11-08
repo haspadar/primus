@@ -8,7 +8,6 @@ declare(strict_types=1);
 
 namespace Primus\Tests\Scalar;
 
-use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Primus\Scalar\ScalarOf;
@@ -18,7 +17,6 @@ use Primus\Tests\Constraint\HasScalarValue;
 /**
  * @since 0.2
  */
-#[CoversClass(Sticky::class)]
 final class StickyTest extends TestCase
 {
     #[Test]
@@ -26,12 +24,10 @@ final class StickyTest extends TestCase
     {
         $scalar = new Sticky(new ScalarOf(fn (): string => uniqid('', true)));
 
-        $firstCall = $scalar->value();
-        $secondCall = $scalar->value();
-
-        self::assertThat(
-            new ScalarOf(fn (): bool => $firstCall === $secondCall),
-            new HasScalarValue(true)
+        self::assertSame(
+            $scalar->value(),
+            $scalar->value(),
+            'Sticky should return the same cached value'
         );
     }
 

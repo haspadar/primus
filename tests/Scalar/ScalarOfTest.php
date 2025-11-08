@@ -8,7 +8,6 @@ declare(strict_types=1);
 
 namespace Primus\Tests\Scalar;
 
-use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Primus\Scalar\ScalarOf;
@@ -18,7 +17,6 @@ use Primus\Tests\Constraint\HasScalarValue;
 /**
  * @since 0.2
  */
-#[CoversClass(ScalarOf::class)]
 final class ScalarOfTest extends TestCase
 {
     #[Test]
