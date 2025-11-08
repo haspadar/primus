@@ -8,9 +8,13 @@
       "vendor"
     ]
   },
+  "testFramework": "phpunit",
+  "timeout": 10,
   "logs": {
+    "text": "infection.log",
+    "summary": "infection-summary.log",
     "stryker": {
-      "badge": "/^main$/"
+      "badge": "/^(main|develop)$/"
     }
   },
   "mutators": {
