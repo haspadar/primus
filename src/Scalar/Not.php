@@ -8,15 +8,19 @@ declare(strict_types=1);
 
 namespace Primus\Scalar;
 
+use Primus\Func\FuncOf;
+
 /**
  * Logical negation of a {@see Scalar<bool>}.
  *
  * Example:
- *     $scalar = new Not(new ScalarOf(fn() => false));
+ *     $scalar = new Not(
+ *         new ScalarOf(new FuncOf(fn(): bool => false))
+ *     );
  *     echo $scalar->value(); // true
  *
  * @extends ScalarEnvelope<bool>
- * @since 0.2
+ * @since 0.3
  */
 final readonly class Not extends ScalarEnvelope
 {
@@ -26,7 +30,11 @@ final readonly class Not extends ScalarEnvelope
     public function __construct(Scalar $origin)
     {
         parent::__construct(
-            new ScalarOf(fn (): bool => !$origin->value())
+            new ScalarOf(
+                new FuncOf(
+                    fn (): bool => !$origin->value()
+                )
+            )
         );
     }
 }

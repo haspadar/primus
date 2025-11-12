@@ -8,9 +8,6 @@ declare(strict_types=1);
 
 namespace Primus\Scalar;
 
-use Override;
-use Primus\Exception;
-
 /**
  * Base class for scalar decorators.
  *
@@ -24,18 +21,15 @@ use Primus\Exception;
 abstract readonly class ScalarEnvelope implements Scalar
 {
     /**
-     * @param Scalar<T> $origin
+     * @psalm-param  Scalar<T> $origin
+     * @phpstan-param Scalar<covariant T> $origin
      */
     public function __construct(protected Scalar $origin)
     {
     }
 
-    /**
-     * @throws Exception
-     * @return T
-     */
-    #[Override]
-    final public function value()
+    #[\Override]
+    public function value()
     {
         return $this->origin->value();
     }

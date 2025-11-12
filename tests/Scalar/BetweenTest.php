@@ -10,12 +10,13 @@ namespace Primus\Tests\Scalar;
 
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
+use Primus\Func\FuncOf;
 use Primus\Scalar\Between;
 use Primus\Scalar\ScalarOf;
 use Primus\Tests\Constraint\HasBoolValue;
 
 /**
- * @since 0.2
+ * @since 0.3
  */
 final class BetweenTest extends TestCase
 {
@@ -24,11 +25,11 @@ final class BetweenTest extends TestCase
     {
         self::assertThat(
             new Between(
-                new ScalarOf(fn (): int => 5),
-                new ScalarOf(fn (): int => 1),
-                new ScalarOf(fn (): int => 10)
+                new ScalarOf(new FuncOf(fn (): int => 5)),
+                new ScalarOf(new FuncOf(fn (): int => 1)),
+                new ScalarOf(new FuncOf(fn (): int => 10))
             ),
-            new HasBoolValue(true)
+            new HasBoolValue(true),
         );
     }
 
@@ -37,11 +38,11 @@ final class BetweenTest extends TestCase
     {
         self::assertThat(
             new Between(
-                new ScalarOf(fn (): int => 1),
-                new ScalarOf(fn (): int => 1),
-                new ScalarOf(fn (): int => 10)
+                new ScalarOf(new FuncOf(fn (): int => 1)),
+                new ScalarOf(new FuncOf(fn (): int => 1)),
+                new ScalarOf(new FuncOf(fn (): int => 10))
             ),
-            new HasBoolValue(false)
+            new HasBoolValue(false),
         );
     }
 
@@ -50,11 +51,11 @@ final class BetweenTest extends TestCase
     {
         self::assertThat(
             new Between(
-                new ScalarOf(fn (): int => 10),
-                new ScalarOf(fn (): int => 1),
-                new ScalarOf(fn (): int => 10)
+                new ScalarOf(new FuncOf(fn (): int => 10)),
+                new ScalarOf(new FuncOf(fn (): int => 1)),
+                new ScalarOf(new FuncOf(fn (): int => 10))
             ),
-            new HasBoolValue(false)
+            new HasBoolValue(false),
         );
     }
 
@@ -63,11 +64,11 @@ final class BetweenTest extends TestCase
     {
         self::assertThat(
             new Between(
-                new ScalarOf(fn (): int => -2),
-                new ScalarOf(fn (): int => 1),
-                new ScalarOf(fn (): int => 10)
+                new ScalarOf(new FuncOf(fn (): int => -2)),
+                new ScalarOf(new FuncOf(fn (): int => 1)),
+                new ScalarOf(new FuncOf(fn (): int => 10))
             ),
-            new HasBoolValue(false)
+            new HasBoolValue(false),
         );
     }
 
@@ -76,11 +77,11 @@ final class BetweenTest extends TestCase
     {
         self::assertThat(
             new Between(
-                new ScalarOf(fn (): int => 15),
-                new ScalarOf(fn (): int => 1),
-                new ScalarOf(fn (): int => 10)
+                new ScalarOf(new FuncOf(fn (): int => 15)),
+                new ScalarOf(new FuncOf(fn (): int => 1)),
+                new ScalarOf(new FuncOf(fn (): int => 10))
             ),
-            new HasBoolValue(false)
+            new HasBoolValue(false),
         );
     }
 }

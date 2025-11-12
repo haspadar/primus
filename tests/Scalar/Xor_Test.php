@@ -11,23 +11,24 @@ namespace Primus\Tests\Scalar;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Primus\Exception;
+use Primus\Func\FuncOf;
 use Primus\Scalar\ScalarOf;
-use Primus\Scalar\XorOf;
+use Primus\Scalar\Xor_;
 use Primus\Tests\Constraint\HasBoolValue;
 use Primus\Tests\Constraint\Throws;
 
 /**
- * @since 0.2
+ * @since 0.3
  */
-final class XorOfTest extends TestCase
+final class Xor_Test extends TestCase
 {
     #[Test]
     public function returnsTrueWhenExactlyOneConditionTrue(): void
     {
         self::assertThat(
-            new XorOf(
-                new ScalarOf(fn (): true => true),
-                new ScalarOf(fn (): false => false),
+            new Xor_(
+                new ScalarOf(new FuncOf(fn (): bool => true)),
+                new ScalarOf(new FuncOf(fn (): bool => false)),
             ),
             new HasBoolValue(true),
         );
@@ -37,9 +38,9 @@ final class XorOfTest extends TestCase
     public function returnsFalseWhenBothTrue(): void
     {
         self::assertThat(
-            new XorOf(
-                new ScalarOf(fn (): true => true),
-                new ScalarOf(fn (): true => true),
+            new Xor_(
+                new ScalarOf(new FuncOf(fn (): bool => true)),
+                new ScalarOf(new FuncOf(fn (): bool => true)),
             ),
             new HasBoolValue(false),
         );
@@ -49,9 +50,9 @@ final class XorOfTest extends TestCase
     public function returnsFalseWhenBothFalse(): void
     {
         self::assertThat(
-            new XorOf(
-                new ScalarOf(fn (): false => false),
-                new ScalarOf(fn (): false => false),
+            new Xor_(
+                new ScalarOf(new FuncOf(fn (): bool => false)),
+                new ScalarOf(new FuncOf(fn (): bool => false)),
             ),
             new HasBoolValue(false),
         );
@@ -61,10 +62,10 @@ final class XorOfTest extends TestCase
     public function returnsFalseWhenEvenNumberTrue(): void
     {
         self::assertThat(
-            new XorOf(
-                new ScalarOf(fn (): true => true),
-                new ScalarOf(fn (): false => false),
-                new ScalarOf(fn (): true => true),
+            new Xor_(
+                new ScalarOf(new FuncOf(fn (): bool => true)),
+                new ScalarOf(new FuncOf(fn (): bool => false)),
+                new ScalarOf(new FuncOf(fn (): bool => true)),
             ),
             new HasBoolValue(false),
         );
@@ -74,7 +75,9 @@ final class XorOfTest extends TestCase
     public function throwsWhenNoConditionsProvided(): void
     {
         self::assertThat(
-            new ScalarOf(fn () => (new XorOf())->value()),
+            new ScalarOf(
+                new FuncOf(fn (): bool => (new Xor_())->value())
+            ),
             new Throws(Exception::class),
         );
     }

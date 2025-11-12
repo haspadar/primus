@@ -8,41 +8,33 @@ declare(strict_types=1);
 
 namespace Primus\Scalar;
 
-use Closure;
 use Override;
+use Primus\Func\Func;
 
 /**
- * A scalar created from a closure.
+ * A scalar created from a {@see Func}.
  *
- * Wraps a zero-argument closure and evaluates it lazily when value() is called.
- * This is the primary way to create scalars from deferred computations.
- *
- * The closure is evaluated on every call to value() unless wrapped in a
- * caching decorator like Sticky.
+ * Wraps a zero-argument function and evaluates it lazily when {@see value()} is called.
+ * The function is evaluated on every call unless wrapped in a caching decorator (e.g. Sticky).
  *
  * Example:
- *     $scalar = new ScalarOf(fn() => 2 + 2);
- *     echo $scalar->value(); // 4
+ * $scalar = new ScalarOf(new FuncOf(fn(): int => 2 + 2));
+ * echo $scalar->value(); // 4
  *
  * @template T
  * @implements Scalar<T>
- * @since 0.1
+ * @since 0.3
  */
 final readonly class ScalarOf implements Scalar
 {
-    /**
-     * @param Closure(): T $closure
-     */
-    public function __construct(private Closure $closure)
+    /** @param Func<mixed, T> $origin */
+    public function __construct(private Func $origin)
     {
     }
 
-    /**
-     * @return T
-     */
     #[Override]
-    public function value()
+    public function value(): mixed
     {
-        return ($this->closure)();
+        return $this->origin->apply('');
     }
 }

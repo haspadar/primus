@@ -10,12 +10,13 @@ namespace Primus\Tests\Scalar;
 
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
+use Primus\Func\FuncOf;
 use Primus\Scalar\EqualTo;
 use Primus\Scalar\ScalarOf;
 use Primus\Tests\Constraint\HasBoolValue;
 
 /**
- * @since 0.2
+ * @since 0.3
  */
 final class EqualToTest extends TestCase
 {
@@ -24,10 +25,10 @@ final class EqualToTest extends TestCase
     {
         self::assertThat(
             new EqualTo(
-                new ScalarOf(fn (): int => 42),
-                new ScalarOf(fn (): int => 42)
+                new ScalarOf(new FuncOf(fn (): int => 42)),
+                new ScalarOf(new FuncOf(fn (): int => 42))
             ),
-            new HasBoolValue(true)
+            new HasBoolValue(true),
         );
     }
 
@@ -36,10 +37,10 @@ final class EqualToTest extends TestCase
     {
         self::assertThat(
             new EqualTo(
-                new ScalarOf(fn (): string => 'foo'),
-                new ScalarOf(fn (): string => 'bar')
+                new ScalarOf(new FuncOf(fn (): string => 'foo')),
+                new ScalarOf(new FuncOf(fn (): string => 'bar'))
             ),
-            new HasBoolValue(false)
+            new HasBoolValue(false),
         );
     }
 
@@ -48,10 +49,10 @@ final class EqualToTest extends TestCase
     {
         self::assertThat(
             new EqualTo(
-                new ScalarOf(fn (): string => ''),
-                new ScalarOf(fn (): string => '')
+                new ScalarOf(new FuncOf(fn (): string => '')),
+                new ScalarOf(new FuncOf(fn (): string => ''))
             ),
-            new HasBoolValue(true)
+            new HasBoolValue(true),
         );
     }
 }

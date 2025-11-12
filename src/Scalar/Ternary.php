@@ -8,23 +8,26 @@ declare(strict_types=1);
 
 namespace Primus\Scalar;
 
+use Primus\Func\FuncOf;
+
 /**
- * Conditional scalar.
+ * Conditional {@see Scalar}.
  *
  * Returns {@see $yes} if {@see $condition} evaluates to true,
  * otherwise {@see $no}.
  *
  * Example:
- *     $scalar = new Ternary(
- *         new ScalarOf(fn() => 2 > 1),
- *         new Constant('yes'),
- *         new Constant('no')
- *     );
- *     echo $scalar->value(); // "yes"
+ * $scalar = new Ternary(
+ *     new ScalarOf(new FuncOf(fn(): bool => 2 > 1)),
+ *     new Constant('yes'),
+ *     new Constant('no')
+ * );
+ * echo $scalar->value(); // "yes"
  *
  * @template T
  * @extends ScalarEnvelope<T>
- * @since 0.2
+ *
+ * @since 0.3
  */
 final readonly class Ternary extends ScalarEnvelope
 {
@@ -37,7 +40,12 @@ final readonly class Ternary extends ScalarEnvelope
     {
         parent::__construct(
             new ScalarOf(
-                fn () => $condition->value() ? $yes->value() : $no->value()
+                new FuncOf(
+                    fn (): mixed =>
+                $condition->value()
+                    ? $yes->value()
+                    : $no->value()
+                )
             )
         );
     }

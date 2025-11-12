@@ -11,25 +11,26 @@ namespace Primus\Tests\Scalar;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Primus\Exception;
-use Primus\Scalar\OrOf;
+use Primus\Func\FuncOf;
+use Primus\Scalar\Or_;
 use Primus\Scalar\ScalarOf;
 use Primus\Tests\Constraint\HasBoolValue;
 use Primus\Tests\Constraint\Throws;
 
 /**
- * @since 0.2
+ * @since 0.3
  */
-final class OrOfTest extends TestCase
+final class Or_Test extends TestCase
 {
     #[Test]
     public function returnsTrueWhenAtLeastOneTrue(): void
     {
         self::assertThat(
-            new OrOf(
-                new ScalarOf(fn (): false => false),
-                new ScalarOf(fn (): true => true)
+            new Or_(
+                new ScalarOf(new FuncOf(fn (): bool => false)),
+                new ScalarOf(new FuncOf(fn (): bool => true))
             ),
-            new HasBoolValue(true)
+            new HasBoolValue(true),
         );
     }
 
@@ -37,11 +38,11 @@ final class OrOfTest extends TestCase
     public function returnsFalseWhenAllFalse(): void
     {
         self::assertThat(
-            new OrOf(
-                new ScalarOf(fn (): false => false),
-                new ScalarOf(fn (): false => false)
+            new Or_(
+                new ScalarOf(new FuncOf(fn (): bool => false)),
+                new ScalarOf(new FuncOf(fn (): bool => false))
             ),
-            new HasBoolValue(false)
+            new HasBoolValue(false),
         );
     }
 
@@ -49,11 +50,11 @@ final class OrOfTest extends TestCase
     public function returnsTrueWhenAllTrue(): void
     {
         self::assertThat(
-            new OrOf(
-                new ScalarOf(fn (): true => true),
-                new ScalarOf(fn (): true => true)
+            new Or_(
+                new ScalarOf(new FuncOf(fn (): bool => true)),
+                new ScalarOf(new FuncOf(fn (): bool => true))
             ),
-            new HasBoolValue(true)
+            new HasBoolValue(true),
         );
     }
 
@@ -61,8 +62,10 @@ final class OrOfTest extends TestCase
     public function throwsWhenNoScalarsProvided(): void
     {
         self::assertThat(
-            new ScalarOf(fn () => (new OrOf())->value()),
-            new Throws(Exception::class)
+            new ScalarOf(
+                new FuncOf(fn (): bool => (new Or_())->value())
+            ),
+            new Throws(Exception::class),
         );
     }
 }

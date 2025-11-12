@@ -10,13 +10,14 @@ namespace Primus\Tests\Scalar;
 
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
+use Primus\Func\FuncOf;
 use Primus\Scalar\Constant;
 use Primus\Scalar\ScalarOf;
 use Primus\Scalar\Ternary;
 use Primus\Tests\Constraint\HasScalarValue;
 
 /**
- * @since 0.2
+ * @since 0.3
  */
 final class TernaryTest extends TestCase
 {
@@ -25,7 +26,7 @@ final class TernaryTest extends TestCase
     {
         self::assertThat(
             new Ternary(
-                new ScalarOf(fn (): true => true),
+                new ScalarOf(new FuncOf(fn (): bool => true)),
                 new Constant('yes'),
                 new Constant('no')
             ),
@@ -38,7 +39,7 @@ final class TernaryTest extends TestCase
     {
         self::assertThat(
             new Ternary(
-                new ScalarOf(fn (): false => false),
+                new ScalarOf(new FuncOf(fn (): bool => false)),
                 new Constant('yes'),
                 new Constant('no')
             ),

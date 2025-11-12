@@ -12,32 +12,27 @@ use Override;
 use Primus\Exception;
 
 /**
- * Cached version of a {@see Scalar}.
+ * Cached {@see Scalar}.
  *
  * Evaluates the wrapped scalar once and stores the result in memory.
- * Subsequent calls to {@see value()} return the same cached value.
- *
- * This class is not thread-safe. To share cached data across objects,
- * use an external cache or synchronization mechanism.
+ * Subsequent calls to {@see value()} return the same value.
  *
  * Example:
- *     $scalar = new Sticky(new ScalarOf(fn() => time()));
- *     echo $scalar->value(); // computed once
- *     echo $scalar->value(); // cached value
+ * $time = new Sticky(new ScalarOf(new FuncOf(fn(): int => time())));
+ * echo $time->value(); // computed once
+ * echo $time->value(); // cached
  *
  * @template T
  * @implements Scalar<T>
- * @since 0.2
+ * @since 0.3
  */
 final class Sticky implements Scalar
 {
-    /**
-     * @psalm-suppress NoMutableProperty
-     */
+    /** @psalm-suppress NoMutableProperty */
     private bool $computed = false;
 
     /**
-     * @var T $stored
+     * @var T
      * @psalm-suppress NoMutableProperty
      */
     private $stored;

@@ -10,12 +10,13 @@ namespace Primus\Tests\Scalar;
 
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
+use Primus\Func\FuncOf;
 use Primus\Scalar\Not;
 use Primus\Scalar\ScalarOf;
 use Primus\Tests\Constraint\HasBoolValue;
 
 /**
- * @since 0.2
+ * @since 0.3
  */
 final class NotTest extends TestCase
 {
@@ -23,8 +24,10 @@ final class NotTest extends TestCase
     public function returnsFalseWhenConditionTrue(): void
     {
         self::assertThat(
-            new Not(new ScalarOf(fn (): true => true)),
-            new HasBoolValue(false)
+            new Not(
+                new ScalarOf(new FuncOf(fn (): bool => true))
+            ),
+            new HasBoolValue(false),
         );
     }
 
@@ -32,8 +35,10 @@ final class NotTest extends TestCase
     public function returnsTrueWhenConditionFalse(): void
     {
         self::assertThat(
-            new Not(new ScalarOf(fn (): false => false)),
-            new HasBoolValue(true)
+            new Not(
+                new ScalarOf(new FuncOf(fn (): bool => false))
+            ),
+            new HasBoolValue(true),
         );
     }
 }

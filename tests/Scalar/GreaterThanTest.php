@@ -10,12 +10,13 @@ namespace Primus\Tests\Scalar;
 
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
+use Primus\Func\FuncOf;
 use Primus\Scalar\GreaterThan;
 use Primus\Scalar\ScalarOf;
 use Primus\Tests\Constraint\HasBoolValue;
 
 /**
- * @since 0.2
+ * @since 0.3
  */
 final class GreaterThanTest extends TestCase
 {
@@ -24,10 +25,10 @@ final class GreaterThanTest extends TestCase
     {
         self::assertThat(
             new GreaterThan(
-                new ScalarOf(fn (): int => 10),
-                new ScalarOf(fn (): int => 5)
+                new ScalarOf(new FuncOf(fn (): int => 10)),
+                new ScalarOf(new FuncOf(fn (): int => 5))
             ),
-            new HasBoolValue(true)
+            new HasBoolValue(true),
         );
     }
 
@@ -36,10 +37,10 @@ final class GreaterThanTest extends TestCase
     {
         self::assertThat(
             new GreaterThan(
-                new ScalarOf(fn (): int => 7),
-                new ScalarOf(fn (): int => 7)
+                new ScalarOf(new FuncOf(fn (): int => 7)),
+                new ScalarOf(new FuncOf(fn (): int => 7))
             ),
-            new HasBoolValue(false)
+            new HasBoolValue(false),
         );
     }
 
@@ -48,10 +49,10 @@ final class GreaterThanTest extends TestCase
     {
         self::assertThat(
             new GreaterThan(
-                new ScalarOf(fn (): int => 3),
-                new ScalarOf(fn (): int => 8)
+                new ScalarOf(new FuncOf(fn (): int => 3)),
+                new ScalarOf(new FuncOf(fn (): int => 8))
             ),
-            new HasBoolValue(false)
+            new HasBoolValue(false),
         );
     }
 }
