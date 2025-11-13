@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Primus\Func;
 
-use Throwable;
+use Exception;
 
 /**
  * {@see Func} with fallback.
@@ -31,7 +31,7 @@ final readonly class FuncWithFallback extends FuncEnvelope
                 function ($input) use ($origin, $fallback) {
                     try {
                         return $origin->apply($input);
-                    } catch (Throwable) {
+                    } catch (Exception) {
                         return $fallback->apply($input);
                     }
                 }
