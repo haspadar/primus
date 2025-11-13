@@ -10,6 +10,7 @@ namespace Primus\Tests\Text;
 
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
+use Primus\Func\FuncOf;
 use Primus\Scalar\ScalarOf;
 use Primus\Tests\Constraint\HasTextValue;
 use Primus\Text\TextOfScalar;
@@ -23,7 +24,11 @@ final class TextOfScalarTest extends TestCase
     public function returnsValueFromScalar(): void
     {
         self::assertThat(
-            new TextOfScalar(new ScalarOf(fn (): string => 'hello')),
+            new TextOfScalar(
+                new ScalarOf(
+                    new FuncOf(fn (): string => 'hello')
+                )
+            ),
             new HasTextValue('hello')
         );
     }

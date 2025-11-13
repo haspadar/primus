@@ -10,11 +10,11 @@ namespace Primus\Tests\Text;
 
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
+use Primus\Exception;
 use Primus\Tests\Constraint\HasTextValue;
 use Primus\Tests\Constraint\Throws;
 use Primus\Text\Normalized;
 use Primus\Text\TextOf;
-use RuntimeException;
 
 /**
  * @since 0.2
@@ -71,7 +71,7 @@ final class NormalizedTest extends TestCase
     {
         self::assertThat(
             new Normalized(new TextOf("\xC3")),
-            new Throws(RuntimeException::class)
+            new Throws(Exception::class)
         );
     }
 }

@@ -8,8 +8,9 @@ declare(strict_types=1);
 
 namespace Primus\Text;
 
+use Primus\Exception;
+use Primus\Func\FuncOf;
 use Primus\Scalar\ScalarOf;
-use RuntimeException;
 
 /**
  * {@see Text} with whitespace removed from the right side.
@@ -27,9 +28,15 @@ final readonly class TrimmedRight extends TextEnvelope
         parent::__construct(
             new TextOfScalar(
                 new ScalarOf(
-                    fn (): string =>
-                        preg_replace('/\s+$/u', '', $origin->value())
-                        ?? throw new RuntimeException('Malformed UTF-8 input')
+                    new FuncOf(
+                        function () use ($origin): string {
+                            $trimmed = preg_replace('/\s+$/u', '', $origin->value());
+                            if ($trimmed === null) {
+                                throw new Exception('Malformed UTF-8 input');
+                            }
+                            return $trimmed;
+                        }
+                    )
                 )
             )
         );

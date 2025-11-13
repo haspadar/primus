@@ -8,6 +8,7 @@ declare(strict_types=1);
 
 namespace Primus\Text;
 
+use Primus\Func\FuncOf;
 use Primus\Scalar\ScalarOf;
 
 /**
@@ -20,26 +21,32 @@ use Primus\Scalar\ScalarOf;
  * $text = new RandomText(8);
  * echo $text->value(); // e.g. 'aZ8mKp2Q'
  *
- * @since 0.2
+ * @since 0.3
  */
 final readonly class RandomText extends TextEnvelope
 {
-    public function __construct(int $length, string $alphabet = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789')
-    {
-        $scalar = new ScalarOf(
-            function () use ($length, $alphabet): string {
-                $alphabet = $alphabet !== '' ? $alphabet : 'a';
-                $size = mb_strlen($alphabet, 'UTF-8');
-                $result = '';
+    public function __construct(
+        int $length,
+        string $alphabet = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'
+    ) {
+        parent::__construct(
+            new TextOfScalar(
+                new ScalarOf(
+                    new FuncOf(
+                        function () use ($length, $alphabet): string {
+                            $alphabet = $alphabet !== '' ? $alphabet : 'a';
+                            $size = mb_strlen($alphabet, 'UTF-8');
+                            $result = '';
 
-                for ($i = 0; $i < max(0, $length); $i++) {
-                    $result .= mb_substr($alphabet, random_int(0, $size - 1), 1, 'UTF-8');
-                }
+                            for ($i = 0; $i < max(0, $length); $i++) {
+                                $result .= mb_substr($alphabet, random_int(0, $size - 1), 1, 'UTF-8');
+                            }
 
-                return $result;
-            }
+                            return $result;
+                        }
+                    )
+                )
+            )
         );
-
-        parent::__construct(new TextOf($scalar->value()));
     }
 }

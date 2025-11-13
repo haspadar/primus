@@ -8,8 +8,9 @@ declare(strict_types=1);
 
 namespace Primus\Text;
 
+use Primus\Exception;
+use Primus\Func\FuncOf;
 use Primus\Scalar\ScalarOf;
-use RuntimeException;
 
 /**
  * {@see Text} with normalized whitespace.
@@ -30,9 +31,15 @@ final readonly class Normalized extends TextEnvelope
         parent::__construct(
             new TextOfScalar(
                 new ScalarOf(
-                    fn (): string =>
-                        preg_replace('/\s+/u', ' ', trim($origin->value()))
-                        ?? throw new RuntimeException('Malformed UTF-8 input')
+                    new FuncOf(
+                        function () use ($origin): string {
+                            $normalized = preg_replace('/\s+/u', ' ', trim($origin->value()));
+                            if ($normalized === null) {
+                                throw new Exception('Malformed UTF-8 input');
+                            }
+                            return $normalized;
+                        }
+                    )
                 )
             )
         );

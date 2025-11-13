@@ -8,6 +8,7 @@ declare(strict_types=1);
 
 namespace Primus\Text;
 
+use Primus\Func\FuncOf;
 use Primus\Scalar\ScalarEnvelope;
 use Primus\Scalar\ScalarOf;
 
@@ -19,17 +20,16 @@ use Primus\Scalar\ScalarOf;
  * echo $length->value(); // 9
  *
  * @extends ScalarEnvelope<int>
- *
+ * @since 0.3
  */
 final readonly class LengthOfText extends ScalarEnvelope
 {
     public function __construct(Text $origin)
     {
-        /** @var ScalarOf<int> $scalar */
-        $scalar = new ScalarOf(
-            fn (): int => mb_strlen($origin->value(), 'UTF-8')
+        parent::__construct(
+            new ScalarOf(
+                new FuncOf(fn (): int => mb_strlen($origin->value(), 'UTF-8'))
+            )
         );
-
-        parent::__construct($scalar);
     }
 }
