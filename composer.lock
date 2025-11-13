@@ -2113,16 +2113,16 @@
         },
         {
             "name": "justinrainbow/json-schema",
-            "version": "6.6.0",
+            "version": "6.6.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/jsonrainbow/json-schema.git",
-                "reference": "68ba7677532803cc0c5900dd5a4d730537f2b2f3"
+                "reference": "fd8e5c6b1badb998844ad34ce0abcd71a0aeb396"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jsonrainbow/json-schema/zipball/68ba7677532803cc0c5900dd5a4d730537f2b2f3",
-                "reference": "68ba7677532803cc0c5900dd5a4d730537f2b2f3",
+                "url": "https://api.github.com/repos/jsonrainbow/json-schema/zipball/fd8e5c6b1badb998844ad34ce0abcd71a0aeb396",
+                "reference": "fd8e5c6b1badb998844ad34ce0abcd71a0aeb396",
                 "shasum": ""
             },
             "require": {
@@ -2182,9 +2182,9 @@
             ],
             "support": {
                 "issues": "https://github.com/jsonrainbow/json-schema/issues",
-                "source": "https://github.com/jsonrainbow/json-schema/tree/6.6.0"
+                "source": "https://github.com/jsonrainbow/json-schema/tree/6.6.1"
             },
-            "time": "2025-10-10T11:34:09+00:00"
+            "time": "2025-11-07T18:30:29+00:00"
         },
         {
             "name": "kelunik/certificate",
@@ -3384,11 +3384,11 @@
         },
         {
             "name": "phpstan/phpstan",
-            "version": "2.1.31",
+            "version": "2.1.32",
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/ead89849d879fe203ce9292c6ef5e7e76f867b96",
-                "reference": "ead89849d879fe203ce9292c6ef5e7e76f867b96",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/e126cad1e30a99b137b8ed75a85a676450ebb227",
+                "reference": "e126cad1e30a99b137b8ed75a85a676450ebb227",
                 "shasum": ""
             },
             "require": {
@@ -3433,7 +3433,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-10-10T14:14:11+00:00"
+            "time": "2025-11-11T15:18:17+00:00"
         },
         {
             "name": "phpunit/php-code-coverage",
@@ -4654,21 +4654,21 @@
         },
         {
             "name": "rector/rector",
-            "version": "2.2.7",
+            "version": "2.2.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/rectorphp/rector.git",
-                "reference": "022038537838bc8a4e526af86c2d6e38eaeff7ef"
+                "reference": "303aa811649ccd1d32e51e62d5c85949d01b5f1b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/rectorphp/rector/zipball/022038537838bc8a4e526af86c2d6e38eaeff7ef",
-                "reference": "022038537838bc8a4e526af86c2d6e38eaeff7ef",
+                "url": "https://api.github.com/repos/rectorphp/rector/zipball/303aa811649ccd1d32e51e62d5c85949d01b5f1b",
+                "reference": "303aa811649ccd1d32e51e62d5c85949d01b5f1b",
                 "shasum": ""
             },
             "require": {
                 "php": "^7.4|^8.0",
-                "phpstan/phpstan": "^2.1.26"
+                "phpstan/phpstan": "^2.1.32"
             },
             "conflict": {
                 "rector/rector-doctrine": "*",
@@ -4702,7 +4702,7 @@
             ],
             "support": {
                 "issues": "https://github.com/rectorphp/rector/issues",
-                "source": "https://github.com/rectorphp/rector/tree/2.2.7"
+                "source": "https://github.com/rectorphp/rector/tree/2.2.8"
             },
             "funding": [
                 {
@@ -4710,7 +4710,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-10-29T15:46:12+00:00"
+            "time": "2025-11-12T18:38:00+00:00"
         },
         {
             "name": "revolt/event-loop",
@@ -5871,16 +5871,16 @@
         },
         {
             "name": "spatie/array-to-xml",
-            "version": "3.4.0",
+            "version": "3.4.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/array-to-xml.git",
-                "reference": "7dcfc67d60b0272926dabad1ec01f6b8a5fb5e67"
+                "reference": "6a740f39415aee8886aea10333403adc77d50791"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/array-to-xml/zipball/7dcfc67d60b0272926dabad1ec01f6b8a5fb5e67",
-                "reference": "7dcfc67d60b0272926dabad1ec01f6b8a5fb5e67",
+                "url": "https://api.github.com/repos/spatie/array-to-xml/zipball/6a740f39415aee8886aea10333403adc77d50791",
+                "reference": "6a740f39415aee8886aea10333403adc77d50791",
                 "shasum": ""
             },
             "require": {
@@ -5923,7 +5923,7 @@
                 "xml"
             ],
             "support": {
-                "source": "https://github.com/spatie/array-to-xml/tree/3.4.0"
+                "source": "https://github.com/spatie/array-to-xml/tree/3.4.1"
             },
             "funding": [
                 {
@@ -5935,7 +5935,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-12-16T12:45:15+00:00"
+            "time": "2025-11-12T10:32:50+00:00"
         },
         {
             "name": "symfony/console",

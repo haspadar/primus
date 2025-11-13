@@ -1,5 +1,18 @@
 # Changelog
 
+## [0.3.0] — 2025-11-07
+
+### Added
+
+- Func components:
+    - `Func`, `FuncOf`, `FuncEnvelope`
+    - `BiFunc`, `BiFuncOf`
+    - `Proc`, `ProcOf`
+    - `Predicate`, `PredicateOf`
+    - `FuncWithFallback`
+    - `Repeated`
+    - `StickyFunc`
+
 ## [0.2.0] — 2025-11-07
 
 ### Added
