@@ -35,7 +35,6 @@ final readonly class FuncOf implements Func
     #[\Override]
     public function apply($input): mixed
     {
-        $fn = $this->origin;
-        return $fn($input);
+        return ($this->origin)($input);
     }
 }

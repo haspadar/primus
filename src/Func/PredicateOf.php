@@ -28,7 +28,6 @@ final readonly class PredicateOf implements Predicate
     #[\Override]
     public function apply(mixed $input): bool
     {
-        $fn = $this->origin;
-        return $fn($input);
+        return ($this->origin)($input);
     }
 }

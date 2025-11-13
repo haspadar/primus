@@ -30,7 +30,6 @@ final readonly class BiFuncOf implements BiFunc
     #[\Override]
     public function apply(mixed $first, mixed $second): mixed
     {
-        $fn = $this->origin;
-        return $fn($first, $second);
+        return ($this->origin)($first, $second);
     }
 }
