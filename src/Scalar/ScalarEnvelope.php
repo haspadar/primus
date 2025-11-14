@@ -8,8 +8,7 @@ declare(strict_types=1);
 
 namespace Primus\Scalar;
 
-use Override;
-use Primus\Exception;
+use Throwable;
 
 /**
  * Base class for scalar decorators.
@@ -31,10 +30,10 @@ abstract readonly class ScalarEnvelope implements Scalar
     }
 
     /**
-     * @throws Exception
+     * @throws Throwable
      * @return T
      */
-    #[Override]
+    #[\Override]
     final public function value()
     {
         return $this->origin->value();
