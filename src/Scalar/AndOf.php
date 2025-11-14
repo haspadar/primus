@@ -8,7 +8,7 @@ declare(strict_types=1);
 
 namespace Primus\Scalar;
 
-use Primus\Exception;
+use InvalidArgumentException;
 
 /**
  * Logical AND over multiple {@see Scalar<bool>}.
@@ -33,7 +33,7 @@ final readonly class AndOf extends ScalarEnvelope
         $scalar = new ScalarOf(
             function () use ($conditions): bool {
                 if ($conditions === []) {
-                    throw new Exception('AndOf requires at least one condition');
+                    throw new InvalidArgumentException('AndOf requires at least one condition');
                 }
 
                 return array_reduce(

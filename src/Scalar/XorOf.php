@@ -8,7 +8,7 @@ declare(strict_types=1);
 
 namespace Primus\Scalar;
 
-use Primus\Exception;
+use InvalidArgumentException;
 
 /**
  * Logical XOR over multiple {@see Scalar<bool>}.
@@ -35,7 +35,7 @@ final readonly class XorOf extends ScalarEnvelope
         parent::__construct(
             new ScalarOf(
                 fn (): bool => match (count($conditions)) {
-                    0 => throw new Exception('XorOf requires at least one condition'),
+                    0 => throw new InvalidArgumentException('XorOf requires at least one condition'),
                     default => array_reduce(
                         $conditions,
                         fn (bool $carry, Scalar $cond): bool => $carry xor $cond->value(),

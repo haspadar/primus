@@ -8,9 +8,9 @@ declare(strict_types=1);
 
 namespace Primus\Tests\Scalar;
 
+use InvalidArgumentException;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
-use Primus\Exception;
 use Primus\Scalar\OrOf;
 use Primus\Scalar\ScalarOf;
 use Primus\Tests\Constraint\HasBoolValue;
@@ -62,7 +62,7 @@ final class OrOfTest extends TestCase
     {
         self::assertThat(
             new ScalarOf(fn () => (new OrOf())->value()),
-            new Throws(Exception::class)
+            new Throws(InvalidArgumentException::class)
         );
     }
 }

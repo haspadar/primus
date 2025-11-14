@@ -8,7 +8,7 @@ declare(strict_types=1);
 
 namespace Primus\Scalar;
 
-use Primus\Exception;
+use InvalidArgumentException;
 
 /**
  * Logical OR over multiple {@see Scalar<bool>}.
@@ -29,7 +29,7 @@ final readonly class OrOf extends ScalarEnvelope
             new ScalarOf(
                 function () use ($conditions): bool {
                     if ($conditions === []) {
-                        throw new Exception('OrOf requires at least one condition');
+                        throw new InvalidArgumentException('OrOf requires at least one condition');
                     }
                     return array_any($conditions, fn ($condition) => $condition->value());
                 }

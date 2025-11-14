@@ -8,13 +8,13 @@ declare(strict_types=1);
 
 namespace Primus\Tests\Text;
 
+use InvalidArgumentException;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Primus\Tests\Constraint\HasTextValue;
 use Primus\Tests\Constraint\Throws;
 use Primus\Text\TextOf;
 use Primus\Text\TrimmedRight;
-use RuntimeException;
 
 /**
  * @since 0.2
@@ -43,7 +43,7 @@ final class TrimmedRightTest extends TestCase
     public function removesUnicodeWhitespace(): void
     {
         self::assertThat(
-            new TrimmedRight(new TextOf("Hello  ")), // em spaces (U+2003)
+            new TrimmedRight(new TextOf("Hello  ")),
             new HasTextValue('Hello')
         );
     }
@@ -71,7 +71,7 @@ final class TrimmedRightTest extends TestCase
     {
         self::assertThat(
             (new TrimmedRight(new TextOf("\xC3"))),
-            new Throws(RuntimeException::class)
+            new Throws(InvalidArgumentException::class)
         );
     }
 }

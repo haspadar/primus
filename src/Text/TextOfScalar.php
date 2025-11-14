@@ -8,8 +8,8 @@ declare(strict_types=1);
 
 namespace Primus\Text;
 
-use Primus\Exception;
 use Primus\Scalar\Scalar;
+use Throwable;
 
 /**
  * Text based on a scalar producing a string.
@@ -22,7 +22,7 @@ final readonly class TextOfScalar implements Text
     }
 
     /**
-     * @throws Exception
+     * @throws Throwable
      */
     #[\Override]
     public function value(): string

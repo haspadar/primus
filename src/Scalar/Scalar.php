@@ -8,7 +8,7 @@ declare(strict_types=1);
 
 namespace Primus\Scalar;
 
-use Primus\Exception;
+use Throwable;
 
 /**
  * Represents a lazily-evaluated value of any type.
@@ -25,7 +25,7 @@ interface Scalar
      * Returns the computed value.
      *
      * @noinspection ReturnTypeCanBeDeclaredInspection
-     * @throws Exception if the value cannot be computed
+     * @throws Throwable if the value cannot be computed
      * @return T The value represented by this scalar.
      */
     public function value();
