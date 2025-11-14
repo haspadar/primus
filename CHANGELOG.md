@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.4.0] – 2025-11-14
+### Changed
+- Removed Primus\Exception in favor of SPL exceptions
+- Updated Scalar::value() phpdoc to `@throws Throwable`
+- Normalized, TrimmedRight etc. now throw InvalidArgumentException instead of Primus\Exception
+
+### Removed
+- Primus\Exception
+
 ## [0.3.0] — 2025-11-07
 
 ### Added
