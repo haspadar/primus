@@ -11,6 +11,8 @@
 [![PHPStan Level](https://img.shields.io/badge/PHPStan-Level%209-brightgreen)](https://phpstan.org/)
 [![Psalm](https://img.shields.io/badge/psalm-level%208-brightgreen)](https://psalm.dev)
 [![CodeRabbit Pull Request Reviews](https://img.shields.io/coderabbit/prs/github/haspadar/primus?utm_source=oss&utm_medium=github&utm_campaign=haspadar%2Fprimus&labelColor=171717&color=FF570A&label=CodeRabbit+Reviews)](https://coderabbit.ai)
+[![Hits-of-Code](https://hitsofcode.com/github/haspadar/primus?branch=main)](https://hitsofcode.com/github/haspadar/primus/view?branch=main)
+
 ---
 
 ## 📦 About
