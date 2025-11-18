@@ -13,7 +13,7 @@ use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Primus\Scalar\OrOf;
 use Primus\Scalar\ScalarOf;
-use Primus\Tests\Constraint\HasBoolValue;
+use Primus\Tests\Constraint\HasScalarBoolValue;
 use Primus\Tests\Constraint\Throws;
 
 /**
@@ -29,7 +29,8 @@ final class OrOfTest extends TestCase
                 new ScalarOf(fn (): false => false),
                 new ScalarOf(fn (): true => true)
             ),
-            new HasBoolValue(true)
+            new HasScalarBoolValue(true),
+            'OrOf must return true when at least one scalar is true'
         );
     }
 
@@ -41,7 +42,8 @@ final class OrOfTest extends TestCase
                 new ScalarOf(fn (): false => false),
                 new ScalarOf(fn (): false => false)
             ),
-            new HasBoolValue(false)
+            new HasScalarBoolValue(false),
+            'OrOf must return false when all scalars are false'
         );
     }
 
@@ -53,7 +55,8 @@ final class OrOfTest extends TestCase
                 new ScalarOf(fn (): true => true),
                 new ScalarOf(fn (): true => true)
             ),
-            new HasBoolValue(true)
+            new HasScalarBoolValue(true),
+            'OrOf must return true when all scalars are true'
         );
     }
 
@@ -62,7 +65,8 @@ final class OrOfTest extends TestCase
     {
         self::assertThat(
             new ScalarOf(fn () => (new OrOf())->value()),
-            new Throws(InvalidArgumentException::class)
+            new Throws(InvalidArgumentException::class),
+            'OrOf must throw an exception when no scalars are provided'
         );
     }
 }

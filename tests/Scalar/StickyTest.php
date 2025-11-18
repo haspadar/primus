@@ -36,7 +36,8 @@ final class StickyTest extends TestCase
     {
         self::assertThat(
             new Sticky(new ScalarOf(fn (): int => 42)),
-            new HasScalarValue(42)
+            new HasScalarValue(42),
+            'Sticky must return the stored value'
         );
     }
 }

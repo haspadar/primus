@@ -26,7 +26,8 @@ final class TrimmedRightTest extends TestCase
     {
         self::assertThat(
             new TrimmedRight(new TextOf('  hello world   ')),
-            new HasTextValue('  hello world')
+            new HasTextValue('  hello world'),
+            'TrimmedRight must remove trailing spaces only'
         );
     }
 
@@ -35,7 +36,8 @@ final class TrimmedRightTest extends TestCase
     {
         self::assertThat(
             new TrimmedRight(new TextOf('world')),
-            new HasTextValue('world')
+            new HasTextValue('world'),
+            'TrimmedRight must return the same text when there are no trailing spaces'
         );
     }
 
@@ -44,7 +46,8 @@ final class TrimmedRightTest extends TestCase
     {
         self::assertThat(
             new TrimmedRight(new TextOf("Hello  ")),
-            new HasTextValue('Hello')
+            new HasTextValue('Hello'),
+            'TrimmedRight must remove unicode whitespace'
         );
     }
 
@@ -53,7 +56,8 @@ final class TrimmedRightTest extends TestCase
     {
         self::assertThat(
             new TrimmedRight(new TextOf('   ')),
-            new HasTextValue('')
+            new HasTextValue(''),
+            'TrimmedRight must return an empty string when the original text consists only of spaces'
         );
     }
 
@@ -62,7 +66,8 @@ final class TrimmedRightTest extends TestCase
     {
         self::assertThat(
             new TrimmedRight(new TextOf('  hi')),
-            new HasTextValue('  hi')
+            new HasTextValue('  hi'),
+            'TrimmedRight must keep leading spaces intact'
         );
     }
 
@@ -71,7 +76,8 @@ final class TrimmedRightTest extends TestCase
     {
         self::assertThat(
             (new TrimmedRight(new TextOf("\xC3"))),
-            new Throws(InvalidArgumentException::class)
+            new Throws(InvalidArgumentException::class),
+            'TrimmedRight must throw an exception on malformed UTF-8 input'
         );
     }
 }

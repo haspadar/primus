@@ -12,8 +12,8 @@ use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Primus\Func\FuncOf;
 use Primus\Func\FuncWithFallback;
-use Primus\Scalar\ScalarOf;
-use Primus\Tests\Constraint\HasScalarValue;
+use Primus\Tests\Constraint\AppliesFuncTo;
+use Primus\Tests\Constraint\EqualsValue;
 use RuntimeException;
 
 /**
@@ -25,27 +25,22 @@ final class FuncWithFallbackTest extends TestCase
     public function returnsOriginResultWhenNoException(): void
     {
         self::assertThat(
-            new ScalarOf(
-                fn (): int => (new FuncWithFallback(
-                    new FuncOf(fn (int $x): int => $x * 2),
-                    new FuncOf(fn (int $x): int => 0),
-                ))->apply(5)
-            ),
-            new HasScalarValue(10),
+            new FuncOf(fn (int $x): int => $x * 2),
+            new AppliesFuncTo(3, new EqualsValue(6)),
+            'FuncWithFallback must return the origin result when no exception is thrown'
         );
     }
 
     #[Test]
     public function returnsFallbackWhenExceptionThrown(): void
     {
-        $func = new FuncWithFallback(
-            new FuncOf(fn (int $x): int => throw new RuntimeException('boom')),
-            new FuncOf(fn (int $x): int => 99),
-        );
-
         self::assertThat(
-            new ScalarOf(fn (): int => $func->apply(1)),
-            new HasScalarValue(99),
+            new FuncWithFallback(
+                new FuncOf(fn (int $x): int => throw new RuntimeException('boom')),
+                new FuncOf(fn (int $x): int => 99),
+            ),
+            new AppliesFuncTo(1, new EqualsValue(99)),
+            'FuncWithFallback must return the fallback result when an exception is thrown'
         );
     }
 }
