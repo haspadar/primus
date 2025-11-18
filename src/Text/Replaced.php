@@ -14,12 +14,12 @@ namespace Primus\Text;
  * Replaces one or multiple search strings with replacements.
  *
  * Example:
- * $text = new Replaced(
- *     new TextOf('<b>Hello & bye</b>'),
- *     ['<b>', '</b>', '&'],
- *     ['', '', 'and']
- * );
- * echo $text->value(); // 'Hello and bye'
+ *     $text = new Replaced(
+ *         new TextOf('<b>Hello & bye</b>'),
+ *         ['<b>', '</b>', '&'],
+ *         ['', '', 'and']
+ *     );
+ *     echo $text->value(); // 'Hello and bye'
  *
  * @since 0.2
  */

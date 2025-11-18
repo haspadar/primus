@@ -22,7 +22,7 @@ use Throwable;
  *
  * @since 0.2
  */
-final class Throws extends Constraint
+final class ThrowsValue extends Constraint
 {
     private ?Throwable $caughtException = null;
     private bool $exceptionThrown = false;
@@ -60,6 +60,6 @@ final class Throws extends Constraint
             return "\nExpected exception: {$this->expected}\nBut no exception was thrown.";
         }
 
-        return "\nExpected exception: {$this->expected}\nBut was:            " . $this->caughtException::class;
+        return "\nExpected exception: {$this->expected}\nBut was:            " . $this->caughtException::class . ': ' . $this->caughtException->getMessage() . ': ' . $this->caughtException->getTraceAsString();
     }
 }

@@ -16,8 +16,8 @@ use InvalidArgumentException;
  * Returns true only if all provided scalars evaluate to true.
  *
  * Example:
- * $and = new AndOf(new True_(), new False_());
- * echo $and->value(); // false
+ *     $and = new AndOf(new True_(), new False_());
+ *     echo $and->value(); // false
  *
  * @extends ScalarEnvelope<bool>
  * @since 0.2

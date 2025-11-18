@@ -15,8 +15,8 @@ namespace Primus\Text;
  * If the text length does not exceed the limit, it is returned unchanged.
  *
  * Example:
- * $text = new Abbreviated(new TextOf('Hello, world!'), 8);
- * echo $text->value(); // 'Hello, w…'
+ *     $text = new Abbreviated(new TextOf('Hello, world!'), 8);
+ *     echo $text->value(); // 'Hello, w…'
  *
  * @since 0.1
  */

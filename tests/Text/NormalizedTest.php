@@ -12,7 +12,7 @@ use InvalidArgumentException;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Primus\Tests\Constraint\HasTextValue;
-use Primus\Tests\Constraint\Throws;
+use Primus\Tests\Constraint\ThrowsValue;
 use Primus\Text\Normalized;
 use Primus\Text\TextOf;
 
@@ -71,7 +71,7 @@ final class NormalizedTest extends TestCase
     {
         self::assertThat(
             new Normalized(new TextOf("\xC3")),
-            new Throws(InvalidArgumentException::class)
+            new ThrowsValue(InvalidArgumentException::class)
         );
     }
 }

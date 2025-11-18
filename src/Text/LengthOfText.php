@@ -15,8 +15,8 @@ use Primus\Scalar\ScalarOf;
  * Length of {@see Text}, measured in multibyte characters.
  *
  * Example:
- * $length = new LengthOfText(new TextOf('Café Noël'));
- * echo $length->value(); // 9
+ *     $length = new LengthOfText(new TextOf('Café Noël'));
+ *     echo $length->value(); // 9
  *
  * @extends ScalarEnvelope<int>
  *

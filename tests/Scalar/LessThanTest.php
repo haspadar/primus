@@ -12,7 +12,7 @@ use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Primus\Scalar\LessThan;
 use Primus\Scalar\ScalarOf;
-use Primus\Tests\Constraint\HasBoolValue;
+use Primus\Tests\Constraint\HasScalarBoolValue;
 
 /**
  * @since 0.2
@@ -27,7 +27,7 @@ final class LessThanTest extends TestCase
                 new ScalarOf(fn (): int => 3),
                 new ScalarOf(fn (): int => 8)
             ),
-            new HasBoolValue(true)
+            new HasScalarBoolValue(true)
         );
     }
 
@@ -39,7 +39,7 @@ final class LessThanTest extends TestCase
                 new ScalarOf(fn (): int => 5),
                 new ScalarOf(fn (): int => 5)
             ),
-            new HasBoolValue(false)
+            new HasScalarBoolValue(false)
         );
     }
 
@@ -51,7 +51,7 @@ final class LessThanTest extends TestCase
                 new ScalarOf(fn (): int => 9),
                 new ScalarOf(fn (): int => 2)
             ),
-            new HasBoolValue(false)
+            new HasScalarBoolValue(false)
         );
     }
 }

@@ -8,27 +8,51 @@ declare(strict_types=1);
 
 namespace Primus\Iterable;
 
+use Iterator;
+use IteratorAggregate;
+use Primus\Func\Predicate;
+
 /**
- * Filters items in a {@see Sequence} by a predicate.
+ * Iterable that lazily filters values from another iterable
+ * using the provided predicate.
+ *
+ * Example:
+ *     $it = new Filtered(
+ *         new IterableOf([10, 5, 40, 3]),
+ *         new PredicateOf(fn (int $x): bool => $x > 10)
+ *     );
+ *
+ *     foreach ($it as $v) {
+ *         echo $v . ' ';   // 40
+ *     }
  *
  * @template T
- * @extends SequenceEnvelope<T>
+ * @implements IteratorAggregate<T>
+ *
+ * @since 0.5
  */
-final readonly class Filtered extends SequenceEnvelope
+final readonly class Filtered implements IteratorAggregate
 {
     /**
-     * @param callable(T): bool $predicate
-     * @param Sequence<T> $sequence
+     * @param IteratorAggregate<T> $origin
+     * @param Predicate<T> $predicate
      */
-    public function __construct(callable $predicate, Sequence $sequence)
+    public function __construct(
+        private IteratorAggregate $origin,
+        private Predicate $predicate,
+    ) {
+    }
+
+    /**
+     * @throws \Exception
+     * @return Iterator<int, T>
+     */
+    #[\Override]
+    public function getIterator(): Iterator
     {
-        parent::__construct(new SequenceOf(
-            array_values(
-                array_filter(
-                    iterator_to_array($sequence->getIterator()),
-                    $predicate
-                )
-            )
-        ));
+        /** @var Iterator<mixed,T> $it */
+        $it = $this->origin->getIterator();
+
+        return new \Primus\Iterator\Filtered($it, $this->predicate);
     }
 }

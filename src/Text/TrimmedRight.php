@@ -15,8 +15,8 @@ use Primus\Scalar\ScalarOf;
  * {@see Text} with whitespace removed from the right side.
  *
  * Example:
- * $text = new TrimmedRight(new TextOf(" hello   "));
- * echo $text->value(); // ' hello'
+ *     $text = new TrimmedRight(new TextOf(" hello   "));
+ *     echo $text->value(); // ' hello'
  *
  * @since 0.2
  */

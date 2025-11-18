@@ -11,7 +11,7 @@ namespace Primus\Tests\Scalar;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Primus\Scalar\ScalarOf;
-use Primus\Tests\Constraint\HasBoolValue;
+use Primus\Tests\Constraint\HasScalarBoolValue;
 use Primus\Tests\Constraint\HasScalarValue;
 
 /**
@@ -40,7 +40,7 @@ final class ScalarOfTest extends TestCase
 
         self::assertThat(
             new ScalarOf(fn (): bool => $called),
-            new HasBoolValue(true)
+            new HasScalarBoolValue(true)
         );
     }
 }

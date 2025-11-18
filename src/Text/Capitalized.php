@@ -15,8 +15,8 @@ namespace Primus\Text;
  * and leaves the rest of the text unchanged.
  *
  * Example:
- * $text = new Capitalized(new TextOf('hello'));
- * echo $text->value(); // 'Hello'
+ *     $text = new Capitalized(new TextOf('hello'));
+ *     echo $text->value(); // 'Hello'
  *
  * @since 0.2
  */

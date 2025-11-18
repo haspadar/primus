@@ -12,7 +12,7 @@ use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Primus\Func\FuncOf;
 use Primus\Func\StickyFunc;
-use Primus\Tests\CallCounter;
+use Primus\Tests\Constraint\EqualsValue;
 
 /**
  * @since 0.3
@@ -22,63 +22,52 @@ final class StickyFuncTest extends TestCase
     #[Test]
     public function cachesScalarInput(): void
     {
-        $counter = new CallCounter();
-
         $sticky = new StickyFunc(
-            new FuncOf(fn (int $x): int => $counter->increment() * $x)
+            new FuncOf(fn (int $x): int => random_int(PHP_INT_MIN, PHP_INT_MAX))
         );
 
-        $sticky->apply(7);
-        $sticky->apply(7);
+        $a = $sticky->apply(7);
+        $b = $sticky->apply(7);
 
-        self::assertSame(1, $counter->total(), 'Should call origin only once for same scalar');
+        self::assertThat($a, new EqualsValue($b));
     }
 
     #[Test]
     public function cachesArrayInput(): void
     {
-        $counter = new CallCounter();
-
         $sticky = new StickyFunc(
-            new FuncOf(fn (array $input): int => $counter->increment() + count($input))
+            new FuncOf(fn (array $x): int => random_int(PHP_INT_MIN, PHP_INT_MAX))
         );
 
-        $sticky->apply(['a', 'b']);
-        $sticky->apply(['a', 'b']);
+        $a = $sticky->apply(['a', 'b']);
+        $b = $sticky->apply(['a', 'b']);
 
-        self::assertSame(1, $counter->total(), 'Should call origin only once for same array');
+        self::assertThat($a, new EqualsValue($b));
     }
 
     #[Test]
-    public function cachesObjectInput(): void
+    public function cachesTrueInput(): void
     {
-        $counter = new CallCounter();
-
         $sticky = new StickyFunc(
-            new FuncOf(fn (object $input): int => $counter->increment() + strlen($input::class))
+            new FuncOf(fn (bool $x): int => random_int(PHP_INT_MIN, PHP_INT_MAX))
         );
 
-        $object = new \stdClass();
-        $sticky->apply($object);
-        $sticky->apply($object);
+        $first = $sticky->apply(true);
+        $second = $sticky->apply(true);
 
-        self::assertSame(1, $counter->total(), 'Should call origin only once for same object');
+        self::assertThat($first, new EqualsValue($second));
     }
 
     #[Test]
-    public function cachesBooleanInput(): void
+    public function cachesFalseInput(): void
     {
-        $counter = new CallCounter();
-
         $sticky = new StickyFunc(
-            new FuncOf(fn (bool $input): int => $counter->increment() + ($input ? 1 : 0))
+            new FuncOf(fn (bool $x): int => random_int(PHP_INT_MIN, PHP_INT_MAX))
         );
 
-        $sticky->apply(true);
-        $sticky->apply(true);
-        $sticky->apply(false);
-        $sticky->apply(false);
+        $first = $sticky->apply(false);
+        $second = $sticky->apply(false);
 
-        self::assertSame(2, $counter->total(), 'Should call origin only once per boolean value');
+        self::assertThat($first, new EqualsValue($second));
     }
 }

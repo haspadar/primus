@@ -15,8 +15,8 @@ namespace Primus\Text;
  * Equivalent to {@see mb_substr($text, $start, PHP_INT_MAX, 'UTF-8')}.
  *
  * Example:
- * $text = new Sub(new TextOf('hello world'), 0, 5);
- * echo $text->value(); // 'hello'
+ *     $text = new Sub(new TextOf('hello world'), 0, 5);
+ *     echo $text->value(); // 'hello'
  *
  * @since 0.1
  */

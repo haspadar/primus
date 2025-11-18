@@ -17,8 +17,8 @@ use Primus\Scalar\ScalarOf;
  * from the specified alphabet.
  *
  * Example:
- * $text = new RandomText(8);
- * echo $text->value(); // e.g. 'aZ8mKp2Q'
+ *     $text = new RandomText(8);
+ *     echo $text->value(); // e.g. 'aZ8mKp2Q'
  *
  * @since 0.2
  */

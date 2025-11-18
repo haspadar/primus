@@ -41,7 +41,7 @@ final class TrimmedLeftTest extends TestCase
     public function removesUnicodeWhitespace(): void
     {
         self::assertThat(
-            new TrimmedLeft(new TextOf("  Hello")), // em spaces (U+2003)
+            new TrimmedLeft(new TextOf("  Hello")),
             new HasTextValue('Hello')
         );
     }

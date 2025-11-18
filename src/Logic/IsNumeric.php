@@ -14,10 +14,10 @@ namespace Primus\Logic;
  * Uses PHP's {@see is_numeric()} to determine if the string is a number.
  *
  * Example:
- * new IsNumeric(new TextOf("123")) → true
- * new IsNumeric(new TextOf("3.14")) → true
- * new IsNumeric(new TextOf("1e10")) → true
- * new IsNumeric(new TextOf("abc")) → false
+ *     new IsNumeric(new TextOf("123")) → true
+ *     new IsNumeric(new TextOf("3.14")) → true
+ *     new IsNumeric(new TextOf("1e10")) → true
+ *     new IsNumeric(new TextOf("abc")) → false
  *
  */
 final readonly class IsNumeric extends LogicEnvelope

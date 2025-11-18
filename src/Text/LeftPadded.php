@@ -15,8 +15,8 @@ namespace Primus\Text;
  * with the given character using {@see str_pad()}.
  *
  * Example:
- * $text = new LeftPadded(new TextOf('foo'), 6, '.');
- * echo $text->value(); // '...foo'
+ *     $text = new LeftPadded(new TextOf('foo'), 6, '.');
+ *     echo $text->value(); // '...foo'
  *
  * @since 0.2
  */

@@ -12,7 +12,7 @@ use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Primus\Scalar\Not;
 use Primus\Scalar\ScalarOf;
-use Primus\Tests\Constraint\HasBoolValue;
+use Primus\Tests\Constraint\HasScalarBoolValue;
 
 /**
  * @since 0.2
@@ -24,7 +24,7 @@ final class NotTest extends TestCase
     {
         self::assertThat(
             new Not(new ScalarOf(fn (): true => true)),
-            new HasBoolValue(false)
+            new HasScalarBoolValue(false)
         );
     }
 
@@ -33,7 +33,7 @@ final class NotTest extends TestCase
     {
         self::assertThat(
             new Not(new ScalarOf(fn (): false => false)),
-            new HasBoolValue(true)
+            new HasScalarBoolValue(true)
         );
     }
 }

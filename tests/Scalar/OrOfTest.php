@@ -13,8 +13,8 @@ use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Primus\Scalar\OrOf;
 use Primus\Scalar\ScalarOf;
-use Primus\Tests\Constraint\HasBoolValue;
-use Primus\Tests\Constraint\Throws;
+use Primus\Tests\Constraint\HasScalarBoolValue;
+use Primus\Tests\Constraint\ThrowsValue;
 
 /**
  * @since 0.2
@@ -29,7 +29,7 @@ final class OrOfTest extends TestCase
                 new ScalarOf(fn (): false => false),
                 new ScalarOf(fn (): true => true)
             ),
-            new HasBoolValue(true)
+            new HasScalarBoolValue(true)
         );
     }
 
@@ -41,7 +41,7 @@ final class OrOfTest extends TestCase
                 new ScalarOf(fn (): false => false),
                 new ScalarOf(fn (): false => false)
             ),
-            new HasBoolValue(false)
+            new HasScalarBoolValue(false)
         );
     }
 
@@ -53,7 +53,7 @@ final class OrOfTest extends TestCase
                 new ScalarOf(fn (): true => true),
                 new ScalarOf(fn (): true => true)
             ),
-            new HasBoolValue(true)
+            new HasScalarBoolValue(true)
         );
     }
 
@@ -62,7 +62,7 @@ final class OrOfTest extends TestCase
     {
         self::assertThat(
             new ScalarOf(fn () => (new OrOf())->value()),
-            new Throws(InvalidArgumentException::class)
+            new ThrowsValue(InvalidArgumentException::class)
         );
     }
 }
