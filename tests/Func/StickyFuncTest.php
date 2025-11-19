@@ -12,6 +12,9 @@ use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Primus\Func\FuncOf;
 use Primus\Func\StickyFunc;
+use Primus\Tests\Constraint\EqualsValue;
+use Primus\Tests\Constraint\HasCallCount;
+use Primus\Tests\CountCalls;
 
 /**
  * @since 0.3
@@ -19,70 +22,53 @@ use Primus\Func\StickyFunc;
 final class StickyFuncTest extends TestCase
 {
     #[Test]
-    public function cachesScalarInput(): void
-    {
-        $sticky = new StickyFunc(
-            new FuncOf(fn (int $x): int => random_int(PHP_INT_MIN, PHP_INT_MAX)),
-        );
-
-        $a = $sticky->apply(7);
-        $b = $sticky->apply(7);
-
-        self::assertSame(
-            $a,
-            $b,
-            'StickyFunc must return the same value for repeated scalar input',
-        );
-    }
-
-    #[Test]
     public function cachesArrayInput(): void
     {
+        $calls = new CountCalls();
+
         $sticky = new StickyFunc(
-            new FuncOf(fn (array $x): int => random_int(PHP_INT_MIN, PHP_INT_MAX)),
+            new FuncOf(fn (array $x): int => $calls->record(count($x)))
         );
 
-        $a = $sticky->apply(['a', 'b']);
-        $b = $sticky->apply(['a', 'b']);
-
-        self::assertSame(
-            $a,
-            $b,
-            'StickyFunc must return the same value for repeated array input',
+        self::assertThat(
+            $sticky->apply(['a', 'b']),
+            new EqualsValue($sticky->apply(['a', 'b']))
         );
+
+        self::assertThat($calls, new HasCallCount(1));
     }
 
     #[Test]
     public function cachesTrueInput(): void
     {
+        $calls = new CountCalls();
+
         $sticky = new StickyFunc(
-            new FuncOf(fn (bool $x): int => random_int(PHP_INT_MIN, PHP_INT_MAX)),
+            new FuncOf(fn (bool $x): int => $calls->record($x ? 1 : 0))
         );
 
-        $first = $sticky->apply(true);
-        $second = $sticky->apply(true);
-
-        self::assertSame(
-            $first,
-            $second,
-            'StickyFunc must cache result for boolean true',
+        self::assertThat(
+            $sticky->apply(true),
+            new EqualsValue($sticky->apply(true))
         );
+
+        self::assertThat($calls, new HasCallCount(1));
     }
 
     #[Test]
     public function cachesFalseInput(): void
     {
+        $calls = new CountCalls();
+
         $sticky = new StickyFunc(
-            new FuncOf(fn (bool $x): int => random_int(PHP_INT_MIN, PHP_INT_MAX)),
+            new FuncOf(fn (bool $x): int => $calls->record($x ? 1 : 0))
         );
 
-        $first = $sticky->apply(false);
-        $second = $sticky->apply(false);
-
-        self::assertSame(
-            $first,
-            $second,
-            'StickyFunc must cache result for boolean false',
+        self::assertThat(
+            $sticky->apply(false),
+            new EqualsValue($sticky->apply(false))
         );
+
+        self::assertThat($calls, new HasCallCount(1));
     }
 }

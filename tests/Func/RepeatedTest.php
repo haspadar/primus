@@ -12,6 +12,7 @@ use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Primus\Func\FuncOf;
 use Primus\Func\Repeated;
+use Primus\Tests\Constraint\ThrowsClosure;
 
 /**
  * @since 0.3
@@ -36,14 +37,25 @@ final class RepeatedTest extends TestCase
     }
 
     #[Test]
+    public function threadsResultsBetweenInvocations(): void
+    {
+        $func = new FuncOf(fn (int $x): int => $x + 1);
+
+        self::assertSame(
+            3,
+            (new Repeated($func, 3))->apply(0),
+            'Repeated must thread results through (0 → 1 → 2 → 3)',
+        );
+    }
+
+    #[Test]
     public function repeatsNullResults(): void
     {
         $func = new FuncOf(fn (): mixed => null);
 
-        self::assertSame(
-            null,
+        self::assertNull(
             (new Repeated($func, 2))->apply(null),
-            'Repeated must return null when origin returns null',
+            'Repeated must return null when origin returns null'
         );
     }
 
@@ -53,7 +65,7 @@ final class RepeatedTest extends TestCase
         $values = [10, 20, 30, 40];
         $func = new FuncOf(
             function () use (&$values): int {
-                return array_shift($values);
+                return (int)array_shift($values);
             },
         );
 
@@ -61,6 +73,18 @@ final class RepeatedTest extends TestCase
             40,
             (new Repeated($func, 4))->apply(0),
             'Repeated must return the last invocation result',
+        );
+    }
+
+    #[Test]
+    public function throwsWhenZeroTimesRequested(): void
+    {
+        $func = new FuncOf(fn (): int => 123);
+
+        self::assertThat(
+            fn (): mixed => (new Repeated($func, 0))->apply(1),
+            new ThrowsClosure(\RuntimeException::class),
+            'Repeated must reject zero-times constructor argument',
         );
     }
 }

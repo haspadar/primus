@@ -25,7 +25,10 @@ final class FuncWithFallbackTest extends TestCase
     public function returnsOriginResultWhenNoException(): void
     {
         self::assertThat(
-            new FuncOf(fn (int $x): int => $x * 2),
+            new FuncWithFallback(
+                new FuncOf(fn (int $x): int => $x * 2),
+                new FuncOf(fn (int $x): int => 0),
+            ),
             new AppliesFuncTo(3, new EqualsValue(6)),
             'FuncWithFallback must return the origin result when no exception is thrown'
         );

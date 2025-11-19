@@ -11,8 +11,9 @@ namespace Primus\Tests\Scalar;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Primus\Scalar\ScalarOf;
-use Primus\Tests\Constraint\HasScalarBoolValue;
+use Primus\Tests\Constraint\HasCallCount;
 use Primus\Tests\Constraint\HasScalarValue;
+use Primus\Tests\CountCalls;
 
 /**
  * @since 0.2
@@ -32,16 +33,13 @@ final class ScalarOfTest extends TestCase
     #[Test]
     public function invokesClosureWhenValueIsCalled(): void
     {
-        $called = false;
+        $calls = new CountCalls();
 
-        (new ScalarOf(function () use (&$called): int {
-            $called = true;
-            return 1;
-        }))->value();
+        (new ScalarOf(fn (): int => $calls->record(1)))->value();
 
         self::assertThat(
-            new ScalarOf(fn (): bool => $called),
-            new HasScalarBoolValue(true),
+            $calls,
+            new HasCallCount(1),
             'ScalarOf must invoke the closure when value() is called'
         );
     }

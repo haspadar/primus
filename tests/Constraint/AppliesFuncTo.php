@@ -12,13 +12,13 @@ use PHPUnit\Framework\Constraint\Constraint;
 use Primus\Func\Func;
 
 /**
- * Asserts that a Func applied to a given input
- * returns the expected value.
+ * Asserts that a BiProc executes successfully
+ * when invoked with two given inputs.
  *
  * Example:
  * self::assertThat(
- *     new FuncOf(fn(int $x) => $x * 2),
- *     new AppliesTo(3, 6)
+ *     new ExecutesBiProcWith([2, 3]),
+ *     new BiProcOf(...)
  * );
  *
  * @since 0.5
