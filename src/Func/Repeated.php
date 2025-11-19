@@ -37,9 +37,7 @@ final readonly class Repeated implements Func
         }
 
         $result = $input;
-        $limit = max(1, $this->times);
-
-        for ($i = 0; $i < $limit; $i++) {
+        for ($i = 0; $i < $this->times; $i++) {
             $result = $this->origin->apply($result);
         }
 
