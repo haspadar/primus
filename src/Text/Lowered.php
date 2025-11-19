@@ -24,7 +24,7 @@ final readonly class Lowered extends TextEnvelope
     public function __construct(Text $origin)
     {
         parent::__construct(
-            new TextOf(mb_strtolower($origin->value()))
+            new TextOf(mb_strtolower($origin->value(), 'UTF-8'))
         );
     }
 }
