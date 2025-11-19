@@ -13,7 +13,7 @@ use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Primus\Scalar\ScalarOf;
 use Primus\Scalar\XorOf;
-use Primus\Tests\Constraint\HasBoolValue;
+use Primus\Tests\Constraint\HasScalarBoolValue;
 use Primus\Tests\Constraint\Throws;
 
 /**
@@ -29,7 +29,8 @@ final class XorOfTest extends TestCase
                 new ScalarOf(fn (): true => true),
                 new ScalarOf(fn (): false => false),
             ),
-            new HasBoolValue(true),
+            new HasScalarBoolValue(true),
+            'XorOf must return true when exactly one condition is true'
         );
     }
 
@@ -41,7 +42,8 @@ final class XorOfTest extends TestCase
                 new ScalarOf(fn (): true => true),
                 new ScalarOf(fn (): true => true),
             ),
-            new HasBoolValue(false),
+            new HasScalarBoolValue(false),
+            'XorOf must return false when both conditions are true'
         );
     }
 
@@ -53,7 +55,8 @@ final class XorOfTest extends TestCase
                 new ScalarOf(fn (): false => false),
                 new ScalarOf(fn (): false => false),
             ),
-            new HasBoolValue(false),
+            new HasScalarBoolValue(false),
+            'XorOf must return false when both conditions are false'
         );
     }
 
@@ -66,7 +69,8 @@ final class XorOfTest extends TestCase
                 new ScalarOf(fn (): false => false),
                 new ScalarOf(fn (): true => true),
             ),
-            new HasBoolValue(false),
+            new HasScalarBoolValue(false),
+            'XorOf must return false when an even number of conditions are true'
         );
     }
 
@@ -76,6 +80,7 @@ final class XorOfTest extends TestCase
         self::assertThat(
             new ScalarOf(fn () => (new XorOf())->value()),
             new Throws(InvalidArgumentException::class),
+            'XorOf must throw an exception when no conditions are provided'
         );
     }
 }

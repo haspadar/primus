@@ -32,10 +32,12 @@ final readonly class Repeated implements Func
     #[\Override]
     public function apply(mixed $input): mixed
     {
-        $result = $input;
-        $limit = max(1, $this->times);
+        if ($this->times <= 0) {
+            throw new \RuntimeException('Repeated time must be >= 1');
+        }
 
-        for ($i = 0; $i < $limit; $i++) {
+        $result = $input;
+        for ($i = 0; $i < $this->times; $i++) {
             $result = $this->origin->apply($result);
         }
 

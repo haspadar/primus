@@ -24,7 +24,8 @@ final class FilteredTest extends TestCase
     {
         self::assertThat(
             new Filtered(fn (int $x): bool => $x % 2 === 0, new SequenceOf([1, 2, 3, 4])),
-            new HasScalarValues([2, 4])
+            new HasScalarValues([2, 4]),
+            'Filtered must keep only even numbers'
         );
     }
 }

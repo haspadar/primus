@@ -11,17 +11,18 @@ namespace Primus\Tests;
 /**
  * @since 0.3
  */
-final class CallCounter
+final class CountCalls
 {
-    private int $count = 0;
+    private int $calls = 0;
 
-    public function increment(): int
+    public function record(int $value): int
     {
-        return ++$this->count;
+        $this->calls++;
+        return $value;
     }
 
     public function total(): int
     {
-        return $this->count;
+        return $this->calls;
     }
 }

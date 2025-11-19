@@ -24,7 +24,8 @@ final class MappedTest extends TestCase
     {
         self::assertThat(
             new Mapped(fn (int $n): int => $n * 2, new SequenceOf([1, 2, 3])),
-            new HasScalarValues([2, 4, 6])
+            new HasScalarValues([2, 4, 6]),
+            'Mapped must apply the function to each item'
         );
     }
 
@@ -33,7 +34,8 @@ final class MappedTest extends TestCase
     {
         self::assertThat(
             new Mapped(fn (int $n): int => $n * 2, new SequenceOf([1 => 1, 2 => 2, 3 => 3])),
-            new HasScalarValues([2, 4, 6])
+            new HasScalarValues([2, 4, 6]),
+            'Mapped must preserve list indexing'
         );
     }
 }

@@ -23,7 +23,8 @@ final class SequenceOfTest extends TestCase
     {
         self::assertThat(
             iterator_to_array((new SequenceOf(['x', 'y']))->getIterator()),
-            new HasScalarValues(['x', 'y'])
+            new HasScalarValues(['x', 'y']),
+            'SequenceOf must return values when iterated'
         );
     }
 
@@ -32,7 +33,8 @@ final class SequenceOfTest extends TestCase
     {
         self::assertThat(
             iterator_to_array((new SequenceOf([]))->getIterator()),
-            new HasScalarValues([])
+            new HasScalarValues([]),
+            'SequenceOf must return empty when iterated over an empty sequence'
         );
     }
 
@@ -41,7 +43,8 @@ final class SequenceOfTest extends TestCase
     {
         self::assertThat(
             (new SequenceOf(['one', 'two']))->value(),
-            new HasScalarValues(['one', 'two'])
+            new HasScalarValues(['one', 'two']),
+            'SequenceOf must return an array when value() is called'
         );
     }
 }

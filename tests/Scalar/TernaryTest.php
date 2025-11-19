@@ -29,7 +29,8 @@ final class TernaryTest extends TestCase
                 new Constant('yes'),
                 new Constant('no')
             ),
-            new HasScalarValue('yes')
+            new HasScalarValue('yes'),
+            'Ternary must return the "yes" value when the condition is true'
         );
     }
 
@@ -42,7 +43,8 @@ final class TernaryTest extends TestCase
                 new Constant('yes'),
                 new Constant('no')
             ),
-            new HasScalarValue('no')
+            new HasScalarValue('no'),
+            'Ternary must return the "no" value when the condition is false'
         );
     }
 }

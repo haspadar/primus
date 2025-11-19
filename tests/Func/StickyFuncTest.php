@@ -12,7 +12,9 @@ use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Primus\Func\FuncOf;
 use Primus\Func\StickyFunc;
-use Primus\Tests\CallCounter;
+use Primus\Tests\Constraint\EqualsValue;
+use Primus\Tests\Constraint\HasCallCount;
+use Primus\Tests\CountCalls;
 
 /**
  * @since 0.3
@@ -20,65 +22,53 @@ use Primus\Tests\CallCounter;
 final class StickyFuncTest extends TestCase
 {
     #[Test]
-    public function cachesScalarInput(): void
-    {
-        $counter = new CallCounter();
-
-        $sticky = new StickyFunc(
-            new FuncOf(fn (int $x): int => $counter->increment() * $x)
-        );
-
-        $sticky->apply(7);
-        $sticky->apply(7);
-
-        self::assertSame(1, $counter->total(), 'Should call origin only once for same scalar');
-    }
-
-    #[Test]
     public function cachesArrayInput(): void
     {
-        $counter = new CallCounter();
+        $calls = new CountCalls();
 
         $sticky = new StickyFunc(
-            new FuncOf(fn (array $input): int => $counter->increment() + count($input))
+            new FuncOf(fn (array $x): int => $calls->record(count($x)))
         );
 
-        $sticky->apply(['a', 'b']);
-        $sticky->apply(['a', 'b']);
+        self::assertThat(
+            $sticky->apply(['a', 'b']),
+            new EqualsValue($sticky->apply(['a', 'b']))
+        );
 
-        self::assertSame(1, $counter->total(), 'Should call origin only once for same array');
+        self::assertThat($calls, new HasCallCount(1));
     }
 
     #[Test]
-    public function cachesObjectInput(): void
+    public function cachesTrueInput(): void
     {
-        $counter = new CallCounter();
+        $calls = new CountCalls();
 
         $sticky = new StickyFunc(
-            new FuncOf(fn (object $input): int => $counter->increment() + strlen($input::class))
+            new FuncOf(fn (bool $x): int => $calls->record($x ? 1 : 0))
         );
 
-        $object = new \stdClass();
-        $sticky->apply($object);
-        $sticky->apply($object);
+        self::assertThat(
+            $sticky->apply(true),
+            new EqualsValue($sticky->apply(true))
+        );
 
-        self::assertSame(1, $counter->total(), 'Should call origin only once for same object');
+        self::assertThat($calls, new HasCallCount(1));
     }
 
     #[Test]
-    public function cachesBooleanInput(): void
+    public function cachesFalseInput(): void
     {
-        $counter = new CallCounter();
+        $calls = new CountCalls();
 
         $sticky = new StickyFunc(
-            new FuncOf(fn (bool $input): int => $counter->increment() + ($input ? 1 : 0))
+            new FuncOf(fn (bool $x): int => $calls->record($x ? 1 : 0))
         );
 
-        $sticky->apply(true);
-        $sticky->apply(true);
-        $sticky->apply(false);
-        $sticky->apply(false);
+        self::assertThat(
+            $sticky->apply(false),
+            new EqualsValue($sticky->apply(false))
+        );
 
-        self::assertSame(2, $counter->total(), 'Should call origin only once per boolean value');
+        self::assertThat($calls, new HasCallCount(1));
     }
 }

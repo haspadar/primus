@@ -12,7 +12,7 @@ use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Primus\Scalar\Between;
 use Primus\Scalar\ScalarOf;
-use Primus\Tests\Constraint\HasBoolValue;
+use Primus\Tests\Constraint\HasScalarBoolValue;
 
 /**
  * @since 0.2
@@ -28,7 +28,8 @@ final class BetweenTest extends TestCase
                 new ScalarOf(fn (): int => 1),
                 new ScalarOf(fn (): int => 10)
             ),
-            new HasBoolValue(true)
+            new HasScalarBoolValue(true),
+            'Between must return true when the value is within the specified range'
         );
     }
 
@@ -41,7 +42,8 @@ final class BetweenTest extends TestCase
                 new ScalarOf(fn (): int => 1),
                 new ScalarOf(fn (): int => 10)
             ),
-            new HasBoolValue(false)
+            new HasScalarBoolValue(false),
+            'Between must return false when the value is equal to the lower bound'
         );
     }
 
@@ -54,7 +56,8 @@ final class BetweenTest extends TestCase
                 new ScalarOf(fn (): int => 1),
                 new ScalarOf(fn (): int => 10)
             ),
-            new HasBoolValue(false)
+            new HasScalarBoolValue(false),
+            'Between must return false when the value is equal to the upper bound'
         );
     }
 
@@ -67,7 +70,8 @@ final class BetweenTest extends TestCase
                 new ScalarOf(fn (): int => 1),
                 new ScalarOf(fn (): int => 10)
             ),
-            new HasBoolValue(false)
+            new HasScalarBoolValue(false),
+            'Between must return false when the value is below the specified range'
         );
     }
 
@@ -80,7 +84,8 @@ final class BetweenTest extends TestCase
                 new ScalarOf(fn (): int => 1),
                 new ScalarOf(fn (): int => 10)
             ),
-            new HasBoolValue(false)
+            new HasScalarBoolValue(false),
+            'Between must return false when the value is above the specified range'
         );
     }
 }

@@ -12,8 +12,7 @@ use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Primus\Func\FuncOf;
 use Primus\Func\Repeated;
-use Primus\Scalar\ScalarOf;
-use Primus\Tests\Constraint\HasScalarValue;
+use Primus\Tests\Constraint\ThrowsClosure;
 
 /**
  * @since 0.3
@@ -23,47 +22,69 @@ final class RepeatedTest extends TestCase
     #[Test]
     public function repeatsExactNumberOfTimes(): void
     {
-        $calls = 0;
-        $func = new FuncOf(function (int $x) use (&$calls): int {
-            $calls++;
-            return $x + 1;
-        });
-
-        self::assertThat(
-            new ScalarOf(fn (): mixed => (new Repeated($func, 3))->apply(5)),
-            new HasScalarValue(8)
+        $values = [1, 2, 5, 6];
+        $func = new FuncOf(
+            function (int $x) use (&$values): int {
+                return array_shift($values);
+            },
         );
-        self::assertSame(3, $calls, 'Origin must be called exactly N times');
+
+        self::assertSame(
+            5,
+            (new Repeated($func, 3))->apply(0),
+            'Repeated must return the 3rd produced value',
+        );
     }
 
     #[Test]
-    public function atLeastOnceWhenZeroTimesRequested(): void
+    public function threadsResultsBetweenInvocations(): void
     {
-        $calls = 0;
-        $func = new FuncOf(function (int $x) use (&$calls): int {
-            $calls++;
-            return $x * 2;
-        });
+        $func = new FuncOf(fn (int $x): int => $x + 1);
 
-        self::assertThat(
-            new ScalarOf(fn (): mixed => (new Repeated($func, 0))->apply(7)),
-            new HasScalarValue(14)
+        self::assertSame(
+            3,
+            (new Repeated($func, 3))->apply(0),
+            'Repeated must thread results through (0 → 1 → 2 → 3)',
         );
-        self::assertSame(1, $calls, 'Zero times must degrade to one call');
+    }
+
+    #[Test]
+    public function repeatsNullResults(): void
+    {
+        $func = new FuncOf(fn (): mixed => null);
+
+        self::assertNull(
+            (new Repeated($func, 2))->apply(null),
+            'Repeated must return null when origin returns null'
+        );
     }
 
     #[Test]
     public function returnsLastInvocationResult(): void
     {
-        $state = 0;
-        $func = new FuncOf(function (int $x) use (&$state): int {
-            $state++;
-            return $state;
-        });
+        $values = [10, 20, 30, 40];
+        $func = new FuncOf(
+            function () use (&$values): int {
+                return (int)array_shift($values);
+            },
+        );
+
+        self::assertSame(
+            40,
+            (new Repeated($func, 4))->apply(0),
+            'Repeated must return the last invocation result',
+        );
+    }
+
+    #[Test]
+    public function throwsWhenZeroTimesRequested(): void
+    {
+        $func = new FuncOf(fn (): int => 123);
 
         self::assertThat(
-            new ScalarOf(fn (): int => (new Repeated($func, 4))->apply(0)),
-            new HasScalarValue(4)
+            fn (): mixed => (new Repeated($func, 0))->apply(1),
+            new ThrowsClosure(\RuntimeException::class),
+            'Repeated must reject zero-times constructor argument',
         );
     }
 }

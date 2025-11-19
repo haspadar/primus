@@ -24,7 +24,8 @@ final class AbbreviatedTest extends TestCase
     {
         self::assertThat(
             new Abbreviated(new TextOf('short'), 10),
-            new HasTextValue('short')
+            new HasTextValue('short'),
+            'Abbreviated must return the original text when the length is less than the limit'
         );
     }
 
@@ -33,7 +34,8 @@ final class AbbreviatedTest extends TestCase
     {
         self::assertThat(
             new Abbreviated(new TextOf('exactly10!'), 10),
-            new HasTextValue('exactly10!')
+            new HasTextValue('exactly10!'),
+            'Abbreviated must return the original text when the length equals the limit'
         );
     }
 
@@ -42,7 +44,8 @@ final class AbbreviatedTest extends TestCase
     {
         self::assertThat(
             new Abbreviated(new TextOf('this is a long string'), 10),
-            new HasTextValue('this is a…')
+            new HasTextValue('this is a…'),
+            'Abbreviated must return truncated text with ellipsis when the text exceeds the limit'
         );
     }
 
@@ -51,7 +54,8 @@ final class AbbreviatedTest extends TestCase
     {
         self::assertThat(
             new Abbreviated(new TextOf('emoji 😊 test ok'), 8),
-            new HasTextValue('emoji 😊…')
+            new HasTextValue('emoji 😊…'),
+            'Abbreviated must return truncated text with ellipsis when the text contains multibyte characters'
         );
     }
 
@@ -60,7 +64,8 @@ final class AbbreviatedTest extends TestCase
     {
         self::assertThat(
             new Abbreviated(new TextOf(str_repeat('a', 100))),
-            new HasTextValue(str_repeat('a', 49) . '…')
+            new HasTextValue(str_repeat('a', 49) . '…'),
+            'Abbreviated must return truncated text with ellipsis when the default limit is applied'
         );
     }
 
@@ -69,7 +74,8 @@ final class AbbreviatedTest extends TestCase
     {
         self::assertThat(
             new Abbreviated(new TextOf('abcdef'), 1),
-            new HasTextValue('…')
+            new HasTextValue('…'),
+            'Abbreviated must return only ellipsis when the limit is one'
         );
     }
 
@@ -78,7 +84,8 @@ final class AbbreviatedTest extends TestCase
     {
         self::assertThat(
             new Abbreviated(new TextOf('abcdef'), 0),
-            new HasTextValue('')
+            new HasTextValue(''),
+            'Abbreviated must return an empty string when the limit is zero'
         );
     }
 }
