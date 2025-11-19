@@ -14,7 +14,7 @@ use PHPUnit\Framework\TestCase;
 use Primus\Scalar\OrOf;
 use Primus\Scalar\ScalarOf;
 use Primus\Tests\Constraint\HasScalarBoolValue;
-use Primus\Tests\Constraint\Throws;
+use Primus\Tests\Constraint\ThrowsValue;
 
 /**
  * @since 0.2
@@ -65,7 +65,7 @@ final class OrOfTest extends TestCase
     {
         self::assertThat(
             new ScalarOf(fn () => (new OrOf())->value()),
-            new Throws(InvalidArgumentException::class),
+            new ThrowsValue(InvalidArgumentException::class),
             'OrOf must throw an exception when no scalars are provided'
         );
     }

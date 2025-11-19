@@ -14,8 +14,8 @@ namespace Primus\Text;
  * Applies {@see trim()} to the original text.
  *
  * Example:
- * $text = new Trimmed(new TextOf('  hello  '));
- * echo $text->value(); // 'hello'
+ *     $text = new Trimmed(new TextOf('  hello  '));
+ *     echo $text->value(); // 'hello'
  *
  * @since 0.1
  */

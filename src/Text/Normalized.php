@@ -18,8 +18,8 @@ use Primus\Scalar\ScalarOf;
  * with a single space and trims leading/trailing whitespace.
  *
  * Example:
- * $text = new Normalized(new TextOf(" Hello \n\t  world "));
- * echo $text->value(); // 'Hello world'
+ *     $text = new Normalized(new TextOf(" Hello \n\t  world "));
+ *     echo $text->value(); // 'Hello world'
  *
  * @since 0.2
  */

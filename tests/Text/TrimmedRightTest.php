@@ -12,7 +12,7 @@ use InvalidArgumentException;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Primus\Tests\Constraint\HasTextValue;
-use Primus\Tests\Constraint\Throws;
+use Primus\Tests\Constraint\ThrowsValue;
 use Primus\Text\TextOf;
 use Primus\Text\TrimmedRight;
 
@@ -76,7 +76,7 @@ final class TrimmedRightTest extends TestCase
     {
         self::assertThat(
             (new TrimmedRight(new TextOf("\xC3"))),
-            new Throws(InvalidArgumentException::class),
+            new ThrowsValue(InvalidArgumentException::class),
             'TrimmedRight must throw an exception on malformed UTF-8 input'
         );
     }

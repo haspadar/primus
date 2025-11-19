@@ -14,8 +14,8 @@ namespace Primus\Text;
  * Pads the text to the specified length with the given character using {@see str_pad()}.
  *
  * Example:
- * $text = new RightPadded(new TextOf('foo'), 6, '.');
- * echo $text->value(); // 'foo...'
+ *     $text = new RightPadded(new TextOf('foo'), 6, '.');
+ *     echo $text->value(); // 'foo...'
  *
  * @since 0.1
  */

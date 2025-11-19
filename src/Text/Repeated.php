@@ -12,8 +12,8 @@ namespace Primus\Text;
  * {@see Text} repeated multiple times.
  *
  * Example:
- * $text = new Repeated(new TextOf('xo'), 3);
- * echo $text->value(); // 'xoxoxo'
+ *     $text = new Repeated(new TextOf('xo'), 3);
+ *     echo $text->value(); // 'xoxoxo'
  *
  * @since 0.2
  */

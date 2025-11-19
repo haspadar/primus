@@ -12,7 +12,7 @@ namespace Primus\Logic;
  * {@see Logic} that returns true if text contains only alphanumeric characters (A–Z, a–z, 0–9).
  *
  * Example:
- * new IsAlphanumeric(new TextOf("abc123")) → true
+ *     new IsAlphanumeric(new TextOf("abc123")) → true
  *
  */
 final readonly class IsAlphanumeric extends LogicEnvelope

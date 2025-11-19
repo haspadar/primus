@@ -14,8 +14,8 @@ namespace Primus\Text;
  * Converts the given text to lowercase using multibyte support.
  *
  * Example:
- * $text = new Lowered(new TextOf('CAFÉ & TÜRKİYE'));
- * echo $text->value(); // 'café & türkiye'
+ *     $text = new Lowered(new TextOf('CAFÉ & TÜRKİYE'));
+ *     echo $text->value(); // 'café & türkiye'
  *
  * @since 0.1
  */
@@ -24,7 +24,7 @@ final readonly class Lowered extends TextEnvelope
     public function __construct(Text $origin)
     {
         parent::__construct(
-            new TextOf(mb_strtolower($origin->value()))
+            new TextOf(mb_strtolower($origin->value(), 'UTF-8'))
         );
     }
 }

@@ -26,6 +26,10 @@ final class ProcOfTest extends TestCase
 
         (new ProcOf(fn (int $x): int => $calls->record($x)))->exec(5);
 
-        self::assertThat($calls, new HasCallCount(1));
+        self::assertThat(
+            $calls,
+            new HasCallCount(1),
+            'ProcOf must execute the closure exactly once'
+        );
     }
 }

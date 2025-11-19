@@ -12,8 +12,8 @@ namespace Primus\Text;
  * Escaped {@see Text} safe for HTML rendering.
  *
  * Example:
- * $text = new HtmlEscaped(new TextOf('<b>"A & B"</b>'));
- * echo $text->value(); // &lt;b&gt;&quot;A &amp; B&quot;&lt;/b&gt;
+ *     $text = new HtmlEscaped(new TextOf('<b>"A & B"</b>'));
+ *     echo $text->value(); // &lt;b&gt;&quot;A &amp; B&quot;&lt;/b&gt;
  *
  * @since 0.2
  */

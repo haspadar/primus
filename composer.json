@@ -42,7 +42,7 @@
     "fix-test": "vendor/bin/php-cs-fixer fix --dry-run --diff",
     "fix-changed": "git diff --name-only origin/main...HEAD | grep '\\.php$' | xargs -r vendor/bin/php-cs-fixer fix --dry-run --diff --allow-risky=yes",
     "infection": "XDEBUG_MODE=coverage vendor/bin/infection --threads=4 --only-covered",
-    "mutations": "XDEBUG_MODE=coverage php -d memory_limit=1024M ./vendor/bin/infection --threads=4 --only-covered --show-mutations",
+    "mutations": "XDEBUG_MODE=coverage php -d memory_limit=1024M ./vendor/bin/infection --threads=$(nproc) --only-covered --show-mutations",
     "metrics": "phpmetrics --report-html=build/phpmetrics-report src",
     "refactor": "rector",
     "test-refactor": "rector --dry-run",

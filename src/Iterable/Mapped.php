@@ -8,31 +8,55 @@ declare(strict_types=1);
 
 namespace Primus\Iterable;
 
-use Closure;
+use Iterator;
+use IteratorAggregate;
+use Primus\Func\Func;
 
 /**
- * A sequence where each item is the result of applying a function to the original items.
+ * Iterable that lazily transforms each element
+ * of the origin iterable using the provided function.
  *
  * Example:
- * new Mapped(
- *     fn(int $n): int => $n * 2,
- *     new SequenceOf([1, 2, 3])
- * );
+ *     $it = new Mapped(
+ *         new IterableOf([1, 2, 3]),
+ *         new FuncOf(fn (int $x): int => $x * 10)
+ *     );
  *
- * @template TIn
- * @template TOut
- * @extends SequenceEnvelope<TOut>
+ *     foreach ($it as $value) {
+ *         echo $value . ' ';
+ *     }
+ *     // 10 20 30
+ *
+ * @template X
+ * @template Y
+ * @implements IteratorAggregate<Y>
+ *
+ * @since 0.5
  */
-final readonly class Mapped extends SequenceEnvelope
+final readonly class Mapped implements IteratorAggregate
 {
     /**
-     * @param Closure(TIn): TOut $fn
-     * @param Sequence<TIn> $sequence
+     * @param IteratorAggregate<X> $origin
+     * @param Func<X, Y> $func
      */
-    public function __construct(Closure $fn, Sequence $sequence)
+    public function __construct(
+        private IteratorAggregate $origin,
+        private Func $func,
+    ) {
+    }
+
+    /**
+     * @return Iterator<int, Y>
+     */
+    #[\Override]
+    public function getIterator(): Iterator
     {
-        parent::__construct(new SequenceOf(
-            array_values(array_map($fn, iterator_to_array($sequence->getIterator())))
-        ));
+        /** @var Iterator<mixed,X> $it */
+        $it = $this->origin->getIterator();
+
+        return new \Primus\Iterator\Mapped(
+            $it,
+            $this->func,
+        );
     }
 }

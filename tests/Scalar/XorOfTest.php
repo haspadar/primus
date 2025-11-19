@@ -14,7 +14,7 @@ use PHPUnit\Framework\TestCase;
 use Primus\Scalar\ScalarOf;
 use Primus\Scalar\XorOf;
 use Primus\Tests\Constraint\HasScalarBoolValue;
-use Primus\Tests\Constraint\Throws;
+use Primus\Tests\Constraint\ThrowsValue;
 
 /**
  * @since 0.2
@@ -79,7 +79,7 @@ final class XorOfTest extends TestCase
     {
         self::assertThat(
             new ScalarOf(fn () => (new XorOf())->value()),
-            new Throws(InvalidArgumentException::class),
+            new ThrowsValue(InvalidArgumentException::class),
             'XorOf must throw an exception when no conditions are provided'
         );
     }

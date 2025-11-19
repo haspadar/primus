@@ -8,7 +8,6 @@ declare(strict_types=1);
 
 namespace Primus\Text;
 
-use Override;
 use Primus\Scalar\Scalar;
 
 /**
@@ -17,10 +16,10 @@ use Primus\Scalar\Scalar;
  * Produces an iterable of {@see Text} segments separated by the given delimiter.
  *
  * Example:
- * $parts = new Split(',', new TextOf('a,b,c'));
- * foreach ($parts->value() as $text) {
- *     echo $text->value(); // a, b, c
- * }
+ *     $parts = new Split(',', new TextOf('a,b,c'));
+ *     foreach ($parts->value() as $text) {
+ *         echo $text->value(); // a, b, c
+ *     }
  *
  * @implements Scalar<iterable<Text>>
  * @since 0.2
@@ -39,7 +38,7 @@ final readonly class Split implements Scalar
     /**
      * @return iterable<Text>
      */
-    #[Override]
+    #[\Override]
     public function value(): iterable
     {
         foreach (explode($this->delimiter, $this->origin->value()) as $part) {

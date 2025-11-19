@@ -12,8 +12,8 @@ namespace Primus\Text;
  * {@see Text} joined from multiple {@see Text} parts with a separator.
  *
  * Example:
- * $text = new Joined(', ', [new TextOf('a'), new TextOf('b'), new TextOf('c')]);
- * echo $text->value(); // 'a, b, c'
+ *     $text = new Joined(', ', [new TextOf('a'), new TextOf('b'), new TextOf('c')]);
+ *     echo $text->value(); // 'a, b, c'
  *
  * @since 0.2
  */
