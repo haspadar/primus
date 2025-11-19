@@ -30,6 +30,7 @@ final class FilteredTest extends TestCase
                 new PredicateOf(fn (int $x): bool => $x > 10),
             ),
             new HasIteratorValues([40]),
+            'Filtered must yield only values matching the predicate'
         );
     }
 
@@ -42,6 +43,7 @@ final class FilteredTest extends TestCase
                 new PredicateOf(fn (int $x): bool => $x % 2 === 0),
             ),
             new HasIteratorValues([2, 4]),
+            'Filtered must yield all even values'
         );
     }
 
@@ -54,6 +56,7 @@ final class FilteredTest extends TestCase
                 new PredicateOf(fn (int $x): bool => $x > 10),
             ),
             new HasIteratorValues([]),
+            'Filtered must yield empty result when no value matches'
         );
     }
 
@@ -63,9 +66,10 @@ final class FilteredTest extends TestCase
         self::assertThat(
             new Filtered(
                 new IterableOf([]),
-                new PredicateOf(fn (int $x): bool => true),
+                new PredicateOf(fn (int $_): bool => true),
             ),
             new HasIteratorValues([]),
+            'Filtered must yield empty result when origin is empty'
         );
     }
 
@@ -82,6 +86,7 @@ final class FilteredTest extends TestCase
         self::assertThat(
             $filtered,
             new HasIteratorValues([3, 4]),
+            'Filtered must produce same sequence after rewind'
         );
     }
 
@@ -99,6 +104,7 @@ final class FilteredTest extends TestCase
         self::assertThat(
             fn (): mixed => $it->current(),
             new ThrowsClosure(\RuntimeException::class),
+            'FilteredIterator::current() past end must throw'
         );
     }
 
@@ -116,6 +122,7 @@ final class FilteredTest extends TestCase
         self::assertThat(
             fn (): mixed => $it->next(),
             new ThrowsClosure(\RuntimeException::class),
+            'FilteredIterator::next() past end must throw'
         );
     }
 }

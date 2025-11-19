@@ -27,7 +27,8 @@ final class EqualToTest extends TestCase
                 new ScalarOf(fn (): int => 42),
                 new ScalarOf(fn (): int => 42)
             ),
-            new HasScalarBoolValue(true)
+            new HasScalarBoolValue(true),
+            'EqualTo must return true when values are equal'
         );
     }
 
@@ -39,7 +40,8 @@ final class EqualToTest extends TestCase
                 new ScalarOf(fn (): string => 'foo'),
                 new ScalarOf(fn (): string => 'bar')
             ),
-            new HasScalarBoolValue(false)
+            new HasScalarBoolValue(false),
+            'EqualTo must return false when values are different'
         );
     }
 
@@ -51,7 +53,8 @@ final class EqualToTest extends TestCase
                 new ScalarOf(fn (): string => ''),
                 new ScalarOf(fn (): string => '')
             ),
-            new HasScalarBoolValue(true)
+            new HasScalarBoolValue(true),
+            'EqualTo must return true when both values are empty strings'
         );
     }
 }

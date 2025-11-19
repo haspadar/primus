@@ -24,7 +24,8 @@ final class NotTest extends TestCase
     {
         self::assertThat(
             new Not(new ScalarOf(fn (): true => true)),
-            new HasScalarBoolValue(false)
+            new HasScalarBoolValue(false),
+            'Not must return false when the condition is true'
         );
     }
 
@@ -33,7 +34,8 @@ final class NotTest extends TestCase
     {
         self::assertThat(
             new Not(new ScalarOf(fn (): false => false)),
-            new HasScalarBoolValue(true)
+            new HasScalarBoolValue(true),
+            'Not must return true when the condition is false'
         );
     }
 }

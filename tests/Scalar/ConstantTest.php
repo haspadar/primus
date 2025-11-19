@@ -23,7 +23,8 @@ final class ConstantTest extends TestCase
     {
         self::assertThat(
             new Constant('foo'),
-            new HasScalarValue('foo')
+            new HasScalarValue('foo'),
+            'Constant must return the stored value'
         );
     }
 
@@ -35,7 +36,8 @@ final class ConstantTest extends TestCase
 
         self::assertThat(
             $constant,
-            new HasScalarValue('bar')
+            new HasScalarValue('bar'),
+            'Constant must return the same value on subsequent calls'
         );
     }
 }

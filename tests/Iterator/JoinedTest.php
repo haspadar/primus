@@ -125,4 +125,18 @@ final class JoinedTest extends TestCase
             new HasScalarValues([1, 2, 3]),
         );
     }
+
+    #[Test]
+    public function skipsEmptyIteratorsDuringRewind(): void
+    {
+        $it = new Joined([
+            new IteratorOf([]),
+            new IteratorOf([10, 20]),
+        ]);
+
+        self::assertThat(
+            iterator_to_array($it),
+            new HasScalarValues([10, 20]),
+        );
+    }
 }

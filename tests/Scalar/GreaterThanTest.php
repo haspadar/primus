@@ -27,7 +27,8 @@ final class GreaterThanTest extends TestCase
                 new ScalarOf(fn (): int => 10),
                 new ScalarOf(fn (): int => 5)
             ),
-            new HasScalarBoolValue(true)
+            new HasScalarBoolValue(true),
+            'GreaterThan must return true when the left value is greater than the right value'
         );
     }
 
@@ -39,7 +40,8 @@ final class GreaterThanTest extends TestCase
                 new ScalarOf(fn (): int => 7),
                 new ScalarOf(fn (): int => 7)
             ),
-            new HasScalarBoolValue(false)
+            new HasScalarBoolValue(false),
+            'GreaterThan must return false when the left value is equal to the right value'
         );
     }
 
@@ -51,7 +53,8 @@ final class GreaterThanTest extends TestCase
                 new ScalarOf(fn (): int => 3),
                 new ScalarOf(fn (): int => 8)
             ),
-            new HasScalarBoolValue(false)
+            new HasScalarBoolValue(false),
+            'GreaterThan must return false when the left value is less than the right value'
         );
     }
 }

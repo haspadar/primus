@@ -29,7 +29,8 @@ final class OrOfTest extends TestCase
                 new ScalarOf(fn (): false => false),
                 new ScalarOf(fn (): true => true)
             ),
-            new HasScalarBoolValue(true)
+            new HasScalarBoolValue(true),
+            'OrOf must return true when at least one scalar is true'
         );
     }
 
@@ -41,7 +42,8 @@ final class OrOfTest extends TestCase
                 new ScalarOf(fn (): false => false),
                 new ScalarOf(fn (): false => false)
             ),
-            new HasScalarBoolValue(false)
+            new HasScalarBoolValue(false),
+            'OrOf must return false when all scalars are false'
         );
     }
 
@@ -53,7 +55,8 @@ final class OrOfTest extends TestCase
                 new ScalarOf(fn (): true => true),
                 new ScalarOf(fn (): true => true)
             ),
-            new HasScalarBoolValue(true)
+            new HasScalarBoolValue(true),
+            'OrOf must return true when all scalars are true'
         );
     }
 
@@ -62,7 +65,8 @@ final class OrOfTest extends TestCase
     {
         self::assertThat(
             new ScalarOf(fn () => (new OrOf())->value()),
-            new ThrowsValue(InvalidArgumentException::class)
+            new ThrowsValue(InvalidArgumentException::class),
+            'OrOf must throw an exception when no scalars are provided'
         );
     }
 }

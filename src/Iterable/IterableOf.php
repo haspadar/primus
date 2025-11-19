@@ -13,7 +13,7 @@ use IteratorAggregate;
 use Primus\Iterator\IteratorOf;
 
 /**
- * Iterable wrapper over a strict PHP list.
+ * Iterable wrapper over an array of items.
  *
  * Example:
  *     $it = new IterableOf([10, 20, 30]);

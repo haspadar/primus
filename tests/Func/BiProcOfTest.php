@@ -21,10 +21,11 @@ final class BiProcOfTest extends TestCase
     public function executesClosureWithTwoInputs(): void
     {
         $sum = 0;
+
         (new BiProcOf(function (int $a, int $b) use (&$sum): void {
             $sum = $a + $b;
         }))->exec(2, 3);
 
-        self::assertSame(5, $sum, 'Procedure must handle two inputs');
+        self::assertSame(5, $sum, 'BiProcOf must modify the state as expected');
     }
 }

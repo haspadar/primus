@@ -23,7 +23,7 @@ final readonly class Uppered extends TextEnvelope
     public function __construct(Text $origin)
     {
         parent::__construct(
-            new TextOf(mb_strtoupper($origin->value()))
+            new TextOf(mb_strtoupper($origin->value(), 'UTF-8'))
         );
     }
 }

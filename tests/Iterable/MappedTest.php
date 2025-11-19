@@ -16,6 +16,9 @@ use Primus\Iterable\Mapped;
 use Primus\Tests\Constraint\EqualsValue;
 use Primus\Tests\Constraint\HasIteratorValues;
 
+/**
+ * @since 0.2
+ */
 final class MappedTest extends TestCase
 {
     #[Test]
@@ -27,6 +30,7 @@ final class MappedTest extends TestCase
                 new FuncOf(fn (int $x): int => $x * 10),
             ),
             new HasIteratorValues([10, 20, 30]),
+            'Mapped must apply transformation to each element'
         );
     }
 
@@ -36,9 +40,10 @@ final class MappedTest extends TestCase
         self::assertThat(
             new Mapped(
                 new IterableOf([]),
-                new FuncOf(fn ($x) => $x),
+                new FuncOf(fn (mixed $x): mixed => $x),
             ),
             new HasIteratorValues([]),
+            'Mapped must work with an empty iterable'
         );
     }
 
@@ -51,6 +56,7 @@ final class MappedTest extends TestCase
                 new FuncOf(fn (string $s): string => strtoupper($s)),
             ),
             new HasIteratorValues(['A', 'B', 'C']),
+            'Mapped must apply the function to array-string inputs'
         );
     }
 
@@ -67,6 +73,7 @@ final class MappedTest extends TestCase
         self::assertThat(
             iterator_to_array($mapped->getIterator()),
             new EqualsValue([11, 12]),
+            'Mapped must produce a fresh iterator each time'
         );
     }
 }

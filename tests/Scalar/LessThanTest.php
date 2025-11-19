@@ -27,7 +27,8 @@ final class LessThanTest extends TestCase
                 new ScalarOf(fn (): int => 3),
                 new ScalarOf(fn (): int => 8)
             ),
-            new HasScalarBoolValue(true)
+            new HasScalarBoolValue(true),
+            'LessThan must return true when the left value is less than the right value'
         );
     }
 
@@ -39,7 +40,8 @@ final class LessThanTest extends TestCase
                 new ScalarOf(fn (): int => 5),
                 new ScalarOf(fn (): int => 5)
             ),
-            new HasScalarBoolValue(false)
+            new HasScalarBoolValue(false),
+            'LessThan must return false when the left value is equal to the right value'
         );
     }
 
@@ -51,7 +53,8 @@ final class LessThanTest extends TestCase
                 new ScalarOf(fn (): int => 9),
                 new ScalarOf(fn (): int => 2)
             ),
-            new HasScalarBoolValue(false)
+            new HasScalarBoolValue(false),
+            'LessThan must return false when the left value is greater than the right value'
         );
     }
 }

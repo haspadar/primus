@@ -17,7 +17,7 @@ use Throwable;
  * Example:
  * self::assertThat(
  *     new FailingScalar(),
- *     new Throws(\RuntimeException::class)
+ *     new ThrowsValue(\RuntimeException::class)
  * );
  *
  * @since 0.2

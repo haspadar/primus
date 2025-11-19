@@ -30,6 +30,7 @@ final class XorOfTest extends TestCase
                 new ScalarOf(fn (): false => false),
             ),
             new HasScalarBoolValue(true),
+            'XorOf must return true when exactly one condition is true'
         );
     }
 
@@ -42,6 +43,7 @@ final class XorOfTest extends TestCase
                 new ScalarOf(fn (): true => true),
             ),
             new HasScalarBoolValue(false),
+            'XorOf must return false when both conditions are true'
         );
     }
 
@@ -54,6 +56,7 @@ final class XorOfTest extends TestCase
                 new ScalarOf(fn (): false => false),
             ),
             new HasScalarBoolValue(false),
+            'XorOf must return false when both conditions are false'
         );
     }
 
@@ -67,6 +70,7 @@ final class XorOfTest extends TestCase
                 new ScalarOf(fn (): true => true),
             ),
             new HasScalarBoolValue(false),
+            'XorOf must return false when an even number of conditions are true'
         );
     }
 
@@ -76,6 +80,7 @@ final class XorOfTest extends TestCase
         self::assertThat(
             new ScalarOf(fn () => (new XorOf())->value()),
             new ThrowsValue(InvalidArgumentException::class),
+            'XorOf must throw an exception when no conditions are provided'
         );
     }
 }

@@ -98,7 +98,7 @@ final class MappedTest extends TestCase
     {
         $mapped = new Mapped(
             new IteratorOf([1]),
-            new FuncOf(fn (int $value): int => throw new \RuntimeException('fail')),
+            new FuncOf(fn (int $_): int => throw new \RuntimeException('fail')),
         );
 
         $mapped->rewind();

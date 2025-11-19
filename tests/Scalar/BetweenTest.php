@@ -28,7 +28,8 @@ final class BetweenTest extends TestCase
                 new ScalarOf(fn (): int => 1),
                 new ScalarOf(fn (): int => 10)
             ),
-            new HasScalarBoolValue(true)
+            new HasScalarBoolValue(true),
+            'Between must return true when the value is within the specified range'
         );
     }
 
@@ -41,7 +42,8 @@ final class BetweenTest extends TestCase
                 new ScalarOf(fn (): int => 1),
                 new ScalarOf(fn (): int => 10)
             ),
-            new HasScalarBoolValue(false)
+            new HasScalarBoolValue(false),
+            'Between must return false when the value is equal to the lower bound'
         );
     }
 
@@ -54,7 +56,8 @@ final class BetweenTest extends TestCase
                 new ScalarOf(fn (): int => 1),
                 new ScalarOf(fn (): int => 10)
             ),
-            new HasScalarBoolValue(false)
+            new HasScalarBoolValue(false),
+            'Between must return false when the value is equal to the upper bound'
         );
     }
 
@@ -67,7 +70,8 @@ final class BetweenTest extends TestCase
                 new ScalarOf(fn (): int => 1),
                 new ScalarOf(fn (): int => 10)
             ),
-            new HasScalarBoolValue(false)
+            new HasScalarBoolValue(false),
+            'Between must return false when the value is below the specified range'
         );
     }
 
@@ -80,7 +84,8 @@ final class BetweenTest extends TestCase
                 new ScalarOf(fn (): int => 1),
                 new ScalarOf(fn (): int => 10)
             ),
-            new HasScalarBoolValue(false)
+            new HasScalarBoolValue(false),
+            'Between must return false when the value is above the specified range'
         );
     }
 }

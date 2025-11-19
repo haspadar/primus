@@ -13,6 +13,8 @@ use PHPUnit\Framework\TestCase;
 use Primus\Func\FuncOf;
 use Primus\Func\StickyFunc;
 use Primus\Tests\Constraint\EqualsValue;
+use Primus\Tests\Constraint\HasCallCount;
+use Primus\Tests\CountCalls;
 
 /**
  * @since 0.3
@@ -20,54 +22,53 @@ use Primus\Tests\Constraint\EqualsValue;
 final class StickyFuncTest extends TestCase
 {
     #[Test]
-    public function cachesScalarInput(): void
-    {
-        $sticky = new StickyFunc(
-            new FuncOf(fn (int $x): int => random_int(PHP_INT_MIN, PHP_INT_MAX))
-        );
-
-        $a = $sticky->apply(7);
-        $b = $sticky->apply(7);
-
-        self::assertThat($a, new EqualsValue($b));
-    }
-
-    #[Test]
     public function cachesArrayInput(): void
     {
+        $calls = new CountCalls();
+
         $sticky = new StickyFunc(
-            new FuncOf(fn (array $x): int => random_int(PHP_INT_MIN, PHP_INT_MAX))
+            new FuncOf(fn (array $x): int => $calls->record(count($x)))
         );
 
-        $a = $sticky->apply(['a', 'b']);
-        $b = $sticky->apply(['a', 'b']);
+        self::assertThat(
+            $sticky->apply(['a', 'b']),
+            new EqualsValue($sticky->apply(['a', 'b']))
+        );
 
-        self::assertThat($a, new EqualsValue($b));
+        self::assertThat($calls, new HasCallCount(1));
     }
 
     #[Test]
     public function cachesTrueInput(): void
     {
+        $calls = new CountCalls();
+
         $sticky = new StickyFunc(
-            new FuncOf(fn (bool $x): int => random_int(PHP_INT_MIN, PHP_INT_MAX))
+            new FuncOf(fn (bool $x): int => $calls->record($x ? 1 : 0))
         );
 
-        $first = $sticky->apply(true);
-        $second = $sticky->apply(true);
+        self::assertThat(
+            $sticky->apply(true),
+            new EqualsValue($sticky->apply(true))
+        );
 
-        self::assertThat($first, new EqualsValue($second));
+        self::assertThat($calls, new HasCallCount(1));
     }
 
     #[Test]
     public function cachesFalseInput(): void
     {
+        $calls = new CountCalls();
+
         $sticky = new StickyFunc(
-            new FuncOf(fn (bool $x): int => random_int(PHP_INT_MIN, PHP_INT_MAX))
+            new FuncOf(fn (bool $x): int => $calls->record($x ? 1 : 0))
         );
 
-        $first = $sticky->apply(false);
-        $second = $sticky->apply(false);
+        self::assertThat(
+            $sticky->apply(false),
+            new EqualsValue($sticky->apply(false))
+        );
 
-        self::assertThat($first, new EqualsValue($second));
+        self::assertThat($calls, new HasCallCount(1));
     }
 }

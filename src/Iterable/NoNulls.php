@@ -22,7 +22,7 @@ use IteratorAggregate;
 final readonly class NoNulls implements IteratorAggregate
 {
     /**
-     * @param Iterator<int, T> $origin
+     * @param Iterator<int, T|null> $origin
      */
     public function __construct(
         private Iterator $origin
