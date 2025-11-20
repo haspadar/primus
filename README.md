@@ -10,80 +10,116 @@
 [![Mutation testing badge](https://img.shields.io/endpoint?style=flat&url=https%3A%2F%2Fbadge-api.stryker-mutator.io%2Fgithub.com%2Fhaspadar%2Fprimus%2Fmain)](https://dashboard.stryker-mutator.io/reports/github.com/haspadar/primus/main)
 [![PHPStan Level](https://img.shields.io/badge/PHPStan-Level%209-brightgreen)](https://phpstan.org/)
 [![Psalm](https://img.shields.io/badge/psalm-level%208-brightgreen)](https://psalm.dev)
-[![CodeRabbit Pull Request Reviews](https://img.shields.io/coderabbit/prs/github/haspadar/primus?utm_source=oss&utm_medium=github&utm_campaign=haspadar%2Fprimus&labelColor=171717&color=FF570A&label=CodeRabbit+Reviews)](https://coderabbit.ai)
+
+[![CodeRabbit Pull Request Reviews](https://img.shields.io/coderabbit/prs/github/haspadar/primus?labelColor=171717&color=FF570A&label=CodeRabbit+Reviews)](https://coderabbit.ai)
 [![Hits-of-Code](https://hitsofcode.com/github/haspadar/primus?branch=main)](https://hitsofcode.com/github/haspadar/primus/view?branch=main)
 
 ---
 
-## 📦 About
+# Primus  
+### Object‑Oriented PHP Primitives
 
-**Primus** is a library of immutable value objects that wrap primitive types like `string`, `int`, `bool`, and `array`.
+Primus is a library of object‑oriented PHP primitives.  
+It provides common operations as small composable objects instead of functions.
 
-Instead of passing around loose values, you use small, self-contained wrappers like:
-
-- `Lowered`, `Trimmed`, `Sub` (strings)
-- `Yes`, `No`, `IsEmpty`, `IsEmail`, `IsUuid`, `LogicEnvelope` (logic)
-- `Mapped`, `SequenceOf` (collections)
-
-Each class encapsulates one behavior and can be composed with others to form robust, intention-revealing objects.
+Inspired by **Elegant Objects** and **cactoos**.
 
 ---
 
-## 🧠 Philosophy
+## 📦 Core Idea
 
-- ❌ No `null`, `static`, or shared state in the public API
-- ✅ One object = one responsibility
-- ✅ Final classes, immutability by default
-- ✅ Composition over inheritance
-- ✅ Behavior and data live together
-
-Inspired by [Elegant Objects](https://www.yegor256.com/elegant-objects.html) and [cactoos](https://github.com/yegor256/cactoos).
-
----
-
-## ✨ Example
+Procedural PHP:
 
 ```php
-$text = new Sub(
-    new Lowered(
-        new Trimmed("  Hello, world!  ")
-    ),
-    5
-);
-
-echo $text->value(); // "hello"
+strtolower(trim(substr($s, 0, 5)));
 ```
 
-Each wrapper adds one behavior:
+Primus:
 
-- `Trimmed` removes whitespace
-- `TruncatedRight` shortens the string
+```php
+(new Sub(
+    new Lowered(
+        new Trimmed($s)
+    ),
+    5
+))->value();
+```
 
-All wrappers implement the same interface and can be freely composed.
+Each object represents exactly one operation.  
+Objects are immutable, final, and easy to combine.
+
+---
+
+## 🧭 Quick Reference
+
+| Procedural | Primus |
+|-----------|--------|
+| `trim($s)` | `new Trimmed($s)` |
+| `strtolower($s)` | `new Lowered($s)` |
+| `substr($s, 0, 5)` | `new Sub($s, 5)` |
+| `strip_tags($s)` | `new WithoutTags($s)` |
+| `strlen($s)` | `new LengthOfText($s)` |
+| `array_map(fn, $a)` | `new Mapped($a, new FuncOf(fn))` |
+| `array_filter($a, fn)` | `new Filtered($a, new PredicateOf(fn))` |
 
 ---
 
 ## 🧱 Modules
 
-- **Text** — `Trimmed`, `Uppered`, `Lowered`, `Sub`, `WithoutTags`, `LengthOfText`, `Abbreviated`, `TextOf`
-- **Logic** — `Yes`, `No`, `ThrowsIf`, `IsEmpty`, `IsEmail`, `IsUuid`, `LogicEnvelope`
-- **Iterable** — `Sequence`, `SequenceOf`, `Mapped`, `Filtered`
-- **Func** — `Func`, `BiFunc`, `Proc`, `BiProc`, `StickyFunc`
-- **Number** — *(coming soon)* `Positive`, `NonZero`, `Rounded`, etc.
+### **Text**
+Trimmed, Lowered, Uppered, Sub, WithoutTags, Abbreviated, LengthOfText, TextOf
+
+### **Logic**
+Yes, No, IsEmpty, IsEmail, IsUuid, IsUrl, ThrowsIf, LogicEnvelope
+
+### **Scalar**
+ScalarOf, ScalarEnvelope, EqualTo, GreaterThan, LessThan, Ternary, Sticky
+
+### **Func**
+Func, FuncOf, FuncEnvelope, BiFunc, Proc, Predicate, StickyFunc, Repeated
+
+### **Iterator**
+IteratorOf, Mapped, Filtered, Joined, NoNulls
+
+### **Iterable**
+IterableOf, Mapped, Filtered, Joined, NoNulls
+
+### **Numeric (WIP)**
+Positive, NonZero, Rounded
 
 ---
 
-## 🧩 Static Analysis Rules
+## 🧠 Design Principles
 
-Primus enforces [Elegant Objects](https://www.yegor256.com/elegant-objects.html) design principles using  
-[`haspadar/psalm-eo-rules`](https://github.com/haspadar/psalm-eo-rules) — a custom Psalm plugin that forbids:
+- No `null`  
+- No `static`  
+- No procedural helpers  
+- No mutable state  
 
-- `static` methods and properties
-- `null`, `isset()`, and `empty()`
-- non-`readonly` mutable state
-- traits and inheritance misuse
+- Immutable objects  
+- Final classes  
+- One class = one behavior  
+- Composition over inheritance  
 
-These checks guarantee immutability and strict object boundaries across all modules.
+---
+
+## 🧪 Testing & Static Analysis
+
+Primus includes:
+
+- Custom PHPUnit constraints (`HasIteratorValues`, `EqualsValue`, …)
+- Mutation testing (Infection)
+- Static analysis:
+  - PHPStan level 9  
+  - Psalm + `haspadar/psalm-eo-rules`
+
+The Psalm rules enforce:
+
+- No `static`
+- No `null`
+- No `isset()` / `empty()`
+- All state must be `readonly`
+- No traits or unnecessary inheritance
 
 ---
 
@@ -93,7 +129,7 @@ These checks guarantee immutability and strict object boundaries across all modu
 composer require haspadar/primus
 ```
 
-Requires PHP 8.2
+Requires **PHP ≥ 8.2**
 
 ---
 
