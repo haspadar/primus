@@ -17,7 +17,7 @@
 ---
 
 # Primus  
-### Object‑Oriented PHP Primitives
+## Object‑Oriented PHP Primitives
 
 Primus is a library of object‑oriented PHP primitives.  
 It provides common operations as small composable objects instead of functions.
