@@ -1,73 +1,43 @@
 {
-  "name": "haspadar/primus",
-  "description": "Primitive wrappers for PHP: strong typing for strings, ints, arrays, and more",
-  "type": "library",
-  "license": "MIT",
-  "require": {
-    "php": "8.2.*"
-  },
-  "require-dev": {
-    "vimeo/psalm": "^6.13",
-    "infection/infection": "^0.29.14",
-    "phpunit/phpunit": "^10.5",
-    "phpstan/phpstan": "^2.0",
-    "rector/rector": "^2.0",
-    "friendsofphp/php-cs-fixer": "^3",
-    "nunomaduro/collision": "^8.0",
-    "phpmetrics/phpmetrics": "^3.0",
-    "haspadar/psalm-eo-rules": "dev-main"
-  },
-
-  "minimum-stability": "RC",
-  "prefer-stable": true,
-  "autoload": {
-    "psr-4": {
-      "Primus\\": "src/"
-    }
-  },
-  "autoload-dev": {
-    "psr-4": {
-      "Primus\\Tests\\": "tests/"
-    }
-  },
-  "scripts": {
-    "test": "phpunit --order-by=random --random-order-seed=$(date +%s)",
-    "test-coverage": "XDEBUG_MODE=coverage php -d memory_limit=512M ./vendor/bin/phpunit --coverage-clover=coverage.xml --coverage-filter=src",
-    "test-coverage-html": "XDEBUG_MODE=coverage php -d memory_limit=512M ./vendor/bin/phpunit --coverage-html=coverage-report --coverage-filter=src",
-    "analyze": "phpstan analyse",
-    "analyze-changed": "git diff --name-only origin/main...HEAD | grep '\\.php$' | xargs -r vendor/bin/phpstan analyse",
-    "psalm": "./vendor/bin/psalm --no-cache",
-    "psalm:shepherd": "./vendor/bin/psalm --shepherd --no-diff --stats --output-format=github",
-    "fix": "vendor/bin/php-cs-fixer fix",
-    "fix-test": "vendor/bin/php-cs-fixer fix --dry-run --diff",
-    "fix-changed": "git diff --name-only origin/main...HEAD | grep '\\.php$' | xargs -r vendor/bin/php-cs-fixer fix --dry-run --diff --allow-risky=yes",
-    "infection": "XDEBUG_MODE=coverage vendor/bin/infection --threads=4 --only-covered",
-    "mutations": "XDEBUG_MODE=coverage php -d memory_limit=1024M ./vendor/bin/infection --threads=$(nproc) --only-covered --show-mutations",
-    "metrics": "phpmetrics --report-html=build/phpmetrics-report src",
-    "refactor": "rector",
-    "test-refactor": "rector --dry-run",
-    "ci-quality": [
-      "@fix-test",
-      "@analyze",
-      "@psalm",
-      "@test",
-      "@infection",
-      "@test-coverage",
-      "@metrics",
-      "@refactor"
+    "name": "haspadar/primus",
+    "description": "Primitive wrappers for PHP: strong typing for strings, ints, arrays, and more",
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Primus\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Primus\\Tests\\": "tests/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Kanstantsinas Mesnikas",
+            "email": "haspadar@gmail.com"
+        }
     ],
-    "build": [
-      "@fix",
-      "@refactor",
-      "@analyze",
-      "@psalm",
-      "@test",
-      "@mutations"
-    ]
-  },
-  "config": {
-    "allow-plugins": {
-      "infection/extension-installer": true
+    "minimum-stability": "stable",
+    "require": {
+        "php": "~8.3.16 || ~8.4.3 || ~8.5.0"
+    },
+    "require-dev": {
+        "haspadar/piqule": "dev-main",
+        "slevomat/coding-standard": "^8.28",
+        "kubawerlos/php-cs-fixer-custom-fixers": "^3.36"
+    },
+    "scripts": {
+        "update-piqule": "bash -c 'COMPOSER_ROOT_VERSION=$(git describe --tags --abbrev=0 | sed s/^v//) composer update haspadar/piqule -W'"
+    },
+    "config": {
+        "platform": {
+            "php": "8.3.16"
+        },
+        "allow-plugins": {
+            "infection/extension-installer": true,
+            "dealerdirect/phpcodesniffer-composer-installer": true
+        }
     }
-  }
 }
