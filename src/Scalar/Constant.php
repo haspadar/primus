@@ -35,9 +35,6 @@ final readonly class Constant implements Scalar
     {
     }
 
-    /**
-     * @return T
-     */
     #[Override]
     public function value()
     {

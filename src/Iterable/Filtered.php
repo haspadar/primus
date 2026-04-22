@@ -43,10 +43,6 @@ final readonly class Filtered implements IteratorAggregate
     ) {
     }
 
-    /**
-     * @throws \Exception
-     * @return Iterator<mixed, T>
-     */
     #[\Override]
     public function getIterator(): Iterator
     {

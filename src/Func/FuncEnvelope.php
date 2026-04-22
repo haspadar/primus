@@ -31,10 +31,6 @@ abstract readonly class FuncEnvelope implements Func
     {
     }
 
-    /**
-     * @param I $input
-     * @return O
-     */
     #[\Override]
     public function apply(mixed $input): mixed
     {

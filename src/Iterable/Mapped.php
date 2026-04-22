@@ -45,9 +45,6 @@ final readonly class Mapped implements IteratorAggregate
     ) {
     }
 
-    /**
-     * @return Iterator<int, Y>
-     */
     #[\Override]
     public function getIterator(): Iterator
     {

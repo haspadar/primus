@@ -36,10 +36,6 @@ final readonly class IterableOf implements IteratorAggregate
     {
     }
 
-    /**
-     * @psalm-return Iterator<mixed, T>
-     * @phpstan-return Iterator<mixed, T>
-     */
     #[\Override]
     public function getIterator(): Iterator
     {

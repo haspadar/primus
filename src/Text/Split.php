@@ -35,9 +35,6 @@ final readonly class Split implements Scalar
     ) {
     }
 
-    /**
-     * @return iterable<Text>
-     */
     #[\Override]
     public function value(): iterable
     {

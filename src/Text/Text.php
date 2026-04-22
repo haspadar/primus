@@ -20,9 +20,6 @@ use Primus\Scalar\Scalar;
  */
 interface Text extends Scalar
 {
-    /**
-     * Returns the string value represented by this object.
-     */
     #[Override]
     public function value(): string;
 }
