@@ -21,6 +21,11 @@ namespace Primus\Text;
  */
 final readonly class Lowered extends TextEnvelope
 {
+    /**
+     * Ctor.
+     *
+     * @param Text $origin The text to lowercase.
+     */
     public function __construct(Text $origin)
     {
         parent::__construct(

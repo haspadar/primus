@@ -16,6 +16,11 @@ use Override;
  */
 abstract readonly class TextEnvelope implements Text
 {
+    /**
+     * Ctor.
+     *
+     * @param Text $origin The text to delegate to.
+     */
     public function __construct(protected Text $origin)
     {
     }

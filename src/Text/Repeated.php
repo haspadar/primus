@@ -19,6 +19,12 @@ namespace Primus\Text;
  */
 final readonly class Repeated extends TextEnvelope
 {
+    /**
+     * Ctor.
+     *
+     * @param Text $origin The text to repeat.
+     * @param int $count The number of repetitions.
+     */
     public function __construct(Text $origin, int $count)
     {
         parent::__construct(
