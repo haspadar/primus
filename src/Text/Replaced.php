@@ -9,7 +9,7 @@ declare(strict_types=1);
 namespace Primus\Text;
 
 /**
- * {@see Text} with replaced substrings.
+ * Text with replaced substrings.
  *
  * Replaces one or multiple search strings with replacements.
  *

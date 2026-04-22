@@ -13,8 +13,7 @@ use IteratorAggregate;
 use Primus\Func\Func;
 
 /**
- * Iterable that lazily transforms each element
- * of the origin iterable using the provided function.
+ * Iterable that lazily transforms each element of the origin iterable using the provided function.
  *
  * Example:
  *     $it = new Mapped(

@@ -9,7 +9,7 @@ declare(strict_types=1);
 namespace Primus\Text;
 
 /**
- * {@see Text} with the first character capitalized.
+ * Text with the first character capitalized.
  *
  * Converts only the first character to uppercase
  * and leaves the rest of the text unchanged.

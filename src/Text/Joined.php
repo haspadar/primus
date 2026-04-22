@@ -9,7 +9,7 @@ declare(strict_types=1);
 namespace Primus\Text;
 
 /**
- * {@see Text} joined from multiple {@see Text} parts with a separator.
+ * Text joined from multiple Text parts with a separator.
  *
  * Example:
  *     $text = new Joined(', ', [new TextOf('a'), new TextOf('b'), new TextOf('c')]);

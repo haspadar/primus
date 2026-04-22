@@ -9,7 +9,7 @@ declare(strict_types=1);
 namespace Primus\Logic;
 
 /**
- * {@see Logic} that returns true if the text is a valid UUID v1–v5.
+ * Logic that returns true if the text is a valid UUID v1–v5.
  *
  * Matches 8-4-4-4-12 pattern with correct version and variant bits.
  *

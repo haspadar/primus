@@ -9,7 +9,7 @@ declare(strict_types=1);
 namespace Primus\Text;
 
 /**
- * {@see Text} without leading or trailing whitespace.
+ * Text without leading or trailing whitespace.
  *
  * Applies {@see trim()} to the original text.
  *

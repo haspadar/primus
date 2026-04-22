@@ -9,7 +9,7 @@ declare(strict_types=1);
 namespace Primus\Text;
 
 /**
- * {@see Text} in uppercase.
+ * Text in uppercase.
  *
  * Converts the given text to uppercase using multibyte support.
  *

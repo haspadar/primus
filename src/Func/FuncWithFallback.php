@@ -7,7 +7,7 @@ namespace Primus\Func;
 use Exception;
 
 /**
- * {@see Func} with fallback.
+ * Func with fallback.
  *
  * @template I
  * @template O

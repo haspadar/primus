@@ -9,7 +9,7 @@ declare(strict_types=1);
 namespace Primus\Text;
 
 /**
- * {@see Text} in lowercase.
+ * Text in lowercase.
  *
  * Converts the given text to lowercase using multibyte support.
  *

@@ -9,7 +9,7 @@ declare(strict_types=1);
 namespace Primus\Logic;
 
 /**
- * {@see Logic} that always returns false.
+ * Logic that always returns false.
  *
  * Useful in testing or as a default negative condition.
  *

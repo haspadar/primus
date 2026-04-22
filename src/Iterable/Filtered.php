@@ -13,8 +13,7 @@ use IteratorAggregate;
 use Primus\Func\Predicate;
 
 /**
- * Iterable that lazily filters values from another iterable
- * using the provided predicate.
+ * Iterable that lazily filters values from another iterable using the provided predicate.
  *
  * Example:
  *     $it = new Filtered(

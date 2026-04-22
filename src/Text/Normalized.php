@@ -12,7 +12,7 @@ use InvalidArgumentException;
 use Primus\Scalar\ScalarOf;
 
 /**
- * {@see Text} with normalized whitespace.
+ * Text with normalized whitespace.
  *
  * Replaces multiple spaces, tabs, and newlines
  * with a single space and trims leading/trailing whitespace.

@@ -9,7 +9,7 @@ declare(strict_types=1);
 namespace Primus\Text;
 
 /**
- * {@see Text} without HTML tags.
+ * Text without HTML tags.
  *
  * Strips all HTML tags from the origin text using {@see strip_tags()}.
  *

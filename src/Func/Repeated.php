@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Primus\Func;
 
 /**
- * {@see Func} applied multiple times sequentially.
+ * Func applied multiple times sequentially.
  *
  * Example:
  *     $func = new Repeated(
