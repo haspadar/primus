@@ -11,7 +11,7 @@ namespace Primus\Logic;
 use Primus\Text\Trimmed;
 
 /**
- * {@see Logic} that returns true if the text is empty or whitespace-only.
+ * Logic that returns true if the text is empty or whitespace-only.
  *
  */
 final readonly class IsEmpty extends LogicEnvelope

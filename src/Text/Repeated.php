@@ -9,7 +9,7 @@ declare(strict_types=1);
 namespace Primus\Text;
 
 /**
- * {@see Text} repeated multiple times.
+ * Text repeated multiple times.
  *
  * Example:
  *     $text = new Repeated(new TextOf('xo'), 3);

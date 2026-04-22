@@ -9,7 +9,7 @@ declare(strict_types=1);
 namespace Primus\Text;
 
 /**
- * {@see Text} with right padding.
+ * Text with right padding.
  *
  * Pads the text to the specified length with the given character using {@see str_pad()}.
  *

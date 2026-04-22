@@ -11,7 +11,7 @@ namespace Primus\Logic;
 use Primus\Text\Text;
 
 /**
- * {@see Logic} that returns true if a {@see Text} is a valid URL.
+ * Logic that returns true if a {@see Text} is a valid URL.
  *
  * Example:
  *     new IsUrl(new TextOf("https://example.com")) → true

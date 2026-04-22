@@ -12,7 +12,7 @@ use InvalidArgumentException;
 use Primus\Scalar\ScalarOf;
 
 /**
- * {@see Text} with whitespace removed from the right side.
+ * Text with whitespace removed from the right side.
  *
  * Example:
  *     $text = new TrimmedRight(new TextOf(" hello   "));

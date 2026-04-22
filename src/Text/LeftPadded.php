@@ -9,7 +9,7 @@ declare(strict_types=1);
 namespace Primus\Text;
 
 /**
- * {@see Text} with left padding.
+ * Text with left padding.
  *
  * Pads the text on the left to the specified length
  * with the given character using {@see str_pad()}.

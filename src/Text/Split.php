@@ -11,7 +11,7 @@ namespace Primus\Text;
 use Primus\Scalar\Scalar;
 
 /**
- * {@see Text} split by a delimiter into parts.
+ * Text split by a delimiter into parts.
  *
  * Produces an iterable of {@see Text} segments separated by the given delimiter.
  *

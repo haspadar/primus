@@ -9,7 +9,7 @@ declare(strict_types=1);
 namespace Primus\Text;
 
 /**
- * {@see Text} with whitespace removed from the left side.
+ * Text with whitespace removed from the left side.
  *
  * Example:
  *     $text = new TrimmedLeft(new TextOf("   hello "));

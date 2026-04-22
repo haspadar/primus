@@ -9,7 +9,7 @@ declare(strict_types=1);
 namespace Primus\Logic;
 
 /**
- * {@see Logic} that returns true if the text is a valid email.
+ * Logic that returns true if the text is a valid email.
  *
  */
 final readonly class IsEmail extends LogicEnvelope

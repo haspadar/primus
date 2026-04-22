@@ -9,7 +9,7 @@ declare(strict_types=1);
 namespace Primus\Logic;
 
 /**
- * {@see Logic} that returns true if text represents a valid numeric value.
+ * Logic that returns true if text represents a valid numeric value.
  *
  * Uses PHP's {@see is_numeric()} to determine if the string is a number.
  *
