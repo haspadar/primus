@@ -21,6 +21,9 @@ namespace Primus\Text;
  */
 final readonly class RightPadded extends TextEnvelope
 {
+    /**
+     * Ctor.
+     */
     public function __construct(
         Text $origin,
         int $length,

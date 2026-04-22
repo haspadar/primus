@@ -22,6 +22,9 @@ namespace Primus\Text;
  */
 final readonly class Abbreviated extends TextEnvelope
 {
+    /**
+     * Ctor.
+     */
     public function __construct(Text $origin, int $limit = 50)
     {
         if ($limit <= 0) {

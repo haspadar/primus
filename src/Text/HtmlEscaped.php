@@ -19,6 +19,9 @@ namespace Primus\Text;
  */
 final readonly class HtmlEscaped extends TextEnvelope
 {
+    /**
+     * Ctor.
+     */
     public function __construct(Text $origin)
     {
         parent::__construct(

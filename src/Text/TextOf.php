@@ -15,6 +15,9 @@ use Override;
  */
 final readonly class TextOf implements Text
 {
+    /**
+     * Ctor.
+     */
     public function __construct(private string $value)
     {
     }

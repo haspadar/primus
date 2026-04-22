@@ -22,6 +22,9 @@ namespace Primus\Text;
  */
 final readonly class Capitalized extends TextEnvelope
 {
+    /**
+     * Ctor.
+     */
     public function __construct(Text $origin)
     {
         $value = $origin->value();

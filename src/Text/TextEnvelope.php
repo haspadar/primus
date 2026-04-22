@@ -16,6 +16,9 @@ use Override;
  */
 abstract readonly class TextEnvelope implements Text
 {
+    /**
+     * Ctor.
+     */
     public function __construct(protected Text $origin)
     {
     }

@@ -24,6 +24,9 @@ use Primus\Scalar\ScalarOf;
  */
 final readonly class RandomText extends TextEnvelope
 {
+    /**
+     * Ctor.
+     */
     public function __construct(int $length, string $alphabet = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789')
     {
         $scalar = new ScalarOf(

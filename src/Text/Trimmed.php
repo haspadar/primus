@@ -21,6 +21,9 @@ namespace Primus\Text;
  */
 final readonly class Trimmed extends TextEnvelope
 {
+    /**
+     * Ctor.
+     */
     public function __construct(Text $origin)
     {
         parent::__construct(

@@ -25,6 +25,9 @@ use Primus\Scalar\ScalarOf;
  */
 final readonly class Normalized extends TextEnvelope
 {
+    /**
+     * Ctor.
+     */
     public function __construct(Text $origin)
     {
         parent::__construct(

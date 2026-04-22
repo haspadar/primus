@@ -20,6 +20,9 @@ namespace Primus\Text;
  */
 final readonly class WithoutTags extends TextEnvelope
 {
+    /**
+     * Ctor.
+     */
     public function __construct(Text $origin)
     {
         parent::__construct(

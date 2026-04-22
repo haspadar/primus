@@ -23,6 +23,9 @@ use Primus\Scalar\ScalarOf;
  */
 final readonly class LengthOfText extends ScalarEnvelope
 {
+    /**
+     * Ctor.
+     */
     public function __construct(Text $origin)
     {
         /** @var ScalarOf<int> $scalar */

@@ -21,6 +21,9 @@ namespace Primus\Text;
  */
 final readonly class Lowered extends TextEnvelope
 {
+    /**
+     * Ctor.
+     */
     public function __construct(Text $origin)
     {
         parent::__construct(

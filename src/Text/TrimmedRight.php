@@ -22,6 +22,9 @@ use Primus\Scalar\ScalarOf;
  */
 final readonly class TrimmedRight extends TextEnvelope
 {
+    /**
+     * Ctor.
+     */
     public function __construct(Text $origin)
     {
         parent::__construct(

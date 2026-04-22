@@ -16,6 +16,9 @@ use Primus\Text\Text;
  */
 abstract readonly class LogicEnvelope implements Logic
 {
+    /**
+     * Ctor.
+     */
     public function __construct(protected Text $text)
     {
     }

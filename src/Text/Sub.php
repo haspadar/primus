@@ -22,6 +22,9 @@ namespace Primus\Text;
  */
 final readonly class Sub extends TextEnvelope
 {
+    /**
+     * Ctor.
+     */
     public function __construct(Text $text, int $start, int $length = PHP_INT_MAX)
     {
         parent::__construct(
