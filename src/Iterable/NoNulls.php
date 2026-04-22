@@ -20,7 +20,7 @@ final readonly class NoNulls implements IteratorAggregate
     /**
      * Ctor.
      *
-     * @param Iterator<int, T|null> $origin The iterator whose nulls are removed.
+     * @param Iterator<int, T|null> $origin The iterator validated for non-null values; nulls trigger RuntimeException on access.
      */
     public function __construct(
         private Iterator $origin

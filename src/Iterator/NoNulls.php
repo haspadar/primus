@@ -25,7 +25,7 @@ final class NoNulls implements Iterator
     /**
      * Ctor.
      *
-     * @param Iterator<mixed, T|null> $origin The iterator whose nulls are removed.
+     * @param Iterator<mixed, T|null> $origin The iterator validated for non-null values; nulls trigger RuntimeException on access.
      */
     public function __construct(
         private readonly Iterator $origin
