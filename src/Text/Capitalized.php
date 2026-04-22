@@ -24,6 +24,8 @@ final readonly class Capitalized extends TextEnvelope
 {
     /**
      * Ctor.
+     *
+     * @param Text $origin The text to capitalize.
      */
     public function __construct(Text $origin)
     {

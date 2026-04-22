@@ -25,6 +25,8 @@ final readonly class LengthOfText extends ScalarEnvelope
 {
     /**
      * Ctor.
+     *
+     * @param Text $origin The text to measure.
      */
     public function __construct(Text $origin)
     {

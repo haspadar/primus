@@ -23,6 +23,10 @@ final readonly class RightPadded extends TextEnvelope
 {
     /**
      * Ctor.
+     *
+     * @param Text $origin The text to pad.
+     * @param int $length The desired total length after padding.
+     * @param string $padChar The character to use for padding.
      */
     public function __construct(
         Text $origin,

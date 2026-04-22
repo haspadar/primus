@@ -21,6 +21,8 @@ final readonly class HtmlEscaped extends TextEnvelope
 {
     /**
      * Ctor.
+     *
+     * @param Text $origin The text to escape.
      */
     public function __construct(Text $origin)
     {

@@ -22,6 +22,8 @@ final readonly class Uppered extends TextEnvelope
 {
     /**
      * Ctor.
+     *
+     * @param Text $origin The text to uppercase.
      */
     public function __construct(Text $origin)
     {

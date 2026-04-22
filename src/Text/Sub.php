@@ -24,6 +24,10 @@ final readonly class Sub extends TextEnvelope
 {
     /**
      * Ctor.
+     *
+     * @param Text $text The text to extract from.
+     * @param int $start The start position in characters.
+     * @param int $length The maximum number of characters to extract.
      */
     public function __construct(Text $text, int $start, int $length = PHP_INT_MAX)
     {

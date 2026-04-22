@@ -24,6 +24,9 @@ final readonly class Abbreviated extends TextEnvelope
 {
     /**
      * Ctor.
+     *
+     * @param Text $origin The text to abbreviate.
+     * @param int $limit The maximum length of the result.
      */
     public function __construct(Text $origin, int $limit = 50)
     {

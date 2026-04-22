@@ -26,6 +26,9 @@ final readonly class RandomText extends TextEnvelope
 {
     /**
      * Ctor.
+     *
+     * @param int $length The length of the generated text.
+     * @param string $alphabet The characters to pick from.
      */
     public function __construct(int $length, string $alphabet = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789')
     {

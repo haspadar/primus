@@ -24,6 +24,8 @@ final readonly class TrimmedRight extends TextEnvelope
 {
     /**
      * Ctor.
+     *
+     * @param Text $origin The text to trim on the right.
      */
     public function __construct(Text $origin)
     {
