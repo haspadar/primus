@@ -23,9 +23,6 @@ final readonly class Joined implements IteratorAggregate
     ) {
     }
 
-    /**
-     * @return Iterator<int,T>
-     */
     #[\Override]
     public function getIterator(): Iterator
     {

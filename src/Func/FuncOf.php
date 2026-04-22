@@ -28,10 +28,6 @@ final readonly class FuncOf implements Func
     {
     }
 
-    /**
-     * @param I $input
-     * @return O
-     */
     #[\Override]
     public function apply($input): mixed
     {

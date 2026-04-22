@@ -37,9 +37,6 @@ final readonly class ScalarOf implements Scalar
     {
     }
 
-    /**
-     * @return T
-     */
     #[Override]
     public function value()
     {

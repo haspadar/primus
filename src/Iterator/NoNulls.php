@@ -41,9 +41,6 @@ final class NoNulls implements Iterator
         $this->origin->rewind();
     }
 
-    /**
-     * @return T
-     */
     #[\Override]
     public function current(): mixed
     {

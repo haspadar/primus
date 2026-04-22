@@ -36,9 +36,6 @@ final class Mapped implements Iterator
         $this->origin->rewind();
     }
 
-    /**
-     * @return Y
-     */
     #[\Override]
     public function current(): mixed
     {

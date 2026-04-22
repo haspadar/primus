@@ -29,9 +29,6 @@ final readonly class NoNulls implements IteratorAggregate
     ) {
     }
 
-    /**
-     * @return Iterator<int, T>
-     */
     #[\Override]
     public function getIterator(): Iterator
     {

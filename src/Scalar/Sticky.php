@@ -8,8 +8,6 @@ declare(strict_types=1);
 
 namespace Primus\Scalar;
 
-use Throwable;
-
 /**
  * Cached version of a {@see Scalar}.
  *
@@ -48,10 +46,6 @@ final class Sticky implements Scalar
     {
     }
 
-    /**
-     * @throws Throwable
-     * @return T
-     */
     #[\Override]
     public function value()
     {

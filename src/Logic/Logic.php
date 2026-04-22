@@ -20,9 +20,6 @@ use Primus\Scalar\Scalar;
  */
 interface Logic extends Scalar
 {
-    /**
-     * Whether the condition is logically true.
-     */
     #[\Override]
     public function value(): bool;
 
