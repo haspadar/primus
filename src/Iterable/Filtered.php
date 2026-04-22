@@ -29,8 +29,10 @@ use Primus\Func\Predicate;
 final readonly class Filtered implements IteratorAggregate
 {
     /**
-     * @param IteratorAggregate<T> $origin
-     * @param Predicate<T> $predicate
+     * Ctor.
+     *
+     * @param IteratorAggregate<T> $origin The origin iterable.
+     * @param Predicate<T> $predicate The predicate used to filter values.
      */
     public function __construct(
         private IteratorAggregate $origin,

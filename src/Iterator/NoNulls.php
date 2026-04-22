@@ -23,7 +23,9 @@ final class NoNulls implements Iterator
     private int $position = 0;
 
     /**
-     * @param Iterator<mixed, T|null> $origin
+     * Ctor.
+     *
+     * @param Iterator<mixed, T|null> $origin The iterator whose nulls are removed.
      */
     public function __construct(
         private readonly Iterator $origin

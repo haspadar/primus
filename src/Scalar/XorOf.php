@@ -24,7 +24,9 @@ use InvalidArgumentException;
 final readonly class XorOf extends ScalarEnvelope
 {
     /**
-     * @param Scalar<bool> ...$conditions
+     * Ctor.
+     *
+     * @param Scalar<bool> ...$conditions The scalars to XOR together.
      */
     public function __construct(Scalar ...$conditions)
     {

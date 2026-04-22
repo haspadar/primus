@@ -21,7 +21,10 @@ namespace Primus\Func;
 final readonly class Repeated implements Func
 {
     /**
-     * @param Func<T, T> $origin
+     * Ctor.
+     *
+     * @param Func<T, T> $origin The function to repeat.
+     * @param int $times Number of sequential applications.
      */
     public function __construct(
         private Func $origin,

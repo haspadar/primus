@@ -26,7 +26,9 @@ use Primus\Iterator\IteratorOf;
 final readonly class IterableOf implements IteratorAggregate
 {
     /**
-     * @param array<mixed,T> $items Strict list of items
+     * Ctor.
+     *
+     * @param array<mixed,T> $items The items to iterate over.
      */
     public function __construct(private array $items)
     {

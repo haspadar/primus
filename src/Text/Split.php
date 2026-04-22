@@ -23,7 +23,10 @@ use Primus\Scalar\Scalar;
 final readonly class Split implements Scalar
 {
     /**
-     * @param non-empty-string $delimiter
+     * Ctor.
+     *
+     * @param non-empty-string $delimiter The delimiter used to split the text.
+     * @param Text $origin The text to split.
      */
     public function __construct(
         private string $delimiter,

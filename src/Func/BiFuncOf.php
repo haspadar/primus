@@ -18,7 +18,11 @@ use Closure;
  */
 final readonly class BiFuncOf implements BiFunc
 {
-    /** @param Closure(X, Y): Z $origin */
+    /**
+     * Ctor.
+     *
+     * @param Closure(X, Y): Z $origin The closure to wrap.
+     */
     public function __construct(private Closure $origin)
     {
     }

@@ -18,7 +18,9 @@ use IteratorAggregate;
 final readonly class NoNulls implements IteratorAggregate
 {
     /**
-     * @param Iterator<int, T|null> $origin
+     * Ctor.
+     *
+     * @param Iterator<int, T|null> $origin The iterator whose nulls are removed.
      */
     public function __construct(
         private Iterator $origin

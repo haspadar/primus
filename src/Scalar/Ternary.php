@@ -25,9 +25,11 @@ namespace Primus\Scalar;
 final readonly class Ternary extends ScalarEnvelope
 {
     /**
-     * @param Scalar<bool> $condition
-     * @param Scalar<T> $yes
-     * @param Scalar<T> $no
+     * Ctor.
+     *
+     * @param Scalar<bool> $condition The branching condition.
+     * @param Scalar<T> $yes The value returned when condition is true.
+     * @param Scalar<T> $no The value returned when condition is false.
      */
     public function __construct(Scalar $condition, Scalar $yes, Scalar $no)
     {

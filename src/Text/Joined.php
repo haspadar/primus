@@ -16,7 +16,10 @@ namespace Primus\Text;
 final readonly class Joined extends TextEnvelope
 {
     /**
-     * @param iterable<Text> $parts
+     * Ctor.
+     *
+     * @param string $separator The glue inserted between parts.
+     * @param iterable<Text> $parts The texts to join.
      */
     public function __construct(string $separator, iterable $parts)
     {

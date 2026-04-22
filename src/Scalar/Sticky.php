@@ -36,7 +36,9 @@ final class Sticky implements Scalar
     private $stored;
 
     /**
-     * @param Scalar<T> $origin
+     * Ctor.
+     *
+     * @param Scalar<T> $origin The scalar whose value is cached.
      */
     public function __construct(private readonly Scalar $origin)
     {

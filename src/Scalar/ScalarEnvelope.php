@@ -17,7 +17,9 @@ namespace Primus\Scalar;
 abstract readonly class ScalarEnvelope implements Scalar
 {
     /**
-     * @param Scalar<T> $origin
+     * Ctor.
+     *
+     * @param Scalar<T> $origin The wrapped scalar.
      */
     public function __construct(protected Scalar $origin)
     {

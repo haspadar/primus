@@ -8,6 +8,8 @@ use Iterator;
 use Primus\Func\Func;
 
 /**
+ * Iterator that lazily transforms each element of the origin iterator using the provided function.
+ *
  * @template X
  * @template Y
  * @implements Iterator<mixed, Y>
@@ -20,8 +22,10 @@ final class Mapped implements Iterator
     private int $position = 0;
 
     /**
-     * @param Iterator<mixed, X> $origin
-     * @param Func<X, Y> $func
+     * Ctor.
+     *
+     * @param Iterator<mixed, X> $origin The origin iterator.
+     * @param Func<X, Y> $func The function used to transform elements.
      */
     public function __construct(
         private readonly Iterator $origin,

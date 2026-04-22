@@ -17,7 +17,9 @@ namespace Primus\Scalar;
 final readonly class Not extends ScalarEnvelope
 {
     /**
-     * @param Scalar<bool> $origin
+     * Ctor.
+     *
+     * @param Scalar<bool> $origin The scalar to negate.
      */
     public function __construct(Scalar $origin)
     {

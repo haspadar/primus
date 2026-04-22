@@ -31,8 +31,10 @@ use Primus\Func\Func;
 final readonly class Mapped implements IteratorAggregate
 {
     /**
-     * @param IteratorAggregate<X> $origin
-     * @param Func<X, Y> $func
+     * Ctor.
+     *
+     * @param IteratorAggregate<X> $origin The origin iterable.
+     * @param Func<X, Y> $func The function used to transform elements.
      */
     public function __construct(
         private IteratorAggregate $origin,

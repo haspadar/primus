@@ -16,7 +16,11 @@ use Closure;
  */
 final readonly class ProcOf implements Proc
 {
-    /** @param Closure(X): void $origin */
+    /**
+     * Ctor.
+     *
+     * @param Closure(X): void $origin The closure to wrap.
+     */
     public function __construct(private Closure $origin)
     {
     }

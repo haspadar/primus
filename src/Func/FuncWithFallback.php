@@ -17,8 +17,10 @@ use Exception;
 final readonly class FuncWithFallback extends FuncEnvelope
 {
     /**
-     * @param Func<I, O> $origin
-     * @param Func<I, O> $fallback
+     * Ctor.
+     *
+     * @param Func<I, O> $origin The primary function.
+     * @param Func<I, O> $fallback The fallback function used on exception.
      */
     public function __construct(Func $origin, Func $fallback)
     {

@@ -17,7 +17,11 @@ use Closure;
  */
 final readonly class BiProcOf implements BiProc
 {
-    /** @param Closure(X, Y): void $origin */
+    /**
+     * Ctor.
+     *
+     * @param Closure(X, Y): void $origin The closure to wrap.
+     */
     public function __construct(private Closure $origin)
     {
     }
