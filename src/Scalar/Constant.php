@@ -25,7 +25,9 @@ use Override;
 final readonly class Constant implements Scalar
 {
     /**
-     * @param T $value Value to return on each call.
+     * Ctor.
+     *
+     * @param T $value The value returned on each call.
      */
     public function __construct(private mixed $value)
     {

@@ -17,7 +17,9 @@ use InvalidArgumentException;
 final readonly class OrOf extends ScalarEnvelope
 {
     /**
-     * @param Scalar<bool> ...$conditions
+     * Ctor.
+     *
+     * @param Scalar<bool> ...$conditions The scalars to OR together.
      */
     public function __construct(Scalar ...$conditions)
     {

@@ -28,7 +28,9 @@ final class IteratorOf implements Iterator
     private int $position = 0;
 
     /**
-     * @param array<array-key, T> $items
+     * Ctor.
+     *
+     * @param array<array-key, T> $items The items to iterate over.
      */
     public function __construct(private readonly array $items)
     {

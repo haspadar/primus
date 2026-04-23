@@ -21,7 +21,9 @@ use InvalidArgumentException;
 final readonly class AndOf extends ScalarEnvelope
 {
     /**
-     * @param Scalar<bool> ...$conditions
+     * Ctor.
+     *
+     * @param Scalar<bool> ...$conditions The scalars to AND together.
      */
     public function __construct(Scalar ...$conditions)
     {

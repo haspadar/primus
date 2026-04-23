@@ -8,6 +8,8 @@ use Iterator;
 use IteratorAggregate;
 
 /**
+ * Iterable that joins multiple iterators into a single sequence.
+ *
  * @template T
  * @implements IteratorAggregate<int, T>
  *
@@ -16,7 +18,9 @@ use IteratorAggregate;
 final readonly class Joined implements IteratorAggregate
 {
     /**
-     * @param array<Iterator<int,T>> $iterators
+     * Ctor.
+     *
+     * @param array<Iterator<int,T>> $iterators The iterators to join.
      */
     public function __construct(
         private array $iterators,

@@ -21,7 +21,9 @@ namespace Primus\Func;
 abstract readonly class FuncEnvelope implements Func
 {
     /**
-     * @param Func<I, O> $origin
+     * Ctor.
+     *
+     * @param Func<I, O> $origin The wrapped function.
      */
     public function __construct(private Func $origin)
     {

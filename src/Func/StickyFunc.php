@@ -29,7 +29,9 @@ final class StickyFunc implements Func
     private array $cache = [];
 
     /**
-     * @param Func<X, Y> $origin
+     * Ctor.
+     *
+     * @param Func<X, Y> $origin The function whose results are cached.
      */
     public function __construct(private readonly Func $origin)
     {

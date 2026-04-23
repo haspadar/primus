@@ -16,7 +16,11 @@ use Closure;
  */
 final readonly class PredicateOf implements Predicate
 {
-    /** @param Closure(X): bool $origin */
+    /**
+     * Ctor.
+     *
+     * @param Closure(X): bool $origin The closure to wrap.
+     */
     public function __construct(private Closure $origin)
     {
     }

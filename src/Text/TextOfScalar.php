@@ -11,7 +11,11 @@ use Primus\Scalar\Scalar;
  */
 final readonly class TextOfScalar implements Text
 {
-    /** @param Scalar<string> $origin */
+    /**
+     * Ctor.
+     *
+     * @param Scalar<string> $origin The scalar producing the string value.
+     */
     public function __construct(private Scalar $origin)
     {
     }

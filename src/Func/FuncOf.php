@@ -18,7 +18,9 @@ use Closure;
 final readonly class FuncOf implements Func
 {
     /**
-     * @param Closure(I):O $origin
+     * Ctor.
+     *
+     * @param Closure(I):O $origin The closure to wrap.
      */
     public function __construct(private Closure $origin)
     {

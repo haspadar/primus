@@ -21,8 +21,10 @@ namespace Primus\Scalar;
 final readonly class GreaterThan extends ScalarEnvelope
 {
     /**
-     * @param Scalar<T> $left
-     * @param Scalar<T> $right
+     * Ctor.
+     *
+     * @param Scalar<T> $left The left operand.
+     * @param Scalar<T> $right The right operand.
      */
     public function __construct(Scalar $left, Scalar $right)
     {

@@ -35,7 +35,9 @@ final class Joined implements Iterator
     private Iterator $current;
 
     /**
-     * @param array<int,Iterator<int,T>> $iterators
+     * Ctor.
+     *
+     * @param array<int,Iterator<int,T>> $iterators The iterators to concatenate.
      */
     public function __construct(array $iterators)
     {

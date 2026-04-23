@@ -22,9 +22,11 @@ namespace Primus\Scalar;
 final readonly class Between extends ScalarEnvelope
 {
     /**
-     * @param Scalar<T> $value
-     * @param Scalar<T> $lower
-     * @param Scalar<T> $upper
+     * Ctor.
+     *
+     * @param Scalar<T> $value The scalar to test.
+     * @param Scalar<T> $lower The lower bound, exclusive.
+     * @param Scalar<T> $upper The upper bound, exclusive.
      */
     public function __construct(Scalar $value, Scalar $lower, Scalar $upper)
     {

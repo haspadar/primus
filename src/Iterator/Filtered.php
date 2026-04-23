@@ -22,8 +22,10 @@ final class Filtered implements Iterator
     private bool $isValid = false;
 
     /**
-     * @param Iterator<mixed, T> $origin
-     * @param Predicate<T>       $predicate
+     * Ctor.
+     *
+     * @param Iterator<mixed, T> $origin The origin iterator.
+     * @param Predicate<T>       $predicate The predicate used to filter values.
      */
     public function __construct(
         private readonly Iterator $origin,

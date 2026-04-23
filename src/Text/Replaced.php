@@ -22,8 +22,11 @@ namespace Primus\Text;
 final readonly class Replaced extends TextEnvelope
 {
     /**
-     * @param string|string[] $search
-     * @param string|string[] $replacement
+     * Ctor.
+     *
+     * @param Text $origin The origin text.
+     * @param string|string[] $search The substrings to search for.
+     * @param string|string[] $replacement The replacements.
      */
     public function __construct(
         Text $origin,
