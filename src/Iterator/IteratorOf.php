@@ -18,9 +18,11 @@ final class IteratorOf implements Iterator
 {
     /**
      * @var list<array-key>
+     * @phpstan-ignore haspadar.immutable
      */
     private array $keys = [];
 
+    /** @phpstan-ignore haspadar.immutable */
     private int $position = 0;
 
     /**
@@ -43,6 +45,7 @@ final class IteratorOf implements Iterator
     public function current(): mixed
     {
         if (!$this->valid()) {
+            /** @phpstan-ignore missingType.checkedException */
             throw new \RuntimeException('Iterator is past the end');
         }
 
@@ -53,6 +56,7 @@ final class IteratorOf implements Iterator
     public function key(): int|string
     {
         if (!$this->valid()) {
+            /** @phpstan-ignore missingType.checkedException */
             throw new \RuntimeException('Iterator key is undefined because iterator is past the end');
         }
 

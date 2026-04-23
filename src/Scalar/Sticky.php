@@ -24,10 +24,12 @@ namespace Primus\Scalar;
  */
 final class Sticky implements Scalar
 {
+    /** @phpstan-ignore haspadar.immutable */
     private bool $computed = false;
 
     /**
      * @var T $stored
+     * @phpstan-ignore haspadar.immutable
      */
     private $stored;
 

@@ -9,6 +9,7 @@ use Override;
 /**
  * Envelope for {@see Text}, delegating all calls to the origin.
  *
+ * @phpstan-ignore haspadar.afferentCoupling
  */
 abstract readonly class TextEnvelope implements Text
 {

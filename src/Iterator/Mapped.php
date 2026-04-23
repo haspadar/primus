@@ -18,6 +18,7 @@ use Primus\Func\Func;
  */
 final class Mapped implements Iterator
 {
+    /** @phpstan-ignore haspadar.immutable */
     private int $position = 0;
 
     /**
@@ -43,6 +44,7 @@ final class Mapped implements Iterator
     public function current(): mixed
     {
         if (!$this->valid()) {
+            /** @phpstan-ignore missingType.checkedException */
             throw new \RuntimeException('Mapped: current() past end');
         }
 
@@ -56,6 +58,7 @@ final class Mapped implements Iterator
     public function key(): int
     {
         if (!$this->valid()) {
+            /** @phpstan-ignore missingType.checkedException */
             throw new \RuntimeException('Mapped: key() past end');
         }
 
@@ -66,6 +69,7 @@ final class Mapped implements Iterator
     public function next(): void
     {
         if (!$this->valid()) {
+            /** @phpstan-ignore missingType.checkedException */
             throw new \RuntimeException('Mapped: next() past end');
         }
 

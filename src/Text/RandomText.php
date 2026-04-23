@@ -28,20 +28,22 @@ final readonly class RandomText extends TextEnvelope
      */
     public function __construct(int $length, string $alphabet = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789')
     {
-        $scalar = new ScalarOf(
-            function () use ($length, $alphabet): string {
-                $source = $alphabet !== '' ? $alphabet : 'a';
-                $size = mb_strlen($source, 'UTF-8');
-                $chars = [];
+        parent::__construct(
+            new TextOf(
+                (new ScalarOf(
+                    function () use ($length, $alphabet): string {
+                        $source = $alphabet !== '' ? $alphabet : 'a';
+                        $size = mb_strlen($source, 'UTF-8');
+                        $chars = [];
 
-                for ($i = 0; $i < max(0, $length); $i++) {
-                    $chars[] = mb_substr($source, random_int(0, $size - 1), 1, 'UTF-8');
-                }
+                        for ($i = 0; $i < max(0, $length); $i++) {
+                            $chars[] = mb_substr($source, random_int(0, $size - 1), 1, 'UTF-8');
+                        }
 
-                return implode('', $chars);
-            }
+                        return implode('', $chars);
+                    }
+                ))->value()
+            )
         );
-
-        parent::__construct(new TextOf($scalar->value()));
     }
 }
