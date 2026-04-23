@@ -107,10 +107,11 @@ Primus includes:
 
 - Custom PHPUnit constraints (`HasIteratorValues`, `EqualsValue`, …)
 - Mutation testing (Infection)
-- Static analysis:
-  - PHPStan level 9 with `haspadar/phpstan-rules`
+- Static analysis via [`haspadar/piqule`](https://github.com/haspadar/piqule) —
+  a curated bundle of strict quality gates (PHPStan level 9 with custom rules,
+  PHP-CS-Fixer, PHPMD, PHPMetrics, Infection).
 
-The rules enforce:
+The enforced rules include:
 
 - No `static`
 - No `null`
