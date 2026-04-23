@@ -16,9 +16,6 @@ use RuntimeException;
  */
 final class Filtered implements Iterator
 {
-    /**
-     * @psalm-suppress NoMutableProperty
-     */
     private bool $isValid = false;
 
     /**

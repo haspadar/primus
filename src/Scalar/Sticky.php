@@ -24,14 +24,10 @@ namespace Primus\Scalar;
  */
 final class Sticky implements Scalar
 {
-    /**
-     * @psalm-suppress NoMutableProperty
-     */
     private bool $computed = false;
 
     /**
      * @var T $stored
-     * @psalm-suppress NoMutableProperty
      */
     private $stored;
 

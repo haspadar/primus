@@ -24,7 +24,6 @@ final class StickyFunc implements Func
 {
     /**
      * @var array<string, mixed>
-     * @psalm-suppress NoMutableProperty
      */
     private array $cache = [];
 
