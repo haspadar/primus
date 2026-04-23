@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "fd3b2920d6a714e71a26f761330afd15",
+    "content-hash": "a361bbad933e906ee672bdb7b0b23015",
     "packages": [],
     "packages-dev": [
         {
@@ -1815,16 +1815,16 @@
         },
         {
             "name": "haspadar/phpstan-rules",
-            "version": "v0.37.2",
+            "version": "v0.42.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/haspadar/phpstan-rules.git",
-                "reference": "0bbb3b3285236c406e6d9196c9ad976f8f06c32d"
+                "reference": "bc3aa5840c0b52b6208ea399ab94987f79463050"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/haspadar/phpstan-rules/zipball/0bbb3b3285236c406e6d9196c9ad976f8f06c32d",
-                "reference": "0bbb3b3285236c406e6d9196c9ad976f8f06c32d",
+                "url": "https://api.github.com/repos/haspadar/phpstan-rules/zipball/bc3aa5840c0b52b6208ea399ab94987f79463050",
+                "reference": "bc3aa5840c0b52b6208ea399ab94987f79463050",
                 "shasum": ""
             },
             "require": {
@@ -1862,9 +1862,9 @@
             "description": "PHPStan design rules for immutability and structure",
             "support": {
                 "issues": "https://github.com/haspadar/phpstan-rules/issues",
-                "source": "https://github.com/haspadar/phpstan-rules/tree/v0.37.2"
+                "source": "https://github.com/haspadar/phpstan-rules/tree/v0.42.1"
             },
-            "time": "2026-04-21T11:00:31+00:00"
+            "time": "2026-04-23T12:56:16+00:00"
         },
         {
             "name": "haspadar/piqule",
@@ -1872,12 +1872,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/haspadar/piqule.git",
-                "reference": "c06d82b1fbf8ad7614ae98e0bd1146b75ca13cac"
+                "reference": "3b96447a796aedb70579c63b0d53a77239f1c69d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/haspadar/piqule/zipball/c06d82b1fbf8ad7614ae98e0bd1146b75ca13cac",
-                "reference": "c06d82b1fbf8ad7614ae98e0bd1146b75ca13cac",
+                "url": "https://api.github.com/repos/haspadar/piqule/zipball/3b96447a796aedb70579c63b0d53a77239f1c69d",
+                "reference": "3b96447a796aedb70579c63b0d53a77239f1c69d",
                 "shasum": ""
             },
             "require": {
@@ -1925,7 +1925,7 @@
                 "issues": "https://github.com/haspadar/piqule/issues",
                 "source": "https://github.com/haspadar/piqule/tree/main"
             },
-            "time": "2026-04-22T12:20:12+00:00"
+            "time": "2026-04-23T14:38:10+00:00"
         },
         {
             "name": "infection/abstract-testframework-adapter",
@@ -3539,11 +3539,11 @@
         },
         {
             "name": "phpstan/phpstan",
-            "version": "2.1.50",
+            "version": "2.1.51",
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/d452086fb4cf648c6b2d8cf3b639351f79e4f3e2",
-                "reference": "d452086fb4cf648c6b2d8cf3b639351f79e4f3e2",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/dc3b523c45e714c70de2ac5113b958223b55dc59",
+                "reference": "dc3b523c45e714c70de2ac5113b958223b55dc59",
                 "shasum": ""
             },
             "require": {
@@ -3588,7 +3588,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2026-04-17T13:10:32+00:00"
+            "time": "2026-04-21T18:22:01+00:00"
         },
         {
             "name": "phpstan/phpstan-strict-rules",

@@ -45,11 +45,11 @@ final readonly class Mapped implements IteratorAggregate
     #[\Override]
     public function getIterator(): Iterator
     {
-        /** @var Iterator<mixed,X> $it */
-        $it = $this->origin->getIterator();
+        /** @var Iterator<mixed,X> $iterator */
+        $iterator = $this->origin->getIterator();
 
         return new \Primus\Iterator\Mapped(
-            $it,
+            $iterator,
             $this->func,
         );
     }

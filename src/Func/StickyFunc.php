@@ -40,6 +40,8 @@ final class StickyFunc implements Func
     public function apply(mixed $input): mixed
     {
         $key = serialize($input);
-        return $this->cache[$key] ??= $this->origin->apply($input);
+        $this->cache[$key] ??= $this->origin->apply($input);
+
+        return $this->cache[$key];
     }
 }

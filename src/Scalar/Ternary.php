@@ -7,8 +7,8 @@ namespace Primus\Scalar;
 /**
  * Conditional scalar.
  *
- * Returns {@see $yes} if {@see $condition} evaluates to true,
- * otherwise {@see $no}.
+ * Returns {@see $truthy} if {@see $condition} evaluates to true,
+ * otherwise {@see $falsy}.
  *
  * Example:
  *     $scalar = new Ternary(
@@ -28,14 +28,14 @@ final readonly class Ternary extends ScalarEnvelope
      * Ctor.
      *
      * @param Scalar<bool> $condition The branching condition.
-     * @param Scalar<T> $yes The value returned when condition is true.
-     * @param Scalar<T> $no The value returned when condition is false.
+     * @param Scalar<T> $truthy The value returned when condition is true.
+     * @param Scalar<T> $falsy The value returned when condition is false.
      */
-    public function __construct(Scalar $condition, Scalar $yes, Scalar $no)
+    public function __construct(Scalar $condition, Scalar $truthy, Scalar $falsy)
     {
         parent::__construct(
             new ScalarOf(
-                fn () => $condition->value() ? $yes->value() : $no->value()
+                fn () => $condition->value() ? $truthy->value() : $falsy->value()
             )
         );
     }
