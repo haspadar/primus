@@ -17,20 +17,15 @@ use RuntimeException;
  */
 final class Joined implements Iterator
 {
-    /**
-     * @psalm-suppress NoMutableProperty
-     */
     private int $position = 0;
 
     /**
      * @var Iterator<int,Iterator<int,T>>
-     * @psalm-suppress NoMutableProperty
      */
     private readonly Iterator $outer;
 
     /**
      * @var Iterator<int,T>
-     * @psalm-suppress NoMutableProperty
      */
     private Iterator $current;
 

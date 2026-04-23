@@ -18,7 +18,6 @@ use Primus\Func\Func;
  */
 final class Mapped implements Iterator
 {
-    /** @psalm-suppress NoMutableProperty */
     private int $position = 0;
 
     /**

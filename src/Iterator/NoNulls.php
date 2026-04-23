@@ -17,9 +17,6 @@ use RuntimeException;
  */
 final class NoNulls implements Iterator
 {
-    /**
-     * @psalm-suppress NoMutableProperty
-     */
     private int $position = 0;
 
     /**

@@ -18,13 +18,9 @@ final class IteratorOf implements Iterator
 {
     /**
      * @var list<array-key>
-     * @psalm-suppress NoMutableProperty
      */
     private array $keys = [];
 
-    /**
-     * @psalm-suppress NoMutableProperty
-     */
     private int $position = 0;
 
     /**

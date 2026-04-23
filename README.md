@@ -9,7 +9,6 @@
 [![Coverage](https://codecov.io/gh/haspadar/primus/branch/main/graph/badge.svg)](https://codecov.io/gh/haspadar/primus)
 [![Mutation testing badge](https://img.shields.io/endpoint?style=flat&url=https%3A%2F%2Fbadge-api.stryker-mutator.io%2Fgithub.com%2Fhaspadar%2Fprimus%2Fmain)](https://dashboard.stryker-mutator.io/reports/github.com/haspadar/primus/main)
 [![PHPStan Level](https://img.shields.io/badge/PHPStan-Level%209-brightgreen)](https://phpstan.org/)
-[![Psalm](https://img.shields.io/badge/psalm-level%208-brightgreen)](https://psalm.dev)
 
 [![Hits-of-Code](https://hitsofcode.com/github/haspadar/primus?branch=main)](https://hitsofcode.com/github/haspadar/primus/view?branch=main)
 [![CodeRabbit Pull Request Reviews](https://img.shields.io/coderabbit/prs/github/haspadar/primus?labelColor=171717&color=FF570A&label=CodeRabbit+Reviews)](https://coderabbit.ai)
@@ -108,11 +107,11 @@ Primus includes:
 
 - Custom PHPUnit constraints (`HasIteratorValues`, `EqualsValue`, …)
 - Mutation testing (Infection)
-- Static analysis:
-  - PHPStan level 9  
-  - Psalm + `haspadar/psalm-eo-rules`
+- Static analysis via [`haspadar/piqule`](https://github.com/haspadar/piqule) —
+  a curated bundle of strict quality gates (PHPStan level 9 with custom rules,
+  PHP-CS-Fixer, PHPMD, PHPMetrics, Infection).
 
-The Psalm rules enforce:
+The enforced rules include:
 
 - No `static`
 - No `null`
