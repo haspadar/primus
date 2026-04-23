@@ -30,15 +30,15 @@ final readonly class RandomText extends TextEnvelope
     {
         $scalar = new ScalarOf(
             function () use ($length, $alphabet): string {
-                $alphabet = $alphabet !== '' ? $alphabet : 'a';
-                $size = mb_strlen($alphabet, 'UTF-8');
-                $result = '';
+                $source = $alphabet !== '' ? $alphabet : 'a';
+                $size = mb_strlen($source, 'UTF-8');
+                $chars = [];
 
                 for ($i = 0; $i < max(0, $length); $i++) {
-                    $result .= mb_substr($alphabet, random_int(0, $size - 1), 1, 'UTF-8');
+                    $chars[] = mb_substr($source, random_int(0, $size - 1), 1, 'UTF-8');
                 }
 
-                return $result;
+                return implode('', $chars);
             }
         );
 

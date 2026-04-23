@@ -43,9 +43,9 @@ final readonly class Filtered implements IteratorAggregate
     #[\Override]
     public function getIterator(): Iterator
     {
-        /** @var Iterator<mixed,T> $it */
-        $it = $this->origin->getIterator();
+        /** @var Iterator<mixed,T> $iterator */
+        $iterator = $this->origin->getIterator();
 
-        return new \Primus\Iterator\Filtered($it, $this->predicate);
+        return new \Primus\Iterator\Filtered($iterator, $this->predicate);
     }
 }
