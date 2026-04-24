@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Primus\Func;
 
-use Exception;
+use Throwable;
 
 /**
  * Func with fallback.
@@ -34,7 +34,7 @@ final readonly class FuncWithFallback extends FuncEnvelope
                     try {
                         return $origin->apply($input);
                         // @phpstan-ignore-next-line haspadar.illegalCatch
-                    } catch (Exception) {
+                    } catch (Throwable) {
                         return $fallback->apply($input);
                     }
                 },
