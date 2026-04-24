@@ -14,7 +14,6 @@ use Override;
  * @template Y
  * @template Z
  * @implements BiFunc<X, Y, Z>
- *
  * @since 0.3
  */
 final readonly class BiFuncOf implements BiFunc

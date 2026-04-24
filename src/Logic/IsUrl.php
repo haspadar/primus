@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Primus\Logic;
 
 use Override;
-use Primus\Text\Text;
 
 /**
  * Logic that returns true if a {@see Text} is a valid URL.

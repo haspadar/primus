@@ -10,7 +10,6 @@ namespace Primus\Func;
  * @template X
  * @template Y
  * @template Z
- *
  * @since 0.3
  */
 interface BiFunc

@@ -15,7 +15,6 @@ use RuntimeException;
  * @template X
  * @template Y
  * @implements Iterator<mixed, Y>
- *
  * @since 0.5
  */
 final class Mapped implements Iterator
@@ -29,10 +28,7 @@ final class Mapped implements Iterator
      * @param Iterator<mixed, X> $origin The origin iterator.
      * @param Func<X, Y> $func The function used to transform elements.
      */
-    public function __construct(
-        private readonly Iterator $origin,
-        private readonly Func $func,
-    ) {}
+    public function __construct(private readonly Iterator $origin, private readonly Func $func) {}
 
     #[Override]
     public function rewind(): void

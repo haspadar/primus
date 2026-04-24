@@ -20,7 +20,6 @@
 
     <rule ref="SlevomatCodingStandard.Exceptions.CatchExceptionsOrder"/>
     <rule ref="SlevomatCodingStandard.Exceptions.DeadCatch"/>
-    <rule ref="SlevomatCodingStandard.Exceptions.ReferenceThrowableOnly"/>
     <rule ref="SlevomatCodingStandard.Exceptions.RequireNonCapturingCatch"/>
 
     <rule ref="SlevomatCodingStandard.Variables.DisallowSuperGlobalVariable"/>

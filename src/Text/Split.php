@@ -29,10 +29,7 @@ final readonly class Split implements Scalar
      * @param non-empty-string $delimiter The delimiter used to split the text.
      * @param Text $origin The text to split.
      */
-    public function __construct(
-        private string $delimiter,
-        private Text $origin,
-    ) {}
+    public function __construct(private string $delimiter, private Text $origin) {}
 
     #[Override]
     public function value(): iterable

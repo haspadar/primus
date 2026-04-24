@@ -12,7 +12,6 @@ use Override;
  *
  * @template X
  * @implements Predicate<X>
- *
  * @since 0.3
  */
 final readonly class PredicateOf implements Predicate

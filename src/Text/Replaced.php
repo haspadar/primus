@@ -25,14 +25,11 @@ final readonly class Replaced extends TextEnvelope
      * Ctor.
      *
      * @param Text $origin The origin text.
-     * @param string|string[] $search The substrings to search for.
-     * @param string|string[] $replacement The replacements.
+     * @param string|list<string> $search The substrings to search for.
+     * @param string|list<string> $replacement The replacements.
      */
-    public function __construct(
-        Text $origin,
-        string|array $search,
-        string|array $replacement,
-    ) {
+    public function __construct(Text $origin, string|array $search, string|array $replacement)
+    {
         parent::__construct(
             new TextOf(
                 str_replace($search, $replacement, $origin->value()),

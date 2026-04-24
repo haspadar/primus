@@ -7,13 +7,13 @@ namespace Primus\Iterable;
 use Iterator;
 use IteratorAggregate;
 use Override;
+use Primus\Iterator\NoNulls as NoNullsIterator;
 
 /**
  * Iterable that forbids NULL values.
  *
  * @template T
  * @implements IteratorAggregate<T>
- *
  * @since 0.5
  */
 final readonly class NoNulls implements IteratorAggregate
@@ -23,13 +23,11 @@ final readonly class NoNulls implements IteratorAggregate
      *
      * @param Iterator<int, T|null> $origin The iterator validated for non-null values; nulls trigger RuntimeException on access.
      */
-    public function __construct(
-        private Iterator $origin,
-    ) {}
+    public function __construct(private Iterator $origin) {}
 
     #[Override]
     public function getIterator(): Iterator
     {
-        return new \Primus\Iterator\NoNulls($this->origin);
+        return new NoNullsIterator($this->origin);
     }
 }

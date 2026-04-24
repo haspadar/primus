@@ -26,13 +26,17 @@ final readonly class RandomText extends TextEnvelope
      * @param int $length The length of the generated text.
      * @param string $alphabet The characters to pick from.
      */
-    public function __construct(int $length, string $alphabet = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789')
-    {
+    public function __construct(
+        int $length,
+        string $alphabet = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789',
+    ) {
         parent::__construct(
             new TextOf(
                 (new ScalarOf(
-                    function () use ($length, $alphabet): string {
-                        $source = $alphabet !== '' ? $alphabet : 'a';
+                    static function () use ($length, $alphabet): string {
+                        $source = $alphabet !== ''
+                            ? $alphabet
+                            : 'a';
                         $size = mb_strlen($source, 'UTF-8');
                         $chars = [];
 

@@ -13,7 +13,6 @@ use RuntimeException;
  *
  * @template T
  * @implements Iterator<mixed, T>
- *
  * @since 0.5
  */
 final class NoNulls implements Iterator
@@ -26,9 +25,7 @@ final class NoNulls implements Iterator
      *
      * @param Iterator<mixed, T|null> $origin The iterator validated for non-null values; nulls trigger RuntimeException on access.
      */
-    public function __construct(
-        private readonly Iterator $origin,
-    ) {}
+    public function __construct(private readonly Iterator $origin) {}
 
     #[Override]
     public function rewind(): void

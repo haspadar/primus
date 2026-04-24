@@ -13,7 +13,6 @@ use RuntimeException;
  *
  * @template T
  * @implements Iterator<array-key, T>
- *
  * @since 0.5
  */
 final class IteratorOf implements Iterator

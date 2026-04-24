@@ -8,7 +8,7 @@ namespace Primus\Text;
  * Text with whitespace removed from the left side.
  *
  * Example:
- *     $text = new TrimmedLeft(new TextOf("   hello "));
+ *     $text = new TrimmedLeft(new TextOf(" hello "));
  *     echo $text->value(); // 'hello '
  *
  * @since 0.2

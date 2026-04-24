@@ -13,7 +13,6 @@ use RuntimeException;
  *
  * @template T
  * @implements Iterator<int, T>
- *
  * @since 0.5
  */
 final class Joined implements Iterator
@@ -21,9 +20,7 @@ final class Joined implements Iterator
     /** @phpstan-ignore haspadar.immutable */
     private int $position = 0;
 
-    /**
-     * @var Iterator<int, Iterator<int, T>>
-     */
+    /** @var Iterator<int, Iterator<int, T>> */
     private readonly Iterator $outer;
 
     /**

@@ -8,6 +8,7 @@ use Iterator;
 use IteratorAggregate;
 use Override;
 use Primus\Func\Predicate;
+use Primus\Iterator\Filtered as FilteredIterator;
 
 /**
  * Iterable that lazily filters values from another iterable using the provided predicate.
@@ -19,12 +20,11 @@ use Primus\Func\Predicate;
  *     );
  *
  *     foreach ($it as $v) {
- *         echo $v . ' ';   // 40
+ *         echo $v . ' '; // 40
  *     }
  *
  * @template T
  * @implements IteratorAggregate<T>
- *
  * @since 0.5
  */
 final readonly class Filtered implements IteratorAggregate
@@ -35,10 +35,7 @@ final readonly class Filtered implements IteratorAggregate
      * @param IteratorAggregate<T> $origin The origin iterable.
      * @param Predicate<T> $predicate The predicate used to filter values.
      */
-    public function __construct(
-        private IteratorAggregate $origin,
-        private Predicate $predicate,
-    ) {}
+    public function __construct(private IteratorAggregate $origin, private Predicate $predicate) {}
 
     #[Override]
     public function getIterator(): Iterator
@@ -46,6 +43,6 @@ final readonly class Filtered implements IteratorAggregate
         /** @var Iterator<mixed, T> $iterator */
         $iterator = $this->origin->getIterator();
 
-        return new \Primus\Iterator\Filtered($iterator, $this->predicate);
+        return new FilteredIterator($iterator, $this->predicate);
     }
 }

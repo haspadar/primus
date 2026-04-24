@@ -27,6 +27,7 @@ final readonly class Capitalized extends TextEnvelope
     {
         /** @phpstan-ignore haspadar.constructorInit */
         $value = $origin->value();
+
         parent::__construct(
             new TextOf(
                 $value === ''

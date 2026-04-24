@@ -29,14 +29,14 @@ final readonly class AndOf extends ScalarEnvelope
     {
         parent::__construct(
             new ScalarOf(
-                function () use ($conditions): bool {
+                static function () use ($conditions): bool {
                     if ($conditions === []) {
                         throw new InvalidArgumentException('AndOf requires at least one condition');
                     }
 
                     return array_reduce(
                         $conditions,
-                        fn(bool $carry, Scalar $cond): bool => $carry && $cond->value(),
+                        static fn(bool $carry, Scalar $cond): bool => $carry && $cond->value(),
                         true,
                     );
                 },

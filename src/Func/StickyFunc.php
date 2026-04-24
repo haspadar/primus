@@ -14,8 +14,8 @@ use Override;
  *
  * Example:
  *     $doubled = new StickyFunc(new FuncOf(fn(int $x): int => $x * 2));
- *     echo $doubled->apply(5);  // 10
- *     echo $doubled->apply(5);  // cached
+ *     echo $doubled->apply(5); // 10
+ *     echo $doubled->apply(5); // cached
  *
  * @template X
  * @template Y

@@ -19,7 +19,6 @@ use Override;
  *
  * @template T
  * @implements Scalar<T>
- *
  * @since 0.2
  */
 final readonly class Constant implements Scalar

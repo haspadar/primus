@@ -29,10 +29,7 @@ final readonly class Repeated implements Func
      * @param Func<T, T> $origin The function to repeat.
      * @param int $times Number of sequential applications.
      */
-    public function __construct(
-        private Func $origin,
-        private int $times,
-    ) {}
+    public function __construct(private Func $origin, private int $times) {}
 
     #[Override]
     public function apply(mixed $input): mixed
@@ -43,6 +40,7 @@ final readonly class Repeated implements Func
         }
 
         $result = $input;
+
         for ($i = 0; $i < $this->times; $i++) {
             $result = $this->origin->apply($result);
         }

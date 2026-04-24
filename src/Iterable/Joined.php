@@ -7,13 +7,13 @@ namespace Primus\Iterable;
 use Iterator;
 use IteratorAggregate;
 use Override;
+use Primus\Iterator\Joined as JoinedIterator;
 
 /**
  * Iterable that joins multiple iterators into a single sequence.
  *
  * @template T
  * @implements IteratorAggregate<int, T>
- *
  * @since 0.5
  */
 final readonly class Joined implements IteratorAggregate
@@ -23,13 +23,11 @@ final readonly class Joined implements IteratorAggregate
      *
      * @param list<Iterator<int, T>> $iterators The iterators to join.
      */
-    public function __construct(
-        private array $iterators,
-    ) {}
+    public function __construct(private array $iterators) {}
 
     #[Override]
     public function getIterator(): Iterator
     {
-        return new \Primus\Iterator\Joined($this->iterators);
+        return new JoinedIterator($this->iterators);
     }
 }

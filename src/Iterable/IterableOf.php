@@ -21,7 +21,6 @@ use Primus\Iterator\IteratorOf;
  *
  * @template T
  * @implements IteratorAggregate<T>
- *
  * @since 0.5
  */
 final readonly class IterableOf implements IteratorAggregate

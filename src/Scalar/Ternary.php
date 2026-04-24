@@ -35,7 +35,7 @@ final readonly class Ternary extends ScalarEnvelope
     {
         parent::__construct(
             new ScalarOf(
-                fn() => $condition->value() ? $truthy->value() : $falsy->value(),
+                static fn() => $condition->value() ? $truthy->value() : $falsy->value(),
             ),
         );
     }

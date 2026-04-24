@@ -35,6 +35,7 @@ final readonly class Abbreviated extends TextEnvelope
 
         /** @phpstan-ignore haspadar.constructorInit */
         $length = new LengthOfText($origin);
+
         /** @phpstan-ignore haspadar.constructorInit */
         if ($length->value() <= $limit) {
             parent::__construct($origin);
@@ -44,6 +45,7 @@ final readonly class Abbreviated extends TextEnvelope
 
         /** @phpstan-ignore haspadar.constructorInit */
         $truncated = sprintf('%s…', (new Sub($origin, 0, $limit - 1))->value());
+
         parent::__construct(new TextOf($truncated));
     }
 }
