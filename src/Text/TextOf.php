@@ -8,8 +8,6 @@ use Override;
 
 /**
  * Text of a plain string.
- *
- * @phpstan-ignore haspadar.afferentCoupling
  */
 final readonly class TextOf implements Text
 {

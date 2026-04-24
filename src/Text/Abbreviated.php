@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Primus\Text;
 
+use Primus\Scalar\ScalarOf;
+
 /**
  * Abbreviated {@see Text}.
  *
@@ -26,26 +28,22 @@ final readonly class Abbreviated extends TextEnvelope
      */
     public function __construct(Text $origin, int $limit = 50)
     {
-        /** @phpstan-ignore haspadar.constructorInit */
-        if ($limit <= 0) {
-            parent::__construct(new TextOf(''));
+        parent::__construct(
+            new TextOfScalar(
+                new ScalarOf(
+                    static function () use ($origin, $limit): string {
+                        if ($limit <= 0) {
+                            return '';
+                        }
 
-            return;
-        }
+                        if (mb_strlen($origin->value(), 'UTF-8') <= $limit) {
+                            return $origin->value();
+                        }
 
-        /** @phpstan-ignore haspadar.constructorInit */
-        $length = new LengthOfText($origin);
-
-        /** @phpstan-ignore haspadar.constructorInit */
-        if ($length->value() <= $limit) {
-            parent::__construct($origin);
-
-            return;
-        }
-
-        /** @phpstan-ignore haspadar.constructorInit */
-        $truncated = sprintf('%s…', (new Sub($origin, 0, $limit - 1))->value());
-
-        parent::__construct(new TextOf($truncated));
+                        return sprintf('%s…', mb_substr($origin->value(), 0, $limit - 1, 'UTF-8'));
+                    },
+                ),
+            ),
+        );
     }
 }
