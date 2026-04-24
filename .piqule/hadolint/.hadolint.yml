@@ -1,0 +1,9 @@
+# Hadolint configuration (Piqule managed)
+
+failure-threshold: error
+
+ignored: []
+
+override:
+  error: []
+  warning: []

@@ -1,0 +1,31 @@
+{
+  "$schema": "../../vendor/infection/infection/resources/schema.json",
+
+  "source": {
+    "directories": [
+        "../../src"
+    ]
+  },
+
+  "testFramework": "phpunit",
+
+  "phpUnit": {
+    "configDir": "../phpunit"
+  },
+
+  "initialTestsPhpOptions": "-d memory_limit=1G",
+  "timeout": 30,
+  "minMsi": 50,
+  "minCoveredMsi": 80,
+  "logs": {
+    "text": "infection.log",
+    "summary": "infection-summary.log",
+    "stryker": {
+      "badge": "/^(main|develop)$/"
+    }
+  },
+
+  "mutators": {
+    "@default": true
+  }
+}

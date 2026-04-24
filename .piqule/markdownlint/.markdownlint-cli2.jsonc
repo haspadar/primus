@@ -1,0 +1,18 @@
+{
+  // MD013 (line length) disabled because many projects contain long URLs,
+  // code examples, or tables that should not be arbitrarily wrapped.
+  // MD033 (inline HTML) disabled because README files often require <details>,
+  // <br>, and other HTML elements that Markdown lacks equivalents for.
+  "config": {
+    "default": true,
+    "MD013": false,
+    "MD033": false
+  },
+
+  // Ignore dependency/vendor directories to avoid linting third-party content.
+  "ignores": [
+    "vendor/**",
+    "tests/**",
+    ".git/**"
+  ]
+}
