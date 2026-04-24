@@ -42,7 +42,6 @@ final class Filtered implements Iterator
     public function next(): void
     {
         if (!$this->isValid) {
-            /** @phpstan-ignore missingType.checkedException */
             throw new RuntimeException('Iterator is past the end');
         }
 
@@ -54,7 +53,6 @@ final class Filtered implements Iterator
     public function current(): mixed
     {
         if (!$this->isValid) {
-            /** @phpstan-ignore missingType.checkedException */
             throw new RuntimeException('Iterator is past the end');
         }
 
@@ -65,7 +63,6 @@ final class Filtered implements Iterator
     public function key(): mixed
     {
         if (!$this->isValid) {
-            /** @phpstan-ignore missingType.checkedException */
             throw new RuntimeException('Iterator is past the end');
         }
 
