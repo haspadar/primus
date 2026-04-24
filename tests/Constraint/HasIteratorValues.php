@@ -45,10 +45,7 @@ final class HasIteratorValues extends Constraint
 
     protected function matches($other): bool
     {
-        $it = $this->asIterator($other);
-
-        $it->rewind();
-        $actual = iterator_to_array($it, false);
+        $actual = iterator_to_array($this->asIterator($other), false);
 
         return $actual === $this->expected;
     }
@@ -60,10 +57,7 @@ final class HasIteratorValues extends Constraint
 
     protected function additionalFailureDescription($other): string
     {
-        $it = $this->asIterator($other);
-
-        $it->rewind();
-        $actual = iterator_to_array($it, false);
+        $actual = iterator_to_array($this->asIterator($other), false);
 
         return "\nExpected: " . json_encode($this->expected, JSON_THROW_ON_ERROR | JSON_UNESCAPED_UNICODE)
             . "\nBut was:  " . json_encode($actual, JSON_THROW_ON_ERROR | JSON_UNESCAPED_UNICODE);

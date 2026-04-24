@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace Primus\Iterable;
 
-use Iterator;
+use Generator;
 use IteratorAggregate;
 use Override;
-use Primus\Iterator\Joined as JoinedIterator;
+use Traversable;
 
 /**
- * Iterable that joins multiple iterators into a single sequence.
+ * Iterable that joins multiple iterables into a single sequence.
  *
  * @template T
  * @implements IteratorAggregate<int, T>
@@ -21,13 +21,21 @@ final readonly class Joined implements IteratorAggregate
     /**
      * Ctor.
      *
-     * @param list<Iterator<int, T>> $iterators The iterators to join.
+     * @param list<Traversable<mixed, T>> $iterators The iterables to join.
      */
     public function __construct(private array $iterators) {}
 
     #[Override]
-    public function getIterator(): Iterator
+    public function getIterator(): Generator
     {
-        return new JoinedIterator($this->iterators);
+        $position = 0;
+
+        foreach ($this->iterators as $iterator) {
+            foreach ($iterator as $value) {
+                yield $position => $value;
+
+                $position++;
+            }
+        }
     }
 }

@@ -4,10 +4,9 @@ declare(strict_types=1);
 
 namespace Primus\Iterable;
 
-use Iterator;
+use Generator;
 use IteratorAggregate;
 use Override;
-use Primus\Iterator\IteratorOf;
 
 /**
  * Iterable wrapper over an array of items.
@@ -20,7 +19,7 @@ use Primus\Iterator\IteratorOf;
  *     // 10 20 30
  *
  * @template T
- * @implements IteratorAggregate<T>
+ * @implements IteratorAggregate<array-key, T>
  * @since 0.5
  */
 final readonly class IterableOf implements IteratorAggregate
@@ -28,13 +27,15 @@ final readonly class IterableOf implements IteratorAggregate
     /**
      * Ctor.
      *
-     * @param array<mixed, T> $items The items to iterate over.
+     * @param array<array-key, T> $items The items to iterate over.
      */
     public function __construct(private array $items) {}
 
     #[Override]
-    public function getIterator(): Iterator
+    public function getIterator(): Generator
     {
-        return new IteratorOf($this->items);
+        foreach ($this->items as $key => $value) {
+            yield $key => $value;
+        }
     }
 }

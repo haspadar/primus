@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace Primus\Iterable;
 
-use Iterator;
+use Generator;
 use IteratorAggregate;
 use Override;
 use Primus\Func\Predicate;
-use Primus\Iterator\Filtered as FilteredIterator;
+use Traversable;
 
 /**
  * Iterable that lazily filters values from another iterable using the provided predicate.
@@ -24,7 +24,7 @@ use Primus\Iterator\Filtered as FilteredIterator;
  *     }
  *
  * @template T
- * @implements IteratorAggregate<T>
+ * @implements IteratorAggregate<array-key, T>
  * @since 0.5
  */
 final readonly class Filtered implements IteratorAggregate
@@ -32,17 +32,18 @@ final readonly class Filtered implements IteratorAggregate
     /**
      * Ctor.
      *
-     * @param IteratorAggregate<T> $origin The origin iterable.
+     * @param Traversable<array-key, T> $origin The origin iterable.
      * @param Predicate<T> $predicate The predicate used to filter values.
      */
-    public function __construct(private IteratorAggregate $origin, private Predicate $predicate) {}
+    public function __construct(private Traversable $origin, private Predicate $predicate) {}
 
     #[Override]
-    public function getIterator(): Iterator
+    public function getIterator(): Generator
     {
-        /** @var Iterator<mixed, T> $iterator */
-        $iterator = $this->origin->getIterator();
-
-        return new FilteredIterator($iterator, $this->predicate);
+        foreach ($this->origin as $key => $value) {
+            if ($this->predicate->apply($value)) {
+                yield $key => $value;
+            }
+        }
     }
 }

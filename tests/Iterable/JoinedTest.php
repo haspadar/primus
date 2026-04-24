@@ -6,11 +6,9 @@ namespace Primus\Tests\Iterable;
 
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
+use Primus\Iterable\IterableOf;
 use Primus\Iterable\Joined;
-use Primus\Iterator\IteratorOf;
-use Primus\Tests\Constraint\EqualsValue;
 use Primus\Tests\Constraint\HasIteratorValues;
-use Primus\Tests\Constraint\ThrowsClosure;
 
 /**
  * @since 0.5
@@ -22,9 +20,9 @@ final class JoinedTest extends TestCase
     {
         self::assertThat(
             new Joined([
-                new IteratorOf([1, 2]),
-                new IteratorOf([3]),
-                new IteratorOf([4]),
+                new IterableOf([1, 2]),
+                new IterableOf([3]),
+                new IterableOf([4]),
             ]),
             new HasIteratorValues([1, 2, 3, 4]),
         );
@@ -43,8 +41,8 @@ final class JoinedTest extends TestCase
     public function producesSameValuesOnSecondIteration(): void
     {
         $joined = new Joined([
-            new IteratorOf([10]),
-            new IteratorOf([20]),
+            new IterableOf([10]),
+            new IterableOf([20]),
         ]);
 
         iterator_to_array($joined);
@@ -59,29 +57,10 @@ final class JoinedTest extends TestCase
     public function keysAreSequential(): void
     {
         $it = new Joined([
-            new IteratorOf([5]),
-            new IteratorOf([6]),
+            new IterableOf([5]),
+            new IterableOf([6]),
         ]);
 
-        self::assertThat(
-            iterator_to_array($it),
-            new EqualsValue([0 => 5, 1 => 6]),
-        );
-    }
-
-    #[Test]
-    public function currentThrowsExceptionPastEnd(): void
-    {
-        $it = (new Joined([
-            new IteratorOf([1]),
-        ]))->getIterator();
-
-        $it->rewind();
-        $it->next();
-
-        self::assertThat(
-            fn (): mixed => $it->current(),
-            new ThrowsClosure(\RuntimeException::class),
-        );
+        self::assertSame([0 => 5, 1 => 6], iterator_to_array($it));
     }
 }
