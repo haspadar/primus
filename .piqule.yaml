@@ -13,4 +13,5 @@ override:
     phpunit.testsuites.unit: ["../../tests"]
     phpunit.testsuites.integration: []
     phpmetrics.coupling.max_afferent: 20
-    php_cs_fixer.disabled_rules: ["phpdoc_types"]
+    php_cs_fixer.extend: |
+        'phpdoc_types' => ['exclude' => ['scalar']],

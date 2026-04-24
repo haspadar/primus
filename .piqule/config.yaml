@@ -56,13 +56,13 @@ defaults:
 
   php-cs-fixer.cli: true
   php_cs_fixer.allow_unsupported: ["true"]
-  php_cs_fixer.disabled_rules: []
   php_cs_fixer.exclude: ["vendor", "tests", ".git"]
+  php_cs_fixer.extend: ""
   php_cs_fixer.paths: ["../.."]
 
   phpcs.cli: true
-  phpcs.disabled_rules: []
   phpcs.excludes: ["vendor/*", "tests/*", ".git/*"]
+  phpcs.extend: ""
   phpcs.files: ["../../src"]
   phpcs.root_namespace: ""
 
