@@ -20,4 +20,5 @@
     <rule ref=".piqule/phpcs/slevomat-flow.xml"/>
     <rule ref=".piqule/phpcs/slevomat-style.xml"/>
 
+
 </ruleset>

@@ -76,7 +76,7 @@ return (new PhpCsFixer\Config())
         'phpdoc_order' => true,
         'phpdoc_scalar' => true,
         'phpdoc_trim' => true,
-        'phpdoc_types' => false,
+        'phpdoc_types' => true,
         'phpdoc_var_without_name' => true,
 
         // Clean code
@@ -106,5 +106,6 @@ return (new PhpCsFixer\Config())
         // PHP 8.4 compatibility: keep parentheses around `new` expressions
         // so tools based on pdepend (phpmd) can still parse the code
         'new_expression_parentheses' => ['use_parentheses' => true],
+        'phpdoc_types' => false,
     ]))
     ->setUnsupportedPhpVersionAllowed(true);
