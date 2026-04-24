@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace Primus\Scalar;
 
-use Throwable;
-
 /**
  * Represents a lazily-evaluated value of any type.
  *
@@ -21,8 +19,6 @@ interface Scalar
      * Returns the computed value.
      *
      * @noinspection ReturnTypeCanBeDeclaredInspection
-     * @phpstan-ignore-next-line haspadar.illegalThrows
-     * @throws Throwable if the value cannot be computed
      * @return T The value represented by this scalar.
      */
     public function value();
