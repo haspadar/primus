@@ -24,10 +24,7 @@
         "php": "~8.3.16 || ~8.4.3 || ~8.5.0"
     },
     "require-dev": {
-        "haspadar/phpstan-rules": "0.42.1",
-        "haspadar/piqule": "dev-main",
-        "slevomat/coding-standard": "^8.28",
-        "kubawerlos/php-cs-fixer-custom-fixers": "^3.36"
+        "haspadar/piqule": "dev-main"
     },
     "scripts": {
         "update-piqule": "bash -c 'COMPOSER_ROOT_VERSION=$(git describe --tags --abbrev=0 | sed s/^v//) composer update haspadar/piqule -W'"
