@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<psalm
+        errorLevel="1"
+        xmlns="https://getpsalm.org/schema/config"
+        findUnusedCode="true"
+        findUnusedBaselineEntry="true"
+        ensureArrayStringOffsetsExist="true"
+        reportMixedIssues="true"
+>
+    <projectFiles>
+        <directory name="../../src" />
+
+        <ignoreFiles>
+
+        </ignoreFiles>
+    </projectFiles>
+    <issueHandlers>
+        <InvalidAttribute errorLevel="suppress" />
+        <UnusedClass errorLevel="suppress">
+            <errorLevel type="suppress">
+                <directory name="../../src" />
+            </errorLevel>
+        </UnusedClass>
+    </issueHandlers>
+</psalm>

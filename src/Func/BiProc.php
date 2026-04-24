@@ -9,7 +9,6 @@ namespace Primus\Func;
  *
  * @template X
  * @template Y
- *
  * @since 0.3
  */
 interface BiProc
@@ -19,6 +18,7 @@ interface BiProc
      *
      * @param X $first
      * @param Y $second
+     * @psalm-suppress PossiblyUnusedMethod Public API of the library
      */
     public function exec(mixed $first, mixed $second): void;
 }

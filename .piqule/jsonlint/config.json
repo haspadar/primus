@@ -1,0 +1,14 @@
+{
+  "mode": "json5",
+  "compact": true,
+  "continue": true,
+  "duplicate-keys": false,
+  "patterns": [
+    "**/*.json",
+    "**/*.json5",
+    "**/*.jsonc",
+    "!vendor/**",
+    "!tests/**",
+    "!.git/**"
+  ]
+}

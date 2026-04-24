@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Primus\Iterator;
 
 use Iterator;
+use Override;
 use RuntimeException;
 
 /**
@@ -12,7 +13,6 @@ use RuntimeException;
  *
  * @template T
  * @implements Iterator<int, T>
- *
  * @since 0.5
  */
 final class Joined implements Iterator
@@ -20,13 +20,11 @@ final class Joined implements Iterator
     /** @phpstan-ignore haspadar.immutable */
     private int $position = 0;
 
-    /**
-     * @var Iterator<int,Iterator<int,T>>
-     */
+    /** @var Iterator<int, Iterator<int, T>> */
     private readonly Iterator $outer;
 
     /**
-     * @var Iterator<int,T>
+     * @var Iterator<int, T>
      * @phpstan-ignore haspadar.immutable
      */
     private Iterator $current;
@@ -34,7 +32,7 @@ final class Joined implements Iterator
     /**
      * Ctor.
      *
-     * @param array<int,Iterator<int,T>> $iterators The iterators to concatenate.
+     * @param array<int, Iterator<int, T>> $iterators The iterators to concatenate.
      */
     public function __construct(array $iterators)
     {
@@ -42,7 +40,7 @@ final class Joined implements Iterator
         $this->current = new IteratorOf([]);
     }
 
-    #[\Override]
+    #[Override]
     public function rewind(): void
     {
         $this->position = 0;
@@ -50,16 +48,19 @@ final class Joined implements Iterator
 
         if (!$this->outer->valid()) {
             $this->current = new IteratorOf([]);
+
             return;
         }
 
+        /** @psalm-suppress PossiblyNullPropertyAssignmentValue Guarded by valid() above */
         $this->current = $this->outer->current();
+        /** @psalm-suppress PossiblyNullReference Guarded by valid() above */
         $this->current->rewind();
 
         $this->advance();
     }
 
-    #[\Override]
+    #[Override]
     public function current(): mixed
     {
         if (!$this->valid()) {
@@ -70,7 +71,7 @@ final class Joined implements Iterator
         return $this->current->current();
     }
 
-    #[\Override]
+    #[Override]
     public function key(): int
     {
         if (!$this->valid()) {
@@ -81,7 +82,7 @@ final class Joined implements Iterator
         return $this->position;
     }
 
-    #[\Override]
+    #[Override]
     public function next(): void
     {
         if (!$this->valid()) {
@@ -95,7 +96,7 @@ final class Joined implements Iterator
         $this->advance();
     }
 
-    #[\Override]
+    #[Override]
     public function valid(): bool
     {
         return $this->current->valid();
@@ -110,7 +111,9 @@ final class Joined implements Iterator
             $this->outer->next();
 
             if ($this->outer->valid()) {
+                /** @psalm-suppress PossiblyNullPropertyAssignmentValue Guarded by valid() above */
                 $this->current = $this->outer->current();
+                /** @psalm-suppress PossiblyNullReference Guarded by valid() above */
                 $this->current->rewind();
             }
         }

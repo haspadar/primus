@@ -6,7 +6,9 @@ namespace Primus\Iterable;
 
 use Iterator;
 use IteratorAggregate;
+use Override;
 use Primus\Func\Func;
+use Primus\Iterator\Mapped as MappedIterator;
 
 /**
  * Iterable that lazily transforms each element of the origin iterable using the provided function.
@@ -25,7 +27,6 @@ use Primus\Func\Func;
  * @template X
  * @template Y
  * @implements IteratorAggregate<Y>
- *
  * @since 0.5
  */
 final readonly class Mapped implements IteratorAggregate
@@ -36,19 +37,15 @@ final readonly class Mapped implements IteratorAggregate
      * @param IteratorAggregate<X> $origin The origin iterable.
      * @param Func<X, Y> $func The function used to transform elements.
      */
-    public function __construct(
-        private IteratorAggregate $origin,
-        private Func $func,
-    ) {
-    }
+    public function __construct(private IteratorAggregate $origin, private Func $func) {}
 
-    #[\Override]
+    #[Override]
     public function getIterator(): Iterator
     {
-        /** @var Iterator<mixed,X> $iterator */
+        /** @var Iterator<mixed, X> $iterator */
         $iterator = $this->origin->getIterator();
 
-        return new \Primus\Iterator\Mapped(
+        return new MappedIterator(
             $iterator,
             $this->func,
         );

@@ -1,0 +1,12 @@
+# Typos configuration
+# Docs: https://github.com/crate-ci/typos
+
+[default]
+binary = false
+
+[files]
+extend-exclude = [
+    "vendor/",
+    "tests/",
+    ".git/",
+]

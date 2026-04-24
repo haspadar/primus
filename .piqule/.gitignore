@@ -1,0 +1,9 @@
+php-cs-fixer/.php-cs-fixer.cache
+codecov/coverage-report/
+codecov/coverage.xml
+infection/*.log
+ast-metrics/reports/
+phpmetrics/phpmetrics.json
+phpmetrics/html/
+phpunit/.phpunit.result.cache
+templates.md5

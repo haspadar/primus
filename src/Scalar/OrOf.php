@@ -25,13 +25,14 @@ final readonly class OrOf extends ScalarEnvelope
     {
         parent::__construct(
             new ScalarOf(
-                function () use ($conditions): bool {
+                static function () use ($conditions): bool {
                     if ($conditions === []) {
                         throw new InvalidArgumentException('OrOf requires at least one condition');
                     }
-                    return array_any($conditions, fn ($condition) => $condition->value());
-                }
-            )
+
+                    return array_any($conditions, static fn($condition) => $condition->value());
+                },
+            ),
         );
     }
 }

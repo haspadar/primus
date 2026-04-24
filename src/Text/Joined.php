@@ -28,11 +28,11 @@ final readonly class Joined extends TextEnvelope
                 implode(
                     $separator,
                     array_map(
-                        fn (Text $t): string => $t->value(),
-                        is_array($parts) ? $parts : iterator_to_array($parts, false)
-                    )
-                )
-            )
+                        static fn(Text $t): string => $t->value(),
+                        is_array($parts) ? $parts : iterator_to_array($parts, false),
+                    ),
+                ),
+            ),
         );
     }
 }

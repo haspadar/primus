@@ -11,7 +11,7 @@ use Primus\Scalar\ScalarOf;
  * Text with whitespace removed from the right side.
  *
  * Example:
- *     $text = new TrimmedRight(new TextOf(" hello   "));
+ *     $text = new TrimmedRight(new TextOf(" hello "));
  *     echo $text->value(); // ' hello'
  *
  * @since 0.2
@@ -28,11 +28,10 @@ final readonly class TrimmedRight extends TextEnvelope
         parent::__construct(
             new TextOfScalar(
                 new ScalarOf(
-                    fn (): string =>
-                        preg_replace('/\s+$/u', '', $origin->value())
-                        ?? throw new InvalidArgumentException('Malformed UTF-8 input')
-                )
-            )
+                    static fn(): string => preg_replace('/\s+$/u', '', $origin->value())
+                        ?? throw new InvalidArgumentException('Malformed UTF-8 input'),
+                ),
+            ),
         );
     }
 }

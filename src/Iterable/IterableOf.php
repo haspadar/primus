@@ -6,6 +6,7 @@ namespace Primus\Iterable;
 
 use Iterator;
 use IteratorAggregate;
+use Override;
 use Primus\Iterator\IteratorOf;
 
 /**
@@ -20,7 +21,6 @@ use Primus\Iterator\IteratorOf;
  *
  * @template T
  * @implements IteratorAggregate<T>
- *
  * @since 0.5
  */
 final readonly class IterableOf implements IteratorAggregate
@@ -28,13 +28,11 @@ final readonly class IterableOf implements IteratorAggregate
     /**
      * Ctor.
      *
-     * @param array<mixed,T> $items The items to iterate over.
+     * @param array<mixed, T> $items The items to iterate over.
      */
-    public function __construct(private array $items)
-    {
-    }
+    public function __construct(private array $items) {}
 
-    #[\Override]
+    #[Override]
     public function getIterator(): Iterator
     {
         return new IteratorOf($this->items);

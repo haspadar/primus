@@ -25,8 +25,8 @@ final readonly class Repeated extends TextEnvelope
     {
         parent::__construct(
             new TextOf(
-                str_repeat($origin->value(), max(0, $count))
-            )
+                str_repeat($origin->value(), max(0, $count)),
+            ),
         );
     }
 }

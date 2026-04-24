@@ -27,6 +27,7 @@ final readonly class Capitalized extends TextEnvelope
     {
         /** @phpstan-ignore haspadar.constructorInit */
         $value = $origin->value();
+
         parent::__construct(
             new TextOf(
                 $value === ''
@@ -34,9 +35,9 @@ final readonly class Capitalized extends TextEnvelope
                     : sprintf(
                         '%s%s',
                         mb_strtoupper(mb_substr($value, 0, 1, 'UTF-8'), 'UTF-8'),
-                        mb_substr($value, 1, null, 'UTF-8')
-                    )
-            )
+                        mb_substr($value, 1, null, 'UTF-8'),
+                    ),
+            ),
         );
     }
 }

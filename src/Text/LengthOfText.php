@@ -15,7 +15,6 @@ use Primus\Scalar\ScalarOf;
  *     echo $length->value(); // 9
  *
  * @extends ScalarEnvelope<int>
- *
  */
 final readonly class LengthOfText extends ScalarEnvelope
 {
@@ -31,7 +30,7 @@ final readonly class LengthOfText extends ScalarEnvelope
          * @phpstan-ignore haspadar.constructorInit
          */
         $scalar = new ScalarOf(
-            fn (): int => mb_strlen($origin->value(), 'UTF-8')
+            static fn(): int => mb_strlen($origin->value(), 'UTF-8'),
         );
 
         parent::__construct($scalar);

@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Primus\Logic;
 
+use Override;
+
 /**
  * Logic that always returns false.
  *
@@ -13,7 +15,7 @@ namespace Primus\Logic;
  */
 final readonly class No implements Logic
 {
-    #[\Override]
+    #[Override]
     public function value(): bool
     {
         return false;

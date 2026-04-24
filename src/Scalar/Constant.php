@@ -19,7 +19,6 @@ use Override;
  *
  * @template T
  * @implements Scalar<T>
- *
  * @since 0.2
  */
 final readonly class Constant implements Scalar
@@ -29,9 +28,7 @@ final readonly class Constant implements Scalar
      *
      * @param T $value The value returned on each call.
      */
-    public function __construct(private mixed $value)
-    {
-    }
+    public function __construct(private mixed $value) {}
 
     #[Override]
     public function value()

@@ -9,7 +9,6 @@ namespace Primus\Func;
  *
  * @template I
  * @template O
- *
  * @since 0.3
  */
 interface Func

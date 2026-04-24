@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Primus\Scalar;
 
+use Override;
+
 /**
  * Base class for scalar decorators.
  *
@@ -21,11 +23,9 @@ abstract readonly class ScalarEnvelope implements Scalar
      *
      * @param Scalar<T> $origin The wrapped scalar.
      */
-    public function __construct(protected Scalar $origin)
-    {
-    }
+    public function __construct(protected Scalar $origin) {}
 
-    #[\Override]
+    #[Override]
     final public function value()
     {
         return $this->origin->value();

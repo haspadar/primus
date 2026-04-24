@@ -10,7 +10,7 @@ namespace Primus\Text;
  * Applies {@see trim()} to the original text.
  *
  * Example:
- *     $text = new Trimmed(new TextOf('  hello  '));
+ *     $text = new Trimmed(new TextOf(' hello '));
  *     echo $text->value(); // 'hello'
  *
  * @since 0.1
@@ -25,7 +25,7 @@ final readonly class Trimmed extends TextEnvelope
     public function __construct(Text $origin)
     {
         parent::__construct(
-            new TextOf(trim($origin->value()))
+            new TextOf(trim($origin->value())),
         );
     }
 }

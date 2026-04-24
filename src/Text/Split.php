@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Primus\Text;
 
+use Override;
 use Primus\Scalar\Scalar;
 
 /**
@@ -28,13 +29,9 @@ final readonly class Split implements Scalar
      * @param non-empty-string $delimiter The delimiter used to split the text.
      * @param Text $origin The text to split.
      */
-    public function __construct(
-        private string $delimiter,
-        private Text $origin,
-    ) {
-    }
+    public function __construct(private string $delimiter, private Text $origin) {}
 
-    #[\Override]
+    #[Override]
     public function value(): iterable
     {
         foreach (explode($this->delimiter, $this->origin->value()) as $part) {

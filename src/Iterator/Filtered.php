@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Primus\Iterator;
 
 use Iterator;
+use Override;
 use Primus\Func\Predicate;
 use RuntimeException;
 
@@ -23,22 +24,21 @@ final class Filtered implements Iterator
      * Ctor.
      *
      * @param Iterator<mixed, T> $origin The origin iterator.
-     * @param Predicate<T>       $predicate The predicate used to filter values.
+     * @param Predicate<T> $predicate The predicate used to filter values.
      */
     public function __construct(
         private readonly Iterator $origin,
-        private readonly Predicate $predicate
-    ) {
-    }
+        private readonly Predicate $predicate,
+    ) {}
 
-    #[\Override]
+    #[Override]
     public function rewind(): void
     {
         $this->origin->rewind();
         $this->advance();
     }
 
-    #[\Override]
+    #[Override]
     public function next(): void
     {
         if (!$this->isValid) {
@@ -50,27 +50,29 @@ final class Filtered implements Iterator
         $this->advance();
     }
 
-    #[\Override]
+    #[Override]
     public function current(): mixed
     {
         if (!$this->isValid) {
             /** @phpstan-ignore missingType.checkedException */
             throw new RuntimeException('Iterator is past the end');
         }
+
         return $this->origin->current();
     }
 
-    #[\Override]
+    #[Override]
     public function key(): mixed
     {
         if (!$this->isValid) {
             /** @phpstan-ignore missingType.checkedException */
             throw new RuntimeException('Iterator is past the end');
         }
+
         return $this->origin->key();
     }
 
-    #[\Override]
+    #[Override]
     public function valid(): bool
     {
         return $this->isValid;
@@ -86,6 +88,7 @@ final class Filtered implements Iterator
 
             if ($this->predicate->apply($value)) {
                 $this->isValid = true;
+
                 return;
             }
 

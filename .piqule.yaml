@@ -1,0 +1,15 @@
+# Piqule configuration. All available keys and their defaults are in .piqule/config.yaml.
+#
+# override:
+#     phpstan.level: 8
+#     php.versions: ["8.3", "8.4", "8.5"]
+#
+# append:
+#     php.src:
+#         - lib
+#     exclude:
+#         - legacy
+override:
+    phpunit.testsuites.unit: ["../../tests"]
+    phpunit.testsuites.integration: []
+    phpmetrics.coupling.max_afferent: 20

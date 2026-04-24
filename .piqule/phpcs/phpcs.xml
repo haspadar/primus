@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<ruleset name="Piqule PHPCS Rules">
+    <description>Structural and semantic PHP rules</description>
+
+    <file>../../src</file>
+
+    <exclude-pattern>vendor/*</exclude-pattern>
+    <exclude-pattern>tests/*</exclude-pattern>
+    <exclude-pattern>.git/*</exclude-pattern>
+
+    <arg name="extensions" value="php"/>
+    <arg name="colors"/>
+
+    <rule ref="Generic.PHP.Syntax"/>
+
+    <rule ref=".piqule/phpcs/slevomat-types.xml"/>
+    <rule ref=".piqule/phpcs/slevomat-classes.xml"/>
+    <rule ref=".piqule/phpcs/slevomat-functions.xml"/>
+    <rule ref=".piqule/phpcs/slevomat-namespaces.xml"/>
+    <rule ref=".piqule/phpcs/slevomat-flow.xml"/>
+    <rule ref=".piqule/phpcs/slevomat-style.xml"/>
+
+</ruleset>

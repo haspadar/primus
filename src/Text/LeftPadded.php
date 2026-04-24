@@ -25,20 +25,17 @@ final readonly class LeftPadded extends TextEnvelope
      * @param int $length The desired total length after padding.
      * @param string $padding The character to use for padding.
      */
-    public function __construct(
-        Text $origin,
-        int $length,
-        string $padding
-    ) {
+    public function __construct(Text $origin, int $length, string $padding)
+    {
         parent::__construct(
             new TextOf(
                 str_pad(
                     $origin->value(),
                     $length,
                     $padding,
-                    STR_PAD_LEFT
-                )
-            )
+                    STR_PAD_LEFT,
+                ),
+            ),
         );
     }
 }

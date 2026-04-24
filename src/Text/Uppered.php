@@ -12,7 +12,6 @@ namespace Primus\Text;
  * Example:
  *     $text = new Uppered(new TextOf('touché résumé'));
  *     echo $text->value(); // 'TOUCHÉ RÉSUMÉ'
- *
  */
 final readonly class Uppered extends TextEnvelope
 {
@@ -24,7 +23,7 @@ final readonly class Uppered extends TextEnvelope
     public function __construct(Text $origin)
     {
         parent::__construct(
-            new TextOf(mb_strtoupper($origin->value(), 'UTF-8'))
+            new TextOf(mb_strtoupper($origin->value(), 'UTF-8')),
         );
     }
 }

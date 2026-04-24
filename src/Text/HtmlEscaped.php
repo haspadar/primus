@@ -24,8 +24,8 @@ final readonly class HtmlEscaped extends TextEnvelope
     {
         parent::__construct(
             new TextOf(
-                htmlspecialchars($origin->value(), ENT_QUOTES | ENT_HTML5, 'UTF-8')
-            )
+                htmlspecialchars($origin->value(), ENT_QUOTES | ENT_HTML5, 'UTF-8'),
+            ),
         );
     }
 }
