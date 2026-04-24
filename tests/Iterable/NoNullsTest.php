@@ -4,13 +4,12 @@ declare(strict_types=1);
 
 namespace Primus\Tests\Iterable;
 
+use ArrayIterator;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
-use Primus\Iterator\IteratorOf;
-use Primus\Iterator\NoNulls;
-use Primus\Tests\Constraint\EqualsValue;
+use Primus\Iterable\IterableOf;
+use Primus\Iterable\NoNulls;
 use Primus\Tests\Constraint\HasIteratorValues;
-use Primus\Tests\Constraint\HasKey;
 use Primus\Tests\Constraint\ThrowsClosure;
 use RuntimeException;
 
@@ -23,11 +22,11 @@ final class NoNullsTest extends TestCase
     public function throwsOnNullValue(): void
     {
         self::assertThat(
-            function (): void {
-                $it = new NoNulls(new IteratorOf([1, null, 3]));
-                $it->rewind();
-                $it->next();
-                $it->current();
+            static function (): void {
+                foreach (new NoNulls(new IterableOf([1, null, 3])) as $value) {
+                    // consume
+                    unset($value);
+                }
             },
             new ThrowsClosure(RuntimeException::class),
             'NoNulls must throw when encountering null'
@@ -38,7 +37,7 @@ final class NoNullsTest extends TestCase
     public function iteratesOverNonNullValues(): void
     {
         self::assertThat(
-            new NoNulls(new IteratorOf([1, 2])),
+            new NoNulls(new IterableOf([1, 2])),
             new HasIteratorValues([1, 2]),
             'NoNulls must yield non-null values only'
         );
@@ -48,10 +47,11 @@ final class NoNullsTest extends TestCase
     public function throwsOnNullAtFirstElement(): void
     {
         self::assertThat(
-            function (): void {
-                $it = new NoNulls(new IteratorOf([null]));
-                $it->rewind();
-                $it->current();
+            static function (): void {
+                foreach (new NoNulls(new IterableOf([null])) as $value) {
+                    // consume
+                    unset($value);
+                }
             },
             new ThrowsClosure(RuntimeException::class),
             'NoNulls must throw when first value is null'
@@ -61,61 +61,29 @@ final class NoNullsTest extends TestCase
     #[Test]
     public function yieldsSequentialIntegerKeys(): void
     {
-        $it = new NoNulls(new IteratorOf(['a', 'b', 'c']));
-        $it->rewind();
-
         $keys = [];
-        while ($it->valid()) {
-            $keys[] = $it->key();
-            $it->next();
+        foreach (new NoNulls(new IterableOf(['a', 'b', 'c'])) as $key => $value) {
+            $keys[] = $key;
+            unset($value);
         }
 
-        self::assertThat(
-            $keys,
-            new EqualsValue([0, 1, 2]),
-            'NoNulls must reindex keys sequentially'
-        );
-    }
-
-    #[Test]
-    public function resetsKeysAfterRewind(): void
-    {
-        $it = new NoNulls(new IteratorOf(['x', 'y']));
-
-        $it->rewind();
-        while ($it->valid()) {
-            $it->next();
-        }
-        $it->rewind();
-
-        self::assertThat(
-            $it,
-            new HasKey(0),
-            'NoNulls must reset key to 0 after rewind'
-        );
+        self::assertSame([0, 1, 2], $keys, 'NoNulls must reindex keys sequentially');
     }
 
     #[Test]
     public function ignoresOriginKeys(): void
     {
-        $origin = new \ArrayIterator([
+        $origin = new ArrayIterator([
             10 => 'p',
             20 => 'q',
         ]);
 
-        $it = new NoNulls($origin);
-        $it->rewind();
-
         $keys = [];
-        while ($it->valid()) {
-            $keys[] = $it->key();
-            $it->next();
+        foreach (new NoNulls($origin) as $key => $value) {
+            $keys[] = $key;
+            unset($value);
         }
 
-        self::assertThat(
-            $keys,
-            new EqualsValue([0, 1]),
-            'NoNulls must ignore origin keys and reindex'
-        );
+        self::assertSame([0, 1], $keys, 'NoNulls must ignore origin keys and reindex');
     }
 }

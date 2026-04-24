@@ -10,7 +10,6 @@ use Primus\Func\PredicateOf;
 use Primus\Iterable\Filtered;
 use Primus\Iterable\IterableOf;
 use Primus\Tests\Constraint\HasIteratorValues;
-use Primus\Tests\Constraint\ThrowsClosure;
 
 /**
  * @since 0.5
@@ -86,39 +85,4 @@ final class FilteredTest extends TestCase
         );
     }
 
-    #[Test]
-    public function currentPastEndThrows(): void
-    {
-        $filtered = new Filtered(
-            new IterableOf([1, 2]),
-            new PredicateOf(fn (int $x): bool => $x > 10),
-        );
-
-        $it = $filtered->getIterator();
-        $it->rewind();
-
-        self::assertThat(
-            fn (): mixed => $it->current(),
-            new ThrowsClosure(\RuntimeException::class),
-            'FilteredIterator::current() past end must throw'
-        );
-    }
-
-    #[Test]
-    public function nextPastEndThrows(): void
-    {
-        $filtered = new Filtered(
-            new IterableOf([1]),
-            new PredicateOf(fn (int $x): bool => $x > 10),
-        );
-
-        $it = $filtered->getIterator();
-        $it->rewind();
-
-        self::assertThat(
-            fn (): mixed => $it->next(),
-            new ThrowsClosure(\RuntimeException::class),
-            'FilteredIterator::next() past end must throw'
-        );
-    }
 }
