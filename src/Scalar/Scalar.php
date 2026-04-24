@@ -12,7 +12,7 @@ use Throwable;
  * Serves as a generic interface for deferred computation and value composition.
  * Used as a base abstraction for all primitive-like types (Text, Number, etc).
  *
- * @template T
+ * @template-covariant T
  * @since 0.1
  */
 interface Scalar
