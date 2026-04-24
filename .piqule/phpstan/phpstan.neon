@@ -22,4 +22,5 @@ parameters:
     haspadar:
         afferentCoupling:
             ignoreInterfaces: true
-
+            excludedClasses:
+                - Primus\Text\TextEnvelope

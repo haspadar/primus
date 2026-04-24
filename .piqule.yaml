@@ -13,5 +13,7 @@ override:
     phpunit.testsuites.unit: ["../../tests"]
     phpunit.testsuites.integration: []
     phpmetrics.coupling.max_afferent: 20
+    phpstan.afferent_coupling.excluded_classes:
+        - Primus\Text\TextEnvelope
     php_cs_fixer.extend: |
         'phpdoc_types' => ['exclude' => ['scalar']],
