@@ -24,6 +24,7 @@ final class StickyFunc implements Func
 {
     /**
      * @var array<string, mixed>
+     * @phpstan-ignore haspadar.immutable
      */
     private array $cache = [];
 

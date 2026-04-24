@@ -17,6 +17,7 @@ use RuntimeException;
  */
 final class Joined implements Iterator
 {
+    /** @phpstan-ignore haspadar.immutable */
     private int $position = 0;
 
     /**
@@ -26,6 +27,7 @@ final class Joined implements Iterator
 
     /**
      * @var Iterator<int,T>
+     * @phpstan-ignore haspadar.immutable
      */
     private Iterator $current;
 
@@ -61,6 +63,7 @@ final class Joined implements Iterator
     public function current(): mixed
     {
         if (!$this->valid()) {
+            /** @phpstan-ignore missingType.checkedException */
             throw new RuntimeException('Joined iterator is past the end');
         }
 
@@ -71,6 +74,7 @@ final class Joined implements Iterator
     public function key(): int
     {
         if (!$this->valid()) {
+            /** @phpstan-ignore missingType.checkedException */
             throw new RuntimeException('Iterator key is undefined because iterator is past the end');
         }
 
@@ -81,6 +85,7 @@ final class Joined implements Iterator
     public function next(): void
     {
         if (!$this->valid()) {
+            /** @phpstan-ignore missingType.checkedException */
             throw new RuntimeException('Joined iterator is past the end');
         }
 

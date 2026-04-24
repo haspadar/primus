@@ -17,6 +17,7 @@ use RuntimeException;
  */
 final class NoNulls implements Iterator
 {
+    /** @phpstan-ignore haspadar.immutable */
     private int $position = 0;
 
     /**
@@ -40,12 +41,14 @@ final class NoNulls implements Iterator
     public function current(): mixed
     {
         if (!$this->valid()) {
+            /** @phpstan-ignore missingType.checkedException */
             throw new RuntimeException('Iterator is past the end');
         }
 
         $value = $this->origin->current();
 
         if ($value === null) {
+            /** @phpstan-ignore missingType.checkedException */
             throw new RuntimeException('Null value encountered in NoNulls iterator');
         }
 
@@ -56,6 +59,7 @@ final class NoNulls implements Iterator
     public function key(): int
     {
         if (!$this->valid()) {
+            /** @phpstan-ignore missingType.checkedException */
             throw new RuntimeException('Iterator key is undefined because iterator is past the end');
         }
 
@@ -66,6 +70,7 @@ final class NoNulls implements Iterator
     public function next(): void
     {
         if (!$this->valid()) {
+            /** @phpstan-ignore missingType.checkedException */
             throw new RuntimeException('Iterator is past the end');
         }
 

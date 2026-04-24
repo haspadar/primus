@@ -27,21 +27,20 @@ final readonly class AndOf extends ScalarEnvelope
      */
     public function __construct(Scalar ...$conditions)
     {
-        /** @var ScalarOf<bool> $scalar */
-        $scalar = new ScalarOf(
-            function () use ($conditions): bool {
-                if ($conditions === []) {
-                    throw new InvalidArgumentException('AndOf requires at least one condition');
-                }
+        parent::__construct(
+            new ScalarOf(
+                function () use ($conditions): bool {
+                    if ($conditions === []) {
+                        throw new InvalidArgumentException('AndOf requires at least one condition');
+                    }
 
-                return array_reduce(
-                    $conditions,
-                    fn (bool $carry, Scalar $cond): bool => $carry && $cond->value(),
-                    true,
-                );
-            },
+                    return array_reduce(
+                        $conditions,
+                        fn (bool $carry, Scalar $cond): bool => $carry && $cond->value(),
+                        true,
+                    );
+                },
+            ),
         );
-
-        parent::__construct($scalar);
     }
 }

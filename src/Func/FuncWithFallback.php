@@ -33,7 +33,7 @@ final readonly class FuncWithFallback extends FuncEnvelope
                 function ($input) use ($origin, $fallback) {
                     try {
                         return $origin->apply($input);
-                    } catch (Exception) {
+                    } catch (Exception) { // @phpstan-ignore haspadar.illegalCatch
                         return $fallback->apply($input);
                     }
                 }

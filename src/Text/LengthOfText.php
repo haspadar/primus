@@ -26,7 +26,10 @@ final readonly class LengthOfText extends ScalarEnvelope
      */
     public function __construct(Text $origin)
     {
-        /** @var ScalarOf<int> $scalar */
+        /**
+         * @var ScalarOf<int> $scalar
+         * @phpstan-ignore haspadar.constructorInit
+         */
         $scalar = new ScalarOf(
             fn (): int => mb_strlen($origin->value(), 'UTF-8')
         );

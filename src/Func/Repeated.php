@@ -36,6 +36,7 @@ final readonly class Repeated implements Func
     public function apply(mixed $input): mixed
     {
         if ($this->times <= 0) {
+            /** @phpstan-ignore missingType.checkedException */
             throw new \RuntimeException('Repeated time must be >= 1');
         }
 
