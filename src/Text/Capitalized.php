@@ -25,19 +25,11 @@ final readonly class Capitalized extends TextEnvelope
      */
     public function __construct(Text $origin)
     {
-        /** @phpstan-ignore haspadar.constructorInit */
-        $value = $origin->value();
-
         parent::__construct(
-            new TextOf(
-                $value === ''
-                    ? ''
-                    : sprintf(
-                        '%s%s',
-                        mb_strtoupper(mb_substr($value, 0, 1, 'UTF-8'), 'UTF-8'),
-                        mb_substr($value, 1, null, 'UTF-8'),
-                    ),
-            ),
+            new Joined('', [
+                new Uppered(new Sub($origin, 0, 1)),
+                new Sub($origin, 1),
+            ]),
         );
     }
 }
