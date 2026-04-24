@@ -31,11 +31,11 @@ final readonly class Normalized extends TextEnvelope
         parent::__construct(
             new TextOfScalar(
                 new ScalarOf(
-                    fn (): string =>
+                    fn(): string =>
                         preg_replace('/\s+/u', ' ', trim($origin->value()))
-                        ?? throw new InvalidArgumentException('Malformed UTF-8 input')
-                )
-            )
+                        ?? throw new InvalidArgumentException('Malformed UTF-8 input'),
+                ),
+            ),
         );
     }
 }

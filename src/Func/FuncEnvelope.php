@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Primus\Func;
 
+use Override;
+
 /**
  * Envelope for {@see Func}.
  *
@@ -25,11 +27,9 @@ abstract readonly class FuncEnvelope implements Func
      *
      * @param Func<I, O> $origin The wrapped function.
      */
-    public function __construct(private Func $origin)
-    {
-    }
+    public function __construct(private Func $origin) {}
 
-    #[\Override]
+    #[Override]
     public function apply(mixed $input): mixed
     {
         return $this->origin->apply($input);

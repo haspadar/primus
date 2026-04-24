@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Primus\Func;
 
 use Closure;
+use Override;
 
 /**
  * Wraps a {@see Closure} as a {@see Proc}.
@@ -21,11 +22,9 @@ final readonly class ProcOf implements Proc
      *
      * @param Closure(X): void $origin The closure to wrap.
      */
-    public function __construct(private Closure $origin)
-    {
-    }
+    public function __construct(private Closure $origin) {}
 
-    #[\Override]
+    #[Override]
     public function exec(mixed $input): void
     {
         ($this->origin)($input);

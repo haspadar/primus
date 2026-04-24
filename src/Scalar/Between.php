@@ -33,8 +33,8 @@ final readonly class Between extends ScalarEnvelope
         parent::__construct(
             new AndOf(
                 new GreaterThan($value, $lower),
-                new LessThan($value, $upper)
-            )
+                new LessThan($value, $upper),
+            ),
         );
     }
 }

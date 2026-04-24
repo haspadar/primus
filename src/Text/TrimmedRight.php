@@ -28,11 +28,11 @@ final readonly class TrimmedRight extends TextEnvelope
         parent::__construct(
             new TextOfScalar(
                 new ScalarOf(
-                    fn (): string =>
+                    fn(): string =>
                         preg_replace('/\s+$/u', '', $origin->value())
-                        ?? throw new InvalidArgumentException('Malformed UTF-8 input')
-                )
-            )
+                        ?? throw new InvalidArgumentException('Malformed UTF-8 input'),
+                ),
+            ),
         );
     }
 }

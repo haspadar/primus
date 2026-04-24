@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Primus\Func;
 
+use Override;
+use RuntimeException;
+
 /**
  * Func applied multiple times sequentially.
  *
@@ -28,16 +31,15 @@ final readonly class Repeated implements Func
      */
     public function __construct(
         private Func $origin,
-        private int $times
-    ) {
-    }
+        private int $times,
+    ) {}
 
-    #[\Override]
+    #[Override]
     public function apply(mixed $input): mixed
     {
         if ($this->times <= 0) {
             /** @phpstan-ignore missingType.checkedException */
-            throw new \RuntimeException('Repeated time must be >= 1');
+            throw new RuntimeException('Repeated time must be >= 1');
         }
 
         $result = $input;

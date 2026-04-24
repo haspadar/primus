@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace Primus\Iterator;
 
 use Iterator;
+use Override;
+use RuntimeException;
 
 /**
  * Simple iterator over a PHP array.
@@ -30,46 +32,44 @@ final class IteratorOf implements Iterator
      *
      * @param array<array-key, T> $items The items to iterate over.
      */
-    public function __construct(private readonly array $items)
-    {
-    }
+    public function __construct(private readonly array $items) {}
 
-    #[\Override]
+    #[Override]
     public function rewind(): void
     {
         $this->keys = array_keys($this->items);
         $this->position = 0;
     }
 
-    #[\Override]
+    #[Override]
     public function current(): mixed
     {
         if (!$this->valid()) {
             /** @phpstan-ignore missingType.checkedException */
-            throw new \RuntimeException('Iterator is past the end');
+            throw new RuntimeException('Iterator is past the end');
         }
 
         return $this->items[$this->keys[$this->position]];
     }
 
-    #[\Override]
+    #[Override]
     public function key(): int|string
     {
         if (!$this->valid()) {
             /** @phpstan-ignore missingType.checkedException */
-            throw new \RuntimeException('Iterator key is undefined because iterator is past the end');
+            throw new RuntimeException('Iterator key is undefined because iterator is past the end');
         }
 
         return $this->keys[$this->position];
     }
 
-    #[\Override]
+    #[Override]
     public function next(): void
     {
         $this->position++;
     }
 
-    #[\Override]
+    #[Override]
     public function valid(): bool
     {
         return $this->position < count($this->keys);

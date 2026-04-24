@@ -18,9 +18,7 @@ abstract readonly class TextEnvelope implements Text
      *
      * @param Text $origin The text to delegate to.
      */
-    public function __construct(protected Text $origin)
-    {
-    }
+    public function __construct(protected Text $origin) {}
 
     #[Override]
     public function value(): string

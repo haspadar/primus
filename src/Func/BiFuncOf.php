@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Primus\Func;
 
 use Closure;
+use Override;
 
 /**
  * Wraps a {@see Closure} as a {@see BiFunc}.
@@ -23,11 +24,9 @@ final readonly class BiFuncOf implements BiFunc
      *
      * @param Closure(X, Y): Z $origin The closure to wrap.
      */
-    public function __construct(private Closure $origin)
-    {
-    }
+    public function __construct(private Closure $origin) {}
 
-    #[\Override]
+    #[Override]
     public function apply(mixed $first, mixed $second): mixed
     {
         return ($this->origin)($first, $second);

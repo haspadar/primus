@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Primus\Func;
 
+use Override;
+
 /**
  * Cached (sticky) {@see Func}.
  *
@@ -33,11 +35,9 @@ final class StickyFunc implements Func
      *
      * @param Func<X, Y> $origin The function whose results are cached.
      */
-    public function __construct(private readonly Func $origin)
-    {
-    }
+    public function __construct(private readonly Func $origin) {}
 
-    #[\Override]
+    #[Override]
     public function apply(mixed $input): mixed
     {
         $key = serialize($input);

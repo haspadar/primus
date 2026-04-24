@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace Primus\Logic;
 
+use Override;
 use Primus\Text\Text;
 
 /**
  * Envelope for {@see Logic}, delegating the call to the origin.
- *
  */
 abstract readonly class LogicEnvelope implements Logic
 {
@@ -17,10 +17,8 @@ abstract readonly class LogicEnvelope implements Logic
      *
      * @param Text $text The text to evaluate.
      */
-    public function __construct(protected Text $text)
-    {
-    }
+    public function __construct(protected Text $text) {}
 
-    #[\Override]
+    #[Override]
     abstract public function value(): bool;
 }

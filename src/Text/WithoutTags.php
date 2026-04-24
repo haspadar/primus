@@ -12,7 +12,6 @@ namespace Primus\Text;
  * Example:
  *     $text = new WithoutTags(new TextOf('<b>John & "Jane"</b>'));
  *     echo $text->value(); // 'John & "Jane"'
- *
  */
 final readonly class WithoutTags extends TextEnvelope
 {
@@ -25,8 +24,8 @@ final readonly class WithoutTags extends TextEnvelope
     {
         parent::__construct(
             new TextOf(
-                strip_tags($origin->value())
-            )
+                strip_tags($origin->value()),
+            ),
         );
     }
 }

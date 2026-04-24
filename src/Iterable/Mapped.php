@@ -6,6 +6,7 @@ namespace Primus\Iterable;
 
 use Iterator;
 use IteratorAggregate;
+use Override;
 use Primus\Func\Func;
 
 /**
@@ -39,13 +40,12 @@ final readonly class Mapped implements IteratorAggregate
     public function __construct(
         private IteratorAggregate $origin,
         private Func $func,
-    ) {
-    }
+    ) {}
 
-    #[\Override]
+    #[Override]
     public function getIterator(): Iterator
     {
-        /** @var Iterator<mixed,X> $iterator */
+        /** @var Iterator<mixed, X> $iterator */
         $iterator = $this->origin->getIterator();
 
         return new \Primus\Iterator\Mapped(

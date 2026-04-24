@@ -6,6 +6,7 @@ namespace Primus\Iterable;
 
 use Iterator;
 use IteratorAggregate;
+use Override;
 use Primus\Func\Predicate;
 
 /**
@@ -37,13 +38,12 @@ final readonly class Filtered implements IteratorAggregate
     public function __construct(
         private IteratorAggregate $origin,
         private Predicate $predicate,
-    ) {
-    }
+    ) {}
 
-    #[\Override]
+    #[Override]
     public function getIterator(): Iterator
     {
-        /** @var Iterator<mixed,T> $iterator */
+        /** @var Iterator<mixed, T> $iterator */
         $iterator = $this->origin->getIterator();
 
         return new \Primus\Iterator\Filtered($iterator, $this->predicate);

@@ -32,15 +32,15 @@ final readonly class XorOf extends ScalarEnvelope
     {
         parent::__construct(
             new ScalarOf(
-                fn (): bool => match (count($conditions)) {
+                fn(): bool => match (count($conditions)) {
                     0 => throw new InvalidArgumentException('XorOf requires at least one condition'),
                     default => array_reduce(
                         $conditions,
-                        fn (bool $carry, Scalar $cond): bool => $carry xor $cond->value(),
-                        false
+                        fn(bool $carry, Scalar $cond): bool => $carry xor $cond->value(),
+                        false,
                     ),
-                }
-            )
+                },
+            ),
         );
     }
 }

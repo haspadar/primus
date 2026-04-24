@@ -36,8 +36,8 @@ final readonly class FuncWithFallback extends FuncEnvelope
                     } catch (Exception) { // @phpstan-ignore haspadar.illegalCatch
                         return $fallback->apply($input);
                     }
-                }
-            )
+                },
+            ),
         );
     }
 }

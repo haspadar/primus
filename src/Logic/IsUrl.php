@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Primus\Logic;
 
+use Override;
 use Primus\Text\Text;
 
 /**
@@ -12,11 +13,10 @@ use Primus\Text\Text;
  * Example:
  *     new IsUrl(new TextOf("https://example.com")) → true
  *     new IsUrl(new TextOf("not-a-url")) → false
- *
  */
 final readonly class IsUrl extends LogicEnvelope
 {
-    #[\Override]
+    #[Override]
     public function value(): bool
     {
         return filter_var($this->text->value(), FILTER_VALIDATE_URL) !== false;

@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Primus\Scalar;
 
+use Override;
+
 /**
  * Cached version of a {@see Scalar}.
  *
@@ -28,7 +30,7 @@ final class Sticky implements Scalar
     private bool $computed = false;
 
     /**
-     * @var T $stored
+     * @var T
      * @phpstan-ignore haspadar.immutable
      */
     private $stored;
@@ -38,11 +40,9 @@ final class Sticky implements Scalar
      *
      * @param Scalar<T> $origin The scalar whose value is cached.
      */
-    public function __construct(private readonly Scalar $origin)
-    {
-    }
+    public function __construct(private readonly Scalar $origin) {}
 
-    #[\Override]
+    #[Override]
     public function value()
     {
         if (!$this->computed) {

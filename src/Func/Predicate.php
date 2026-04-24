@@ -12,6 +12,4 @@ namespace Primus\Func;
  *
  * @since 0.3
  */
-interface Predicate extends Func
-{
-}
+interface Predicate extends Func {}

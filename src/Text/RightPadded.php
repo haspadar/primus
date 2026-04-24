@@ -27,16 +27,16 @@ final readonly class RightPadded extends TextEnvelope
     public function __construct(
         Text $origin,
         int $length,
-        string $padding
+        string $padding,
     ) {
         parent::__construct(
             new TextOf(
                 str_pad(
                     $origin->value(),
                     $length,
-                    $padding
-                )
-            )
+                    $padding,
+                ),
+            ),
         );
     }
 }

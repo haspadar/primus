@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Primus\Logic;
 
+use Override;
 use Primus\Scalar\Scalar;
 
 /**
@@ -12,11 +13,9 @@ use Primus\Scalar\Scalar;
  * Represents a boolean condition.
  *
  * @extends Scalar<bool>
- *
  */
 interface Logic extends Scalar
 {
-    #[\Override]
+    #[Override]
     public function value(): bool;
-
 }

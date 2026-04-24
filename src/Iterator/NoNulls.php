@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Primus\Iterator;
 
 use Iterator;
+use Override;
 use RuntimeException;
 
 /**
@@ -26,18 +27,17 @@ final class NoNulls implements Iterator
      * @param Iterator<mixed, T|null> $origin The iterator validated for non-null values; nulls trigger RuntimeException on access.
      */
     public function __construct(
-        private readonly Iterator $origin
-    ) {
-    }
+        private readonly Iterator $origin,
+    ) {}
 
-    #[\Override]
+    #[Override]
     public function rewind(): void
     {
         $this->position = 0;
         $this->origin->rewind();
     }
 
-    #[\Override]
+    #[Override]
     public function current(): mixed
     {
         if (!$this->valid()) {
@@ -55,7 +55,7 @@ final class NoNulls implements Iterator
         return $value;
     }
 
-    #[\Override]
+    #[Override]
     public function key(): int
     {
         if (!$this->valid()) {
@@ -66,7 +66,7 @@ final class NoNulls implements Iterator
         return $this->position;
     }
 
-    #[\Override]
+    #[Override]
     public function next(): void
     {
         if (!$this->valid()) {
@@ -78,7 +78,7 @@ final class NoNulls implements Iterator
         $this->origin->next();
     }
 
-    #[\Override]
+    #[Override]
     public function valid(): bool
     {
         return $this->origin->valid();

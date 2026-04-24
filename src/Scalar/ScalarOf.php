@@ -31,9 +31,7 @@ final readonly class ScalarOf implements Scalar
      *
      * @param Closure(): T $closure The deferred computation.
      */
-    public function __construct(private Closure $closure)
-    {
-    }
+    public function __construct(private Closure $closure) {}
 
     #[Override]
     public function value()

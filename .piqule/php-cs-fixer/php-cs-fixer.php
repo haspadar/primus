@@ -76,7 +76,7 @@ return (new PhpCsFixer\Config())
         'phpdoc_order' => true,
         'phpdoc_scalar' => true,
         'phpdoc_trim' => true,
-        'phpdoc_types' => true,
+        'phpdoc_types' => false,
         'phpdoc_var_without_name' => true,
 
         // Clean code

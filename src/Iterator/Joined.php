@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Primus\Iterator;
 
 use Iterator;
+use Override;
 use RuntimeException;
 
 /**
@@ -21,12 +22,12 @@ final class Joined implements Iterator
     private int $position = 0;
 
     /**
-     * @var Iterator<int,Iterator<int,T>>
+     * @var Iterator<int, Iterator<int, T>>
      */
     private readonly Iterator $outer;
 
     /**
-     * @var Iterator<int,T>
+     * @var Iterator<int, T>
      * @phpstan-ignore haspadar.immutable
      */
     private Iterator $current;
@@ -34,7 +35,7 @@ final class Joined implements Iterator
     /**
      * Ctor.
      *
-     * @param array<int,Iterator<int,T>> $iterators The iterators to concatenate.
+     * @param array<int, Iterator<int, T>> $iterators The iterators to concatenate.
      */
     public function __construct(array $iterators)
     {
@@ -42,7 +43,7 @@ final class Joined implements Iterator
         $this->current = new IteratorOf([]);
     }
 
-    #[\Override]
+    #[Override]
     public function rewind(): void
     {
         $this->position = 0;
@@ -50,6 +51,7 @@ final class Joined implements Iterator
 
         if (!$this->outer->valid()) {
             $this->current = new IteratorOf([]);
+
             return;
         }
 
@@ -59,7 +61,7 @@ final class Joined implements Iterator
         $this->advance();
     }
 
-    #[\Override]
+    #[Override]
     public function current(): mixed
     {
         if (!$this->valid()) {
@@ -70,7 +72,7 @@ final class Joined implements Iterator
         return $this->current->current();
     }
 
-    #[\Override]
+    #[Override]
     public function key(): int
     {
         if (!$this->valid()) {
@@ -81,7 +83,7 @@ final class Joined implements Iterator
         return $this->position;
     }
 
-    #[\Override]
+    #[Override]
     public function next(): void
     {
         if (!$this->valid()) {
@@ -95,7 +97,7 @@ final class Joined implements Iterator
         $this->advance();
     }
 
-    #[\Override]
+    #[Override]
     public function valid(): bool
     {
         return $this->current->valid();

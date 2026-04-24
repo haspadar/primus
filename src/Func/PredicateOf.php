@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Primus\Func;
 
 use Closure;
+use Override;
 
 /**
  * Wraps a {@see Closure} as a {@see Predicate}.
@@ -21,11 +22,9 @@ final readonly class PredicateOf implements Predicate
      *
      * @param Closure(X): bool $origin The closure to wrap.
      */
-    public function __construct(private Closure $origin)
-    {
-    }
+    public function __construct(private Closure $origin) {}
 
-    #[\Override]
+    #[Override]
     public function apply(mixed $input): bool
     {
         return ($this->origin)($input);

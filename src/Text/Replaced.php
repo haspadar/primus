@@ -31,12 +31,12 @@ final readonly class Replaced extends TextEnvelope
     public function __construct(
         Text $origin,
         string|array $search,
-        string|array $replacement
+        string|array $replacement,
     ) {
         parent::__construct(
             new TextOf(
-                str_replace($search, $replacement, $origin->value())
-            )
+                str_replace($search, $replacement, $origin->value()),
+            ),
         );
     }
 }

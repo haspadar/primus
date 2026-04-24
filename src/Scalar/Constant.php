@@ -29,9 +29,7 @@ final readonly class Constant implements Scalar
      *
      * @param T $value The value returned on each call.
      */
-    public function __construct(private mixed $value)
-    {
-    }
+    public function __construct(private mixed $value) {}
 
     #[Override]
     public function value()

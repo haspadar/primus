@@ -29,7 +29,7 @@ final readonly class LessThan extends ScalarEnvelope
     public function __construct(Scalar $left, Scalar $right)
     {
         parent::__construct(
-            new ScalarOf(fn (): bool => $left->value() < $right->value())
+            new ScalarOf(fn(): bool => $left->value() < $right->value()),
         );
     }
 }

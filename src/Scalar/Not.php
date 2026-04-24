@@ -24,7 +24,7 @@ final readonly class Not extends ScalarEnvelope
     public function __construct(Scalar $origin)
     {
         parent::__construct(
-            new ScalarOf(fn (): bool => !$origin->value())
+            new ScalarOf(fn(): bool => !$origin->value()),
         );
     }
 }

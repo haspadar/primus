@@ -36,7 +36,7 @@ final readonly class AndOf extends ScalarEnvelope
 
                     return array_reduce(
                         $conditions,
-                        fn (bool $carry, Scalar $cond): bool => $carry && $cond->value(),
+                        fn(bool $carry, Scalar $cond): bool => $carry && $cond->value(),
                         true,
                     );
                 },

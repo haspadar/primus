@@ -41,9 +41,9 @@ final readonly class RandomText extends TextEnvelope
                         }
 
                         return implode('', $chars);
-                    }
-                ))->value()
-            )
+                    },
+                ))->value(),
+            ),
         );
     }
 }

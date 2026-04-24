@@ -29,9 +29,10 @@ final readonly class OrOf extends ScalarEnvelope
                     if ($conditions === []) {
                         throw new InvalidArgumentException('OrOf requires at least one condition');
                     }
-                    return array_any($conditions, fn ($condition) => $condition->value());
-                }
-            )
+
+                    return array_any($conditions, fn($condition) => $condition->value());
+                },
+            ),
         );
     }
 }

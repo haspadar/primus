@@ -18,9 +18,7 @@ final readonly class TextOf implements Text
      *
      * @param string $value The string to wrap.
      */
-    public function __construct(private string $value)
-    {
-    }
+    public function __construct(private string $value) {}
 
     #[Override]
     public function value(): string

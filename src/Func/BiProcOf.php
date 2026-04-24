@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Primus\Func;
 
 use Closure;
+use Override;
 
 /**
  * Wraps a {@see Closure} as a {@see BiProc}.
@@ -22,11 +23,9 @@ final readonly class BiProcOf implements BiProc
      *
      * @param Closure(X, Y): void $origin The closure to wrap.
      */
-    public function __construct(private Closure $origin)
-    {
-    }
+    public function __construct(private Closure $origin) {}
 
-    #[\Override]
+    #[Override]
     public function exec(mixed $first, mixed $second): void
     {
         ($this->origin)($first, $second);

@@ -5,7 +5,9 @@ declare(strict_types=1);
 namespace Primus\Iterator;
 
 use Iterator;
+use Override;
 use Primus\Func\Func;
+use RuntimeException;
 
 /**
  * Iterator that lazily transforms each element of the origin iterator using the provided function.
@@ -30,22 +32,21 @@ final class Mapped implements Iterator
     public function __construct(
         private readonly Iterator $origin,
         private readonly Func $func,
-    ) {
-    }
+    ) {}
 
-    #[\Override]
+    #[Override]
     public function rewind(): void
     {
         $this->position = 0;
         $this->origin->rewind();
     }
 
-    #[\Override]
+    #[Override]
     public function current(): mixed
     {
         if (!$this->valid()) {
             /** @phpstan-ignore missingType.checkedException */
-            throw new \RuntimeException('Mapped: current() past end');
+            throw new RuntimeException('Mapped: current() past end');
         }
 
         /** @var X $value */
@@ -54,30 +55,30 @@ final class Mapped implements Iterator
         return $this->func->apply($value);
     }
 
-    #[\Override]
+    #[Override]
     public function key(): int
     {
         if (!$this->valid()) {
             /** @phpstan-ignore missingType.checkedException */
-            throw new \RuntimeException('Mapped: key() past end');
+            throw new RuntimeException('Mapped: key() past end');
         }
 
         return $this->position;
     }
 
-    #[\Override]
+    #[Override]
     public function next(): void
     {
         if (!$this->valid()) {
             /** @phpstan-ignore missingType.checkedException */
-            throw new \RuntimeException('Mapped: next() past end');
+            throw new RuntimeException('Mapped: next() past end');
         }
 
         $this->position++;
         $this->origin->next();
     }
 
-    #[\Override]
+    #[Override]
     public function valid(): bool
     {
         return $this->origin->valid();

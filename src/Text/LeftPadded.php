@@ -28,7 +28,7 @@ final readonly class LeftPadded extends TextEnvelope
     public function __construct(
         Text $origin,
         int $length,
-        string $padding
+        string $padding,
     ) {
         parent::__construct(
             new TextOf(
@@ -36,9 +36,9 @@ final readonly class LeftPadded extends TextEnvelope
                     $origin->value(),
                     $length,
                     $padding,
-                    STR_PAD_LEFT
-                )
-            )
+                    STR_PAD_LEFT,
+                ),
+            ),
         );
     }
 }

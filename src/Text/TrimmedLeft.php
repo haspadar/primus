@@ -24,8 +24,8 @@ final readonly class TrimmedLeft extends TextEnvelope
     {
         parent::__construct(
             new TextOf(
-                (string)preg_replace('/^\s+/u', '', $origin->value())
-            )
+                (string) preg_replace('/^\s+/u', '', $origin->value()),
+            ),
         );
     }
 }

@@ -29,6 +29,7 @@ final readonly class Abbreviated extends TextEnvelope
         /** @phpstan-ignore haspadar.constructorInit */
         if ($limit <= 0) {
             parent::__construct(new TextOf(''));
+
             return;
         }
 
@@ -37,6 +38,7 @@ final readonly class Abbreviated extends TextEnvelope
         /** @phpstan-ignore haspadar.constructorInit */
         if ($length->value() <= $limit) {
             parent::__construct($origin);
+
             return;
         }
 

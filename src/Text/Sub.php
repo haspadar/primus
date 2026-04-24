@@ -28,7 +28,7 @@ final readonly class Sub extends TextEnvelope
     public function __construct(Text $text, int $start, int $length = PHP_INT_MAX)
     {
         parent::__construct(
-            new TextOf(mb_substr($text->value(), $start, $length, 'UTF-8'))
+            new TextOf(mb_substr($text->value(), $start, $length, 'UTF-8')),
         );
     }
 }

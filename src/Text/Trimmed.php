@@ -25,7 +25,7 @@ final readonly class Trimmed extends TextEnvelope
     public function __construct(Text $origin)
     {
         parent::__construct(
-            new TextOf(trim($origin->value()))
+            new TextOf(trim($origin->value())),
         );
     }
 }

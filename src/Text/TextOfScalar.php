@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Primus\Text;
 
+use Override;
 use Primus\Scalar\Scalar;
 
 /**
@@ -16,14 +17,11 @@ final readonly class TextOfScalar implements Text
      *
      * @param Scalar<string> $origin The scalar producing the string value.
      */
-    public function __construct(private Scalar $origin)
-    {
-    }
+    public function __construct(private Scalar $origin) {}
 
-    #[\Override]
+    #[Override]
     public function value(): string
     {
-        /** @var string */
         return $this->origin->value();
     }
 }
