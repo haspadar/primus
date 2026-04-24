@@ -43,6 +43,7 @@ final class StickyFunc implements Func
         $key = serialize($input);
         $this->cache[$key] ??= $this->origin->apply($input);
 
+        /** @psalm-suppress MixedReturnStatement Cache stores Y per contract, see @var */
         return $this->cache[$key];
     }
 }

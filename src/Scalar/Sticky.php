@@ -31,6 +31,7 @@ final class Sticky implements Scalar
 
     /**
      * @var T
+     * @psalm-suppress PropertyNotSetInConstructor Lazy-initialized in value()
      * @phpstan-ignore haspadar.immutable
      */
     private $stored;

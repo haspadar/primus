@@ -52,7 +52,9 @@ final class Joined implements Iterator
             return;
         }
 
+        /** @psalm-suppress PossiblyNullPropertyAssignmentValue Guarded by valid() above */
         $this->current = $this->outer->current();
+        /** @psalm-suppress PossiblyNullReference Guarded by valid() above */
         $this->current->rewind();
 
         $this->advance();
@@ -109,7 +111,9 @@ final class Joined implements Iterator
             $this->outer->next();
 
             if ($this->outer->valid()) {
+                /** @psalm-suppress PossiblyNullPropertyAssignmentValue Guarded by valid() above */
                 $this->current = $this->outer->current();
+                /** @psalm-suppress PossiblyNullReference Guarded by valid() above */
                 $this->current->rewind();
             }
         }

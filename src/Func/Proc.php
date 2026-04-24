@@ -16,6 +16,7 @@ interface Proc
      * Execute the procedure.
      *
      * @param X $input
+     * @psalm-suppress PossiblyUnusedMethod Public API of the library
      */
     public function exec(mixed $input): void;
 }

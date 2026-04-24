@@ -21,6 +21,5 @@
                 <directory name="../../src" />
             </errorLevel>
         </UnusedClass>
-
     </issueHandlers>
 </psalm>

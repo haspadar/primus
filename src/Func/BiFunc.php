@@ -20,6 +20,7 @@ interface BiFunc
      * @param X $first
      * @param Y $second
      * @return Z
+     * @psalm-suppress PossiblyUnusedMethod Public API of the library
      */
     public function apply(mixed $first, mixed $second): mixed;
 }

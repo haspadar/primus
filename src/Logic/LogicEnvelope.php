@@ -16,6 +16,7 @@ abstract readonly class LogicEnvelope implements Logic
      * Ctor.
      *
      * @param Text $text The text to evaluate.
+     * @psalm-suppress PossiblyUnusedMethod Public API of the library
      */
     public function __construct(protected Text $text) {}
 
