@@ -4,6 +4,10 @@ on:
   pull_request:
     types: [opened, labeled, unlabeled, synchronize, edited]
 
+concurrency:
+  group: require-pr-label-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
 permissions:
   pull-requests: read
 
@@ -33,5 +37,6 @@ jobs:
             if (matching.length === 0) {
               core.setFailed(`PR must carry exactly one release-drafter label: ${list} (or \`skip-changelog\`).`);
             } else {
-              core.setFailed(`PR carries multiple release-drafter labels (${matching.join(', ')}); only one is allowed.`);
+              const found = matching.join(', ');
+              core.setFailed(`PR carries multiple release-drafter labels (${found}); only one is allowed.`);
             }
