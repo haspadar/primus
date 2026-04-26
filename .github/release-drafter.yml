@@ -1,0 +1,75 @@
+# Release Drafter configuration for Piqule
+# Versioning is driven strictly by PR labels
+
+name-template: "v$RESOLVED_VERSION"
+tag-template: "v$RESOLVED_VERSION"
+
+# ------------------------------------------------------------
+# Semantic version format
+# ------------------------------------------------------------
+version-template: "$MAJOR.$MINOR.$PATCH"
+
+# Pre-releases are allowed (e.g. v1.2.0-beta.1)
+include-pre-releases: true
+
+# ------------------------------------------------------------
+# Version resolver
+# ------------------------------------------------------------
+# - feat      → MINOR bump
+# - fix/*     → PATCH bump
+# - default   → PATCH bump
+version-resolver:
+  minor:
+    labels:
+      - feat
+  patch:
+    labels:
+      - fix
+      - refactor
+      - docs
+      - ci
+      - chore
+  default: patch
+
+# ------------------------------------------------------------
+# Changelog sections
+# ------------------------------------------------------------
+categories:
+  - title: "Features"
+    labels:
+      - feat
+
+  - title: "Fixes"
+    labels:
+      - fix
+
+  - title: "Documentation"
+    labels:
+      - docs
+
+  - title: "Refactoring"
+    labels:
+      - refactor
+
+  - title: "CI / Maintenance"
+    labels:
+      - ci
+      - chore
+
+# ------------------------------------------------------------
+# Change entry format
+# ------------------------------------------------------------
+change-template: "- $TITLE (#$NUMBER)"
+
+# ------------------------------------------------------------
+# Excluded PRs
+# ------------------------------------------------------------
+exclude-labels:
+  - skip-changelog
+
+# ------------------------------------------------------------
+# Final release notes template
+# ------------------------------------------------------------
+template: |
+  ## Changes
+  $CHANGES
