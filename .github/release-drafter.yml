@@ -1,4 +1,4 @@
-# Release Drafter configuration for Piqule
+# Release Drafter configuration for primus
 # Versioning is driven strictly by PR labels
 
 name-template: "v$RESOLVED_VERSION"
@@ -29,6 +29,8 @@ version-resolver:
       - docs
       - ci
       - chore
+      - test
+      - dependencies
   default: patch
 
 # ------------------------------------------------------------
@@ -50,6 +52,14 @@ categories:
   - title: "Refactoring"
     labels:
       - refactor
+
+  - title: "Tests"
+    labels:
+      - test
+
+  - title: "Dependencies"
+    labels:
+      - dependencies
 
   - title: "CI / Maintenance"
     labels:
