@@ -12,7 +12,7 @@ use InvalidArgumentException;
  * Returns true only if an odd number of conditions are true.
  *
  * Example:
- *     $scalar = new XorOf(
+ *     $scalar = new Xor_(
  *         new ScalarOf(fn() => true),
  *         new ScalarOf(fn() => false)
  *     );
@@ -21,7 +21,7 @@ use InvalidArgumentException;
  * @extends ScalarEnvelope<bool>
  * @since 0.2
  */
-final readonly class XorOf extends ScalarEnvelope
+final readonly class Xor_ extends ScalarEnvelope
 {
     /**
      * Ctor.
@@ -33,7 +33,7 @@ final readonly class XorOf extends ScalarEnvelope
         parent::__construct(
             new ScalarOf(
                 static fn(): bool => match (count($conditions)) {
-                    0 => throw new InvalidArgumentException('XorOf requires at least one condition'),
+                    0 => throw new InvalidArgumentException('Xor requires at least one condition'),
                     default => array_reduce(
                         $conditions,
                         static fn(bool $carry, Scalar $cond): bool => $carry xor $cond->value(),
