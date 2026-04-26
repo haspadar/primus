@@ -2,9 +2,9 @@
 
 ## [Unreleased]
 
-### Changed
+### Removed
 
-- Renamed `Scalar\AndOf` to `Scalar\And_` to free the `Of` suffix for adapter classes.
+- `Scalar\AndOf` removed; renamed to `Scalar\And_` to free the `Of` suffix for adapter classes.
 
 ## [0.5.0] – 2025-11-19
 
