@@ -12,7 +12,7 @@ use Override;
  * Iterable wrapper over an array of items.
  *
  * Example:
- *     $it = new IterableOf([10, 20, 30]);
+ *     $it = new Iterable_([10, 20, 30]);
  *     foreach ($it as $value) {
  *         echo $value . ' ';
  *     }
@@ -22,7 +22,7 @@ use Override;
  * @implements IteratorAggregate<array-key, T>
  * @since 0.5
  */
-final readonly class IterableOf implements IteratorAggregate
+final readonly class Iterable_ implements IteratorAggregate
 {
     /**
      * Ctor.

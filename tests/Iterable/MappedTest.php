@@ -7,7 +7,7 @@ namespace Primus\Tests\Iterable;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Primus\Func\FuncOf;
-use Primus\Iterable\IterableOf;
+use Primus\Iterable\Iterable_;
 use Primus\Iterable\Mapped;
 use Primus\Tests\Constraint\EqualsValue;
 use Primus\Tests\Constraint\HasIteratorValues;
@@ -22,7 +22,7 @@ final class MappedTest extends TestCase
     {
         self::assertThat(
             new Mapped(
-                new IterableOf([1, 2, 3]),
+                new Iterable_([1, 2, 3]),
                 new FuncOf(fn (int $x): int => $x * 10),
             ),
             new HasIteratorValues([10, 20, 30]),
@@ -35,7 +35,7 @@ final class MappedTest extends TestCase
     {
         self::assertThat(
             new Mapped(
-                new IterableOf([]),
+                new Iterable_([]),
                 new FuncOf(fn (mixed $x): mixed => $x),
             ),
             new HasIteratorValues([]),
@@ -48,7 +48,7 @@ final class MappedTest extends TestCase
     {
         self::assertThat(
             new Mapped(
-                new IterableOf(['a', 'b', 'c']),
+                new Iterable_(['a', 'b', 'c']),
                 new FuncOf(fn (string $s): string => strtoupper($s)),
             ),
             new HasIteratorValues(['A', 'B', 'C']),
@@ -60,7 +60,7 @@ final class MappedTest extends TestCase
     public function producesFreshIteratorEachTime(): void
     {
         $mapped = new Mapped(
-            new IterableOf([1, 2]),
+            new Iterable_([1, 2]),
             new FuncOf(fn (int $x): int => $x + 10),
         );
 

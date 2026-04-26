@@ -7,7 +7,7 @@ namespace Primus\Tests\Iterable;
 use ArrayIterator;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
-use Primus\Iterable\IterableOf;
+use Primus\Iterable\Iterable_;
 use Primus\Iterable\NoNulls;
 use Primus\Tests\Constraint\HasIteratorValues;
 use Primus\Tests\Constraint\ThrowsClosure;
@@ -23,7 +23,7 @@ final class NoNullsTest extends TestCase
     {
         self::assertThat(
             static function (): void {
-                foreach (new NoNulls(new IterableOf([1, null, 3])) as $value) {
+                foreach (new NoNulls(new Iterable_([1, null, 3])) as $value) {
                     // consume
                     unset($value);
                 }
@@ -37,7 +37,7 @@ final class NoNullsTest extends TestCase
     public function iteratesOverNonNullValues(): void
     {
         self::assertThat(
-            new NoNulls(new IterableOf([1, 2])),
+            new NoNulls(new Iterable_([1, 2])),
             new HasIteratorValues([1, 2]),
             'NoNulls must yield non-null values only'
         );
@@ -48,7 +48,7 @@ final class NoNullsTest extends TestCase
     {
         self::assertThat(
             static function (): void {
-                foreach (new NoNulls(new IterableOf([null])) as $value) {
+                foreach (new NoNulls(new Iterable_([null])) as $value) {
                     // consume
                     unset($value);
                 }
@@ -62,7 +62,7 @@ final class NoNullsTest extends TestCase
     public function yieldsSequentialIntegerKeys(): void
     {
         $keys = [];
-        foreach (new NoNulls(new IterableOf(['a', 'b', 'c'])) as $key => $value) {
+        foreach (new NoNulls(new Iterable_(['a', 'b', 'c'])) as $key => $value) {
             $keys[] = $key;
             unset($value);
         }

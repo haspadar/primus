@@ -15,7 +15,7 @@ use Traversable;
  *
  * Example:
  *     $it = new Filtered(
- *         new IterableOf([10, 5, 40, 3]),
+ *         new Iterable_([10, 5, 40, 3]),
  *         new PredicateOf(fn (int $x): bool => $x > 10)
  *     );
  *

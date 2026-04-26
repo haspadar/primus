@@ -15,7 +15,7 @@ use Traversable;
  *
  * Example:
  *     $it = new Mapped(
- *         new IterableOf([1, 2, 3]),
+ *         new Iterable_([1, 2, 3]),
  *         new FuncOf(fn (int $x): int => $x * 10)
  *     );
  *
