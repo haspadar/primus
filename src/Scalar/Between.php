@@ -31,7 +31,7 @@ final readonly class Between extends ScalarEnvelope
     public function __construct(Scalar $value, Scalar $lower, Scalar $upper)
     {
         parent::__construct(
-            new AndOf(
+            new And_(
                 new GreaterThan($value, $lower),
                 new LessThan($value, $upper),
             ),
