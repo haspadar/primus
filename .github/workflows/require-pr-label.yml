@@ -2,7 +2,7 @@ name: Require PR Label
 
 on:
   pull_request:
-    types: [opened, labeled, unlabeled, synchronize, edited]
+    types: [opened, reopened, labeled, unlabeled, synchronize]
 
 concurrency:
   group: require-pr-label-${{ github.event.pull_request.number }}
@@ -19,6 +19,7 @@ jobs:
         uses: actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea
         with:
           script: |
+            // Source of truth: .github/release-drafter.yml (version-resolver)
             const accepted = ['feat', 'fix', 'refactor', 'docs', 'ci', 'chore', 'test', 'dependencies'];
             const labels = context.payload.pull_request.labels.map(l => l.name);
 
