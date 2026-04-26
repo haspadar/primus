@@ -80,7 +80,7 @@ Func, FuncOf, FuncEnvelope, BiFunc, Proc, Predicate, StickyFunc, Repeated
 IteratorOf, Mapped, Filtered, Joined, NoNulls
 
 ### **Iterable**
-IterableOf, Mapped, Filtered, Joined, NoNulls
+Iterable_, Mapped, Filtered, Joined, NoNulls
 
 ### **Numeric (WIP)**
 Positive, NonZero, Rounded

@@ -6,7 +6,7 @@ namespace Primus\Tests\Iterable;
 
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
-use Primus\Iterable\IterableOf;
+use Primus\Iterable\Iterable_;
 use Primus\Iterable\Joined;
 use Primus\Tests\Constraint\HasIteratorValues;
 
@@ -20,9 +20,9 @@ final class JoinedTest extends TestCase
     {
         self::assertThat(
             new Joined([
-                new IterableOf([1, 2]),
-                new IterableOf([3]),
-                new IterableOf([4]),
+                new Iterable_([1, 2]),
+                new Iterable_([3]),
+                new Iterable_([4]),
             ]),
             new HasIteratorValues([1, 2, 3, 4]),
         );
@@ -41,8 +41,8 @@ final class JoinedTest extends TestCase
     public function producesSameValuesOnSecondIteration(): void
     {
         $joined = new Joined([
-            new IterableOf([10]),
-            new IterableOf([20]),
+            new Iterable_([10]),
+            new Iterable_([20]),
         ]);
 
         iterator_to_array($joined);
@@ -57,8 +57,8 @@ final class JoinedTest extends TestCase
     public function keysAreSequential(): void
     {
         $it = new Joined([
-            new IterableOf([5]),
-            new IterableOf([6]),
+            new Iterable_([5]),
+            new Iterable_([6]),
         ]);
 
         self::assertSame([0 => 5, 1 => 6], iterator_to_array($it));

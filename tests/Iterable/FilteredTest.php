@@ -8,7 +8,7 @@ use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Primus\Func\PredicateOf;
 use Primus\Iterable\Filtered;
-use Primus\Iterable\IterableOf;
+use Primus\Iterable\Iterable_;
 use Primus\Tests\Constraint\HasIteratorValues;
 
 /**
@@ -21,7 +21,7 @@ final class FilteredTest extends TestCase
     {
         self::assertThat(
             new Filtered(
-                new IterableOf([10, 5, 40, 3]),
+                new Iterable_([10, 5, 40, 3]),
                 new PredicateOf(fn (int $x): bool => $x > 10),
             ),
             new HasIteratorValues([40]),
@@ -34,7 +34,7 @@ final class FilteredTest extends TestCase
     {
         self::assertThat(
             new Filtered(
-                new IterableOf([1, 2, 3, 4, 5]),
+                new Iterable_([1, 2, 3, 4, 5]),
                 new PredicateOf(fn (int $x): bool => $x % 2 === 0),
             ),
             new HasIteratorValues([2, 4]),
@@ -47,7 +47,7 @@ final class FilteredTest extends TestCase
     {
         self::assertThat(
             new Filtered(
-                new IterableOf([1, 3, 5]),
+                new Iterable_([1, 3, 5]),
                 new PredicateOf(fn (int $x): bool => $x > 10),
             ),
             new HasIteratorValues([]),
@@ -60,7 +60,7 @@ final class FilteredTest extends TestCase
     {
         self::assertThat(
             new Filtered(
-                new IterableOf([]),
+                new Iterable_([]),
                 new PredicateOf(fn (int $_): bool => true),
             ),
             new HasIteratorValues([]),
@@ -72,7 +72,7 @@ final class FilteredTest extends TestCase
     public function rewindingProducesSameSequence(): void
     {
         $filtered = new Filtered(
-            new IterableOf([1, 2, 3, 4]),
+            new Iterable_([1, 2, 3, 4]),
             new PredicateOf(fn (int $x): bool => $x > 2),
         );
 

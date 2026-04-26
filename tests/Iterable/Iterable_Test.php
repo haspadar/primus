@@ -6,19 +6,19 @@ namespace Primus\Tests\Iterable;
 
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
-use Primus\Iterable\IterableOf;
+use Primus\Iterable\Iterable_;
 use Primus\Tests\Constraint\HasIteratorValues;
 
 /**
  * @since 0.5
  */
-final class IterableOfTest extends TestCase
+final class Iterable_Test extends TestCase
 {
     #[Test]
     public function yieldsAllValuesInOrder(): void
     {
         self::assertThat(
-            new IterableOf([10, 20, 30]),
+            new Iterable_([10, 20, 30]),
             new HasIteratorValues([10, 20, 30]),
         );
     }
@@ -27,7 +27,7 @@ final class IterableOfTest extends TestCase
     public function yieldsEmptySequence(): void
     {
         self::assertThat(
-            new IterableOf([]),
+            new Iterable_([]),
             new HasIteratorValues([]),
         );
     }
@@ -35,7 +35,7 @@ final class IterableOfTest extends TestCase
     #[Test]
     public function eachIterationStartsFromBeginning(): void
     {
-        $iterable = new IterableOf([1, 2]);
+        $iterable = new Iterable_([1, 2]);
 
         iterator_to_array($iterable);
 
@@ -49,7 +49,7 @@ final class IterableOfTest extends TestCase
     public function ignoresOriginalArrayKeys(): void
     {
         self::assertThat(
-            new IterableOf([2 => 5, 10 => 6, 50 => 7]),
+            new Iterable_([2 => 5, 10 => 6, 50 => 7]),
             new HasIteratorValues([5, 6, 7]),
         );
     }
@@ -62,7 +62,7 @@ final class IterableOfTest extends TestCase
         $arr[20] = 'b';
 
         self::assertThat(
-            new IterableOf($arr),
+            new Iterable_($arr),
             new HasIteratorValues(['a', 'b']),
         );
     }
