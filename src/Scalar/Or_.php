@@ -14,7 +14,7 @@ use InvalidArgumentException;
  * @extends ScalarEnvelope<bool>
  * @since 0.2
  */
-final readonly class OrOf extends ScalarEnvelope
+final readonly class Or_ extends ScalarEnvelope
 {
     /**
      * Ctor.
@@ -27,7 +27,7 @@ final readonly class OrOf extends ScalarEnvelope
             new ScalarOf(
                 static function () use ($conditions): bool {
                     if ($conditions === []) {
-                        throw new InvalidArgumentException('OrOf requires at least one condition');
+                        throw new InvalidArgumentException('Or requires at least one condition');
                     }
 
                     return array_any($conditions, static fn($condition) => $condition->value());
