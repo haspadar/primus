@@ -12,13 +12,13 @@ use InvalidArgumentException;
  * Returns true only if all provided scalars evaluate to true.
  *
  * Example:
- *     $and = new AndOf(new True_(), new False_());
+ *     $and = new And_(new True_(), new False_());
  *     echo $and->value(); // false
  *
  * @extends ScalarEnvelope<bool>
  * @since 0.2
  */
-final readonly class AndOf extends ScalarEnvelope
+final readonly class And_ extends ScalarEnvelope
 {
     /**
      * Ctor.
@@ -31,7 +31,7 @@ final readonly class AndOf extends ScalarEnvelope
             new ScalarOf(
                 static function () use ($conditions): bool {
                     if ($conditions === []) {
-                        throw new InvalidArgumentException('AndOf requires at least one condition');
+                        throw new InvalidArgumentException('And_ requires at least one condition');
                     }
 
                     return array_reduce(

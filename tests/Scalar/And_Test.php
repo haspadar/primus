@@ -7,7 +7,7 @@ namespace Primus\Tests\Scalar;
 use InvalidArgumentException;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
-use Primus\Scalar\AndOf;
+use Primus\Scalar\And_;
 use Primus\Scalar\ScalarOf;
 use Primus\Tests\Constraint\HasScalarBoolValue;
 use Primus\Tests\Constraint\ThrowsValue;
@@ -15,18 +15,18 @@ use Primus\Tests\Constraint\ThrowsValue;
 /**
  * @since 0.2
  */
-final class AndOfTest extends TestCase
+final class And_Test extends TestCase
 {
     #[Test]
     public function returnsTrueWhenAllTrue(): void
     {
         self::assertThat(
-            new AndOf(
+            new And_(
                 new ScalarOf(fn (): true => true),
                 new ScalarOf(fn (): true => true)
             ),
             new HasScalarBoolValue(true),
-            'AndOf must return true when all scalars are true'
+            'And_ must return true when all scalars are true'
         );
     }
 
@@ -34,12 +34,12 @@ final class AndOfTest extends TestCase
     public function returnsFalseWhenOneIsFalse(): void
     {
         self::assertThat(
-            new AndOf(
+            new And_(
                 new ScalarOf(fn (): true => true),
                 new ScalarOf(fn (): false => false)
             ),
             new HasScalarBoolValue(false),
-            'AndOf must return false when at least one scalar is false'
+            'And_ must return false when at least one scalar is false'
         );
     }
 
@@ -47,12 +47,12 @@ final class AndOfTest extends TestCase
     public function returnsFalseWhenAllFalse(): void
     {
         self::assertThat(
-            new AndOf(
+            new And_(
                 new ScalarOf(fn (): false => false),
                 new ScalarOf(fn (): false => false)
             ),
             new HasScalarBoolValue(false),
-            'AndOf must return false when all scalars are false'
+            'And_ must return false when all scalars are false'
         );
     }
 
@@ -60,9 +60,9 @@ final class AndOfTest extends TestCase
     public function throwsWhenNoScalarsProvided(): void
     {
         self::assertThat(
-            new ScalarOf(fn () => (new AndOf())->value()),
+            new ScalarOf(fn () => (new And_())->value()),
             new ThrowsValue(InvalidArgumentException::class),
-            'AndOf must throw an exception when no scalars are provided'
+            'And_ must throw an exception when no scalars are provided'
         );
     }
 }
