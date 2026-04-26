@@ -31,7 +31,7 @@ final readonly class And_ extends ScalarEnvelope
             new ScalarOf(
                 static function () use ($conditions): bool {
                     if ($conditions === []) {
-                        throw new InvalidArgumentException('And_ requires at least one condition');
+                        throw new InvalidArgumentException('And requires at least one condition');
                     }
 
                     return array_reduce(

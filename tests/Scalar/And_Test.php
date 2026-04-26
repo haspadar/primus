@@ -26,7 +26,7 @@ final class And_Test extends TestCase
                 new ScalarOf(fn (): true => true)
             ),
             new HasScalarBoolValue(true),
-            'And_ must return true when all scalars are true'
+            'And must return true when all scalars are true'
         );
     }
 
@@ -39,7 +39,7 @@ final class And_Test extends TestCase
                 new ScalarOf(fn (): false => false)
             ),
             new HasScalarBoolValue(false),
-            'And_ must return false when at least one scalar is false'
+            'And must return false when at least one scalar is false'
         );
     }
 
@@ -52,7 +52,7 @@ final class And_Test extends TestCase
                 new ScalarOf(fn (): false => false)
             ),
             new HasScalarBoolValue(false),
-            'And_ must return false when all scalars are false'
+            'And must return false when all scalars are false'
         );
     }
 
@@ -62,7 +62,7 @@ final class And_Test extends TestCase
         self::assertThat(
             new ScalarOf(fn () => (new And_())->value()),
             new ThrowsValue(InvalidArgumentException::class),
-            'And_ must throw an exception when no scalars are provided'
+            'And must throw an exception when no scalars are provided'
         );
     }
 }
