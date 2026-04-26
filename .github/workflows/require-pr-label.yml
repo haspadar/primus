@@ -1,0 +1,37 @@
+name: Require PR Label
+
+on:
+  pull_request:
+    types: [opened, labeled, unlabeled, synchronize, edited]
+
+permissions:
+  pull-requests: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Verify exactly one release-drafter label
+        uses: actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea
+        with:
+          script: |
+            const accepted = ['feat', 'fix', 'refactor', 'docs', 'ci', 'chore', 'test', 'dependencies'];
+            const labels = context.payload.pull_request.labels.map(l => l.name);
+
+            if (labels.includes('skip-changelog')) {
+              core.info('skip-changelog present — release-drafter label not required');
+              return;
+            }
+
+            const matching = labels.filter(name => accepted.includes(name));
+            if (matching.length === 1) {
+              core.info(`Found release-drafter label: ${matching[0]}`);
+              return;
+            }
+
+            const list = accepted.map(l => `\`${l}\``).join(', ');
+            if (matching.length === 0) {
+              core.setFailed(`PR must carry exactly one release-drafter label: ${list} (or \`skip-changelog\`).`);
+            } else {
+              core.setFailed(`PR carries multiple release-drafter labels (${matching.join(', ')}); only one is allowed.`);
+            }
