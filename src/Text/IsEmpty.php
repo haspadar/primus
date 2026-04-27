@@ -31,7 +31,7 @@ final readonly class IsEmpty extends ScalarEnvelope
     {
         parent::__construct(
             new ScalarOf(
-                static fn(): bool => !(bool) $text->value(),
+                static fn(): bool => in_array($text->value(), ['', '0'], true),
             ),
         );
     }
