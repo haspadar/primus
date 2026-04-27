@@ -65,10 +65,7 @@ Objects are immutable, final, and easy to combine.
 ## 🧱 Modules
 
 ### **Text**
-Trimmed, Lowered, Uppered, Sub, WithoutTags, Abbreviated, LengthOfText, TextOf
-
-### **Logic**
-Yes, No, IsEmpty, IsUuid, IsUrl, ThrowsIf, LogicEnvelope
+Trimmed, Lowered, Uppered, Sub, WithoutTags, Abbreviated, LengthOfText, TextOf, IsEmpty
 
 ### **Scalar**
 ScalarOf, ScalarEnvelope, EqualTo, GreaterThan, LessThan, Ternary, Sticky
