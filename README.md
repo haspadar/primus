@@ -68,7 +68,7 @@ Objects are immutable, final, and easy to combine.
 Trimmed, Lowered, Uppered, Sub, WithoutTags, Abbreviated, LengthOfText, TextOf
 
 ### **Logic**
-Yes, No, IsEmpty, IsEmail, IsUuid, IsUrl, ThrowsIf, LogicEnvelope
+Yes, No, IsEmpty, IsUuid, IsUrl, ThrowsIf, LogicEnvelope
 
 ### **Scalar**
 ScalarOf, ScalarEnvelope, EqualTo, GreaterThan, LessThan, Ternary, Sticky
