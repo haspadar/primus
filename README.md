@@ -68,7 +68,7 @@ Objects are immutable, final, and easy to combine.
 Trimmed, Lowered, Uppered, Sub, WithoutTags, Abbreviated, LengthOfText, TextOf, IsEmpty
 
 ### **Scalar**
-ScalarOf, ScalarEnvelope, EqualTo, GreaterThan, LessThan, Ternary, Sticky
+ScalarOf, ScalarEnvelope, Constant, Sticky, Ternary, EqualTo, GreaterThan, LessThan, Between, And_, Or_, Xor_, Not
 
 ### **Func**
 Func, FuncOf, FuncEnvelope, BiFunc, Proc, Predicate, StickyFunc, Repeated
