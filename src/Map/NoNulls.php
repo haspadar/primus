@@ -34,17 +34,7 @@ final readonly class NoNulls extends MapEnvelope
     #[Override]
     public function value(): array
     {
-        $pairs = [];
-
-        foreach ($this->origin->value() as $key => $value) {
-            if ($value === null) {
-                throw new RuntimeException('Null value encountered in NoNulls map');
-            }
-
-            $pairs[$key] = $value;
-        }
-
-        return $pairs;
+        return iterator_to_array($this->getIterator());
     }
 
     #[Override]
