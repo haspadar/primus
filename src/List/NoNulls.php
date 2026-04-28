@@ -27,6 +27,12 @@ final readonly class NoNulls extends ListEnvelope
     }
 
     #[Override]
+    public function count(): int
+    {
+        return count($this->value());
+    }
+
+    #[Override]
     public function getIterator(): Generator
     {
         foreach ($this->origin->value() as $value) {
