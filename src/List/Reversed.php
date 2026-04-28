@@ -42,6 +42,6 @@ final readonly class Reversed extends ListEnvelope
     #[Override]
     public function getIterator(): Generator
     {
-        yield from array_reverse($this->origin->value());
+        yield from $this->value();
     }
 }
