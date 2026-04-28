@@ -7,9 +7,10 @@ namespace Primus\Tests\Map;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Primus\Func\FuncOf;
+use Primus\Func\PredicateOf;
+use Primus\Map\Filtered;
 use Primus\Map\Mapped;
 use Primus\Map\MapOf;
-use Primus\Map\NoNulls;
 
 final class MappedTest extends TestCase
 {
@@ -66,14 +67,29 @@ final class MappedTest extends TestCase
     }
 
     #[Test]
-    public function composesWithNoNulls(): void
+    public function composesWithFiltered(): void
     {
         $this->assertSame(
-            ['a' => 10, 'b' => 20],
+            ['c' => 30],
             (new Mapped(
-                new NoNulls(new MapOf(['a' => 1, 'b' => 2])),
+                new Filtered(
+                    new MapOf(['a' => 1, 'b' => 2, 'c' => 3]),
+                    new PredicateOf(static fn (int $v): bool => $v > 2),
+                ),
                 new FuncOf(static fn (int $v): int => $v * 10),
             ))->value(),
+        );
+    }
+
+    #[Test]
+    public function yieldsEmptyWhenSourceIsEmpty(): void
+    {
+        $this->assertCount(
+            0,
+            new Mapped(
+                new MapOf([]),
+                new FuncOf(static fn (int $v): int => $v * 10),
+            ),
         );
     }
 }

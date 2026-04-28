@@ -6,8 +6,10 @@ namespace Primus\Tests\Map;
 
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
+use Primus\Func\FuncOf;
 use Primus\Func\PredicateOf;
 use Primus\Map\Filtered;
+use Primus\Map\Mapped;
 use Primus\Map\MapOf;
 
 final class FilteredTest extends TestCase
@@ -71,5 +73,32 @@ final class FilteredTest extends TestCase
         $filtered->value();
         iterator_to_array($filtered);
         $this->assertSame(['a' => 1, 'b' => 2, 'c' => 3], $source->value());
+    }
+
+    #[Test]
+    public function composesWithMapped(): void
+    {
+        $this->assertSame(
+            ['b' => 200, 'c' => 300],
+            (new Filtered(
+                new Mapped(
+                    new MapOf(['a' => 1, 'b' => 2, 'c' => 3]),
+                    new FuncOf(static fn (int $v): int => $v * 100),
+                ),
+                new PredicateOf(static fn (int $v): bool => $v > 100),
+            ))->value(),
+        );
+    }
+
+    #[Test]
+    public function yieldsNothingWhenSourceIsEmpty(): void
+    {
+        $this->assertCount(
+            0,
+            new Filtered(
+                new MapOf([]),
+                new PredicateOf(static fn (int $v): bool => $v > 0),
+            ),
+        );
     }
 }
