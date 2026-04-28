@@ -51,7 +51,7 @@ final class NoNullsTest extends TestCase
     public function throwsOnNullWhenCounting(): void
     {
         $this->expectException(RuntimeException::class);
-        count(new NoNulls(new ListOf(1, null, 3)));
+        (new NoNulls(new ListOf(1, null, 3)))->count();
     }
 
     #[Test]
