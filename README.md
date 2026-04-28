@@ -73,12 +73,6 @@ ScalarOf, ScalarEnvelope, Constant, Sticky, Ternary, EqualTo, GreaterThan, LessT
 ### **Func**
 Func, FuncOf, FuncEnvelope, BiFunc, Proc, Predicate, StickyFunc, Repeated
 
-### **Iterator**
-IteratorOf, Mapped, Filtered, Joined, NoNulls
-
-### **Iterable**
-Iterable_, Mapped, Filtered, Joined, NoNulls
-
 ### **Numeric (WIP)**
 Positive, NonZero, Rounded
 
