@@ -52,4 +52,13 @@ final class NoNullsTest extends TestCase
         $this->expectException(RuntimeException::class);
         (new NoNulls(new MapOf(['a' => 1, 'b' => null, 'c' => 3])))->count();
     }
+
+    #[Test]
+    public function composesWithItself(): void
+    {
+        $this->assertSame(
+            ['a' => 1, 'b' => 2],
+            (new NoNulls(new NoNulls(new MapOf(['a' => 1, 'b' => 2]))))->value(),
+        );
+    }
 }
