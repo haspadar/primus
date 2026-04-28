@@ -21,6 +21,16 @@ final class ReversedTest extends TestCase
     }
 
     #[Test]
+    public function iteratesInReverseOrder(): void
+    {
+        $collected = [];
+        foreach (new Reversed(new ListOf('a', 'b', 'c')) as $value) {
+            $collected[] = $value;
+        }
+        $this->assertSame(['c', 'b', 'a'], $collected);
+    }
+
+    #[Test]
     public function preservesCount(): void
     {
         $this->assertCount(
@@ -30,10 +40,12 @@ final class ReversedTest extends TestCase
     }
 
     #[Test]
-    public function leavesSourceUntouched(): void
+    public function leavesSourceUntouchedAfterReading(): void
     {
         $source = new ListOf(1, 2, 3);
-        new Reversed($source);
+        $reversed = new Reversed($source);
+        $reversed->value();
+        iterator_to_array($reversed);
         $this->assertSame([1, 2, 3], $source->value());
     }
 
