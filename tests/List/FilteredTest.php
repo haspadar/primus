@@ -9,6 +9,7 @@ use PHPUnit\Framework\TestCase;
 use Primus\Func\PredicateOf;
 use Primus\List\Filtered;
 use Primus\List\ListOf;
+use Primus\List\Reversed;
 
 final class FilteredTest extends TestCase
 {
@@ -71,5 +72,19 @@ final class FilteredTest extends TestCase
         $filtered->value();
         iterator_to_array($filtered);
         $this->assertSame([1, 2, 3, 4], $source->value());
+    }
+
+    #[Test]
+    public function composesWithReversed(): void
+    {
+        $this->assertSame(
+            [4, 3],
+            (new Reversed(
+                new Filtered(
+                    new ListOf(1, 2, 3, 4),
+                    new PredicateOf(static fn (int $x): bool => $x > 2),
+                ),
+            ))->value(),
+        );
     }
 }
