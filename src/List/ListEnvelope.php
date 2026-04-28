@@ -38,6 +38,6 @@ abstract readonly class ListEnvelope implements List_
     #[Override]
     public function getIterator(): Generator
     {
-        yield from $this->origin;
+        yield from $this->origin->value();
     }
 }

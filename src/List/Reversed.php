@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Primus\List;
 
+use Generator;
+use Override;
+
 /**
  * List with elements in reverse order.
  *
@@ -27,8 +30,18 @@ final readonly class Reversed extends ListEnvelope
      */
     public function __construct(List_ $origin)
     {
-        parent::__construct(
-            new ListOf(...array_reverse($origin->value())),
-        );
+        parent::__construct($origin);
+    }
+
+    #[Override]
+    public function value(): array
+    {
+        return array_reverse($this->origin->value());
+    }
+
+    #[Override]
+    public function getIterator(): Generator
+    {
+        yield from array_reverse($this->origin->value());
     }
 }
