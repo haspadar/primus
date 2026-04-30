@@ -5,7 +5,7 @@
 </picture>
 <br><br>
 
-[![CI](https://github.com/haspadar/primus/actions/workflows/ci.yml/badge.svg)](https://github.com/haspadar/primus/actions/workflows/ci.yml)
+[![CI](https://github.com/haspadar/primus/actions/workflows/piqule.yml/badge.svg)](https://github.com/haspadar/primus/actions/workflows/piqule.yml)
 [![Coverage](https://codecov.io/gh/haspadar/primus/branch/main/graph/badge.svg)](https://codecov.io/gh/haspadar/primus)
 [![Mutation testing badge](https://img.shields.io/endpoint?style=flat&url=https%3A%2F%2Fbadge-api.stryker-mutator.io%2Fgithub.com%2Fhaspadar%2Fprimus%2Fmain)](https://dashboard.stryker-mutator.io/reports/github.com/haspadar/primus/main)
 [![PHPStan Level](https://img.shields.io/badge/PHPStan-Level%209-brightgreen)](https://phpstan.org/)
@@ -57,24 +57,36 @@ Objects are immutable, final, and easy to combine.
 | `substr($s, 0, 5)` | `new Sub($s, 5)` |
 | `strip_tags($s)` | `new WithoutTags($s)` |
 | `strlen($s)` | `new LengthOfText($s)` |
-| `array_map(fn, $a)` | `new Mapped($a, new FuncOf(fn))` |
-| `array_filter($a, fn)` | `new Filtered($a, new PredicateOf(fn))` |
+| `array_map(fn, $a)` | `new Mapped(new MapOf($a), new FuncOf(fn))` |
+| `array_filter($a, fn)` | `new Filtered(new MapOf($a), new PredicateOf(fn))` |
+| `array_merge($a, $b)` | `new Merged(new MapOf($a), new MapOf($b))` |
 
 ---
 
 ## 🧱 Modules
 
 ### **Text**
-Trimmed, Lowered, Uppered, Sub, WithoutTags, Abbreviated, LengthOfText, TextOf, IsEmpty
+Abbreviated, Capitalized, HtmlEscaped, IsEmpty, Joined, LeftPadded,
+LengthOfText, Lowered, Normalized, RandomText, Repeated, Replaced,
+RightPadded, Split, Sub, Text, TextEnvelope, TextOf, TextOfScalar, Trimmed,
+TrimmedLeft, TrimmedRight, Uppered, WithoutTags
 
 ### **Scalar**
-ScalarOf, ScalarEnvelope, Constant, Sticky, Ternary, EqualTo, GreaterThan, LessThan, Between, And_, Or_, Xor_, Not
+And_, Between, Constant, EqualTo, GreaterThan, LessThan, Not, Or_, Scalar,
+ScalarEnvelope, ScalarOf, Sticky, Ternary, Xor_
 
 ### **Func**
-Func, FuncOf, FuncEnvelope, BiFunc, Proc, Predicate, StickyFunc, Repeated
+BiFunc, BiFuncOf, BiProc, BiProcOf, Func, FuncEnvelope, FuncOf,
+FuncWithFallback, Predicate, PredicateOf, Proc, ProcOf, Repeated, StickyFunc
 
-### **Numeric (WIP)**
-Positive, NonZero, Rounded
+### **List**
+List_, ListEnvelope, ListOf, Filtered, Mapped, NoNulls, Reversed
+
+### **Map**
+Map, MapEnvelope, MapOf, Filtered, Mapped, Merged, NoNulls
+
+### **Numeric**
+Number
 
 ---
 
@@ -99,8 +111,8 @@ Primus includes:
 - Custom PHPUnit constraints (`HasIteratorValues`, `EqualsValue`, …)
 - Mutation testing (Infection)
 - Static analysis via [`haspadar/piqule`](https://github.com/haspadar/piqule) —
-  a curated bundle of strict quality gates (PHPStan level 9 with custom rules,
-  PHP-CS-Fixer, PHPMD, PHPMetrics, Infection).
+  a curated bundle of strict quality gates (PHPStan level 9, Psalm with custom
+  EO rules, PHP-CS-Fixer, PHPMD, PHPMetrics, Infection, and repository lints).
 
 The enforced rules include:
 
@@ -118,7 +130,7 @@ The enforced rules include:
 composer require haspadar/primus
 ```
 
-Requires **PHP ≥ 8.2**
+Requires **PHP 8.3.16+**, **PHP 8.4.3+**, or **PHP 8.5+**.
 
 ---
 
