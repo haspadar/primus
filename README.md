@@ -58,6 +58,7 @@ Objects are immutable, final, and easy to combine.
 | `strip_tags($s)` | `new WithoutTags($s)` |
 | `strlen($s)` | `new LengthOfText($s)` |
 | `array_map(fn, $a)` | `new Mapped(new MapOf($a), new FuncOf(fn))` |
+| key-aware value mapping | `new BiMapped(new MapOf($a), new BiFuncOf(fn))` |
 | `array_filter($a, fn)` | `new Filtered(new MapOf($a), new PredicateOf(fn))` |
 | `array_merge($a, $b)` | `new Merged(new MapOf($a), new MapOf($b))` |
 
@@ -83,7 +84,7 @@ FuncWithFallback, Predicate, PredicateOf, Proc, ProcOf, Repeated, StickyFunc
 List_, ListEnvelope, ListOf, Filtered, Mapped, NoNulls, Reversed
 
 ### **Map**
-Map, MapEnvelope, MapOf, Filtered, Mapped, Merged, NoNulls
+Map, MapEnvelope, MapOf, BiMapped, Filtered, Mapped, Merged, NoNulls
 
 ### **Numeric**
 Number
