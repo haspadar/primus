@@ -71,7 +71,7 @@ final class FilteredTest extends TestCase
             new PredicateOf(static fn (int $v): bool => $v > 1),
         );
         $filtered->value();
-        iterator_to_array($filtered);
+        $this->assertSame(['b' => 2, 'c' => 3], iterator_to_array($filtered));
         $this->assertSame(['a' => 1, 'b' => 2, 'c' => 3], $source->value());
     }
 
