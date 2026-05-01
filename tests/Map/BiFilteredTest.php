@@ -40,13 +40,14 @@ final class BiFilteredTest extends TestCase
     #[Test]
     public function yieldsNothingWhenNoneMatch(): void
     {
-        $this->assertCount(
-            0,
-            new BiFiltered(
-                new MapOf(['draft' => 2, 'queued' => 4]),
-                new BiFuncOf(static fn (string $key, int $value): bool => str_starts_with($key, 'done') && $value > 5),
+        $filtered = new BiFiltered(
+            new MapOf(['draft' => 2, 'queued' => 4]),
+            new BiFuncOf(
+                static fn (string $key, int $value): bool => str_starts_with($key, 'done') && $value > 5
             ),
         );
+        $this->assertCount(0, $filtered);
+        $this->assertSame([], iterator_to_array($filtered));
     }
 
     #[Test]
@@ -92,12 +93,11 @@ final class BiFilteredTest extends TestCase
     #[Test]
     public function yieldsNothingWhenSourceIsEmpty(): void
     {
-        $this->assertCount(
-            0,
-            new BiFiltered(
-                new MapOf([]),
-                new BiFuncOf(static fn (string $key, int $value): bool => strlen($key) > 1 && $value > 0),
-            ),
+        $filtered = new BiFiltered(
+            new MapOf([]),
+            new BiFuncOf(static fn (string $key, int $value): bool => strlen($key) > 1 && $value > 0),
         );
+        $this->assertCount(0, $filtered);
+        $this->assertSame([], iterator_to_array($filtered));
     }
 }
