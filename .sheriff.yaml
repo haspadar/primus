@@ -1,0 +1,7 @@
+# Sheriff configuration. All available keys and their defaults are in .sheriff/config.yaml.
+
+override:
+    php_cs_fixer.extend: "        'phpdoc_types' => ['exclude' => ['scalar']],"
+    phpmetrics.coupling.max_afferent: 17
+    phpunit.testsuites.unit: ["../../tests"]
+    phpunit.testsuites.integration: []

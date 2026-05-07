@@ -1,0 +1,23 @@
+includes:
+    - ../../vendor/phpstan/phpstan-strict-rules/rules.neon
+    - ../../vendor/haspadar/phpstan-rules/rules.neon
+
+parameters:
+    # paths sit outside phpstan.parameters because they are derived from php.src
+    # rather than declared as a static tree leaf.
+    paths:
+        - ../../src
+
+    level: 9
+    errorFormat: table
+    reportUnmatchedIgnoredErrors: true
+    checkUninitializedProperties: true
+    checkClassCaseSensitivity: true
+    checkDynamicProperties: true
+    exceptions:
+        checkedExceptionClasses:
+            - \Throwable
+    haspadar:
+        afferentCoupling:
+            ignoreInterfaces: true
+            excludedClasses: []

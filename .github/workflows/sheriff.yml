@@ -1,0 +1,152 @@
+name: Sheriff
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+
+  # ============================================================
+  # PR SIZE CHECK
+  # ============================================================
+  pr_size:
+    name: PR Size
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: read
+
+    steps:
+      - uses: actions/checkout@0c366fd6a839edf440554fa01a7085ccba70ac98
+        with:
+          fetch-depth: 0
+
+      - uses: maidsafe/pr_size_checker@948bfb3e96d93fbeeef4e207375163e8dae5665e
+        with:
+          max_lines_changed: 250
+
+
+  # ============================================================
+  # INFRA CHECKS
+  # ============================================================
+  infra:
+    name: ${{ matrix.check }}
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+
+    strategy:
+      fail-fast: false
+      matrix:
+        check:
+          - actionlint
+          - hadolint
+          - markdownlint
+          - yamllint
+          - typos
+          - shellcheck
+          - jsonlint
+
+    steps:
+      - uses: actions/checkout@0c366fd6a839edf440554fa01a7085ccba70ac98
+
+      - uses: shivammathur/setup-php@690cb7c9d81dbfe51eba732cfca0a00ca42db777
+        with:
+          php-version: 8.3
+
+
+      - name: Install dependencies
+        run: composer install --prefer-dist --no-progress --no-interaction
+
+      - name: Run check
+        run: vendor/bin/sheriff check ${{ matrix.check }}
+
+
+  # ============================================================
+  # PHP STATIC ANALYSIS
+  # ============================================================
+  php-static:
+    name: ${{ matrix.check }} (PHP ${{ matrix.php }})
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+
+    strategy:
+      fail-fast: false
+      matrix:
+        php: ["8.3"]
+        check:
+          - phpcs
+          - phpstan
+          - psalm
+          - phpmd
+          - phpmetrics
+
+    steps:
+      - uses: actions/checkout@0c366fd6a839edf440554fa01a7085ccba70ac98
+
+      - uses: shivammathur/setup-php@690cb7c9d81dbfe51eba732cfca0a00ca42db777
+        with:
+          php-version: ${{ matrix.php }}
+          extensions: mbstring, dom, json
+
+
+      - name: Install dependencies
+        run: composer install --prefer-dist --no-progress --no-interaction
+
+      - name: Run static check
+        run: vendor/bin/sheriff check ${{ matrix.check }}
+
+
+  # ============================================================
+  # PHP TESTS + COVERAGE + MUTATION
+  # ============================================================
+  php-tests:
+    name: Tests / Coverage / Mutation (PHP 8.3)
+    runs-on: ubuntu-latest
+    needs: php-static
+    permissions:
+      contents: read
+
+    steps:
+      - uses: actions/checkout@0c366fd6a839edf440554fa01a7085ccba70ac98
+
+      - uses: shivammathur/setup-php@690cb7c9d81dbfe51eba732cfca0a00ca42db777
+        with:
+          php-version: 8.3
+          coverage: xdebug
+          extensions: mbstring, dom, json
+
+
+      - name: Install dependencies
+        run: composer install --prefer-dist --no-progress --no-interaction
+
+      # ------------------------------------------------------------
+      # PHPUnit (if config exists)
+      # ------------------------------------------------------------
+      - name: PHPUnit (coverage)
+        if: hashFiles('.sheriff/phpunit/phpunit.xml') != ''
+        run: bash .sheriff/phpunit/command.sh
+
+      # ------------------------------------------------------------
+      # Upload coverage to Codecov (if coverage exists)
+      # ------------------------------------------------------------
+      - name: Upload coverage to Codecov
+        if: true == true && hashFiles('.sheriff/codecov/coverage.xml') != ''
+        uses: codecov/codecov-action@57e3a136b779b570ffcdbf80b3bdc90e7fab3de2
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          files: .sheriff/codecov/coverage.xml
+          fail_ci_if_error: true
+
+      # ------------------------------------------------------------
+      # Infection (if config exists)
+      # ------------------------------------------------------------
+      - name: Infection
+        if: hashFiles('.sheriff/infection/infection.json5') != ''
+        env:
+          INFECTION_DASHBOARD_API_KEY: ${{ secrets.STRYKER_DASHBOARD_API_KEY }}
+        run: bash .sheriff/infection/command.sh
