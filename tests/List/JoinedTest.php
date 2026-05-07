@@ -4,9 +4,12 @@ declare(strict_types=1);
 
 namespace Primus\Tests\List;
 
+use Generator;
+use Override;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Primus\List\Joined;
+use Primus\List\List_;
 use Primus\List\ListOf;
 
 final class JoinedTest extends TestCase
@@ -47,6 +50,35 @@ final class JoinedTest extends TestCase
                 new ListOf('a', 'b'),
                 new ListOf('c', 'd'),
             ))->value(),
+        );
+    }
+
+    #[Test]
+    public function reindexesEvenWhenSourceExposesNonSequentialKeys(): void
+    {
+        $stringKeyed = new readonly class implements List_ {
+            #[Override]
+            public function value(): array
+            {
+                return ['x' => 'a', 'y' => 'b'];
+            }
+
+            #[Override]
+            public function count(): int
+            {
+                return count($this->value());
+            }
+
+            #[Override]
+            public function getIterator(): Generator
+            {
+                yield from $this->value();
+            }
+        };
+
+        $this->assertSame(
+            [0 => 'a', 1 => 'b', 2 => 'c'],
+            (new Joined($stringKeyed, new ListOf('c')))->value(),
         );
     }
 
