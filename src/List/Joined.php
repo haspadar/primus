@@ -55,26 +55,12 @@ final readonly class Joined implements List_
     #[Override]
     public function count(): int
     {
-        $total = 0;
-
-        foreach ($this->sources as $source) {
-            $total += $source->count();
-        }
-
-        return $total;
+        return count($this->value());
     }
 
     #[Override]
     public function getIterator(): Generator
     {
-        $index = 0;
-
-        foreach ($this->sources as $source) {
-            foreach ($source as $item) {
-                yield $index => $item;
-
-                $index++;
-            }
-        }
+        yield from $this->value();
     }
 }
