@@ -1,0 +1,148 @@
+# Built-in defaults for all configuration keys.
+# Copy any key into .sheriff.yaml under "override" or "append" to customize.
+#
+# Example .sheriff.yaml:
+#
+#     override:
+#         phpstan.level: 8
+#     append:
+#         infra.exclude:
+#             - dist
+
+defaults:
+  php.src: ["src"]
+  infra.exclude: ["vendor", "tests", ".git"]
+  php.versions: ["8.3"]
+  envs: {}
+
+  check.full: false
+  check.parallel: true
+  check.slow: ["infection", "sonar"]
+
+  ci.sheriff_bin: "vendor/bin/sheriff"
+  ci.pr.max_lines_changed: 250
+
+  coverage.patch.target: 80
+  coverage.patch.threshold: 5
+  coverage.project.target: 80
+  coverage.project.threshold: 2
+
+  codecov.cloud: true
+  codecov.cli: false
+
+  coderabbit.cloud: true
+  coderabbit.cli: false
+
+  docker.image: "ghcr.io/haspadar/sheriff-infra@sha256:88c76164614b7a8eaa26db74470966458389c237bbf2d6e819ac222cd2ac3762"
+
+  actionlint.cli: true
+
+  hadolint.cli: true
+  hadolint.failure_threshold: "error"
+  hadolint.ignored_yaml: "[]"
+  hadolint.override.error_yaml: "[]"
+  hadolint.override.warning_yaml: "[]"
+  hadolint.patterns: ["Dockerfile*"]
+
+  jsonlint.cli: true
+  jsonlint.compact: true
+  jsonlint.continue: true
+  jsonlint.duplicate_keys: false
+  jsonlint.mode: ["json5"]
+  jsonlint.patterns: ["**/*.json", "**/*.json5", "**/*.jsonc"]
+
+  markdownlint.cli: true
+  markdownlint.ignores: ["vendor/**", "tests/**", ".git/**"]
+
+  php-cs-fixer.cli: true
+  php_cs_fixer.allow_unsupported: ["true"]
+  php_cs_fixer.extend: ""
+  php_cs_fixer.paths: ["../.."]
+
+  phpcs.cli: true
+  phpcs.extend: ""
+
+  phpmd.cli: true
+  phpmd.class_complexity: 50
+  phpmd.class_length: 200
+  phpmd.cyclomatic: 10
+  phpmd.max_fields: 10
+  phpmd.max_methods: 10
+  phpmd.max_parameters: 5
+  phpmd.method_length: 50
+  phpmd.npath: 200
+
+  phpmetrics.cli: true
+  phpmetrics.extensions: ["php"]
+  phpmetrics.complexity.max_cyclomatic_per_method: 10
+  phpmetrics.complexity.max_weighted_methods_per_class: 20
+  phpmetrics.coupling.max_afferent: 14
+  phpmetrics.coupling.max_efferent: 10
+  phpmetrics.halstead.max_bugs_per_method: 0.5
+  phpmetrics.halstead.max_difficulty_per_method: 15
+  phpmetrics.halstead.max_effort_per_method: 15000
+  phpmetrics.halstead.max_volume_per_method: 1000
+  phpmetrics.inheritance.max_depth: 3
+  phpmetrics.report.html: ["html"]
+  phpmetrics.report.json: ["phpmetrics.json"]
+  phpmetrics.size.max_loc_per_class: 1000
+  phpmetrics.size.max_logical_loc_per_class: 600
+  phpmetrics.size.max_logical_loc_per_method: 20
+  phpmetrics.structure.max_methods_per_class: 10
+
+  phpstan.cli: true
+  phpstan.memory: "1G"
+  phpstan.neon_includes: ["../../vendor/phpstan/phpstan-strict-rules/rules.neon", "../../vendor/haspadar/phpstan-rules/rules.neon"]
+  phpstan.parameters:
+    level: 9
+    errorFormat: table
+    reportUnmatchedIgnoredErrors: true
+    checkUninitializedProperties: true
+    checkClassCaseSensitivity: true
+    checkDynamicProperties: true
+    exceptions:
+      checkedExceptionClasses:
+        - '\Throwable'
+    haspadar:
+      afferentCoupling:
+        ignoreInterfaces: true
+        excludedClasses: []
+
+  phpunit.cli: true
+  phpunit.php_options: "-d memory_limit=1G"
+  phpunit.testsuites.unit: ["../../tests/Unit"]
+  phpunit.testsuites.integration: ["../../tests/Integration"]
+
+  psalm.cli: true
+  psalm.error_level: 1
+  psalm.project.files: []
+  psalm.project.ignore: []
+  psalm.suppress.possibly_unused: []
+
+  infection.cli: true
+  infection.min_msi: 50.0
+  infection.min_covered_msi: 80.0
+  infection.php_options: "-d memory_limit=1G"
+  infection.timeout: 30
+
+  shellcheck.cli: true
+  shellcheck.exclude: []
+  shellcheck.external_sources: true
+  shellcheck.severity: "warning"
+  shellcheck.shell: "bash"
+  shellcheck.source_path: "."
+
+  sonar.cloud: true
+  sonar.cli: false
+  sonar.organization: ""
+  sonar.projectKey: ""
+  sonar.tests: ["tests"]
+  sonar.exclusions: []
+  sonar.php.coverage.reportPaths: [".sheriff/codecov/coverage.xml"]
+
+  typos.cli: true
+  typos.exclude: ["vendor/", "tests/", ".git/"]
+
+  yamllint.cli: true
+  yamllint.ignore: ["vendor/**", "tests/**", ".git/**", ".sheriff/**/html/**", ".sheriff/**/coverage-report/**"]
+  yamllint.line_length.max: 120

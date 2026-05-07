@@ -1,0 +1,18 @@
+# ============================================================
+# ShellCheck configuration (Sheriff managed)
+# ============================================================
+
+# Target shell (bash, sh, dash, ksh)
+shell=bash
+
+# Minimum severity: error, warning, info, style
+severity=warning
+
+# Allow sourcing external files
+external-sources=true
+
+# Additional include path for sourced files (optional)
+# source-path=.
+
+# Excluded rules (one per line)
+

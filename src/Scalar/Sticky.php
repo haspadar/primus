@@ -26,13 +26,13 @@ use Override;
  */
 final class Sticky implements Scalar
 {
-    /** @phpstan-ignore haspadar.immutable */
+    /** @phpstan-ignore haspadar.immutable (lazy memoization flag; idempotent externally) */
     private bool $computed = false;
 
     /**
      * @var T
      * @psalm-suppress PropertyNotSetInConstructor Lazy-initialized in value()
-     * @phpstan-ignore haspadar.immutable
+     * @phpstan-ignore haspadar.immutable (lazy memoization slot; idempotent externally)
      */
     private $stored;
 

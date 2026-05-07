@@ -5,7 +5,7 @@
 </picture>
 <br><br>
 
-[![CI](https://github.com/haspadar/primus/actions/workflows/piqule.yml/badge.svg)](https://github.com/haspadar/primus/actions/workflows/piqule.yml)
+[![CI](https://github.com/haspadar/primus/actions/workflows/sheriff.yml/badge.svg)](https://github.com/haspadar/primus/actions/workflows/sheriff.yml)
 [![Coverage](https://codecov.io/gh/haspadar/primus/branch/main/graph/badge.svg)](https://codecov.io/gh/haspadar/primus)
 [![Mutation testing badge](https://img.shields.io/endpoint?style=flat&url=https%3A%2F%2Fbadge-api.stryker-mutator.io%2Fgithub.com%2Fhaspadar%2Fprimus%2Fmain)](https://dashboard.stryker-mutator.io/reports/github.com/haspadar/primus/main)
 [![PHPStan Level](https://img.shields.io/badge/PHPStan-Level%209-brightgreen)](https://phpstan.org/)
@@ -112,7 +112,7 @@ Primus includes:
 
 - Custom PHPUnit constraints (`HasIteratorValues`, `EqualsValue`, …)
 - Mutation testing (Infection)
-- Static analysis via [`haspadar/piqule`](https://github.com/haspadar/piqule) —
+- Static analysis via [`haspadar/sheriff`](https://github.com/haspadar/sheriff) —
   a curated bundle of strict quality gates (PHPStan level 9, Psalm with custom
   EO rules, PHP-CS-Fixer, PHPMD, PHPMetrics, Infection, and repository lints).
 
