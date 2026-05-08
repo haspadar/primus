@@ -7,7 +7,7 @@ namespace Primus\Map;
 use Generator;
 use Override;
 use Primus\List\List_;
-use RuntimeException;
+use Primus\RuntimeException;
 
 /**
  * Map of pairs picked from row arrays where the index column supplies keys and the value column supplies values.

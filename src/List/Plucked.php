@@ -6,7 +6,7 @@ namespace Primus\List;
 
 use Generator;
 use Override;
-use RuntimeException;
+use Primus\RuntimeException;
 
 /**
  * List of values picked at a single key from every row of a source list of rows.
