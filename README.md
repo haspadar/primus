@@ -9,143 +9,199 @@
 [![Coverage](https://codecov.io/gh/haspadar/primus/branch/main/graph/badge.svg)](https://codecov.io/gh/haspadar/primus)
 [![Mutation testing badge](https://img.shields.io/endpoint?style=flat&url=https%3A%2F%2Fbadge-api.stryker-mutator.io%2Fgithub.com%2Fhaspadar%2Fprimus%2Fmain)](https://dashboard.stryker-mutator.io/reports/github.com/haspadar/primus/main)
 [![PHPStan Level](https://img.shields.io/badge/PHPStan-Level%209-brightgreen)](https://phpstan.org/)
-
-[![Hits-of-Code](https://hitsofcode.com/github/haspadar/primus?branch=main)](https://hitsofcode.com/github/haspadar/primus/view?branch=main)
-[![CodeRabbit Pull Request Reviews](https://img.shields.io/coderabbit/prs/github/haspadar/primus?labelColor=171717&color=FF570A&label=CodeRabbit+Reviews)](https://coderabbit.ai)
+[![Psalm Level](https://img.shields.io/badge/Psalm-Level%201-brightgreen)](https://psalm.dev/)
 
 ---
 
-# Object‑Oriented PHP Primitives  
+# Object‑Oriented PHP Primitives
 
-Primus is a library of object‑oriented PHP primitives.  
+Primus is a library of object‑oriented PHP primitives.
 It provides common operations as small composable objects instead of functions.
 
-Inspired by **Elegant Objects** and **cactoos**.
-
----
-
-## 📦 Core Idea
-
-Procedural PHP:
+Procedural PHP buries the steps inside out — you read from the innermost call:
 
 ```php
 strtolower(trim(substr($s, 0, 5)));
 ```
 
-Primus:
+Primus reads top to bottom — each step is a named object:
 
 ```php
-(new Sub(
-    new Lowered(
-        new Trimmed($s)
+(new Lowered(
+    new Trimmed(
+        new Sub($s, 0, 5),
     ),
-    5
 ))->value();
 ```
 
-Each object represents exactly one operation.  
-Objects are immutable, final, and easy to combine.
+Computation is deferred until `value()` is called. The pipeline is a value
+itself: store it, pass it around, decorate it further.
 
----
+## Why?
 
-## 🧭 Quick Reference
+- **`null` everywhere.**  
+  PHP's standard library leaks `null` through `array_search`, `preg_match`,
+  `mb_strpos` even if you ban it in your project. Primus values are never
+  `null` — missing input fails fast.
 
-| Procedural | Primus |
-|-----------|--------|
-| `trim($s)` | `new Trimmed($s)` |
-| `strtolower($s)` | `new Lowered($s)` |
-| `substr($s, 0, 5)` | `new Sub($s, 5)` |
-| `strip_tags($s)` | `new WithoutTags($s)` |
-| `strlen($s)` | `new LengthOfText($s)` |
-| `array_map(fn, $a)` | `new Mapped(new MapOf($a), new FuncOf(fn))` |
-| key-aware value mapping | `new BiMapped(new MapOf($a), new BiFuncOf(fn))` |
-| `array_filter($a, fn)` | `new Filtered(new MapOf($a), new PredicateOf(fn))` |
-| key-aware pair filtering | `new BiFiltered(new MapOf($a), new BiFuncOf(fn))` |
-| `array_merge($a, $b)` | `new Merged(new MapOf($a), new MapOf($b))` |
-| `array_merge` for lists | `new Joined(new ListOf(...$a), new ListOf(...$b))` |
-| `array_keys($a)` | `new Keys(new MapOf($a))` |
-| `array_values($a)` | `new Values(new MapOf($a))` |
-| `array_diff_key($a, $b)` | `new Diff(new MapOf($a), new MapOf($b))` |
-| `array_intersect_key($a, $b)` | `new Intersect(new MapOf($a), new MapOf($b))` |
-| `array_combine($k, $v)` | `new Combined(new ListOf(...$k), new ListOf(...$v))` |
-| `array_column($rows, $key)` | `new Plucked(new ListOf(...$rows), $key)` |
-| `array_column($rows, $vk, $ik)` | `new PluckedBy(new ListOf(...$rows), $ik, $vk)` |
-| `sort($a)` | `new Sorted(new ListOf(...$a))` |
-| `usort($a, $cmp)` | `new SortedBy(new ListOf(...$a), new BiFuncOf($cmp))` |
+- **Bare `array` shapes.**  
+  Procedural functions take `array`/`string` and you re‑describe their shape
+  with PHPDoc at every call site. In Primus the type lives in the class —
+  each operation has a narrow constructor signature you write once.
 
----
+- **Closures hard to substitute.**  
+  A `callable` is convenient until you need to swap it in a test, log every
+  call, or wrap it in retry logic. A `Func`/`Predicate`/`BiFunc` object
+  composes like any other class.
 
-## 🧱 Modules
+- **Controlled flow.**  
+  Procedural chains run as you write them. A Primus pipeline runs only when
+  `value()` is called — building, passing and composing it costs nothing
+  until you ask for the result.
 
-### **Text**
-Abbreviated, Capitalized, HtmlEscaped, IsEmpty, Joined, LeftPadded,
-LengthOfText, Lowered, Normalized, RandomText, Repeated, Replaced,
-RightPadded, Split, Sub, Text, TextEnvelope, TextOf, TextOfScalar, Trimmed,
-TrimmedLeft, TrimmedRight, Uppered, WithoutTags
-
-### **Scalar**
-And_, Between, Constant, EqualTo, GreaterThan, LessThan, Not, Or_, Scalar,
-ScalarEnvelope, ScalarOf, Sticky, Ternary, Xor_
-
-### **Func**
-BiFunc, BiFuncOf, BiProc, BiProcOf, Func, FuncEnvelope, FuncOf,
-FuncWithFallback, Predicate, PredicateOf, Proc, ProcOf, Repeated, StickyFunc
-
-### **List**
-List_, ListEnvelope, ListOf, Filtered, Joined, Mapped, NoNulls, Plucked, Reversed, Sorted, SortedBy
-
-### **Map**
-Map, MapEnvelope, MapOf, BiFiltered, BiMapped, Combined, Diff, Filtered, Intersect, Keys, Mapped, Merged, NoNulls, PluckedBy, Values
-
-### **Numeric**
-Number
-
----
-
-## 🧠 Design Principles
-
-- No `null`  
-- No `static`  
-- No procedural helpers  
-- No mutable state  
-
-- Immutable objects  
-- Final classes  
-- One class = one behavior  
-- Composition over inheritance  
-
----
-
-## 🧪 Testing & Static Analysis
-
-Primus includes:
-
-- Custom PHPUnit constraints (`HasIteratorValues`, `EqualsValue`, …)
-- Mutation testing (Infection)
-- Static analysis via [`haspadar/sheriff`](https://github.com/haspadar/sheriff) —
-  a curated bundle of strict quality gates (PHPStan level 9, Psalm with custom
-  EO rules, PHP-CS-Fixer, PHPMD, PHPMetrics, Infection, and repository lints).
-
-The enforced rules include:
-
-- No `static`
-- No `null`
-- No `isset()` / `empty()`
-- All state must be `readonly`
-- No traits or unnecessary inheritance
-
----
-
-## 📥 Installation
+## Installation
 
 ```bash
 composer require haspadar/primus
 ```
 
-Requires **PHP 8.3.16+**, **PHP 8.4.3+**, or **PHP 8.5+**.
+## Text
 
----
+To trim and lowercase:
 
-## 📄 License
+```php
+$text = (new Lowered(new Trimmed('  Hello  ')))->value();
+// "hello"
+```
+
+To take a substring:
+
+```php
+$text = (new Sub('Hello, world!', 0, 5))->value();
+// "Hello"
+```
+
+## Lists
+
+To filter and sort:
+
+```php
+$big = new Sorted(
+    new Filtered(
+        new ListOf(3, 1, 4, 1, 5, 9, 2, 6),
+        new PredicateOf(static fn (int $x): bool => $x > 2),
+    ),
+);
+// [3, 4, 5, 6, 9]
+```
+
+To pluck a column from a list of rows:
+
+```php
+$names = new Plucked(
+    new ListOf(
+        ['id' => 1, 'name' => 'Alice'],
+        ['id' => 2, 'name' => 'Bob'],
+    ),
+    'name',
+);
+// ['Alice', 'Bob']
+```
+
+## Maps
+
+To merge two maps with last‑wins precedence:
+
+```php
+$merged = new Merged(
+    new MapOf(['a' => 1, 'b' => 2]),
+    new MapOf(['b' => 99, 'c' => 3]),
+);
+// ['a' => 1, 'b' => 99, 'c' => 3]
+```
+
+To index rows by one column with values from another:
+
+```php
+$byId = new PluckedBy(
+    new ListOf(
+        ['id' => 1, 'name' => 'Alice'],
+        ['id' => 2, 'name' => 'Bob'],
+    ),
+    'id',
+    'name',
+);
+// [1 => 'Alice', 2 => 'Bob']
+```
+
+## Scalars
+
+To compose lazy boolean logic:
+
+```php
+$between = new And_(
+    new GreaterThan(new ScalarOf(5), new ScalarOf(0)),
+    new LessThan(new ScalarOf(5), new ScalarOf(10)),
+);
+// true
+```
+
+To memoize an expensive computation:
+
+```php
+$cached = new Sticky(
+    new ScalarOf(static fn () => expensive_computation()),
+);
+// expensive_computation() runs once on first value()
+```
+
+## Functions
+
+To wrap a callable as a reusable, swappable object:
+
+```php
+$double = new FuncOf(static fn (int $x): int => $x * 2);
+$double->apply(21);
+// 42
+```
+
+To memoize a function by its input:
+
+```php
+$cached = new StickyFunc(
+    new FuncOf(static fn (int $id): User => $repo->find($id)),
+);
+$cached->apply(1); // hits the repo
+$cached->apply(1); // cached
+```
+
+To fall back to another function on failure:
+
+```php
+$safe = new FuncWithFallback(
+    new FuncOf(static fn (string $url): string => http_get($url)),
+    new FuncOf(static fn (string $url): string => ''),
+);
+```
+
+## Design rules
+
+- No `null`, no `static`, no `isset()`/`empty()`
+- All state `readonly`, all classes `final`
+- One class = one behavior; composition over inheritance
+- Computation is lazy until `value()`
+
+Enforced by [`haspadar/sheriff`](https://github.com/haspadar/sheriff) — a curated
+bundle of PHPStan level 9, Psalm with custom EO rules, PHP‑CS‑Fixer, PHPMD,
+PHPMetrics, Infection, and repository lints.
+
+Inspired by [Elegant Objects](https://www.elegantobjects.org) and
+[cactoos](https://github.com/yegor256/cactoos).
+
+## Requirements
+
+PHP **8.3.16+**, **8.4.3+**, or **8.5+**.
+
+## License
 
 [MIT](LICENSE)
