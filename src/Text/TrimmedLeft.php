@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Primus\Text;
 
+use Override;
+
 /**
  * Text with whitespace removed from the left side.
  *
@@ -22,10 +24,12 @@ final readonly class TrimmedLeft extends TextEnvelope
      */
     public function __construct(Text $origin)
     {
-        parent::__construct(
-            new TextOf(
-                (string) preg_replace('/^\s+/u', '', $origin->value()),
-            ),
-        );
+        parent::__construct($origin);
+    }
+
+    #[Override]
+    public function value(): string
+    {
+        return (string) preg_replace('/^\s+/u', '', $this->origin->value());
     }
 }
