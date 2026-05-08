@@ -69,6 +69,7 @@ Objects are immutable, final, and easy to combine.
 | `array_intersect_key($a, $b)` | `new Intersect(new MapOf($a), new MapOf($b))` |
 | `array_combine($k, $v)` | `new Combined(new ListOf(...$k), new ListOf(...$v))` |
 | `array_column($rows, $key)` | `new Plucked(new ListOf(...$rows), $key)` |
+| `array_column($rows, $vk, $ik)` | `new PluckedBy(new ListOf(...$rows), $ik, $vk)` |
 
 ---
 
@@ -92,7 +93,7 @@ FuncWithFallback, Predicate, PredicateOf, Proc, ProcOf, Repeated, StickyFunc
 List_, ListEnvelope, ListOf, Filtered, Joined, Mapped, NoNulls, Plucked, Reversed
 
 ### **Map**
-Map, MapEnvelope, MapOf, BiFiltered, BiMapped, Combined, Diff, Filtered, Intersect, Keys, Mapped, Merged, NoNulls, Values
+Map, MapEnvelope, MapOf, BiFiltered, BiMapped, Combined, Diff, Filtered, Intersect, Keys, Mapped, Merged, NoNulls, PluckedBy, Values
 
 ### **Numeric**
 Number
