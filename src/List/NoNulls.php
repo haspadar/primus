@@ -6,7 +6,7 @@ namespace Primus\List;
 
 use Generator;
 use Override;
-use RuntimeException;
+use Primus\RuntimeException;
 
 /**
  * List that forbids null values.

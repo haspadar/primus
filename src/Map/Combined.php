@@ -7,7 +7,7 @@ namespace Primus\Map;
 use Generator;
 use Override;
 use Primus\List\List_;
-use RuntimeException;
+use Primus\RuntimeException;
 
 /**
  * Map built from two parallel lists used as keys and values.

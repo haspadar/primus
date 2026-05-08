@@ -6,7 +6,7 @@ namespace Primus\Map;
 
 use Generator;
 use Override;
-use RuntimeException;
+use Primus\RuntimeException;
 
 /**
  * Map that forbids null values.

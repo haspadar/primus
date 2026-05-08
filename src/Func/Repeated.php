@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Primus\Func;
 
 use Override;
-use RuntimeException;
+use Primus\RuntimeException;
 
 /**
  * Func applied multiple times sequentially.
