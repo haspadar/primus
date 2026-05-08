@@ -50,13 +50,7 @@ final readonly class Combined implements Map
             ));
         }
 
-        $pairs = [];
-
-        foreach ($keysArray as $position => $key) {
-            $pairs[$key] = $valuesArray[$position];
-        }
-
-        return $pairs;
+        return array_combine($keysArray, $valuesArray);
     }
 
     #[Override]
