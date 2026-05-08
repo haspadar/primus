@@ -30,8 +30,13 @@ final class KeysTest extends TestCase
     public function preservesMixedIntegerAndStringKeys(): void
     {
         $this->assertSame(
-            [0, 'name', 7],
-            (new Keys(new MapOf([0 => 'first', 'name' => 'Alice', 7 => 'lucky'])))->value(),
+            [0, 'name', '01', 7],
+            (new Keys(new MapOf([
+                0 => 'first',
+                'name' => 'Alice',
+                '01' => 'leadingZero',
+                7 => 'lucky',
+            ])))->value(),
         );
     }
 
