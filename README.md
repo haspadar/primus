@@ -71,6 +71,7 @@ Objects are immutable, final, and easy to combine.
 | `array_column($rows, $key)` | `new Plucked(new ListOf(...$rows), $key)` |
 | `array_column($rows, $vk, $ik)` | `new PluckedBy(new ListOf(...$rows), $ik, $vk)` |
 | `sort($a)` | `new Sorted(new ListOf(...$a))` |
+| `usort($a, $cmp)` | `new SortedBy(new ListOf(...$a), new BiFuncOf($cmp))` |
 
 ---
 
@@ -91,7 +92,7 @@ BiFunc, BiFuncOf, BiProc, BiProcOf, Func, FuncEnvelope, FuncOf,
 FuncWithFallback, Predicate, PredicateOf, Proc, ProcOf, Repeated, StickyFunc
 
 ### **List**
-List_, ListEnvelope, ListOf, Filtered, Joined, Mapped, NoNulls, Plucked, Reversed, Sorted
+List_, ListEnvelope, ListOf, Filtered, Joined, Mapped, NoNulls, Plucked, Reversed, Sorted, SortedBy
 
 ### **Map**
 Map, MapEnvelope, MapOf, BiFiltered, BiMapped, Combined, Diff, Filtered, Intersect, Keys, Mapped, Merged, NoNulls, PluckedBy, Values
