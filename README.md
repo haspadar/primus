@@ -63,6 +63,7 @@ Objects are immutable, final, and easy to combine.
 | key-aware pair filtering | `new BiFiltered(new MapOf($a), new BiFuncOf(fn))` |
 | `array_merge($a, $b)` | `new Merged(new MapOf($a), new MapOf($b))` |
 | `array_merge` for lists | `new Joined(new ListOf(...$a), new ListOf(...$b))` |
+| `array_keys($a)` | `new Keys(new MapOf($a))` |
 
 ---
 
@@ -86,7 +87,7 @@ FuncWithFallback, Predicate, PredicateOf, Proc, ProcOf, Repeated, StickyFunc
 List_, ListEnvelope, ListOf, Filtered, Joined, Mapped, NoNulls, Reversed
 
 ### **Map**
-Map, MapEnvelope, MapOf, BiFiltered, BiMapped, Filtered, Mapped, Merged, NoNulls
+Map, MapEnvelope, MapOf, BiFiltered, BiMapped, Filtered, Keys, Mapped, Merged, NoNulls
 
 ### **Numeric**
 Number
