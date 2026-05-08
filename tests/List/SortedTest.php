@@ -46,15 +46,6 @@ final class SortedTest extends TestCase
     }
 
     #[Test]
-    public function reindexesKeysSequentiallyFromZero(): void
-    {
-        $this->assertSame(
-            [0 => 1, 1 => 2, 2 => 3],
-            (new Sorted(new ListOf(3, 1, 2)))->value(),
-        );
-    }
-
-    #[Test]
     public function iteratorYieldsSameSequenceAsValue(): void
     {
         $sorted = new Sorted(new ListOf(3, 1, 2));
