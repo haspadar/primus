@@ -23,16 +23,6 @@ use Override;
  */
 final readonly class Sorted extends ListEnvelope
 {
-    /**
-     * Ctor.
-     *
-     * @param List_<T> $origin The list to order.
-     */
-    public function __construct(List_ $origin)
-    {
-        parent::__construct($origin);
-    }
-
     #[Override]
     public function value(): array
     {
