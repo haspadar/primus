@@ -29,13 +29,13 @@ Primus reads top to bottom — each step is a named object:
 ```php
 (new Lowered(
     new Trimmed(
-        new Sub($s, 0, 5),
+        new Sub(new TextOf($s), 0, 5),
     ),
 ))->value();
 ```
 
-Computation is deferred until `value()` is called. The pipeline is a value
-itself: store it, pass it around, decorate it further.
+The pipeline is a value itself: store it, pass it around, decorate it further.
+Reading the result is always explicit — call `value()`.
 
 ## Why?
 
@@ -70,14 +70,14 @@ composer require haspadar/primus
 To trim and lowercase:
 
 ```php
-$text = (new Lowered(new Trimmed('  Hello  ')))->value();
+$text = (new Lowered(new Trimmed(new TextOf('  Hello  '))))->value();
 // "hello"
 ```
 
 To take a substring:
 
 ```php
-$text = (new Sub('Hello, world!', 0, 5))->value();
+$text = (new Sub(new TextOf('Hello, world!'), 0, 5))->value();
 // "Hello"
 ```
 
@@ -86,25 +86,25 @@ $text = (new Sub('Hello, world!', 0, 5))->value();
 To filter and sort:
 
 ```php
-$big = new Sorted(
+$big = (new Sorted(
     new Filtered(
         new ListOf(3, 1, 4, 1, 5, 9, 2, 6),
         new PredicateOf(static fn (int $x): bool => $x > 2),
     ),
-);
+))->value();
 // [3, 4, 5, 6, 9]
 ```
 
 To pluck a column from a list of rows:
 
 ```php
-$names = new Plucked(
+$names = (new Plucked(
     new ListOf(
         ['id' => 1, 'name' => 'Alice'],
         ['id' => 2, 'name' => 'Bob'],
     ),
     'name',
-);
+))->value();
 // ['Alice', 'Bob']
 ```
 
@@ -113,24 +113,24 @@ $names = new Plucked(
 To merge two maps with last‑wins precedence:
 
 ```php
-$merged = new Merged(
+$merged = (new Merged(
     new MapOf(['a' => 1, 'b' => 2]),
     new MapOf(['b' => 99, 'c' => 3]),
-);
+))->value();
 // ['a' => 1, 'b' => 99, 'c' => 3]
 ```
 
-To index rows by one column with values from another:
+To index a list of rows by one column, with values from another:
 
 ```php
-$byId = new PluckedBy(
+$byId = (new PluckedBy(
     new ListOf(
         ['id' => 1, 'name' => 'Alice'],
         ['id' => 2, 'name' => 'Bob'],
     ),
     'id',
     'name',
-);
+))->value();
 // [1 => 'Alice', 2 => 'Bob']
 ```
 
@@ -139,10 +139,10 @@ $byId = new PluckedBy(
 To compose lazy boolean logic:
 
 ```php
-$between = new And_(
-    new GreaterThan(new ScalarOf(5), new ScalarOf(0)),
-    new LessThan(new ScalarOf(5), new ScalarOf(10)),
-);
+$between = (new And_(
+    new GreaterThan(new Constant(5), new Constant(0)),
+    new LessThan(new Constant(5), new Constant(10)),
+))->value();
 // true
 ```
 
@@ -152,7 +152,8 @@ To memoize an expensive computation:
 $cached = new Sticky(
     new ScalarOf(static fn () => expensive_computation()),
 );
-// expensive_computation() runs once on first value()
+$cached->value(); // expensive_computation() runs once
+$cached->value(); // cached
 ```
 
 ## Functions
@@ -186,7 +187,7 @@ $safe = new FuncWithFallback(
 
 ## Design rules
 
-- No `null`, no `static`, no `isset()`/`empty()`
+- No `null`, no `static` methods or properties, no `isset()`/`empty()`
 - All state `readonly`, all classes `final`
 - One class = one behavior; composition over inheritance
 - Computation is lazy until `value()`
@@ -200,7 +201,7 @@ Inspired by [Elegant Objects](https://www.elegantobjects.org) and
 
 ## Requirements
 
-PHP **8.3.16+**, **8.4.3+**, or **8.5+**.
+PHP **8.3+**.
 
 ## License
 
