@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Primus\Text;
 
 use Primus\Scalar\ScalarOf;
+use Primus\Scalar\Sticky;
 
 /**
  * Randomly generated {@see Text}.
@@ -31,22 +32,24 @@ final readonly class RandomText extends TextEnvelope
         string $alphabet = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789',
     ) {
         parent::__construct(
-            new TextOf(
-                (new ScalarOf(
-                    static function () use ($length, $alphabet): string {
-                        $source = $alphabet !== ''
-                            ? $alphabet
-                            : 'a';
-                        $size = mb_strlen($source, 'UTF-8');
-                        $chars = [];
+            new TextOfScalar(
+                new Sticky(
+                    new ScalarOf(
+                        static function () use ($length, $alphabet): string {
+                            $source = $alphabet !== ''
+                                ? $alphabet
+                                : 'a';
+                            $size = mb_strlen($source, 'UTF-8');
+                            $chars = [];
 
-                        for ($i = 0; $i < max(0, $length); $i++) {
-                            $chars[] = mb_substr($source, random_int(0, $size - 1), 1, 'UTF-8');
-                        }
+                            for ($i = 0; $i < max(0, $length); $i++) {
+                                $chars[] = mb_substr($source, random_int(0, $size - 1), 1, 'UTF-8');
+                            }
 
-                        return implode('', $chars);
-                    },
-                ))->value(),
+                            return implode('', $chars);
+                        },
+                    ),
+                ),
             ),
         );
     }
