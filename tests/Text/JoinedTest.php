@@ -70,4 +70,24 @@ final class JoinedTest extends TestCase
 
         self::assertSame(0, $calls);
     }
+
+    #[Test]
+    public function resolvesEachPartWhenJoinedValueIsCalled(): void
+    {
+        $calls = 0;
+        $part = new class ($calls) implements Text {
+            public function __construct(private int &$calls) {}
+
+            public function value(): string
+            {
+                $this->calls++;
+
+                return 'x';
+            }
+        };
+        $joined = new Joined(',', [$part, $part]);
+        $joined->value();
+
+        self::assertSame(2, $calls);
+    }
 }
