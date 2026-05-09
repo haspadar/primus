@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Primus\Text;
 
-use Override;
+use Primus\Func\FuncOf;
 
 /**
  * Text in uppercase.
@@ -24,12 +24,11 @@ final readonly class Uppered extends TextEnvelope
      */
     public function __construct(Text $origin)
     {
-        parent::__construct($origin);
-    }
-
-    #[Override]
-    public function value(): string
-    {
-        return mb_strtoupper($this->origin->value(), 'UTF-8');
+        parent::__construct(
+            new Mapped(
+                $origin,
+                new FuncOf(static fn(string $s): string => mb_strtoupper($s, 'UTF-8')),
+            ),
+        );
     }
 }
