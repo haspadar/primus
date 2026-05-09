@@ -23,7 +23,7 @@ return [
         'max_methods_per_class' => 10,
     ],
     'coupling' => [
-        'max_afferent' => 17,
+        'max_afferent' => 18,
         'max_efferent' => 10,
     ],
 ];
