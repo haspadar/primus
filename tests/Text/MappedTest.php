@@ -29,7 +29,7 @@ final class MappedTest extends TestCase
     public function defersFunctionUntilValueIsCalled(): void
     {
         $calls = 0;
-        new Mapped(
+        new Mapped( // NOSONAR — instantiation is the subject under test for the lazy contract
             new TextOf('x'),
             new FuncOf(static function (string $s) use (&$calls): string {
                 $calls++;
