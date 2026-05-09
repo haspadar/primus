@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Primus\Text;
 
+use Override;
+
 /**
  * Text without HTML tags.
  *
@@ -22,10 +24,12 @@ final readonly class WithoutTags extends TextEnvelope
      */
     public function __construct(Text $origin)
     {
-        parent::__construct(
-            new TextOf(
-                strip_tags($origin->value()),
-            ),
-        );
+        parent::__construct($origin);
+    }
+
+    #[Override]
+    public function value(): string
+    {
+        return strip_tags($this->origin->value());
     }
 }

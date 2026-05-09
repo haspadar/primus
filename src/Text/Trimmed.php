@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Primus\Text;
 
+use Override;
+
 /**
  * Text without leading or trailing whitespace.
  *
@@ -24,8 +26,12 @@ final readonly class Trimmed extends TextEnvelope
      */
     public function __construct(Text $origin)
     {
-        parent::__construct(
-            new TextOf(trim($origin->value())),
-        );
+        parent::__construct($origin);
+    }
+
+    #[Override]
+    public function value(): string
+    {
+        return trim($this->origin->value());
     }
 }

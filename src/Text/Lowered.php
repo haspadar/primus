@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Primus\Text;
 
+use Override;
+
 /**
  * Text in lowercase.
  *
@@ -24,8 +26,12 @@ final readonly class Lowered extends TextEnvelope
      */
     public function __construct(Text $origin)
     {
-        parent::__construct(
-            new TextOf(mb_strtolower($origin->value(), 'UTF-8')),
-        );
+        parent::__construct($origin);
+    }
+
+    #[Override]
+    public function value(): string
+    {
+        return mb_strtolower($this->origin->value(), 'UTF-8');
     }
 }
