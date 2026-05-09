@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Primus\Text;
 
+use Primus\Scalar\ScalarOf;
+
 /**
  * Text joined from multiple Text parts with a separator.
  *
@@ -19,19 +21,19 @@ final readonly class Joined extends TextEnvelope
      * Ctor.
      *
      * @param string $separator The glue inserted between parts.
-     * @param iterable<Text> $parts The texts to join.
+     * @param list<Text> $parts The texts to join.
      */
-    public function __construct(string $separator, iterable $parts)
+    public function __construct(string $separator, array $parts)
     {
         parent::__construct(
-            new TextOf(
-                implode(
+            new TextOfScalar(
+                new ScalarOf(static fn(): string => implode(
                     $separator,
                     array_map(
                         static fn(Text $t): string => $t->value(),
-                        is_array($parts) ? $parts : iterator_to_array($parts, false),
+                        $parts,
                     ),
-                ),
+                )),
             ),
         );
     }
