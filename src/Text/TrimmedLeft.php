@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Primus\Text;
 
+use InvalidArgumentException;
 use Override;
 
 /**
@@ -30,6 +31,7 @@ final readonly class TrimmedLeft extends TextEnvelope
     #[Override]
     public function value(): string
     {
-        return (string) preg_replace('/^\s+/u', '', $this->origin->value());
+        return preg_replace('/^\s+/u', '', $this->origin->value())
+            ?? throw new InvalidArgumentException('Malformed UTF-8 input');
     }
 }
