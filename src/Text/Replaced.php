@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Primus\Text;
 
+use Primus\Func\FuncOf;
+
 /**
  * Text with replaced substrings.
  *
@@ -31,8 +33,9 @@ final readonly class Replaced extends TextEnvelope
     public function __construct(Text $origin, string|array $search, string|array $replacement)
     {
         parent::__construct(
-            new TextOf(
-                str_replace($search, $replacement, $origin->value()),
+            new Mapped(
+                $origin,
+                new FuncOf(static fn(string $s): string => str_replace($search, $replacement, $s)),
             ),
         );
     }

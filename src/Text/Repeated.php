@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Primus\Text;
 
+use Primus\Func\FuncOf;
+
 /**
  * Text repeated multiple times.
  *
@@ -24,8 +26,9 @@ final readonly class Repeated extends TextEnvelope
     public function __construct(Text $origin, int $count)
     {
         parent::__construct(
-            new TextOf(
-                str_repeat($origin->value(), max(0, $count)),
+            new Mapped(
+                $origin,
+                new FuncOf(static fn(string $s): string => str_repeat($s, max(0, $count))),
             ),
         );
     }
