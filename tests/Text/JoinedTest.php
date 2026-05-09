@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace Primus\Tests\Text;
 
-use Generator;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Primus\Tests\Constraint\HasTextValue;
 use Primus\Text\Joined;
+use Primus\Text\Text;
 use Primus\Text\TextOf;
 
 /**
@@ -44,7 +44,7 @@ final class JoinedTest extends TestCase
     }
 
     #[Test]
-    public function joinsEmptyIterable(): void
+    public function joinsEmptyArray(): void
     {
         self::assertThat(
             new Joined(', ', []),
@@ -53,29 +53,41 @@ final class JoinedTest extends TestCase
     }
 
     #[Test]
-    public function joinsIteratorIgnoresKeys(): void
+    public function defersValueResolutionUntilJoinedValueIsCalled(): void
     {
-        self::assertThat(
-            new Joined('-', (function (): Generator {
-                yield 'x' => new TextOf('A');
-                yield 'y' => new TextOf('B');
-            })()),
-            new HasTextValue('A-B')
-        );
+        $calls = 0;
+        $part = new class ($calls) implements Text {
+            public function __construct(private int &$calls) {}
+
+            public function value(): string
+            {
+                $this->calls++;
+
+                return 'x';
+            }
+        };
+        new Joined(',', [$part, $part]); // NOSONAR — instantiation is the subject under test for the lazy contract
+
+        self::assertSame(0, $calls);
     }
 
     #[Test]
-    public function joinsIteratorWithDuplicateKeys(): void
+    public function resolvesEachPartWhenJoinedValueIsCalled(): void
     {
-        self::assertThat(
-            new Joined(
-                ',',
-                (function (): Generator {
-                    yield 0 => new TextOf('first');
-                    yield 0 => new TextOf('second');
-                })()
-            ),
-            new HasTextValue('first,second')
-        );
+        $calls = 0;
+        $part = new class ($calls) implements Text {
+            public function __construct(private int &$calls) {}
+
+            public function value(): string
+            {
+                $this->calls++;
+
+                return 'x';
+            }
+        };
+        $joined = new Joined(',', [$part, $part]);
+        $joined->value();
+
+        self::assertSame(2, $calls);
     }
 }
