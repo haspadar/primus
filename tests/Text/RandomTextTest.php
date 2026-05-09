@@ -77,4 +77,12 @@ final class RandomTextTest extends TestCase
             new MatchesPattern('/^[a]+$/')
         );
     }
+
+    #[Test]
+    public function returnsTheSameValueOnRepeatedCalls(): void
+    {
+        $text = new RandomText(16);
+
+        self::assertSame($text->value(), $text->value());
+    }
 }
