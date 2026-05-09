@@ -40,4 +40,21 @@ final class MappedTest extends TestCase
 
         self::assertSame(0, $calls);
     }
+
+    #[Test]
+    public function appliesFunctionWhenValueIsCalled(): void
+    {
+        $calls = 0;
+        $mapped = new Mapped(
+            new TextOf('x'),
+            new FuncOf(static function (string $s) use (&$calls): string {
+                $calls++;
+
+                return $s;
+            }),
+        );
+        $mapped->value();
+
+        self::assertSame(1, $calls);
+    }
 }
