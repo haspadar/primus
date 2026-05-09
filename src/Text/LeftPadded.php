@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Primus\Text;
 
+use Primus\Func\FuncOf;
+
 /**
  * Text with left padding.
  *
@@ -28,13 +30,9 @@ final readonly class LeftPadded extends TextEnvelope
     public function __construct(Text $origin, int $length, string $padding)
     {
         parent::__construct(
-            new TextOf(
-                str_pad(
-                    $origin->value(),
-                    $length,
-                    $padding,
-                    STR_PAD_LEFT,
-                ),
+            new Mapped(
+                $origin,
+                new FuncOf(static fn(string $s): string => str_pad($s, $length, $padding, STR_PAD_LEFT)),
             ),
         );
     }
