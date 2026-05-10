@@ -4,9 +4,12 @@ declare(strict_types=1);
 
 namespace Primus\Tests\List;
 
+use Generator;
+use LogicException;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Primus\List\ListOf;
+use Primus\List\List_;
 use Primus\List\Unique;
 
 final class UniqueTest extends TestCase
@@ -79,5 +82,30 @@ final class UniqueTest extends TestCase
     public function reportsCountOfDistinctValues(): void
     {
         $this->assertCount(3, new Unique(new ListOf(1, 1, 2, 3, 3, 2)));
+    }
+
+    #[Test]
+    public function defersOriginValueResolutionUntilValueIsCalled(): void
+    {
+        $origin = new class () implements List_ {
+            public function value(): array
+            {
+                throw new LogicException('value() must not be called by Unique constructor');
+            }
+
+            public function count(): int
+            {
+                return 0;
+            }
+
+            public function getIterator(): Generator
+            {
+                yield from [];
+            }
+        };
+
+        new Unique($origin); // NOSONAR — instantiation is the subject under test for the lazy contract
+
+        $this->expectNotToPerformAssertions();
     }
 }
