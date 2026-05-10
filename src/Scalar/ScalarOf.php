@@ -23,6 +23,7 @@ use Override;
  * @template T
  * @implements Scalar<T>
  * @since 0.1
+ * @phpstan-ignore haspadar.afferentCoupling (base lazy primitive for every Scalar decorator; high coupling is intrinsic to the closure-wrap pattern)
  */
 final readonly class ScalarOf implements Scalar
 {
