@@ -83,4 +83,13 @@ final class SlicedTest extends TestCase
         }
         $this->assertSame(['b' => 2], $collected);
     }
+
+    #[Test]
+    public function reportsCountOfSlicedEntries(): void
+    {
+        $this->assertCount(
+            2,
+            new Sliced(new MapOf(['a' => 1, 'b' => 2, 'c' => 3, 'd' => 4]), 1, 2),
+        );
+    }
 }
