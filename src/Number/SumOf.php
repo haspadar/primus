@@ -37,13 +37,7 @@ final readonly class SumOf implements Number
     #[Override]
     public function asInt(): int
     {
-        $total = 0;
-
-        foreach ($this->addends as $addend) {
-            $total += $addend->asInt();
-        }
-
-        return $total;
+        return (int) $this->asFloat();
     }
 
     #[Override]

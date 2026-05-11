@@ -30,6 +30,12 @@ final class SumOfTest extends TestCase
     }
 
     #[Test]
+    public function truncatesSumAfterAddingFloatsRatherThanEachAddend(): void
+    {
+        $this->assertSame(1, (new SumOf(new NumberOf(0.9), new NumberOf(0.9)))->asInt());
+    }
+
+    #[Test]
     public function sumsAcrossManyOperands(): void
     {
         $this->assertSame(
