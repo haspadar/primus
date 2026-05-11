@@ -49,14 +49,17 @@ final readonly class DiffAssoc implements Map
     #[Override]
     public function value(): array
     {
+        $excludedValues = array_map(
+            static fn(Map $source): array => $source->value(),
+            $this->excluded,
+        );
+
         $kept = [];
 
         foreach ($this->first->value() as $key => $value) {
             $matched = false;
 
-            foreach ($this->excluded as $source) {
-                $other = $source->value();
-
+            foreach ($excludedValues as $other) {
                 if (array_key_exists($key, $other) && $other[$key] === $value) {
                     $matched = true;
 
