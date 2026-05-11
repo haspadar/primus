@@ -1,0 +1,60 @@
+<?php
+
+declare(strict_types=1);
+
+namespace Primus\Number;
+
+use Override;
+
+/**
+ * Sum of one or more Number addends.
+ *
+ * Each operand contributes its float projection; the int accessor
+ * truncates the resulting sum toward zero.
+ *
+ * Example:
+ *     $sum = new SumOf(new NumberOf(1), new NumberOf(2.5));
+ *     $sum->asInt(); // 3 (truncate)
+ *     $sum->asFloat(); // 3.5
+ *
+ * @since 0.3
+ */
+final readonly class SumOf implements Number
+{
+    /** @var array<array-key, Number> */
+    private array $addends;
+
+    /**
+     * Ctor.
+     *
+     * @param Number ...$addends The numbers to add.
+     */
+    public function __construct(Number ...$addends)
+    {
+        $this->addends = $addends;
+    }
+
+    #[Override]
+    public function asInt(): int
+    {
+        $total = 0;
+
+        foreach ($this->addends as $addend) {
+            $total += $addend->asInt();
+        }
+
+        return $total;
+    }
+
+    #[Override]
+    public function asFloat(): float
+    {
+        $total = (float) 0;
+
+        foreach ($this->addends as $addend) {
+            $total += $addend->asFloat();
+        }
+
+        return $total;
+    }
+}
