@@ -29,16 +29,6 @@ use Override;
  */
 final readonly class Unique extends MapEnvelope
 {
-    /**
-     * Ctor.
-     *
-     * @param Map<K, V> $origin The map to deduplicate.
-     */
-    public function __construct(Map $origin)
-    {
-        parent::__construct($origin);
-    }
-
     #[Override]
     public function value(): array
     {

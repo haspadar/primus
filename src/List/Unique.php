@@ -27,16 +27,6 @@ use Override;
  */
 final readonly class Unique extends ListEnvelope
 {
-    /**
-     * Ctor.
-     *
-     * @param List_<T> $origin The list to deduplicate.
-     */
-    public function __construct(List_ $origin)
-    {
-        parent::__construct($origin);
-    }
-
     #[Override]
     public function value(): array
     {

@@ -21,16 +21,6 @@ use Primus\RuntimeException;
  */
 final readonly class NoNulls extends MapEnvelope
 {
-    /**
-     * Ctor.
-     *
-     * @param Map<K, V> $origin The map whose null values should be rejected.
-     */
-    public function __construct(Map $origin)
-    {
-        parent::__construct($origin);
-    }
-
     #[Override]
     public function value(): array
     {
