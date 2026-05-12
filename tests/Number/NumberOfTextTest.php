@@ -24,9 +24,15 @@ final class NumberOfTextTest extends TestCase
     }
 
     #[Test]
-    public function truncatesParsedFloatTowardZero(): void
+    public function truncatesParsedPositiveFloatTowardZero(): void
     {
         $this->assertSame(3, (new NumberOfText(new TextOf('3.7')))->asInt());
+    }
+
+    #[Test]
+    public function truncatesParsedNegativeFloatTowardZero(): void
+    {
+        $this->assertSame(-3, (new NumberOfText(new TextOf('-3.7')))->asInt());
     }
 
     #[Test]
