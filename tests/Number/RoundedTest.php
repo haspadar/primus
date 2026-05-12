@@ -36,9 +36,9 @@ final class RoundedTest extends TestCase
     }
 
     #[Test]
-    public function intAccessorTruncatesRoundedFloat(): void
+    public function intAccessorDelegatesToOriginWithoutRounding(): void
     {
-        $this->assertSame(3, (new Rounded(new NumberOf(3.49), 1))->asInt());
+        $this->assertSame(3, (new Rounded(new NumberOf(3.7), 0))->asInt());
     }
 
     #[Test]
