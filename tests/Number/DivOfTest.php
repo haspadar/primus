@@ -8,6 +8,7 @@ use DivisionByZeroError;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Primus\Number\DivOf;
+use Primus\Number\MultOf;
 use Primus\Number\NumberOf;
 
 final class DivOfTest extends TestCase
@@ -37,11 +38,14 @@ final class DivOfTest extends TestCase
     }
 
     #[Test]
-    public function percentFormulaCombinesWithMultAndSum(): void
+    public function percentFormulaComposesDivWithMult(): void
     {
         $this->assertSame(
             87.5,
-            (new DivOf(new NumberOf(7), new NumberOf(8)))->asFloat() * 100,
+            (new MultOf(
+                new DivOf(new NumberOf(7), new NumberOf(8)),
+                new NumberOf(100),
+            ))->asFloat(),
         );
     }
 
