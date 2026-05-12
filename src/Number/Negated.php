@@ -16,8 +16,15 @@ use Override;
  *
  * @since 0.3
  */
-final readonly class Negated extends NumberEnvelope
+final readonly class Negated implements Number
 {
+    /**
+     * Ctor.
+     *
+     * @param Number $origin The number to negate.
+     */
+    public function __construct(private Number $origin) {}
+
     #[Override]
     public function asInt(): int
     {

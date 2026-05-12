@@ -10,9 +10,8 @@ use Override;
  * Number rounded to the given decimal precision on the float projection.
  *
  * Rounding uses PHP's default half-away-from-zero mode. The int accessor
- * is inherited from the envelope: rounding to a decimal precision is
- * undefined for the integer projection, so it returns the origin int
- * unchanged.
+ * returns the origin int unchanged: rounding to a decimal precision is
+ * undefined for the integer projection.
  *
  * Example:
  *     $n = new Rounded(new NumberOf(3.14159), 2);
@@ -21,7 +20,7 @@ use Override;
  *
  * @since 0.3
  */
-final readonly class Rounded extends NumberEnvelope
+final readonly class Rounded implements Number
 {
     /**
      * Ctor.
@@ -29,9 +28,12 @@ final readonly class Rounded extends NumberEnvelope
      * @param Number $origin The number to round.
      * @param int $precision The number of decimal digits to keep.
      */
-    public function __construct(Number $origin, private int $precision)
+    public function __construct(private Number $origin, private int $precision) {}
+
+    #[Override]
+    public function asInt(): int
     {
-        parent::__construct($origin);
+        return $this->origin->asInt();
     }
 
     #[Override]
