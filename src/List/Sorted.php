@@ -19,7 +19,6 @@ use Override;
  *
  * @template T
  * @extends ListEnvelope<T>
- * @since 0.3
  */
 final readonly class Sorted extends ListEnvelope
 {

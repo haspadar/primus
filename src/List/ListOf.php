@@ -16,7 +16,6 @@ use Override;
  *
  * @template T
  * @implements List_<T>
- * @since 0.3
  */
 final readonly class ListOf implements List_
 {

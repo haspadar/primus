@@ -12,8 +12,6 @@ use Primus\Scalar\ScalarOf;
  * Example:
  *     $text = new Joined(', ', [new TextOf('a'), new TextOf('b'), new TextOf('c')]);
  *     echo $text->value(); // 'a, b, c'
- *
- * @since 0.2
  */
 final readonly class Joined extends TextEnvelope
 {

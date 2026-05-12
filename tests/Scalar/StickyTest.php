@@ -11,7 +11,6 @@ use Primus\Scalar\Sticky;
 use Primus\Tests\Constraint\HasScalarValue;
 
 /**
- * @since 0.2
  */
 final class StickyTest extends TestCase
 {

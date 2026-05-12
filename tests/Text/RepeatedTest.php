@@ -11,7 +11,6 @@ use Primus\Text\Repeated;
 use Primus\Text\TextOf;
 
 /**
- * @since 0.2
  */
 final class RepeatedTest extends TestCase
 {

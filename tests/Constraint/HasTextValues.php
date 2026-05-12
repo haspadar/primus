@@ -21,7 +21,6 @@ use Primus\Text\Text;
  * Expected: ["a","b"]
  * But was:  ["a","c"]
  *
- * @since 0.2
  */
 final class HasTextValues extends Constraint
 {

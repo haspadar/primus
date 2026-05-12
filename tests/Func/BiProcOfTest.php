@@ -9,7 +9,6 @@ use PHPUnit\Framework\TestCase;
 use Primus\Func\BiProcOf;
 
 /**
- * @since 0.3
  */
 final class BiProcOfTest extends TestCase
 {

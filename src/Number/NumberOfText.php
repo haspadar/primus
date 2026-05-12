@@ -17,8 +17,6 @@ use Primus\Text\Text;
  *     $n = new NumberOfText(new TextOf('3.14'));
  *     $n->asInt(); // 3
  *     $n->asFloat(); // 3.14
- *
- * @since 0.3
  */
 final readonly class NumberOfText implements Number
 {

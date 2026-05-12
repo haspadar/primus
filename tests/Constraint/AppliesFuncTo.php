@@ -17,7 +17,6 @@ use Primus\Func\Func;
  *     new AppliesFuncTo(3, new EqualsValue(6))
  * );
  *
- * @since 0.5
  */
 final class AppliesFuncTo extends Constraint
 {

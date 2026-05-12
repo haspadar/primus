@@ -17,7 +17,6 @@ use Throwable;
  *     new ThrowsClosure(\RuntimeException::class)
  * );
  *
- * @since 0.5
  */
 final class ThrowsClosure extends Constraint
 {

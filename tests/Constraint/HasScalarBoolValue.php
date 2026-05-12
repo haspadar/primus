@@ -13,7 +13,6 @@ use Primus\Scalar\Scalar;
  * Example:
  * self::assertThat(new True_(), new HasBoolValue(true));
  *
- * @since 0.2
  */
 final class HasScalarBoolValue extends Constraint
 {

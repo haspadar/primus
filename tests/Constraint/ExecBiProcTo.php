@@ -17,7 +17,6 @@ use Primus\Func\BiProc;
  *     new BiProcOf(...)
  * );
  *
- * @since 0.5
  */
 final class ExecBiProcTo extends Constraint
 {

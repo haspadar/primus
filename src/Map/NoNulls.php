@@ -17,7 +17,6 @@ use Primus\RuntimeException;
  * @template K of array-key
  * @template V
  * @extends MapEnvelope<K, V>
- * @since 0.3
  */
 final readonly class NoNulls extends MapEnvelope
 {

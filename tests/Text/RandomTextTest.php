@@ -11,7 +11,6 @@ use Primus\Tests\Constraint\MatchesPattern;
 use Primus\Text\RandomText;
 
 /**
- * @since 0.2
  */
 final class RandomTextTest extends TestCase
 {

@@ -11,7 +11,6 @@ use Primus\Tests\Constraint\HasTextValue;
 use Primus\Text\TextOfScalar;
 
 /**
- * @since 0.2
  */
 final class TextOfScalarTest extends TestCase
 {

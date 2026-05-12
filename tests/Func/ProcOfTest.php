@@ -11,7 +11,6 @@ use Primus\Tests\Constraint\HasCallCount;
 use Primus\Tests\CountCalls;
 
 /**
- * @since 0.3
  */
 final class ProcOfTest extends TestCase
 {

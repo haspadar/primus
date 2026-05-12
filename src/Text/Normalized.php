@@ -16,8 +16,6 @@ use Primus\Scalar\ScalarOf;
  * Example:
  *     $text = new Normalized(new TextOf(" Hello \n\t world "));
  *     echo $text->value(); // 'Hello world'
- *
- * @since 0.2
  */
 final readonly class Normalized extends TextEnvelope
 {

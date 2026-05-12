@@ -11,7 +11,6 @@ use Primus\Text\LeftPadded;
 use Primus\Text\TextOf;
 
 /**
- * @since 0.2
  */
 final class LeftPaddedTest extends TestCase
 {

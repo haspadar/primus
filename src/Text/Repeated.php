@@ -12,8 +12,6 @@ use Primus\Func\FuncOf;
  * Example:
  *     $text = new Repeated(new TextOf('xo'), 3);
  *     echo $text->value(); // 'xoxoxo'
- *
- * @since 0.2
  */
 final readonly class Repeated extends TextEnvelope
 {

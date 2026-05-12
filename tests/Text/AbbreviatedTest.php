@@ -11,7 +11,6 @@ use Primus\Text\Abbreviated;
 use Primus\Text\TextOf;
 
 /**
- * @since 0.2
  */
 final class AbbreviatedTest extends TestCase
 {

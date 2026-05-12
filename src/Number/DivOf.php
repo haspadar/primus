@@ -18,8 +18,6 @@ use Override;
  *     $q = new DivOf(new NumberOf(7), new NumberOf(2));
  *     $q->asFloat(); // 3.5
  *     $q->asInt(); // 3
- *
- * @since 0.3
  */
 final readonly class DivOf implements Number
 {

@@ -11,7 +11,6 @@ use Primus\Text\Capitalized;
 use Primus\Text\TextOf;
 
 /**
- * @since 0.2
  */
 final class CapitalizedTest extends TestCase
 {

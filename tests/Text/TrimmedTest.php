@@ -11,7 +11,6 @@ use Primus\Text\TextOf;
 use Primus\Text\Trimmed;
 
 /**
- * @since 0.2
  */
 final class TrimmedTest extends TestCase
 {

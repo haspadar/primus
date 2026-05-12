@@ -19,7 +19,6 @@ use Primus\RuntimeException;
  *
  * @template T
  * @implements Func<T, T>
- * @since 0.3
  */
 final readonly class Repeated implements Func
 {

@@ -11,7 +11,6 @@ use Primus\Func\Repeated;
 use Primus\Tests\Constraint\ThrowsClosure;
 
 /**
- * @since 0.3
  */
 final class RepeatedTest extends TestCase
 {

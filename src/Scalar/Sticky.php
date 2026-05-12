@@ -22,7 +22,6 @@ use Override;
  *
  * @template T
  * @implements Scalar<T>
- * @since 0.2
  */
 final class Sticky implements Scalar
 {

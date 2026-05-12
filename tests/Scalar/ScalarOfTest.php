@@ -12,7 +12,6 @@ use Primus\Tests\Constraint\HasScalarValue;
 use Primus\Tests\CountCalls;
 
 /**
- * @since 0.2
  */
 final class ScalarOfTest extends TestCase
 {

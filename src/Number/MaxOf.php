@@ -16,8 +16,6 @@ use UnderflowException;
  * Example:
  *     $max = new MaxOf(new NumberOf(3), new NumberOf(-1), new NumberOf(2));
  *     $max->asInt(); // 3
- *
- * @since 0.3
  */
 final readonly class MaxOf implements Number
 {

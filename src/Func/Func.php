@@ -9,7 +9,6 @@ namespace Primus\Func;
  *
  * @template I
  * @template-covariant O
- * @since 0.3
  */
 interface Func
 {

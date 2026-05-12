@@ -25,7 +25,6 @@ use Override;
  * @template K of array-key
  * @template V
  * @extends MapEnvelope<K, V>
- * @since 0.3
  */
 final readonly class Sliced extends MapEnvelope
 {

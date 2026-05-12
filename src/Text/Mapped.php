@@ -16,8 +16,6 @@ use Primus\Func\Func;
  *         new FuncOf(strtoupper(...)),
  *     );
  *     echo $text->value(); // 'HELLO'
- *
- * @since 0.3
  */
 final readonly class Mapped extends TextEnvelope
 {

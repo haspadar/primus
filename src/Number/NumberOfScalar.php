@@ -17,8 +17,6 @@ use Primus\Scalar\Scalar;
  *     $n = new NumberOfScalar(new ScalarOf(static fn(): float => 2.7));
  *     $n->asInt(); // 2
  *     $n->asFloat(); // 2.7
- *
- * @since 0.3
  */
 final readonly class NumberOfScalar implements Number
 {

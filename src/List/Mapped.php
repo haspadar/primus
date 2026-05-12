@@ -24,7 +24,6 @@ use Primus\Func\Func;
  * @template X
  * @template Y
  * @implements List_<Y>
- * @since 0.3
  */
 final readonly class Mapped implements List_
 {

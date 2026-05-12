@@ -8,7 +8,6 @@ namespace Primus\Func;
  * Procedure from X with no result.
  *
  * @template X
- * @since 0.3
  */
 interface Proc
 {

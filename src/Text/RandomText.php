@@ -16,8 +16,6 @@ use Primus\Scalar\Sticky;
  * Example:
  *     $text = new RandomText(8);
  *     echo $text->value(); // e.g. 'aZ8mKp2Q'
- *
- * @since 0.2
  */
 final readonly class RandomText extends TextEnvelope
 {

@@ -11,7 +11,6 @@ use Primus\Text\Lowered;
 use Primus\Text\TextOf;
 
 /**
- * @since 0.2
  */
 final class LoweredTest extends TestCase
 {

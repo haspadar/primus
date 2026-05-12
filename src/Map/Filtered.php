@@ -24,7 +24,6 @@ use Primus\Func\Predicate;
  * @template K of array-key
  * @template V
  * @extends MapEnvelope<K, V>
- * @since 0.3
  */
 final readonly class Filtered extends MapEnvelope
 {

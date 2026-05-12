@@ -12,7 +12,6 @@ use Primus\Scalar\Scalar;
  *
  * Supports int, float, string, and bool.
  *
- * @since 0.2
  */
 final class HasScalarValue extends Constraint
 {

@@ -16,7 +16,6 @@ use InvalidArgumentException;
  *     echo $and->value(); // false
  *
  * @extends ScalarEnvelope<bool>
- * @since 0.2
  */
 final readonly class And_ extends ScalarEnvelope
 {

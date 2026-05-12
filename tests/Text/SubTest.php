@@ -11,7 +11,6 @@ use Primus\Text\Sub;
 use Primus\Text\TextOf;
 
 /**
- * @since 0.2
  */
 final class SubTest extends TestCase
 {

@@ -19,7 +19,6 @@ use Primus\Text\Text;
  * Expected length: 5
  * But was:         3
  *
- * @since 0.2
  */
 final class HasSize extends Constraint
 {

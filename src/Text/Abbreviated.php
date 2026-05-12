@@ -15,8 +15,6 @@ use Primus\Scalar\ScalarOf;
  * Example:
  *     $text = new Abbreviated(new TextOf('Hello, world!'), 8);
  *     echo $text->value(); // 'Hello, w…'
- *
- * @since 0.1
  */
 final readonly class Abbreviated extends TextEnvelope
 {

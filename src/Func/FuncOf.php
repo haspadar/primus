@@ -13,7 +13,6 @@ use Override;
  * @template I
  * @template O
  * @implements Func<I, O>
- * @since 0.3
  */
 final readonly class FuncOf implements Func
 {

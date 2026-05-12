@@ -13,7 +13,6 @@ use Primus\Text\Text;
  * Example:
  * self::assertThat(new TextOf('foo'), new HasTextValue('foo'));
  *
- * @since 0.2
  */
 final class HasTextValue extends Constraint
 {

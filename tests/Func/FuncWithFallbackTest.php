@@ -13,7 +13,6 @@ use Primus\Tests\Constraint\EqualsValue;
 use RuntimeException;
 
 /**
- * @since 0.3
  */
 final class FuncWithFallbackTest extends TestCase
 {

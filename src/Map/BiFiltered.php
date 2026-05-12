@@ -24,7 +24,6 @@ use Primus\Func\BiFunc;
  * @template K of array-key
  * @template V
  * @extends MapEnvelope<K, V>
- * @since 0.7
  */
 final readonly class BiFiltered extends MapEnvelope
 {

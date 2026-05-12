@@ -18,7 +18,6 @@ use Override;
  * @template I
  * @template O
  * @implements Func<I, O>
- * @since 0.3
  */
 abstract readonly class FuncEnvelope implements Func
 {

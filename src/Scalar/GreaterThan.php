@@ -16,7 +16,6 @@ namespace Primus\Scalar;
  *
  * @template T of int|float|string
  * @extends ScalarEnvelope<bool>
- * @since 0.2
  */
 final readonly class GreaterThan extends ScalarEnvelope
 {

@@ -25,7 +25,6 @@ use Primus\Func\BiFunc;
  *
  * @template T
  * @extends ListEnvelope<T>
- * @since 0.3
  */
 final readonly class SortedBy extends ListEnvelope
 {

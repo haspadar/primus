@@ -13,8 +13,6 @@ use Override;
  *     $n = new NumberOf(3.7);
  *     $n->asInt(); // 3 (truncate)
  *     $n->asFloat(); // 3.7
- *
- * @since 0.3
  */
 final readonly class NumberOf implements Number
 {

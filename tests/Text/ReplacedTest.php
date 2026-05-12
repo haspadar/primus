@@ -11,7 +11,6 @@ use Primus\Text\Replaced;
 use Primus\Text\TextOf;
 
 /**
- * @since 0.2
  */
 final class ReplacedTest extends TestCase
 {

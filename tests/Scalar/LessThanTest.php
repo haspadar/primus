@@ -11,7 +11,6 @@ use Primus\Scalar\ScalarOf;
 use Primus\Tests\Constraint\HasScalarBoolValue;
 
 /**
- * @since 0.2
  */
 final class LessThanTest extends TestCase
 {

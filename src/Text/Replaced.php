@@ -18,8 +18,6 @@ use Primus\Func\FuncOf;
  *         ['', '', 'and']
  *     );
  *     echo $text->value(); // 'Hello and bye'
- *
- * @since 0.2
  */
 final readonly class Replaced extends TextEnvelope
 {

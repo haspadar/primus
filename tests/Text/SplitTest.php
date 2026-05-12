@@ -11,7 +11,6 @@ use Primus\Text\Split;
 use Primus\Text\TextOf;
 
 /**
- * @since 0.2
  */
 final class SplitTest extends TestCase
 {

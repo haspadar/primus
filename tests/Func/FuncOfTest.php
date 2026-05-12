@@ -9,7 +9,6 @@ use PHPUnit\Framework\TestCase;
 use Primus\Func\FuncOf;
 
 /**
- * @since 0.3
  */
 final class FuncOfTest extends TestCase
 {

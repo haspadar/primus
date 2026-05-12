@@ -19,7 +19,6 @@ use InvalidArgumentException;
  *     echo $scalar->value(); // true
  *
  * @extends ScalarEnvelope<bool>
- * @since 0.2
  */
 final readonly class Xor_ extends ScalarEnvelope
 {

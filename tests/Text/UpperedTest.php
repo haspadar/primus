@@ -11,7 +11,6 @@ use Primus\Text\TextOf;
 use Primus\Text\Uppered;
 
 /**
- * @since 0.2
  */
 final class UpperedTest extends TestCase
 {

@@ -10,7 +10,6 @@ use PHPUnit\Framework\Constraint\Constraint;
  * Asserts that an iterable of scalar values (int, float, string, bool)
  * has the expected values.
  *
- * @since 0.2
  */
 final class HasScalarValues extends Constraint
 {

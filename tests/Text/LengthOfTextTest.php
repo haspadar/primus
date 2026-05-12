@@ -10,7 +10,6 @@ use Primus\Tests\Constraint\HasSize;
 use Primus\Text\TextOf;
 
 /**
- * @since 0.2
  */
 final class LengthOfTextTest extends TestCase
 {

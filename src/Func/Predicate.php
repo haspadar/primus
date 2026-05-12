@@ -9,6 +9,5 @@ namespace Primus\Func;
  *
  * @template X
  * @extends Func<X, bool>
- * @since 0.3
  */
 interface Predicate extends Func {}
