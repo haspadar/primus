@@ -23,13 +23,13 @@ final readonly class TimeOf implements Time
     /**
      * Ctor.
      *
-     * @param string $iso The textual moment in any format accepted by DateTimeImmutable.
+     * @param string $datetime The textual moment in any format accepted by DateTimeImmutable.
      */
-    public function __construct(private string $iso) {}
+    public function __construct(private string $datetime) {}
 
     #[Override]
     public function value(): DateTimeImmutable
     {
-        return new DateTimeImmutable($this->iso);
+        return new DateTimeImmutable($this->datetime);
     }
 }
