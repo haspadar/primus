@@ -12,7 +12,6 @@ use Override;
  *
  * @template T
  * @implements List_<T>
- * @since 0.3
  */
 abstract readonly class ListEnvelope implements List_
 {

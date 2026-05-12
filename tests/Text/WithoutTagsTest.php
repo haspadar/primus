@@ -11,7 +11,6 @@ use Primus\Text\TextOf;
 use Primus\Text\WithoutTags;
 
 /**
- * @since 0.2
  */
 final class WithoutTagsTest extends TestCase
 {

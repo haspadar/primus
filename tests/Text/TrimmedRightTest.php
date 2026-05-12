@@ -13,7 +13,6 @@ use Primus\Text\TextOf;
 use Primus\Text\TrimmedRight;
 
 /**
- * @since 0.2
  */
 final class TrimmedRightTest extends TestCase
 {

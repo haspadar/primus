@@ -16,7 +16,6 @@ use Primus\Scalar\ScalarOf;
  *
  * @template T
  * @extends ScalarEnvelope<bool>
- * @since 0.3
  */
 final readonly class Contains extends ScalarEnvelope
 {

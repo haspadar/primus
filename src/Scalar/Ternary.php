@@ -20,7 +20,6 @@ namespace Primus\Scalar;
  *
  * @template T
  * @extends ScalarEnvelope<T>
- * @since 0.2
  */
 final readonly class Ternary extends ScalarEnvelope
 {

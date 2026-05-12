@@ -14,7 +14,6 @@ use IteratorAggregate;
  *
  * @template T
  * @extends IteratorAggregate<array-key, T>
- * @since 0.3
  */
 interface List_ extends Countable, IteratorAggregate
 {

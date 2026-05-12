@@ -9,8 +9,6 @@ namespace Primus\Number;
  *
  * Truncation toward zero on the int accessor follows native PHP `(int)` cast
  * semantics; the float accessor preserves the source magnitude.
- *
- * @since 0.3
  */
 interface Number
 {

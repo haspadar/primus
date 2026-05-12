@@ -13,7 +13,6 @@ use Primus\Tests\Constraint\HasScalarBoolValue;
 use Primus\Tests\Constraint\ThrowsValue;
 
 /**
- * @since 0.2
  */
 final class Or_Test extends TestCase
 {

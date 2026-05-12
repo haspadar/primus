@@ -12,8 +12,6 @@ use Primus\Func\FuncOf;
  * Example:
  *     $text = new HtmlEscaped(new TextOf('<b>"A & B"</b>'));
  *     echo $text->value(); // &lt;b&gt;&quot;A &amp; B&quot;&lt;/b&gt;
- *
- * @since 0.2
  */
 final readonly class HtmlEscaped extends TextEnvelope
 {

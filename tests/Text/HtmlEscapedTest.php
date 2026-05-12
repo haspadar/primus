@@ -11,7 +11,6 @@ use Primus\Text\HtmlEscaped;
 use Primus\Text\TextOf;
 
 /**
- * @since 0.2
  */
 final class HtmlEscapedTest extends TestCase
 {

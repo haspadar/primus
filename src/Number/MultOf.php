@@ -17,8 +17,6 @@ use Override;
  *     $product = new MultOf(new NumberOf(2), new NumberOf(2.5));
  *     $product->asInt(); // 5
  *     $product->asFloat(); // 5.0
- *
- * @since 0.3
  */
 final readonly class MultOf implements Number
 {

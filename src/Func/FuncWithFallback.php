@@ -12,7 +12,6 @@ use Throwable;
  * @template I
  * @template O
  * @extends FuncEnvelope<I, O>
- * @since 0.3
  */
 final readonly class FuncWithFallback extends FuncEnvelope
 {

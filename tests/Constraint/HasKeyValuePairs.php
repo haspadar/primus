@@ -41,7 +41,6 @@ use Traversable;
  *   1 => 4,
  * )
  *
- * @since 0.5
  */
 final class HasKeyValuePairs extends Constraint
 {

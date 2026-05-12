@@ -9,7 +9,6 @@ use PHPUnit\Framework\TestCase;
 use Primus\Func\PredicateOf;
 
 /**
- * @since 0.3
  */
 final class PredicateOfTest extends TestCase
 {

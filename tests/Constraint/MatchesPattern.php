@@ -22,7 +22,6 @@ use Primus\Text\Text;
  * Expected pattern: /^foo$/
  * But was:          'bar'
  *
- * @since 0.2
  */
 final class MatchesPattern extends Constraint
 {

@@ -11,7 +11,6 @@ namespace Primus\Scalar;
  * Used as a base abstraction for all primitive-like types (Text, Number, etc).
  *
  * @template-covariant T
- * @since 0.1
  */
 interface Scalar
 {

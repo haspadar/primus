@@ -16,7 +16,6 @@ use Throwable;
  *     new ThrowsValue(\RuntimeException::class)
  * );
  *
- * @since 0.2
  */
 final class ThrowsValue extends Constraint
 {

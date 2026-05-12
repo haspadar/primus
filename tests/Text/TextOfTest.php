@@ -10,7 +10,6 @@ use Primus\Tests\Constraint\HasTextValue;
 use Primus\Text\TextOf;
 
 /**
- * @since 0.2
  */
 final class TextOfTest extends TestCase
 {

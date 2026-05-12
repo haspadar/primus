@@ -10,7 +10,6 @@ use Primus\Scalar\Constant;
 use Primus\Tests\Constraint\HasScalarValue;
 
 /**
- * @since 0.2
  */
 final class ConstantTest extends TestCase
 {

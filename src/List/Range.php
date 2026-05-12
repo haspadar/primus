@@ -23,7 +23,6 @@ use Override;
  *     // 1357
  *
  * @implements List_<int>
- * @since 0.3
  */
 final readonly class Range implements List_
 {

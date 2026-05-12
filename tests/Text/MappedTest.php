@@ -12,7 +12,6 @@ use Primus\Text\Mapped;
 use Primus\Text\TextOf;
 
 /**
- * @since 0.3
  */
 final class MappedTest extends TestCase
 {

@@ -12,7 +12,6 @@ use PHPUnit\Framework\Constraint\Constraint;
  * Example:
  * self::assertThat($actual, new EqualsValue($expected));
  *
- * @since 0.5
  */
 final class EqualsValue extends Constraint
 {

@@ -20,7 +20,6 @@ use Override;
  * @template K of array-key
  * @template V
  * @implements Map<K, V>
- * @since 0.3
  */
 final readonly class Merged implements Map
 {

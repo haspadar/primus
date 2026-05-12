@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Primus\Tests;
 
 /**
- * @since 0.3
  */
 final class CountCalls
 {

@@ -19,7 +19,6 @@ use Primus\Scalar\Scalar;
  *     }
  *
  * @implements Scalar<iterable<Text>>
- * @since 0.2
  */
 final readonly class Split implements Scalar
 {

@@ -12,7 +12,6 @@ use InvalidArgumentException;
  * Returns true if at least one provided scalar evaluates to true.
  *
  * @extends ScalarEnvelope<bool>
- * @since 0.2
  */
 final readonly class Or_ extends ScalarEnvelope
 {

@@ -26,7 +26,6 @@ use Override;
  *
  * @template T
  * @implements List_<T>
- * @since 0.3
  */
 final readonly class Difference implements List_
 {

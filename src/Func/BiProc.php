@@ -9,7 +9,6 @@ namespace Primus\Func;
  *
  * @template X
  * @template Y
- * @since 0.3
  */
 interface BiProc
 {

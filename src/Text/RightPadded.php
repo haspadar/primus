@@ -14,8 +14,6 @@ use Primus\Func\FuncOf;
  * Example:
  *     $text = new RightPadded(new TextOf('foo'), 6, '.');
  *     echo $text->value(); // 'foo...'
- *
- * @since 0.1
  */
 final readonly class RightPadded extends TextEnvelope
 {

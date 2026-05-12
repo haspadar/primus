@@ -23,7 +23,6 @@ use Primus\RuntimeException;
  *
  * @template V
  * @implements List_<V>
- * @since 0.3
  */
 final readonly class Plucked implements List_
 {

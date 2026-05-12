@@ -13,7 +13,6 @@ use Override;
  * @template K of array-key
  * @template V
  * @implements Map<K, V>
- * @since 0.3
  */
 abstract readonly class MapEnvelope implements Map
 {

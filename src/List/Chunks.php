@@ -23,7 +23,6 @@ use Override;
  *
  * @template T
  * @implements List_<List_<T>>
- * @since 0.3
  */
 final readonly class Chunks implements List_
 {

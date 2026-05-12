@@ -25,7 +25,6 @@ use Primus\Func\BiFunc;
  * @template V
  * @template W
  * @implements Map<K, W>
- * @since 0.7
  */
 final readonly class BiMapped implements Map
 {

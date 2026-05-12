@@ -12,7 +12,6 @@ namespace Primus\Scalar;
  *     echo $scalar->value(); // true
  *
  * @extends ScalarEnvelope<bool>
- * @since 0.2
  */
 final readonly class Not extends ScalarEnvelope
 {

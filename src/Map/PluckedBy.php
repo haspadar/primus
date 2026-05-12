@@ -25,7 +25,6 @@ use Primus\RuntimeException;
  *
  * @template V
  * @implements Map<array-key, V>
- * @since 0.3
  */
 final readonly class PluckedBy implements Map
 {

@@ -18,7 +18,6 @@ use Primus\Scalar\ScalarOf;
  *     echo $empty->value(); // true
  *
  * @extends ScalarEnvelope<bool>
- * @since 0.3
  */
 final readonly class IsEmpty extends ScalarEnvelope
 {

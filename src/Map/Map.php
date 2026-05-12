@@ -15,7 +15,6 @@ use IteratorAggregate;
  * @template K of array-key
  * @template V
  * @extends IteratorAggregate<K, V>
- * @since 0.3
  */
 interface Map extends Countable, IteratorAggregate
 {

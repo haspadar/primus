@@ -15,8 +15,6 @@ use Primus\Func\FuncOf;
  * Example:
  *     $text = new Sub(new TextOf('hello world'), 0, 5);
  *     echo $text->value(); // 'hello'
- *
- * @since 0.1
  */
 final readonly class Sub extends TextEnvelope
 {

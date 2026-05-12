@@ -16,8 +16,6 @@ use Override;
  *     $sum = new SumOf(new NumberOf(1), new NumberOf(2.5));
  *     $sum->asInt(); // 3 (truncate)
  *     $sum->asFloat(); // 3.5
- *
- * @since 0.3
  */
 final readonly class SumOf implements Number
 {

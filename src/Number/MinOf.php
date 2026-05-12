@@ -16,8 +16,6 @@ use UnderflowException;
  * Example:
  *     $min = new MinOf(new NumberOf(3), new NumberOf(-1), new NumberOf(2));
  *     $min->asInt(); // -1
- *
- * @since 0.3
  */
 final readonly class MinOf implements Number
 {

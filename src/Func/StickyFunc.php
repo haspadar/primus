@@ -20,7 +20,6 @@ use Override;
  * @template X
  * @template Y
  * @implements Func<X, Y>
- * @since 0.3
  */
 final class StickyFunc implements Func
 {

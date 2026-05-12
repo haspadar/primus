@@ -18,7 +18,6 @@ use Primus\List\List_;
  * @template K of array-key
  * @template V
  * @implements List_<K>
- * @since 0.3
  */
 final readonly class Keys implements List_
 {

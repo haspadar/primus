@@ -13,8 +13,6 @@ namespace Primus\Text;
  * Example:
  *     $text = new Capitalized(new TextOf('hello'));
  *     echo $text->value(); // 'Hello'
- *
- * @since 0.2
  */
 final readonly class Capitalized extends TextEnvelope
 {

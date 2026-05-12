@@ -12,7 +12,6 @@ use Primus\Text\Text;
 use Primus\Text\TextOf;
 
 /**
- * @since 0.2
  */
 final class JoinedTest extends TestCase
 {

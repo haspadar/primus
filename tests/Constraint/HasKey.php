@@ -23,7 +23,6 @@ use PHPUnit\Framework\Constraint\Constraint;
  * Failed asserting that iterator has key 2
  * But key was: 1
  *
- * @since 0.5
  */
 final class HasKey extends Constraint
 {

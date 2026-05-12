@@ -17,7 +17,6 @@ use Primus\Scalar\ScalarOf;
  *
  * @template T
  * @extends ScalarEnvelope<int>
- * @since 0.3
  */
 final readonly class IndexOf extends ScalarEnvelope
 {

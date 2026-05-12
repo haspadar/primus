@@ -12,7 +12,5 @@ use RuntimeException as BaseRuntimeException;
  * Every Primus runtime failure uses this single type so that consumers can
  * distinguish primus-originated failures from unrelated runtime exceptions
  * via a single catch clause. No per-failure subclasses are introduced.
- *
- * @since 0.3
  */
 final class RuntimeException extends BaseRuntimeException {}

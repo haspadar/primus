@@ -13,7 +13,6 @@ use Primus\Text\Normalized;
 use Primus\Text\TextOf;
 
 /**
- * @since 0.2
  */
 final class NormalizedTest extends TestCase
 {

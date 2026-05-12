@@ -14,8 +14,6 @@ use Primus\Func\FuncOf;
  * Example:
  *     $text = new Lowered(new TextOf('CAFÉ & TÜRKİYE'));
  *     echo $text->value(); // 'café & türkiye'
- *
- * @since 0.1
  */
 final readonly class Lowered extends TextEnvelope
 {

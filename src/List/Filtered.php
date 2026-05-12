@@ -22,7 +22,6 @@ use Primus\Func\Predicate;
  *
  * @template T
  * @extends ListEnvelope<T>
- * @since 0.3
  */
 final readonly class Filtered extends ListEnvelope
 {

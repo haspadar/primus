@@ -12,7 +12,6 @@ use Override;
  *
  * @template X
  * @implements Proc<X>
- * @since 0.3
  */
 final readonly class ProcOf implements Proc
 {

@@ -17,7 +17,6 @@ use Primus\Func\BiFunc;
  *     new AppliesBiFuncTo([3, 4], 7)
  * );
  *
- * @since 0.5
  */
 final class AppliesBiFuncTo extends Constraint
 {

@@ -16,7 +16,6 @@ use Primus\RuntimeException;
  *
  * @template T
  * @extends ListEnvelope<T>
- * @since 0.3
  */
 final readonly class NoNulls extends ListEnvelope
 {

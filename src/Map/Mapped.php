@@ -25,7 +25,6 @@ use Primus\Func\Func;
  * @template V
  * @template W
  * @implements Map<K, W>
- * @since 0.3
  */
 final readonly class Mapped implements Map
 {

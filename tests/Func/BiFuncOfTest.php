@@ -10,7 +10,6 @@ use Primus\Func\BiFuncOf;
 use Primus\Tests\Constraint\AppliesBiFuncTo;
 
 /**
- * @since 0.3
  */
 final class BiFuncOfTest extends TestCase
 {

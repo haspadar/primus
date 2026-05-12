@@ -14,7 +14,6 @@ use Override;
  *
  * @template T
  * @implements Scalar<T>
- * @since 0.1
  */
 abstract readonly class ScalarEnvelope implements Scalar
 {

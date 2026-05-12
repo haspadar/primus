@@ -27,7 +27,6 @@ use RuntimeException;
  * Expected: [10,20]
  * But was:  [10]
  *
- * @since 0.5
  */
 final class HasIteratorValues extends Constraint
 {

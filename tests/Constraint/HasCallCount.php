@@ -8,7 +8,6 @@ use PHPUnit\Framework\Constraint\Constraint;
 
 /**
 *
-* @since 0.3
 */
 final class HasCallCount extends Constraint
 {

@@ -12,7 +12,6 @@ use Primus\Scalar\Ternary;
 use Primus\Tests\Constraint\HasScalarValue;
 
 /**
- * @since 0.2
  */
 final class TernaryTest extends TestCase
 {

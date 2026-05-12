@@ -16,7 +16,6 @@ namespace Primus\Scalar;
  *
  * @template T
  * @extends ScalarEnvelope<bool>
- * @since 0.2
  */
 final readonly class EqualTo extends ScalarEnvelope
 {

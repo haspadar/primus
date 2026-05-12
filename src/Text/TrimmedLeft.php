@@ -13,8 +13,6 @@ use Primus\Func\FuncOf;
  * Example:
  *     $text = new TrimmedLeft(new TextOf(" hello "));
  *     echo $text->value(); // 'hello '
- *
- * @since 0.2
  */
 final readonly class TrimmedLeft extends TextEnvelope
 {

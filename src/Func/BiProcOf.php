@@ -13,7 +13,6 @@ use Override;
  * @template X
  * @template Y
  * @implements BiProc<X, Y>
- * @since 0.3
  */
 final readonly class BiProcOf implements BiProc
 {
