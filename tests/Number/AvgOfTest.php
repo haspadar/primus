@@ -25,9 +25,15 @@ final class AvgOfTest extends TestCase
     }
 
     #[Test]
-    public function truncatesFractionalAverageOnIntAccessor(): void
+    public function truncatesPositiveFractionalAverageOnIntAccessor(): void
     {
         $this->assertSame(2, (new AvgOf(new NumberOf(1), new NumberOf(2), new NumberOf(4)))->asInt());
+    }
+
+    #[Test]
+    public function truncatesNegativeFractionalAverageTowardZeroOnIntAccessor(): void
+    {
+        $this->assertSame(-2, (new AvgOf(new NumberOf(-1), new NumberOf(-2), new NumberOf(-4)))->asInt());
     }
 
     #[Test]
