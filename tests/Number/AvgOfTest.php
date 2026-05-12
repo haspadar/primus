@@ -21,7 +21,7 @@ final class AvgOfTest extends TestCase
     #[Test]
     public function averagesMixedIntegerAndFloat(): void
     {
-        $this->assertSame(2.5, (new AvgOf(new NumberOf(2), new NumberOf(3)))->asFloat());
+        $this->assertSame(2.25, (new AvgOf(new NumberOf(2), new NumberOf(2.5)))->asFloat());
     }
 
     #[Test]
@@ -31,9 +31,15 @@ final class AvgOfTest extends TestCase
     }
 
     #[Test]
-    public function singleOperandIsItsOwnAverage(): void
+    public function singleOperandIsItsOwnAverageAsFloat(): void
     {
         $this->assertSame(7.0, (new AvgOf(new NumberOf(7)))->asFloat());
+    }
+
+    #[Test]
+    public function singleOperandIsItsOwnAverageAsInt(): void
+    {
+        $this->assertSame(7, (new AvgOf(new NumberOf(7)))->asInt());
     }
 
     #[Test]
