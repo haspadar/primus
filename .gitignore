@@ -37,3 +37,6 @@ coverage-xml/
 
 # Php metrics
 /build/
+
+# Public agent contract — overrides the global ignore of AGENTS.md.
+!AGENTS.md
