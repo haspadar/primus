@@ -303,48 +303,40 @@ Every primitive in this library is built to the same set of rules. They
 explain what you can expect from any class you pick and how your own
 extensions should look.
 
-- **`final readonly` classes.**
-
+- **`final readonly` classes.**  
   Every instance is a value — safe to share, pass, decorate, without
   defensive copies. There are no setters and no inheritance points for
   "convenience" overrides.
 
-- **No work in constructors.**
-
+- **No work in constructors.**  
   Building a graph of objects is always free — no I/O, no parsing, no
   branching. Failures surface in the computation method (`value()` /
   `asInt()` / `exec()` …), at the call site that asked for the result.
 
-- **One class, one behaviour.**
-
+- **One class, one behaviour.**  
   When you need two behaviours, compose two classes. Memoization is
   `Sticky`. Fallback on failure is `FuncWithFallback`. Iteration with
   side-effect is `ForEach_`. No class carries a flag that toggles its
   behaviour.
 
-- **Composition over inheritance.**
-
+- **Composition over inheritance.**  
   Every class is `final`. You change behaviour by **wrapping** an object,
   not by subclassing it.
 
-- **No `null` ever.**
-
+- **No `null` ever.**  
   No method returns it, no method accepts it. There is no `?Text`, no
   `?Number`. Missing data fails fast at the boundary with a real exception.
 
-- **No `static`, no `isset`, no `empty`.**
-
+- **No `static`, no `isset`, no `empty`.**  
   Behaviour belongs to instances, never to classes. Signatures must be
   honest — no hidden "I might be absent" checks.
 
-- **No getters and setters.**
-
+- **No getters and setters.**  
   A class exposes **behaviour**, not data. `name()` returns a value
   because asking is a behaviour; there is no `setName()` because changing
   state means constructing a new object.
 
-- **Computation is lazy.**
-
+- **Computation is lazy.**  
   Nothing runs until you call the computation method. A pipeline built
   with ten decorators costs no CPU until you ask for `value()`.
 
