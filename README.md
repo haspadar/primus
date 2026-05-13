@@ -234,14 +234,6 @@ To run a side-effect over every list element:
 ))->exec();
 ```
 
-To run an action exactly once, no matter how many times it's invoked:
-
-```php
-$init = new RunOnce(new ProcOf(fn () => bootstrap()));
-$init->exec(null); // bootstrap() runs
-$init->exec(null); // no-op
-```
-
 ## Numbers
 
 To parse and read a numeric value:
@@ -315,7 +307,7 @@ extensions should look.
 
   Every instance is a value — safe to share, pass, decorate, without
   defensive copies. There are no setters and no inheritance points for
-  "convenience" overrides. The only sanctioned exception is `RunOnce`.
+  "convenience" overrides.
 
 - **No work in constructors.**
 
