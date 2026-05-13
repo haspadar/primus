@@ -21,15 +21,17 @@ It provides common operations as small composable objects instead of functions.
 Procedural PHP buries the steps inside out — you read from the innermost call:
 
 ```php
-strtolower(trim(substr($s, 0, 5)));
+$result = array_values(array_filter([3, 1, 4, 1, 5], fn ($x) => $x > 2));
+sort($result);
 ```
 
 Primus reads top to bottom — each step is a named object:
 
 ```php
-(new Lowered(
-    new Trimmed(
-        new Sub(new TextOf($s), 0, 5),
+(new Sorted(
+    new Filtered(
+        new ListOf(3, 1, 4, 1, 5),
+        new PredicateOf(fn (int $x) => $x > 2),
     ),
 ))->value();
 ```
@@ -37,33 +39,60 @@ Primus reads top to bottom — each step is a named object:
 The pipeline is a value itself: store it, pass it around, decorate it further.
 Reading the result is always explicit — call `value()`.
 
-## Why?
-
-- **`null` everywhere.**  
-  PHP's standard library leaks `null` through `array_search`, `preg_match`,
-  `mb_strpos` even if you ban it in your project. Primus values are never
-  `null` — missing input fails fast.
-
-- **Bare `array` shapes.**  
-  Procedural functions take `array`/`string` and you re‑describe their shape
-  with PHPDoc at every call site. In Primus the type lives in the class —
-  each operation has a narrow constructor signature you write once.
-
-- **Closures hard to substitute.**  
-  A `callable` is convenient until you need to swap it in a test, log every
-  call, or wrap it in retry logic. A `Func`/`Predicate`/`BiFunc` object
-  composes like any other class.
-
-- **Controlled flow.**  
-  Procedural chains run as you write them. A Primus pipeline runs only when
-  `value()` is called — building, passing and composing it costs nothing
-  until you ask for the result.
-
 ## Installation
 
 ```bash
 composer require haspadar/primus
 ```
+
+## Why?
+
+- **The pipeline is a value.**  
+  Build it, pass it, store it, decorate it further. Nothing runs until `value()`.
+
+  You can return a pipeline from a function, cache it, or wrap it in
+  retry/logging — things you can't do with a procedural chain.
+
+  ```php
+  $headline = new Lowered(new Trimmed(new TextOf($raw)));
+  $cached   = new Sticky(new ScalarOf(fn () => $headline->value()));
+  // No work done yet.
+  ```
+
+- **Constructors only remember.**  
+  No I/O, no branches, no work in `__construct` — just dependency capture.
+
+  You can substitute `RandomBytes` with a fixed `BytesOf` in tests — no
+  framework, no mocking library, just a different constructor argument.
+
+  ```php
+  $uuid = new UuidV4(new RandomBytes(16));
+  $hex  = new HexEncoded($uuid);
+  ```
+
+- **Every operation is a class.**  
+  Named types replace anonymous `array`/`string`/`callable`.
+
+  You can extend `Mapped` by wrapping it, not by passing more flags.
+  A `Logged(new Mapped(...))` decorator works the same way.
+
+  ```php
+  $doubled = new Mapped(
+      new ListOf(1, 2, 3),
+      new FuncOf(fn (int $x): int => $x * 2),
+  );
+  ```
+
+- **No `null`, no mutation, no statics.**  
+  Missing input fails fast; state is `readonly`; behaviour belongs to instances.
+
+  You can pass a `Number` deep into your code without `?Number` types or
+  null-guards at every boundary.
+
+  ```php
+  $n = new NumberOfText(new TextOf('42'));  // throws on bad input — never returns null
+  $n->asInt();                              // 42
+  ```
 
 ## Text
 
@@ -156,6 +185,17 @@ $cached->value(); // expensive_computation() runs once
 $cached->value(); // cached
 ```
 
+To unwrap an exception chain to its underlying cause:
+
+```php
+try {
+    $repo->save($entity);
+} catch (\Throwable $e) {
+    $root = (new RootCause($e))->value();
+    logger()->error($root->getMessage());
+}
+```
+
 ## Functions
 
 To wrap a callable as a reusable, swappable object:
@@ -185,23 +225,154 @@ $safe = new FuncWithFallback(
 );
 ```
 
+To run a side-effect over every list element:
+
+```php
+(new ForEach_(
+    new ListOf('a', 'b', 'c'),
+    new ProcOf(fn (string $s) => error_log($s)),
+))->exec();
+```
+
+To run an action exactly once, no matter how many times it's invoked:
+
+```php
+$init = new RunOnce(new ProcOf(fn () => bootstrap()));
+$init->exec(null); // bootstrap() runs
+$init->exec(null); // no-op
+```
+
+## Numbers
+
+To parse and read a numeric value:
+
+```php
+$n = new NumberOfText(new TextOf('42'));
+$n->asInt();    // 42
+$n->asFloat();  // 42.0
+```
+
+To aggregate a list of numbers:
+
+```php
+$total = (new SumOf(
+    new NumberOf(10),
+    new NumberOf(20),
+    new NumberOf(12),
+))->asFloat();
+// 42.0
+
+$avg = (new AvgOf(new NumberOf(1), new NumberOf(2), new NumberOf(3)))->asFloat();
+// 2.0
+```
+
+## Time
+
+To capture and format the current moment:
+
+```php
+$now = new Now();
+(new Iso($now))->value();
+// e.g. "2026-05-13T07:14:00+00:00"
+```
+
+To parse an existing timestamp:
+
+```php
+$ts = new TimeOf('2026-05-12T12:00:00Z');
+$ts->value()->format('Y-m-d'); // "2026-05-12"
+```
+
+## Bytes
+
+To hash and hex-encode raw bytes:
+
+```php
+$digest = (new HexEncoded(new Sha256(new BytesOf('hello'))))->value();
+// "2cf24dba5fb0a30e26e83b2ac5b9e29e1b161e5c1fa7425e73043362938b9824"
+```
+
+To generate a UUID v4 from injectable randomness:
+
+```php
+$uuid = (new HexEncoded(new UuidV4(new RandomBytes(16))))->value();
+// 32 lowercase hex chars
+```
+
+To make a time-ordered UUID v7 — sortable, ideal for database keys:
+
+```php
+$uuid = (new HexEncoded(new UuidV7(new Now(), new RandomBytes(10))))->value();
+```
+
 ## Design rules
 
-- No `null`, no `static` methods or properties, no `isset()`/`empty()`
-- All state `readonly`, all classes `final`
-- One class = one behavior; composition over inheritance
-- Computation is lazy until `value()`
+Every primitive in this library is built to the same set of rules. They
+explain what you can expect from any class you pick and how your own
+extensions should look.
 
-Enforced by [`haspadar/sheriff`](https://github.com/haspadar/sheriff) — a curated
-bundle of PHPStan level 9, Psalm with custom EO rules, PHP‑CS‑Fixer, PHPMD,
-PHPMetrics, Infection, and repository lints.
+- **`final readonly` classes.**
 
-Inspired by [Elegant Objects](https://www.elegantobjects.org) and
-[cactoos](https://github.com/yegor256/cactoos).
+  Every instance is a value — safe to share, pass, decorate, without
+  defensive copies. There are no setters and no inheritance points for
+  "convenience" overrides. The only sanctioned exception is `RunOnce`.
+
+- **No work in constructors.**
+
+  Building a graph of objects is always free — no I/O, no parsing, no
+  branching. Failures surface in the computation method (`value()` /
+  `asInt()` / `exec()` …), at the call site that asked for the result.
+
+- **One class, one behaviour.**
+
+  When you need two behaviours, compose two classes. Memoization is
+  `Sticky`. Fallback on failure is `FuncWithFallback`. Iteration with
+  side-effect is `ForEach_`. No class carries a flag that toggles its
+  behaviour.
+
+- **Composition over inheritance.**
+
+  Every class is `final`. You change behaviour by **wrapping** an object,
+  not by subclassing it.
+
+- **No `null` ever.**
+
+  No method returns it, no method accepts it. There is no `?Text`, no
+  `?Number`. Missing data fails fast at the boundary with a real exception.
+
+- **No `static`, no `isset`, no `empty`.**
+
+  Behaviour belongs to instances, never to classes. Signatures must be
+  honest — no hidden "I might be absent" checks.
+
+- **No getters and setters.**
+
+  A class exposes **behaviour**, not data. `name()` returns a value
+  because asking is a behaviour; there is no `setName()` because changing
+  state means constructing a new object.
+
+- **Computation is lazy.**
+
+  Nothing runs until you call the computation method. A pipeline built
+  with ten decorators costs no CPU until you ask for `value()`.
+
+Enforced by [`haspadar/sheriff`](https://github.com/haspadar/sheriff) — a
+curated bundle of PHPStan level 9, Psalm with custom EO rules,
+PHP‑CS‑Fixer, PHPMD, PHPMetrics, Infection, and repository lints.
+
+Inspired by [Elegant Objects](https://www.elegantobjects.org) (Yegor
+Bugayenko) and [cactoos](https://github.com/yegor256/cactoos).
 
 ## Requirements
 
 PHP **8.3+**.
+
+## Working with AI agents
+
+Using an AI coding assistant (Claude Code, Codex, Cursor, Aider, …) with
+this library? See [`AGENTS.md`](AGENTS.md) for the namespace map,
+composition contract, antipatterns, and a step-by-step guide for adding
+new primitives.
 
 ## License
 
