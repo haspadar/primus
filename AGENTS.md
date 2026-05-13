@@ -55,22 +55,15 @@ new decorators — extend it to inherit interface compliance for free.
   `BiFiltered`, `BiMapped`, `NoNulls`, `Diff`, `DiffAssoc`, `Intersect`,
   `IntersectAssoc`, `Keys`, `Values`, `Sliced`, `Unique`, `MapEnvelope`.
 
-- **`Primus\Scalar`** — generic `Scalar<T>` plus boolean, comparison and
-  control primitives.
+- **`Primus\Scalar`** — generic `Scalar<T>` plus boolean and control
+  primitives.
   `ScalarOf`, `Constant`, `Sticky` (memoize), `Ternary`, `And_`, `Or_`,
-  `Not`, `Xor_`, `EqualTo`, `GreaterThan`, `LessThan`, `Between`,
-  `RootCause` (unwrap a Throwable chain), `ScalarEnvelope`.
+  `Not`, `Xor_`, `RootCause` (unwrap a Throwable chain), `ScalarEnvelope`.
 
 - **`Primus\Number`** — numeric primitives.
   `Number` interface (`asInt()` + `asFloat()`), `NumberOf`,
   `NumberOfScalar`, `NumberOfText`, `Sticky` (memoize both projections),
   `SumOf`, `MinOf`, `MaxOf`, `AvgOf`, `MultOf`, `DivOf`.
-
-- **`Primus\Numeric`** — a parallel numeric hierarchy: the `Number`
-  interface here extends `Scalar<int|float|string>` and exposes `value()`
-  instead of split `asInt()`/`asFloat()`. Use `Primus\Number` for the
-  decorator-friendly two-projection API; use `Primus\Numeric` only when
-  composing with generic `Scalar<T>` machinery.
 
 - **`Primus\Time`** — `DateTimeImmutable` wrappers.
   `Time` interface, `TimeOf` (parse a string), `Now` (current moment),
