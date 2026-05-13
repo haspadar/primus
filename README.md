@@ -168,9 +168,9 @@ $byId = (new PluckedBy(
 To compose lazy boolean logic:
 
 ```php
-$between = (new And_(
-    new GreaterThan(new Constant(5), new Constant(0)),
-    new LessThan(new Constant(5), new Constant(10)),
+$result = (new And_(
+    new Constant(true),
+    new Not(new Constant(false)),
 ))->value();
 // true
 ```
