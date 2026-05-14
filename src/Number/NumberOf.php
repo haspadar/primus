@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace Primus\Number;
 
 use Override;
+use Primus\Text\Text;
+use Primus\Text\TextOf;
 
 /**
  * Number lifted from a native int or float scalar.
@@ -36,8 +38,8 @@ final readonly class NumberOf implements Number
     }
 
     #[Override]
-    public function asString(): string
+    public function asText(): Text
     {
-        return (string) (float) $this->value;
+        return new TextOf((string) (float) $this->value);
     }
 }

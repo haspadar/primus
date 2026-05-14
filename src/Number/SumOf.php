@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace Primus\Number;
 
 use Override;
+use Primus\Text\Text;
+use Primus\Text\TextOf;
 
 /**
  * Sum of one or more Number addends.
@@ -51,8 +53,8 @@ final readonly class SumOf implements Number
     }
 
     #[Override]
-    public function asString(): string
+    public function asText(): Text
     {
-        return (string) $this->asFloat();
+        return new TextOf((string) $this->asFloat());
     }
 }

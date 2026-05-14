@@ -5,11 +5,13 @@ declare(strict_types=1);
 namespace Primus\Number;
 
 use Override;
+use Primus\Text\Text;
+use Primus\Text\TextOf;
 
 /**
  * Cached version of a {@see Number}.
  *
- * Evaluates each projection (asInt, asFloat, asString) at most once and stores
+ * Evaluates each projection (asInt, asFloat, asText) at most once and stores
  * the result. Subsequent calls return the cached value instead of re-traversing
  * the underlying decorator graph.
  *
@@ -22,14 +24,13 @@ use Override;
  *     $cached->asFloat(); // cached
  *     $cached->asInt(); // computed once, traverses the tree
  *     $cached->asInt(); // cached
- *     $cached->asString(); // computed once, traverses the tree
- *     $cached->asString(); // cached
+ *     $cached->asText(); // computed once, traverses the tree
+ *     $cached->asText(); // cached
  */
 final class Sticky implements Number
 {
     private const int EMPTY_INT = 0;
     private const float EMPTY_FLOAT = 0.0;
-    private const string EMPTY_STRING = '';
 
     /** @phpstan-ignore haspadar.immutable (lazy memoization flag; idempotent externally) */
     private bool $intComputed = false;
@@ -44,17 +45,20 @@ final class Sticky implements Number
     private float $floatStored = self::EMPTY_FLOAT;
 
     /** @phpstan-ignore haspadar.immutable (lazy memoization flag; idempotent externally) */
-    private bool $stringComputed = false;
+    private bool $textComputed = false;
 
     /** @phpstan-ignore haspadar.immutable (lazy memoization slot; idempotent externally) */
-    private string $stringStored = self::EMPTY_STRING;
+    private Text $textStored;
 
     /**
      * Ctor.
      *
      * @param Number $origin The number whose projections are cached.
      */
-    public function __construct(private readonly Number $origin) {}
+    public function __construct(private readonly Number $origin)
+    {
+        $this->textStored = new TextOf('');
+    }
 
     #[Override]
     public function asInt(): int
@@ -79,13 +83,13 @@ final class Sticky implements Number
     }
 
     #[Override]
-    public function asString(): string
+    public function asText(): Text
     {
-        if (!$this->stringComputed) {
-            $this->stringStored = $this->origin->asString();
-            $this->stringComputed = true;
+        if (!$this->textComputed) {
+            $this->textStored = $this->origin->asText();
+            $this->textComputed = true;
         }
 
-        return $this->stringStored;
+        return $this->textStored;
     }
 }

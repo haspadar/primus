@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace Primus\Number;
 
 use Override;
+use Primus\Text\Text;
+use Primus\Text\TextOf;
 
 /**
  * Arithmetic mean of one or more Number operands.
@@ -53,8 +55,8 @@ final readonly class AvgOf implements Number
     }
 
     #[Override]
-    public function asString(): string
+    public function asText(): Text
     {
-        return (string) $this->asFloat();
+        return new TextOf((string) $this->asFloat());
     }
 }

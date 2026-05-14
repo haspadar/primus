@@ -48,20 +48,20 @@ final class NumberOfScalarTest extends TestCase
     }
 
     #[Test]
-    public function returnsStringForIntegerScalar(): void
+    public function returnsTextForIntegerScalar(): void
     {
         $this->assertSame(
             '42',
-            (new NumberOfScalar(new ScalarOf(static fn(): int => 42)))->asString(),
+            (new NumberOfScalar(new ScalarOf(static fn(): int => 42)))->asText()->value(),
         );
     }
 
     #[Test]
-    public function returnsStringForFloatScalar(): void
+    public function returnsTextForFloatScalar(): void
     {
         $this->assertSame(
             '3.14',
-            (new NumberOfScalar(new ScalarOf(static fn(): float => 3.14)))->asString(),
+            (new NumberOfScalar(new ScalarOf(static fn(): float => 3.14)))->asText()->value(),
         );
     }
 }

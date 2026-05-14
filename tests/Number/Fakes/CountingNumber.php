@@ -6,6 +6,8 @@ namespace Primus\Tests\Number\Fakes;
 
 use Override;
 use Primus\Number\Number;
+use Primus\Text\Text;
+use Primus\Text\TextOf;
 
 /**
  * Number fake that counts how many times each projection is invoked.
@@ -16,12 +18,12 @@ final class CountingNumber implements Number
 {
     public int $intCalls = 0;
     public int $floatCalls = 0;
-    public int $stringCalls = 0;
+    public int $textCalls = 0;
 
     public function __construct(
         private readonly int $intValue,
         private readonly float $floatValue,
-        private readonly string $stringValue = '',
+        private readonly string $textValue = '',
     ) {}
 
     #[Override]
@@ -41,10 +43,10 @@ final class CountingNumber implements Number
     }
 
     #[Override]
-    public function asString(): string
+    public function asText(): Text
     {
-        ++$this->stringCalls;
+        ++$this->textCalls;
 
-        return $this->stringValue;
+        return new TextOf($this->textValue);
     }
 }

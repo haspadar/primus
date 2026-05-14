@@ -71,8 +71,8 @@ final class MinOfTest extends TestCase
     }
 
     #[Test]
-    public function returnsStringOfMinimum(): void
+    public function returnsTextOfMinimum(): void
     {
-        $this->assertSame('3', (new MinOf(new NumberOf(9), new NumberOf(3), new NumberOf(5)))->asString());
+        $this->assertSame('3', (new MinOf(new NumberOf(9), new NumberOf(3), new NumberOf(5)))->asText()->value());
     }
 }

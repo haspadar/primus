@@ -68,20 +68,20 @@ final class SumOfTest extends TestCase
     }
 
     #[Test]
-    public function returnsStringOfIntegerSum(): void
+    public function returnsTextOfIntegerSum(): void
     {
-        $this->assertSame('5', (new SumOf(new NumberOf(2), new NumberOf(3)))->asString());
+        $this->assertSame('5', (new SumOf(new NumberOf(2), new NumberOf(3)))->asText()->value());
     }
 
     #[Test]
-    public function returnsStringOfFractionalSum(): void
+    public function returnsTextOfFractionalSum(): void
     {
-        $this->assertSame('3.5', (new SumOf(new NumberOf(1), new NumberOf(2.5)))->asString());
+        $this->assertSame('3.5', (new SumOf(new NumberOf(1), new NumberOf(2.5)))->asText()->value());
     }
 
     #[Test]
-    public function emptySumIsZeroString(): void
+    public function emptySumIsZeroText(): void
     {
-        $this->assertSame('0', (new SumOf())->asString());
+        $this->assertSame('0', (new SumOf())->asText()->value());
     }
 }

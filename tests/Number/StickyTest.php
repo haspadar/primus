@@ -69,25 +69,25 @@ final class StickyTest extends TestCase
     }
 
     #[Test]
-    public function returnsSameStringOnRepeatedCalls(): void
+    public function returnsSameTextOnRepeatedCalls(): void
     {
         $sticky = new Sticky(new CountingNumber(42, 3.14, '3.14'));
 
-        $this->assertSame('3.14', $sticky->asString());
-        $this->assertSame('3.14', $sticky->asString());
+        $this->assertSame('3.14', $sticky->asText()->value());
+        $this->assertSame('3.14', $sticky->asText()->value());
     }
 
     #[Test]
-    public function callsOriginAsStringAtMostOnce(): void
+    public function callsOriginAsTextAtMostOnce(): void
     {
         $origin = new CountingNumber(42, 3.14, '3.14');
         $sticky = new Sticky($origin);
 
-        $sticky->asString();
-        $sticky->asString();
-        $sticky->asString();
+        $sticky->asText();
+        $sticky->asText();
+        $sticky->asText();
 
-        $this->assertSame(1, $origin->stringCalls);
+        $this->assertSame(1, $origin->textCalls);
     }
 
     #[Test]
@@ -98,10 +98,10 @@ final class StickyTest extends TestCase
 
         $sticky->asInt();
         $sticky->asFloat();
-        $sticky->asString();
+        $sticky->asText();
 
         $this->assertSame(1, $origin->intCalls);
         $this->assertSame(1, $origin->floatCalls);
-        $this->assertSame(1, $origin->stringCalls);
+        $this->assertSame(1, $origin->textCalls);
     }
 }
