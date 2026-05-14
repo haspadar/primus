@@ -28,5 +28,5 @@ interface Number
     /**
      * Returns the canonical decimal text projection of this number.
      */
-    public function asText(): string;
+    public function asString(): string;
 }

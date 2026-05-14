@@ -42,7 +42,7 @@ final readonly class DivOf implements Number
     }
 
     #[Override]
-    public function asText(): string
+    public function asString(): string
     {
         return (string) $this->asFloat();
     }

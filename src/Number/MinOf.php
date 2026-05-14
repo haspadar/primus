@@ -53,7 +53,7 @@ final readonly class MinOf implements Number
     }
 
     #[Override]
-    public function asText(): string
+    public function asString(): string
     {
         return (string) $this->asFloat();
     }

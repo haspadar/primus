@@ -50,18 +50,18 @@ final class NumberOfTextTest extends TestCase
     #[Test]
     public function normalizesIntegerStringToText(): void
     {
-        $this->assertSame('42', (new NumberOfText(new TextOf('42')))->asText());
+        $this->assertSame('42', (new NumberOfText(new TextOf('42')))->asString());
     }
 
     #[Test]
     public function normalizesFloatStringToText(): void
     {
-        $this->assertSame('3.14', (new NumberOfText(new TextOf('3.14')))->asText());
+        $this->assertSame('3.14', (new NumberOfText(new TextOf('3.14')))->asString());
     }
 
     #[Test]
     public function dropsNonNumericTailFromText(): void
     {
-        $this->assertSame('3.14', (new NumberOfText(new TextOf('3.14abc')))->asText());
+        $this->assertSame('3.14', (new NumberOfText(new TextOf('3.14abc')))->asString());
     }
 }

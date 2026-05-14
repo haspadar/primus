@@ -16,12 +16,12 @@ final class CountingNumber implements Number
 {
     public int $intCalls = 0;
     public int $floatCalls = 0;
-    public int $textCalls = 0;
+    public int $stringCalls = 0;
 
     public function __construct(
         private readonly int $intValue,
         private readonly float $floatValue,
-        private readonly string $textValue = '',
+        private readonly string $stringValue = '',
     ) {}
 
     #[Override]
@@ -41,10 +41,10 @@ final class CountingNumber implements Number
     }
 
     #[Override]
-    public function asText(): string
+    public function asString(): string
     {
-        ++$this->textCalls;
+        ++$this->stringCalls;
 
-        return $this->textValue;
+        return $this->stringValue;
     }
 }

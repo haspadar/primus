@@ -9,7 +9,7 @@ use Override;
 /**
  * Cached version of a {@see Number}.
  *
- * Evaluates each projection (asInt, asFloat, asText) at most once and stores
+ * Evaluates each projection (asInt, asFloat, asString) at most once and stores
  * the result. Subsequent calls return the cached value instead of re-traversing
  * the underlying decorator graph.
  *
@@ -22,14 +22,14 @@ use Override;
  *     $cached->asFloat(); // cached
  *     $cached->asInt(); // computed once, traverses the tree
  *     $cached->asInt(); // cached
- *     $cached->asText(); // computed once, traverses the tree
- *     $cached->asText(); // cached
+ *     $cached->asString(); // computed once, traverses the tree
+ *     $cached->asString(); // cached
  */
 final class Sticky implements Number
 {
     private const int EMPTY_INT = 0;
     private const float EMPTY_FLOAT = 0.0;
-    private const string EMPTY_TEXT = '';
+    private const string EMPTY_STRING = '';
 
     /** @phpstan-ignore haspadar.immutable (lazy memoization flag; idempotent externally) */
     private bool $intComputed = false;
@@ -44,10 +44,10 @@ final class Sticky implements Number
     private float $floatStored = self::EMPTY_FLOAT;
 
     /** @phpstan-ignore haspadar.immutable (lazy memoization flag; idempotent externally) */
-    private bool $textComputed = false;
+    private bool $stringComputed = false;
 
     /** @phpstan-ignore haspadar.immutable (lazy memoization slot; idempotent externally) */
-    private string $textStored = self::EMPTY_TEXT;
+    private string $stringStored = self::EMPTY_STRING;
 
     /**
      * Ctor.
@@ -79,13 +79,13 @@ final class Sticky implements Number
     }
 
     #[Override]
-    public function asText(): string
+    public function asString(): string
     {
-        if (!$this->textComputed) {
-            $this->textStored = $this->origin->asText();
-            $this->textComputed = true;
+        if (!$this->stringComputed) {
+            $this->stringStored = $this->origin->asString();
+            $this->stringComputed = true;
         }
 
-        return $this->textStored;
+        return $this->stringStored;
     }
 }

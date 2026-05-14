@@ -52,7 +52,7 @@ final class NumberOfScalarTest extends TestCase
     {
         $this->assertSame(
             '42',
-            (new NumberOfScalar(new ScalarOf(static fn(): int => 42)))->asText(),
+            (new NumberOfScalar(new ScalarOf(static fn(): int => 42)))->asString(),
         );
     }
 
@@ -61,7 +61,7 @@ final class NumberOfScalarTest extends TestCase
     {
         $this->assertSame(
             '3.14',
-            (new NumberOfScalar(new ScalarOf(static fn(): float => 3.14)))->asText(),
+            (new NumberOfScalar(new ScalarOf(static fn(): float => 3.14)))->asString(),
         );
     }
 }

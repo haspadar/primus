@@ -51,7 +51,7 @@ final readonly class SumOf implements Number
     }
 
     #[Override]
-    public function asText(): string
+    public function asString(): string
     {
         return (string) $this->asFloat();
     }

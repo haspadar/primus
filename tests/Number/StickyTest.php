@@ -73,8 +73,8 @@ final class StickyTest extends TestCase
     {
         $sticky = new Sticky(new CountingNumber(42, 3.14, '3.14'));
 
-        $this->assertSame('3.14', $sticky->asText());
-        $this->assertSame('3.14', $sticky->asText());
+        $this->assertSame('3.14', $sticky->asString());
+        $this->assertSame('3.14', $sticky->asString());
     }
 
     #[Test]
@@ -83,11 +83,11 @@ final class StickyTest extends TestCase
         $origin = new CountingNumber(42, 3.14, '3.14');
         $sticky = new Sticky($origin);
 
-        $sticky->asText();
-        $sticky->asText();
-        $sticky->asText();
+        $sticky->asString();
+        $sticky->asString();
+        $sticky->asString();
 
-        $this->assertSame(1, $origin->textCalls);
+        $this->assertSame(1, $origin->stringCalls);
     }
 
     #[Test]
@@ -98,10 +98,10 @@ final class StickyTest extends TestCase
 
         $sticky->asInt();
         $sticky->asFloat();
-        $sticky->asText();
+        $sticky->asString();
 
         $this->assertSame(1, $origin->intCalls);
         $this->assertSame(1, $origin->floatCalls);
-        $this->assertSame(1, $origin->textCalls);
+        $this->assertSame(1, $origin->stringCalls);
     }
 }

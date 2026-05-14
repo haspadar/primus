@@ -49,18 +49,18 @@ final class NumberOfTest extends TestCase
     #[Test]
     public function returnsTextForIntegerSource(): void
     {
-        $this->assertSame('42', (new NumberOf(42))->asText());
+        $this->assertSame('42', (new NumberOf(42))->asString());
     }
 
     #[Test]
     public function returnsTextForFloatSource(): void
     {
-        $this->assertSame('3.14', (new NumberOf(3.14))->asText());
+        $this->assertSame('3.14', (new NumberOf(3.14))->asString());
     }
 
     #[Test]
     public function returnsTextForNegativeSource(): void
     {
-        $this->assertSame('-7', (new NumberOf(-7))->asText());
+        $this->assertSame('-7', (new NumberOf(-7))->asString());
     }
 }
