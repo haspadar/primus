@@ -11,8 +11,8 @@ use Primus\Text\Text;
  *
  * Truncation toward zero on the int accessor follows native PHP `(int)` cast
  * semantics; the float accessor preserves the source magnitude; the text
- * accessor returns the float projection rendered through PHP's default
- * decimal format — integer values render without a trailing `.0`.
+ * accessor returns the canonical decimal form of the value, with the exact
+ * format determined by the implementation family.
  */
 interface Number
 {
