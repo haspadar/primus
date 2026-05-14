@@ -78,6 +78,14 @@ final class StickyTest extends TestCase
     }
 
     #[Test]
+    public function returnsSameTextInstanceOnRepeatedCalls(): void
+    {
+        $sticky = new Sticky(new CountingNumber(42, 3.14, '3.14'));
+
+        $this->assertSame($sticky->asText(), $sticky->asText());
+    }
+
+    #[Test]
     public function callsOriginAsTextAtMostOnce(): void
     {
         $origin = new CountingNumber(42, 3.14, '3.14');
