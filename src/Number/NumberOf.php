@@ -38,6 +38,6 @@ final readonly class NumberOf implements Number
     #[Override]
     public function asText(): string
     {
-        return (string) $this->value;
+        return (string) (float) $this->value;
     }
 }

@@ -78,4 +78,10 @@ final class SumOfTest extends TestCase
     {
         $this->assertSame('3.5', (new SumOf(new NumberOf(1), new NumberOf(2.5)))->asText());
     }
+
+    #[Test]
+    public function emptySumIsZeroText(): void
+    {
+        $this->assertSame('0', (new SumOf())->asText());
+    }
 }
