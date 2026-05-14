@@ -8,9 +8,18 @@ use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Primus\Integer\Abs;
 use Primus\Integer\IntegerOf;
+use TypeError;
 
 final class AbsTest extends TestCase
 {
+    #[Test]
+    public function overflowsOnPhpIntMin(): void
+    {
+        $this->expectException(TypeError::class);
+
+        (new Abs(new IntegerOf(PHP_INT_MIN)))->asInt();
+    }
+
     #[Test]
     public function leavesPositiveUnchanged(): void
     {
