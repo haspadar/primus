@@ -2,35 +2,35 @@
 
 declare(strict_types=1);
 
-namespace Primus\IntNumber;
+namespace Primus\Integer;
 
 use Override;
 use Primus\Text\Text;
 use Primus\Text\TextOf;
 
 /**
- * Product of zero or more IntNumber factors, computed in native PHP int arithmetic.
+ * Product of zero or more Integer factors, computed in native PHP int arithmetic.
  *
  * Each operand contributes its int projection; overflow follows native PHP
  * semantics (the result silently widens to float, breaking the int contract).
  * Callers are responsible for staying within PHP_INT_MAX.
  *
  * Example:
- *     $product = new MultOf(new IntNumberOf(3), new IntNumberOf(4));
+ *     $product = new MultOf(new IntegerOf(3), new IntegerOf(4));
  *     $product->asInt(); // 12
  *     (new MultOf())->asInt(); // 1 (multiplicative identity)
  */
-final readonly class MultOf implements IntNumber
+final readonly class MultOf implements Integer
 {
-    /** @var array<array-key, IntNumber> */
+    /** @var array<array-key, Integer> */
     private array $factors;
 
     /**
      * Ctor.
      *
-     * @param IntNumber ...$factors The integers to multiply.
+     * @param Integer ...$factors The integers to multiply.
      */
-    public function __construct(IntNumber ...$factors)
+    public function __construct(Integer ...$factors)
     {
         $this->factors = $factors;
     }

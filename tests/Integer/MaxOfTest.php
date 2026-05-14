@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Primus\Tests\IntNumber;
+namespace Primus\Tests\Integer;
 
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
-use Primus\IntNumber\IntNumberOf;
-use Primus\IntNumber\MaxOf;
+use Primus\Integer\IntegerOf;
+use Primus\Integer\MaxOf;
 use UnderflowException;
 
 final class MaxOfTest extends TestCase
@@ -17,7 +17,7 @@ final class MaxOfTest extends TestCase
     {
         $this->assertSame(
             9,
-            (new MaxOf(new IntNumberOf(3), new IntNumberOf(9), new IntNumberOf(5)))->asInt(),
+            (new MaxOf(new IntegerOf(3), new IntegerOf(9), new IntegerOf(5)))->asInt(),
         );
     }
 
@@ -26,7 +26,7 @@ final class MaxOfTest extends TestCase
     {
         $this->assertSame(
             -2,
-            (new MaxOf(new IntNumberOf(-7), new IntNumberOf(-2), new IntNumberOf(-5)))->asInt(),
+            (new MaxOf(new IntegerOf(-7), new IntegerOf(-2), new IntegerOf(-5)))->asInt(),
         );
     }
 
@@ -35,7 +35,7 @@ final class MaxOfTest extends TestCase
     {
         $this->assertSame(
             9.0,
-            (new MaxOf(new IntNumberOf(3), new IntNumberOf(9)))->asFloat(),
+            (new MaxOf(new IntegerOf(3), new IntegerOf(9)))->asFloat(),
         );
     }
 
@@ -44,7 +44,7 @@ final class MaxOfTest extends TestCase
     {
         $this->assertSame(
             '9',
-            (new MaxOf(new IntNumberOf(3), new IntNumberOf(9)))->asText()->value(),
+            (new MaxOf(new IntegerOf(3), new IntegerOf(9)))->asText()->value(),
         );
     }
 

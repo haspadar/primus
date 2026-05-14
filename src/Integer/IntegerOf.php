@@ -2,22 +2,22 @@
 
 declare(strict_types=1);
 
-namespace Primus\IntNumber;
+namespace Primus\Integer;
 
 use Override;
 use Primus\Text\Text;
 use Primus\Text\TextOf;
 
 /**
- * IntNumber lifted from a native int.
+ * Integer lifted from a native int.
  *
  * Example:
- *     $n = new IntNumberOf(42);
+ *     $n = new IntegerOf(42);
  *     $n->asInt(); // 42
  *     $n->asFloat(); // 42.0
  *     $n->asText()->value(); // "42"
  */
-final readonly class IntNumberOf implements IntNumber
+final readonly class IntegerOf implements Integer
 {
     /**
      * Ctor.

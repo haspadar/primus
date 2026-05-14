@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Primus\Tests\IntNumber;
+namespace Primus\Tests\Integer;
 
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
-use Primus\IntNumber\IntNumberOf;
-use Primus\IntNumber\MinOf;
+use Primus\Integer\IntegerOf;
+use Primus\Integer\MinOf;
 use UnderflowException;
 
 final class MinOfTest extends TestCase
@@ -17,7 +17,7 @@ final class MinOfTest extends TestCase
     {
         $this->assertSame(
             3,
-            (new MinOf(new IntNumberOf(9), new IntNumberOf(3), new IntNumberOf(5)))->asInt(),
+            (new MinOf(new IntegerOf(9), new IntegerOf(3), new IntegerOf(5)))->asInt(),
         );
     }
 
@@ -26,7 +26,7 @@ final class MinOfTest extends TestCase
     {
         $this->assertSame(
             -7,
-            (new MinOf(new IntNumberOf(-7), new IntNumberOf(-2), new IntNumberOf(-5)))->asInt(),
+            (new MinOf(new IntegerOf(-7), new IntegerOf(-2), new IntegerOf(-5)))->asInt(),
         );
     }
 
@@ -35,7 +35,7 @@ final class MinOfTest extends TestCase
     {
         $this->assertSame(
             3.0,
-            (new MinOf(new IntNumberOf(9), new IntNumberOf(3)))->asFloat(),
+            (new MinOf(new IntegerOf(9), new IntegerOf(3)))->asFloat(),
         );
     }
 
@@ -44,7 +44,7 @@ final class MinOfTest extends TestCase
     {
         $this->assertSame(
             '3',
-            (new MinOf(new IntNumberOf(9), new IntNumberOf(3)))->asText()->value(),
+            (new MinOf(new IntegerOf(9), new IntegerOf(3)))->asText()->value(),
         );
     }
 
