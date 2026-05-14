@@ -49,4 +49,10 @@ final readonly class SumOf implements Number
 
         return $total;
     }
+
+    #[Override]
+    public function asText(): string
+    {
+        return (string) $this->asFloat();
+    }
 }

@@ -51,4 +51,10 @@ final readonly class MinOf implements Number
 
         return min(array_map(static fn(Number $n): float => $n->asFloat(), $this->numbers));
     }
+
+    #[Override]
+    public function asText(): string
+    {
+        return (string) $this->asFloat();
+    }
 }

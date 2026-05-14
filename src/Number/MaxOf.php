@@ -51,4 +51,10 @@ final readonly class MaxOf implements Number
 
         return max(array_map(static fn(Number $n): float => $n->asFloat(), $this->operands));
     }
+
+    #[Override]
+    public function asText(): string
+    {
+        return (string) $this->asFloat();
+    }
 }

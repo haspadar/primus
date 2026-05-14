@@ -38,4 +38,10 @@ final readonly class NumberOfText implements Number
     {
         return (float) $this->origin->value();
     }
+
+    #[Override]
+    public function asText(): string
+    {
+        return (string) (float) $this->origin->value();
+    }
 }

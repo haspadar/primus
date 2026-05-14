@@ -38,4 +38,10 @@ final readonly class NumberOfScalar implements Number
     {
         return (float) $this->origin->value();
     }
+
+    #[Override]
+    public function asText(): string
+    {
+        return (string) $this->origin->value();
+    }
 }

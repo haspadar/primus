@@ -40,4 +40,10 @@ final readonly class DivOf implements Number
     {
         return $this->dividend->asFloat() / $this->divisor->asFloat();
     }
+
+    #[Override]
+    public function asText(): string
+    {
+        return (string) $this->asFloat();
+    }
 }

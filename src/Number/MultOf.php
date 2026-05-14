@@ -50,4 +50,10 @@ final readonly class MultOf implements Number
 
         return $total;
     }
+
+    #[Override]
+    public function asText(): string
+    {
+        return (string) $this->asFloat();
+    }
 }

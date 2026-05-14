@@ -66,4 +66,16 @@ final class SumOfTest extends TestCase
     {
         $this->assertSame(0.0, (new SumOf())->asFloat());
     }
+
+    #[Test]
+    public function returnsTextOfIntegerSum(): void
+    {
+        $this->assertSame('5', (new SumOf(new NumberOf(2), new NumberOf(3)))->asText());
+    }
+
+    #[Test]
+    public function returnsTextOfFractionalSum(): void
+    {
+        $this->assertSame('3.5', (new SumOf(new NumberOf(1), new NumberOf(2.5)))->asText());
+    }
 }

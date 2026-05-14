@@ -46,4 +46,22 @@ final class NumberOfScalarTest extends TestCase
             (new NumberOfScalar(new ScalarOf(static fn(): int => 5)))->asFloat(),
         );
     }
+
+    #[Test]
+    public function returnsTextForIntegerScalar(): void
+    {
+        $this->assertSame(
+            '42',
+            (new NumberOfScalar(new ScalarOf(static fn(): int => 42)))->asText(),
+        );
+    }
+
+    #[Test]
+    public function returnsTextForFloatScalar(): void
+    {
+        $this->assertSame(
+            '3.14',
+            (new NumberOfScalar(new ScalarOf(static fn(): float => 3.14)))->asText(),
+        );
+    }
 }

@@ -34,4 +34,10 @@ final readonly class NumberOf implements Number
     {
         return (float) $this->value;
     }
+
+    #[Override]
+    public function asText(): string
+    {
+        return (string) $this->value;
+    }
 }

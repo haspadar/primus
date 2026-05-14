@@ -66,4 +66,10 @@ final class MultOfTest extends TestCase
     {
         $this->assertSame(0, (new MultOf(new NumberOf(5), new NumberOf(0)))->asInt());
     }
+
+    #[Test]
+    public function returnsTextOfProduct(): void
+    {
+        $this->assertSame('12', (new MultOf(new NumberOf(3), new NumberOf(4)))->asText());
+    }
 }

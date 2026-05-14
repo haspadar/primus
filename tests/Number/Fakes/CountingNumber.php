@@ -16,8 +16,13 @@ final class CountingNumber implements Number
 {
     public int $intCalls = 0;
     public int $floatCalls = 0;
+    public int $textCalls = 0;
 
-    public function __construct(private readonly int $intValue, private readonly float $floatValue) {}
+    public function __construct(
+        private readonly int $intValue,
+        private readonly float $floatValue,
+        private readonly string $textValue = '',
+    ) {}
 
     #[Override]
     public function asInt(): int
@@ -33,5 +38,13 @@ final class CountingNumber implements Number
         ++$this->floatCalls;
 
         return $this->floatValue;
+    }
+
+    #[Override]
+    public function asText(): string
+    {
+        ++$this->textCalls;
+
+        return $this->textValue;
     }
 }

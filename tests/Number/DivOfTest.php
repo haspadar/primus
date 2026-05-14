@@ -64,4 +64,10 @@ final class DivOfTest extends TestCase
 
         (new DivOf(new NumberOf(1), new NumberOf(0)))->asInt();
     }
+
+    #[Test]
+    public function returnsTextOfQuotient(): void
+    {
+        $this->assertSame('2.5', (new DivOf(new NumberOf(5), new NumberOf(2)))->asText());
+    }
 }

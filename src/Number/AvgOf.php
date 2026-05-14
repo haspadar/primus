@@ -51,4 +51,10 @@ final readonly class AvgOf implements Number
 
         return $total / (float) count($this->operands);
     }
+
+    #[Override]
+    public function asText(): string
+    {
+        return (string) $this->asFloat();
+    }
 }
