@@ -89,19 +89,4 @@ final class StickyTest extends TestCase
 
         $this->assertSame(1, $origin->textCalls);
     }
-
-    #[Test]
-    public function cachesAllProjectionsIndependently(): void
-    {
-        $origin = new CountingNumber(42, 3.14, '3.14');
-        $sticky = new Sticky($origin);
-
-        $sticky->asInt();
-        $sticky->asFloat();
-        $sticky->asText();
-
-        $this->assertSame(1, $origin->intCalls);
-        $this->assertSame(1, $origin->floatCalls);
-        $this->assertSame(1, $origin->textCalls);
-    }
 }

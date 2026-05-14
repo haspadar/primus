@@ -12,11 +12,14 @@ use Primus\Text\Text;
  *
  * Parsing follows native PHP `(int)` and `(float)` cast semantics on
  * the Text's value: leading numeric prefix is read, the rest is dropped.
+ * `asText` returns the normalized numeric form (the source text passed
+ * through `(float)` and back through `(string)`), not the original input.
  *
  * Example:
  *     $n = new NumberOfText(new TextOf('3.14'));
  *     $n->asInt(); // 3
  *     $n->asFloat(); // 3.14
+ *     $n->asText(); // "3.14"
  */
 final readonly class NumberOfText implements Number
 {

@@ -9,7 +9,9 @@ namespace Primus\Number;
  *
  * Truncation toward zero on the int accessor follows native PHP `(int)` cast
  * semantics; the float accessor preserves the source magnitude; the text
- * accessor returns the canonical decimal representation of the value.
+ * accessor returns the string form of the float projection — integer values
+ * render without a trailing `.0`, fractional values render in PHP's default
+ * decimal format.
  */
 interface Number
 {
