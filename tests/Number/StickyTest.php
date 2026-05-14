@@ -67,4 +67,61 @@ final class StickyTest extends TestCase
         $this->assertSame(1, $origin->intCalls);
         $this->assertSame(1, $origin->floatCalls);
     }
+
+    #[Test]
+    public function returnsSameTextOnRepeatedCalls(): void
+    {
+        $sticky = new Sticky(new CountingNumber(42, 3.14, '3.14'));
+
+        $this->assertSame('3.14', $sticky->asText()->value());
+        $this->assertSame('3.14', $sticky->asText()->value());
+    }
+
+    #[Test]
+    public function returnsSameTextInstanceOnRepeatedCalls(): void
+    {
+        $sticky = new Sticky(new CountingNumber(42, 3.14, '3.14'));
+
+        $this->assertSame($sticky->asText(), $sticky->asText());
+    }
+
+    #[Test]
+    public function callsOriginAsTextAtMostOnce(): void
+    {
+        $origin = new CountingNumber(42, 3.14, '3.14');
+        $sticky = new Sticky($origin);
+
+        $sticky->asText();
+        $sticky->asText();
+        $sticky->asText();
+
+        $this->assertSame(1, $origin->textCalls);
+    }
+
+    #[Test]
+    public function cachesEmptyTextAsValidValue(): void
+    {
+        $origin = new CountingNumber(0, 0.0, '');
+        $sticky = new Sticky($origin);
+
+        $sticky->asText();
+        $sticky->asText();
+
+        $this->assertSame(1, $origin->textCalls);
+    }
+
+    #[Test]
+    public function cachesProjectionsIndependently(): void
+    {
+        $origin = new CountingNumber(42, 3.14, '3.14');
+        $sticky = new Sticky($origin);
+
+        $sticky->asInt();
+        $sticky->asFloat();
+        $sticky->asText();
+
+        $this->assertSame(1, $origin->intCalls);
+        $this->assertSame(1, $origin->floatCalls);
+        $this->assertSame(1, $origin->textCalls);
+    }
 }

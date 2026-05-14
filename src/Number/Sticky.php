@@ -5,12 +5,14 @@ declare(strict_types=1);
 namespace Primus\Number;
 
 use Override;
+use Primus\Text\Text;
+use Primus\Text\TextOf;
 
 /**
  * Cached version of a {@see Number}.
  *
- * Evaluates each projection (asInt, asFloat) at most once and stores the
- * result. Subsequent calls return the cached value instead of re-traversing
+ * Evaluates each projection (asInt, asFloat, asText) at most once and stores
+ * the result. Subsequent calls return the cached value instead of re-traversing
  * the underlying decorator graph.
  *
  * This class is not thread-safe. To share cached data across threads use an
@@ -22,6 +24,8 @@ use Override;
  *     $cached->asFloat(); // cached
  *     $cached->asInt(); // computed once, traverses the tree
  *     $cached->asInt(); // cached
+ *     $cached->asText(); // computed once, traverses the tree
+ *     $cached->asText(); // cached
  */
 final class Sticky implements Number
 {
@@ -40,12 +44,21 @@ final class Sticky implements Number
     /** @phpstan-ignore haspadar.immutable (lazy memoization slot; idempotent externally) */
     private float $floatStored = self::EMPTY_FLOAT;
 
+    /** @phpstan-ignore haspadar.immutable (lazy memoization flag; idempotent externally) */
+    private bool $textComputed = false;
+
+    /** @phpstan-ignore haspadar.immutable (lazy memoization slot; idempotent externally) */
+    private Text $textStored;
+
     /**
      * Ctor.
      *
      * @param Number $origin The number whose projections are cached.
      */
-    public function __construct(private readonly Number $origin) {}
+    public function __construct(private readonly Number $origin)
+    {
+        $this->textStored = new TextOf('');
+    }
 
     #[Override]
     public function asInt(): int
@@ -67,5 +80,16 @@ final class Sticky implements Number
         }
 
         return $this->floatStored;
+    }
+
+    #[Override]
+    public function asText(): Text
+    {
+        if (!$this->textComputed) {
+            $this->textStored = $this->origin->asText();
+            $this->textComputed = true;
+        }
+
+        return $this->textStored;
     }
 }

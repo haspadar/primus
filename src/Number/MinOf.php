@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace Primus\Number;
 
 use Override;
+use Primus\Text\Text;
+use Primus\Text\TextOf;
 use UnderflowException;
 
 /**
@@ -50,5 +52,11 @@ final readonly class MinOf implements Number
         }
 
         return min(array_map(static fn(Number $n): float => $n->asFloat(), $this->numbers));
+    }
+
+    #[Override]
+    public function asText(): Text
+    {
+        return new TextOf((string) $this->asFloat());
     }
 }

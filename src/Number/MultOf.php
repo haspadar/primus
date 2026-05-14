@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace Primus\Number;
 
 use Override;
+use Primus\Text\Text;
+use Primus\Text\TextOf;
 
 /**
  * Product of zero or more Number factors.
@@ -49,5 +51,11 @@ final readonly class MultOf implements Number
         }
 
         return $total;
+    }
+
+    #[Override]
+    public function asText(): Text
+    {
+        return new TextOf((string) $this->asFloat());
     }
 }

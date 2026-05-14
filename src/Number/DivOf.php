@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace Primus\Number;
 
 use Override;
+use Primus\Text\Text;
+use Primus\Text\TextOf;
 
 /**
  * Quotient of a dividend Number and a divisor Number.
@@ -39,5 +41,11 @@ final readonly class DivOf implements Number
     public function asFloat(): float
     {
         return $this->dividend->asFloat() / $this->divisor->asFloat();
+    }
+
+    #[Override]
+    public function asText(): Text
+    {
+        return new TextOf((string) $this->asFloat());
     }
 }

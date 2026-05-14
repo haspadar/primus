@@ -6,6 +6,8 @@ namespace Primus\Number;
 
 use Override;
 use Primus\Scalar\Scalar;
+use Primus\Text\Text;
+use Primus\Text\TextOf;
 
 /**
  * Number lifted from a deferred numeric Scalar.
@@ -37,5 +39,11 @@ final readonly class NumberOfScalar implements Number
     public function asFloat(): float
     {
         return (float) $this->origin->value();
+    }
+
+    #[Override]
+    public function asText(): Text
+    {
+        return new TextOf((string) (float) $this->origin->value());
     }
 }
