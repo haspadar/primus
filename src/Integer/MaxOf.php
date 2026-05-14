@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Primus\IntNumber;
+namespace Primus\Integer;
 
 use Override;
 use Primus\Text\Text;
@@ -10,25 +10,25 @@ use Primus\Text\TextOf;
 use UnderflowException;
 
 /**
- * Maximum of one or more IntNumber operands, computed in native PHP int arithmetic.
+ * Maximum of one or more Integer operands, computed in native PHP int arithmetic.
  *
  * Throws on an empty operand list — maximum is undefined without operands.
  *
  * Example:
- *     $max = new MaxOf(new IntNumberOf(3), new IntNumberOf(9), new IntNumberOf(5));
+ *     $max = new MaxOf(new IntegerOf(3), new IntegerOf(9), new IntegerOf(5));
  *     $max->asInt(); // 9
  */
-final readonly class MaxOf implements IntNumber
+final readonly class MaxOf implements Integer
 {
-    /** @var array<array-key, IntNumber> */
+    /** @var array<array-key, Integer> */
     private array $operands;
 
     /**
      * Ctor.
      *
-     * @param IntNumber ...$operands The integers to compare.
+     * @param Integer ...$operands The integers to compare.
      */
-    public function __construct(IntNumber ...$operands)
+    public function __construct(Integer ...$operands)
     {
         $this->operands = $operands;
     }
@@ -40,7 +40,7 @@ final readonly class MaxOf implements IntNumber
             throw new UnderflowException('Cannot compute maximum of empty operand list');
         }
 
-        return max(array_map(static fn(IntNumber $n): int => $n->asInt(), $this->operands));
+        return max(array_map(static fn(Integer $n): int => $n->asInt(), $this->operands));
     }
 
     #[Override]

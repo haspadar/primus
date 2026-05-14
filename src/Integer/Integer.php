@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Primus\IntNumber;
+namespace Primus\Integer;
 
 use Primus\Number\Number;
 
@@ -13,4 +13,4 @@ use Primus\Number\Number;
  * back their projections with native PHP int arithmetic so the int projection
  * preserves precision beyond the float53 boundary.
  */
-interface IntNumber extends Number {}
+interface Integer extends Number {}
