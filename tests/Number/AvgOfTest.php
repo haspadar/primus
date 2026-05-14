@@ -71,7 +71,7 @@ final class AvgOfTest extends TestCase
     }
 
     #[Test]
-    public function returnsTextOfAverage(): void
+    public function returnsStringOfAverage(): void
     {
         $this->assertSame('2', (new AvgOf(new NumberOf(1), new NumberOf(2), new NumberOf(3)))->asString());
     }

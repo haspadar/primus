@@ -69,7 +69,7 @@ final class StickyTest extends TestCase
     }
 
     #[Test]
-    public function returnsSameTextOnRepeatedCalls(): void
+    public function returnsSameStringOnRepeatedCalls(): void
     {
         $sticky = new Sticky(new CountingNumber(42, 3.14, '3.14'));
 
@@ -78,7 +78,7 @@ final class StickyTest extends TestCase
     }
 
     #[Test]
-    public function callsOriginAsTextAtMostOnce(): void
+    public function callsOriginAsStringAtMostOnce(): void
     {
         $origin = new CountingNumber(42, 3.14, '3.14');
         $sticky = new Sticky($origin);

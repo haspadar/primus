@@ -77,7 +77,7 @@ final class MaxOfTest extends TestCase
     }
 
     #[Test]
-    public function returnsTextOfMaximum(): void
+    public function returnsStringOfMaximum(): void
     {
         $this->assertSame('9', (new MaxOf(new NumberOf(3), new NumberOf(9), new NumberOf(5)))->asString());
     }

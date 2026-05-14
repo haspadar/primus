@@ -26,7 +26,7 @@ interface Number
     public function asFloat(): float;
 
     /**
-     * Returns the canonical decimal text projection of this number.
+     * Returns the canonical decimal string projection of this number.
      */
     public function asString(): string;
 }

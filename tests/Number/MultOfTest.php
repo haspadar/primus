@@ -68,13 +68,13 @@ final class MultOfTest extends TestCase
     }
 
     #[Test]
-    public function returnsTextOfProduct(): void
+    public function returnsStringOfProduct(): void
     {
         $this->assertSame('12', (new MultOf(new NumberOf(3), new NumberOf(4)))->asString());
     }
 
     #[Test]
-    public function emptyProductIsOneText(): void
+    public function emptyProductIsOneString(): void
     {
         $this->assertSame('1', (new MultOf())->asString());
     }

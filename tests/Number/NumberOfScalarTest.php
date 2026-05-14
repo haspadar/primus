@@ -48,7 +48,7 @@ final class NumberOfScalarTest extends TestCase
     }
 
     #[Test]
-    public function returnsTextForIntegerScalar(): void
+    public function returnsStringForIntegerScalar(): void
     {
         $this->assertSame(
             '42',
@@ -57,7 +57,7 @@ final class NumberOfScalarTest extends TestCase
     }
 
     #[Test]
-    public function returnsTextForFloatScalar(): void
+    public function returnsStringForFloatScalar(): void
     {
         $this->assertSame(
             '3.14',
