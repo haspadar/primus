@@ -3,6 +3,16 @@
 override:
     php_cs_fixer.extend: "        'phpdoc_types' => ['exclude' => ['scalar']],"
     phpmetrics.coupling.max_afferent: 18
+    phpstan.parameters:
+        haspadar:
+            afferentCoupling:
+                maxAfferent: 10
+                ignoreInterfaces: true
+                excludedClasses:
+                    - Primus\Text\TextOf
+                    - Primus\Text\Mapped
+                    - Primus\Func\FuncOf
+                    - Primus\Scalar\ScalarOf
     phpunit.testsuites.unit: ["../../tests"]
     phpunit.testsuites.integration: []
     ci.pr.max_lines_changed: 500

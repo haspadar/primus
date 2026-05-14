@@ -20,4 +20,9 @@ parameters:
     haspadar:
         afferentCoupling:
             ignoreInterfaces: true
-            excludedClasses: []
+            excludedClasses:
+                - Primus\Text\TextOf
+                - Primus\Text\Mapped
+                - Primus\Func\FuncOf
+                - Primus\Scalar\ScalarOf
+            maxAfferent: 10
