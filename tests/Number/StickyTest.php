@@ -99,6 +99,18 @@ final class StickyTest extends TestCase
     }
 
     #[Test]
+    public function cachesEmptyTextAsValidValue(): void
+    {
+        $origin = new CountingNumber(0, 0.0, '');
+        $sticky = new Sticky($origin);
+
+        $sticky->asText();
+        $sticky->asText();
+
+        $this->assertSame(1, $origin->textCalls);
+    }
+
+    #[Test]
     public function cachesProjectionsIndependently(): void
     {
         $origin = new CountingNumber(42, 3.14, '3.14');
