@@ -90,8 +90,8 @@ composer require haspadar/primus
   null-guards at every boundary.
 
   ```php
-  $n = new NumberOfText(new TextOf('42'));  // throws on bad input — never returns null
-  $n->asInt();                              // 42
+  $n = new IntegerOf(42);  // explicit type — never returns null
+  $n->asInt();             // 42
   ```
 
 ## Text
@@ -234,28 +234,26 @@ To run a side-effect over every list element:
 ))->exec();
 ```
 
-## Numbers
+## Integers
 
-To parse and read a numeric value:
+To wrap a native int and read its projections:
 
 ```php
-$n = new NumberOfText(new TextOf('42'));
-$n->asInt();    // 42
-$n->asFloat();  // 42.0
+$n = new IntegerOf(42);
+$n->asInt();           // 42
+$n->asFloat();         // 42.0
+$n->asText()->value(); // "42"
 ```
 
-To aggregate a list of numbers:
+To aggregate a list of integers:
 
 ```php
 $total = (new SumOf(
-    new NumberOf(10),
-    new NumberOf(20),
-    new NumberOf(12),
-))->asFloat();
-// 42.0
-
-$avg = (new AvgOf(new NumberOf(1), new NumberOf(2), new NumberOf(3)))->asFloat();
-// 2.0
+    new IntegerOf(10),
+    new IntegerOf(20),
+    new IntegerOf(12),
+))->asInt();
+// 42
 ```
 
 ## Time
@@ -350,6 +348,40 @@ Bugayenko) and [cactoos](https://github.com/yegor256/cactoos).
 ## Requirements
 
 PHP **8.3+**.
+
+## Code style tooling notes
+
+Primus exports class names that collide with PHP pseudo-types in phpdoc:
+`Primus\Integer\Integer`, `Primus\Scalar\Scalar`. Default rules in
+`php-cs-fixer` and `slevomat/coding-standard` compare type names case
+insensitively, so `@param Scalar<T> $x` is flagged as if it were the
+pseudo-type `scalar`. If your project enforces these tools, exclude the
+names explicitly.
+
+**php-cs-fixer** — pass the names to the `exclude` option of
+`phpdoc_types`:
+
+```php
+'phpdoc_types' => ['exclude' => ['scalar', 'integer']],
+```
+
+**phpcs (slevomat)** — disable
+`SlevomatCodingStandard.TypeHints.LongTypeHints` for the affected files:
+
+```xml
+<rule ref="SlevomatCodingStandard.TypeHints.LongTypeHints">
+    <exclude-pattern>*/src/Integer/*</exclude-pattern>
+    <exclude-pattern>*/src/Scalar/*</exclude-pattern>
+</rule>
+```
+
+**[Sheriff](https://github.com/haspadar/sheriff)** — add to
+`.sheriff.yaml`:
+
+```yaml
+override:
+    php_cs_fixer.extend: "        'phpdoc_types' => ['groups' => ['meta', 'simple', 'alias'], 'exclude' => ['scalar', 'integer']],"
+```
 
 ## Working with AI agents
 
