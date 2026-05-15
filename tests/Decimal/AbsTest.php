@@ -30,11 +30,20 @@ final class AbsTest extends TestCase
     }
 
     #[Test]
-    public function leavesZeroUnchanged(): void
+    public function returnsZeroForZeroSource(): void
     {
         $this->assertSame(
             '0',
             (new Abs(new DecimalOf('0'), 0))->asString(),
+        );
+    }
+
+    #[Test]
+    public function truncatesPositiveBeyondScale(): void
+    {
+        $this->assertSame(
+            '3.1',
+            (new Abs(new DecimalOf('3.14'), 1))->asString(),
         );
     }
 

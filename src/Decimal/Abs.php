@@ -29,10 +29,11 @@ final readonly class Abs extends DecimalEnvelope
         parent::__construct(new DecimalOfScalar(new ScalarOf(
             static function () use ($origin, $scale): string {
                 $value = $origin->asString();
+                $factor = str_starts_with($value, '-')
+                    ? '-1'
+                    : '1';
 
-                return str_starts_with($value, '-')
-                    ? bcmul($value, '-1', $scale)
-                    : $value;
+                return bcmul($value, $factor, $scale);
             },
         )));
     }
