@@ -20,8 +20,5 @@
     <rule ref=".sheriff/phpcs/slevomat-flow.xml"/>
     <rule ref=".sheriff/phpcs/slevomat-style.xml"/>
 
-<rule ref="SlevomatCodingStandard.TypeHints.LongTypeHints.UsedLongTypeHint">
-    <exclude-pattern>*/src/Integer/*</exclude-pattern>
-</rule>
 
 </ruleset>
