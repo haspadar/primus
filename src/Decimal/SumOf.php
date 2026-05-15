@@ -4,9 +4,7 @@ declare(strict_types=1);
 
 namespace Primus\Decimal;
 
-use Override;
-use Primus\Text\Text;
-use Primus\Text\TextOf;
+use Primus\Scalar\ScalarOf;
 
 /**
  * Sum of two Decimal addends, computed via bcmath at the given scale.
@@ -18,7 +16,7 @@ use Primus\Text\TextOf;
  *     $sum = new SumOf(new DecimalOf('1.5'), new DecimalOf('2.5'), 1);
  *     $sum->asString(); // "4.0"
  */
-final readonly class SumOf implements Decimal
+final readonly class SumOf extends DecimalEnvelope
 {
     /**
      * Ctor.
@@ -27,29 +25,10 @@ final readonly class SumOf implements Decimal
      * @param Decimal $right The second addend.
      * @param int $scale Number of digits to keep past the decimal point.
      */
-    public function __construct(private Decimal $left, private Decimal $right, private int $scale) {}
-
-    #[Override]
-    public function asInt(): int
+    public function __construct(Decimal $left, Decimal $right, int $scale)
     {
-        return (int) $this->asString();
-    }
-
-    #[Override]
-    public function asFloat(): float
-    {
-        return (float) $this->asString();
-    }
-
-    #[Override]
-    public function asText(): Text
-    {
-        return new TextOf($this->asString());
-    }
-
-    #[Override]
-    public function asString(): string
-    {
-        return bcadd($this->left->asString(), $this->right->asString(), $this->scale);
+        parent::__construct(new DecimalOfScalar(new ScalarOf(
+            static fn(): string => bcadd($left->asString(), $right->asString(), $scale),
+        )));
     }
 }
