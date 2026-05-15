@@ -71,13 +71,14 @@ new decorators — extend it to inherit interface compliance for free.
   `ModOf`, `Abs`, `Sticky` (delegates caching to `Number\Sticky`).
 
 - **`Primus\Time`** — `DateTimeImmutable` wrappers.
-  `Time` interface, `TimeOf` (parse a string), `Now` (current moment),
-  `Iso` (format as ISO 8601 string).
+  `Time` interface, `TimeOf` (wrap a string or `DateTimeImmutable`),
+  `Iso` (format as ISO 8601 string). Sources of the current moment stay
+  on the caller (`new TimeOf(new DateTimeImmutable())`).
 
 - **`Primus\Bytes`** — byte-sequence primitives.
   `Bytes` interface, `BytesOf`, `Base64Encoded`, `Base64Decoded`,
-  `HexEncoded`, `HexDecoded`, `Md5`, `Sha256`, `RandomBytes`, `UuidV4`
-  (random), `UuidV7` (time-ordered).
+  `HexEncoded`, `HexDecoded`, `Md5`, `Sha256`. Random byte sources stay
+  on the caller (`new BytesOf(random_bytes(...))`).
 
 - **`Primus\Func`** — function-as-object primitives.
   `Func<I, O>` (`apply()`), `Proc<X>` (`exec()`, side-effect), `Predicate`
@@ -98,10 +99,12 @@ project's lint gates, or will surprise the caller at runtime.
    `asInt()`/`asFloat()`/`exec()`/etc.) is called.
 
 2. **Computation methods are repeatable but not memoized by default.**
-   `new Now()` returns a different moment per `value()` call. Same for
-   `new RandomBytes(16)` and any value built from them. To freeze a
-   result, wrap in `Sticky` (per-namespace memoizer: `Scalar\Sticky`,
-   `Number\Sticky`, `Func\StickyFunc`).
+   Each call to `value()` (or its peers) may recompute. A caller that
+   feeds a non-deterministic source (e.g. `new BytesOf(random_bytes(16))`
+   that is read by the parent decorator on every projection) will see
+   different results per call. To freeze a result, wrap in `Sticky`
+   (per-namespace memoizer: `Scalar\Sticky`, `Number\Sticky`,
+   `Func\StickyFunc`).
 
 3. **No `null` ever crosses an API boundary.** Constructors take concrete
    typed values; computation methods return concrete typed values.
@@ -138,10 +141,6 @@ Patterns that look reasonable but are wrong for Primus:
   `?Text`, no `?Number`. If a value is genuinely optional in your
   application logic, that's a higher-level concern — handle it with
   `Ternary`, `Or_`, or explicit branching in caller code.
-
-- **Do not expect `Now`/`RandomBytes` to memoize.** Two calls to
-  `value()` return two different moments / two different byte sequences.
-  Wrap in `Sticky` if you need stability.
 
 - **Do not introduce static factory methods.** `Trimmed::of($s)` is not
   a Primus pattern. Use the constructor.
