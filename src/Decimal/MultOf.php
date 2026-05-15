@@ -4,9 +4,7 @@ declare(strict_types=1);
 
 namespace Primus\Decimal;
 
-use Override;
-use Primus\Text\Text;
-use Primus\Text\TextOf;
+use Primus\Scalar\ScalarOf;
 
 /**
  * Product of two Decimal factors, computed via bcmath at the given scale.
@@ -18,7 +16,7 @@ use Primus\Text\TextOf;
  *     $product = new MultOf(new DecimalOf('1.5'), new DecimalOf('2'), 1);
  *     $product->asString(); // "3.0"
  */
-final readonly class MultOf implements Decimal
+final readonly class MultOf extends DecimalEnvelope
 {
     /**
      * Ctor.
@@ -27,29 +25,10 @@ final readonly class MultOf implements Decimal
      * @param Decimal $right The second factor.
      * @param int $scale Number of digits to keep past the decimal point.
      */
-    public function __construct(private Decimal $left, private Decimal $right, private int $scale) {}
-
-    #[Override]
-    public function asInt(): int
+    public function __construct(Decimal $left, Decimal $right, int $scale)
     {
-        return (int) $this->asString();
-    }
-
-    #[Override]
-    public function asFloat(): float
-    {
-        return (float) $this->asString();
-    }
-
-    #[Override]
-    public function asText(): Text
-    {
-        return new TextOf($this->asString());
-    }
-
-    #[Override]
-    public function asString(): string
-    {
-        return bcmul($this->left->asString(), $this->right->asString(), $this->scale);
+        parent::__construct(new DecimalOfScalar(new ScalarOf(
+            static fn(): string => bcmul($left->asString(), $right->asString(), $scale),
+        )));
     }
 }
