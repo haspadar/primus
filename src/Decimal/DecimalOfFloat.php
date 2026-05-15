@@ -30,7 +30,7 @@ final readonly class DecimalOfFloat implements Decimal
     /**
      * Ctor.
      *
-     * @param float $value Native finite float.
+     * @param float $value Native float (validated on first projection).
      */
     public function __construct(private float $value) {}
 
