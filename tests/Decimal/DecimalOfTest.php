@@ -48,4 +48,10 @@ final class DecimalOfTest extends TestCase
     {
         $this->assertSame(3.14, (new DecimalOf('3.14'))->asFloat());
     }
+
+    #[Test]
+    public function returnsNumericStringProjection(): void
+    {
+        $this->assertSame('100000000000000.000001', (new DecimalOf('100000000000000.000001'))->asString());
+    }
 }

@@ -45,4 +45,10 @@ final class DecimalOfIntTest extends TestCase
     {
         $this->assertSame('9007199254740993', (new DecimalOfInt(9007199254740993))->asText()->value());
     }
+
+    #[Test]
+    public function returnsNumericStringProjection(): void
+    {
+        $this->assertSame('42', (new DecimalOfInt(42))->asString());
+    }
 }

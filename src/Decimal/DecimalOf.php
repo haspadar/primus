@@ -9,18 +9,16 @@ use Primus\Text\Text;
 use Primus\Text\TextOf;
 
 /**
- * Decimal lifted from a plain decimal string.
+ * Decimal lifted from a numeric string.
  *
  * The string is stored as-is (no float roundtrip, no normalization), so
- * precision past float53 is preserved through `asText`. Caller is
- * responsible for passing a well-formed plain decimal — `(int)` and
- * `(float)` casts on malformed input follow PHP's native behavior, and
- * downstream bcmath-backed aggregates will reject non-decimal inputs at
- * the moment of computation.
+ * precision past float53 is preserved through both `asText` and `asString`.
+ * The `numeric-string` annotation forces static analyzers to verify the
+ * literal at the call site.
  *
  * Example:
  *     $d = new DecimalOf('100000000000000.000001');
- *     $d->asText()->value(); // "100000000000000.000001" (exact)
+ *     $d->asString(); // "100000000000000.000001" (exact)
  *     $d->asInt(); // 100000000000000 (truncated toward zero)
  */
 final readonly class DecimalOf implements Decimal
@@ -28,7 +26,7 @@ final readonly class DecimalOf implements Decimal
     /**
      * Ctor.
      *
-     * @param string $value Plain decimal string.
+     * @param numeric-string $value Numeric string suitable for bcmath.
      */
     public function __construct(private string $value) {}
 
@@ -48,5 +46,11 @@ final readonly class DecimalOf implements Decimal
     public function asText(): Text
     {
         return new TextOf($this->value);
+    }
+
+    #[Override]
+    public function asString(): string
+    {
+        return $this->value;
     }
 }

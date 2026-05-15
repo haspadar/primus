@@ -15,4 +15,13 @@ use Primus\Number\Number;
  * as `"100000000000000.000001"` keep their precision beyond what float
  * can encode.
  */
-interface Decimal extends Number {}
+interface Decimal extends Number
+{
+    /**
+     * Returns the canonical decimal as a numeric string, safe to feed into
+     * bcmath arithmetic without further parsing or roundtrips.
+     *
+     * @return numeric-string
+     */
+    public function asString(): string;
+}
