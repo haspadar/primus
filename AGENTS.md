@@ -60,10 +60,15 @@ new decorators — extend it to inherit interface compliance for free.
   `ScalarOf`, `Constant`, `Sticky` (memoize), `Ternary`, `And_`, `Or_`,
   `Not`, `Xor_`, `RootCause` (unwrap a Throwable chain), `ScalarEnvelope`.
 
-- **`Primus\Number`** — numeric primitives.
-  `Number` interface (`asInt()` + `asFloat()`), `NumberOf`,
-  `NumberOfScalar`, `NumberOfText`, `Sticky` (memoize both projections),
-  `SumOf`, `MinOf`, `MaxOf`, `AvgOf`, `MultOf`, `DivOf`.
+- **`Primus\Number`** — root numeric contract.
+  `Number` interface with three projections (`asInt()`, `asFloat()`,
+  `asText()`), plus `Sticky` (memoize the projections; reused by family
+  decorators through composition).
+
+- **`Primus\Integer`** — whole-number primitives backed by native PHP
+  int arithmetic. `Integer` interface (marker extending `Number`),
+  `IntegerOf`, `SumOf`, `MultOf`, `MaxOf`, `MinOf`, `DivOf` (truncating),
+  `ModOf`, `Abs`, `Sticky` (delegates caching to `Number\Sticky`).
 
 - **`Primus\Time`** — `DateTimeImmutable` wrappers.
   `Time` interface, `TimeOf` (parse a string), `Now` (current moment),
