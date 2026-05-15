@@ -62,12 +62,13 @@ composer require haspadar/primus
 - **Constructors only remember.**  
   No I/O, no branches, no work in `__construct` — just dependency capture.
 
-  You can substitute `RandomBytes` with a fixed `BytesOf` in tests — no
-  framework, no mocking library, just a different constructor argument.
+  Pass any `Bytes` source into a transformer — in production it can be a
+  real `BytesOf(random_bytes(16))`, in tests a fixed `BytesOf("\x00\x01…")`
+  — no framework, no mocking library, just a different constructor argument.
 
   ```php
-  $uuid = new UuidV4(new RandomBytes(16));
-  $hex  = new HexEncoded($uuid);
+  $bytes = new BytesOf(random_bytes(16));
+  $hex   = new HexEncoded($bytes);
   ```
 
 - **Every operation is a class.**  
@@ -258,20 +259,17 @@ $total = (new SumOf(
 
 ## Time
 
-To capture and format the current moment:
-
-```php
-$now = new Now();
-(new Iso($now))->value();
-// e.g. "2026-05-13T07:14:00+00:00"
-```
-
-To parse an existing timestamp:
+To wrap an existing timestamp and format it:
 
 ```php
 $ts = new TimeOf('2026-05-12T12:00:00Z');
-$ts->value()->format('Y-m-d'); // "2026-05-12"
+(new Iso($ts))->value();
+// "2026-05-12T12:00:00+00:00"
 ```
+
+Side-effect sources like the current moment stay on the caller — pass
+`new TimeOf(new DateTimeImmutable())` when you need now, and a fixed
+`new TimeOf('2026-05-12T12:00:00Z')` in tests.
 
 ## Bytes
 
@@ -282,18 +280,16 @@ $digest = (new HexEncoded(new Sha256(new BytesOf('hello'))))->value();
 // "2cf24dba5fb0a30e26e83b2ac5b9e29e1b161e5c1fa7425e73043362938b9824"
 ```
 
-To generate a UUID v4 from injectable randomness:
+To base64-encode bytes for transport:
 
 ```php
-$uuid = (new HexEncoded(new UuidV4(new RandomBytes(16))))->value();
-// 32 lowercase hex chars
+$encoded = (new Base64Encoded(new BytesOf('hello')))->value();
+// "aGVsbG8="
 ```
 
-To make a time-ordered UUID v7 — sortable, ideal for database keys:
-
-```php
-$uuid = (new HexEncoded(new UuidV7(new Now(), new RandomBytes(10))))->value();
-```
+Random byte sources stay on the caller — feed any `Bytes` you want, in
+production `new BytesOf(random_bytes(16))`, in tests a fixed
+`new BytesOf("\x01\x02…")`.
 
 ## Design rules
 
