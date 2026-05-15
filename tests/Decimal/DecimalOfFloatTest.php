@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Primus\Tests\Decimal;
 
+use InvalidArgumentException;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Primus\Decimal\DecimalOfFloat;
@@ -38,5 +39,27 @@ final class DecimalOfFloatTest extends TestCase
     public function returnsFloatProjection(): void
     {
         $this->assertSame(3.14, (new DecimalOfFloat(3.14))->asFloat());
+    }
+
+    #[Test]
+    public function returnsNumericStringProjection(): void
+    {
+        $this->assertSame('0.3', (new DecimalOfFloat(0.3))->asString());
+    }
+
+    #[Test]
+    public function rejectsNanOnFirstProjection(): void
+    {
+        $this->expectException(InvalidArgumentException::class);
+
+        (new DecimalOfFloat(NAN))->asString();
+    }
+
+    #[Test]
+    public function rejectsInfinityOnFirstProjection(): void
+    {
+        $this->expectException(InvalidArgumentException::class);
+
+        (new DecimalOfFloat(INF))->asString();
     }
 }

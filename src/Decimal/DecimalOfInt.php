@@ -45,4 +45,10 @@ final readonly class DecimalOfInt implements Decimal
     {
         return new TextOf((string) $this->value);
     }
+
+    #[Override]
+    public function asString(): string
+    {
+        return (string) $this->value;
+    }
 }
