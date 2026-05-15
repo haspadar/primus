@@ -9,6 +9,7 @@ use PHPUnit\Framework\TestCase;
 use Primus\Decimal\Decimal;
 use Primus\Decimal\DecimalOf;
 use Primus\Decimal\Sticky;
+use Primus\Tests\Decimal\Fakes\CountingDecimal;
 
 final class StickyTest extends TestCase
 {
@@ -51,5 +52,18 @@ final class StickyTest extends TestCase
         $sticky = new Sticky(new DecimalOf('3.14'));
 
         $this->assertSame($sticky->asText(), $sticky->asText());
+    }
+
+    #[Test]
+    public function callsOriginAsStringAtMostOnce(): void
+    {
+        $origin = new CountingDecimal('3.14');
+        $sticky = new Sticky($origin);
+
+        $sticky->asString();
+        $sticky->asString();
+        $sticky->asString();
+
+        $this->assertSame(1, $origin->stringCalls);
     }
 }
