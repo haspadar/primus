@@ -1,7 +1,7 @@
 # Sheriff configuration. All available keys and their defaults are in .sheriff/config.yaml.
 
 override:
-    php_cs_fixer.extend: "        'phpdoc_types' => ['groups' => ['meta', 'simple'], 'exclude' => ['scalar']],"
+    php_cs_fixer.extend: "        'phpdoc_types' => ['groups' => ['meta', 'simple', 'alias'], 'exclude' => ['scalar', 'integer']],"
     phpmetrics.coupling.max_afferent: 22
     phpstan.parameters:
         haspadar:

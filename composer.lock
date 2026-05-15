@@ -1868,16 +1868,16 @@
         },
         {
             "name": "haspadar/sheriff",
-            "version": "v0.29.2",
+            "version": "v0.29.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/haspadar/sheriff.git",
-                "reference": "c2a224fcac6d2553be9608bc358410cbb980294d"
+                "reference": "949efca03c5eb1fde18f634eef180611bdca079f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/haspadar/sheriff/zipball/c2a224fcac6d2553be9608bc358410cbb980294d",
-                "reference": "c2a224fcac6d2553be9608bc358410cbb980294d",
+                "url": "https://api.github.com/repos/haspadar/sheriff/zipball/949efca03c5eb1fde18f634eef180611bdca079f",
+                "reference": "949efca03c5eb1fde18f634eef180611bdca079f",
                 "shasum": ""
             },
             "require": {
@@ -1930,9 +1930,9 @@
             "description": "Picky standards for PHP projects",
             "support": {
                 "issues": "https://github.com/haspadar/sheriff/issues",
-                "source": "https://github.com/haspadar/sheriff/tree/v0.29.2"
+                "source": "https://github.com/haspadar/sheriff/tree/v0.29.3"
             },
-            "time": "2026-05-15T05:10:36+00:00"
+            "time": "2026-05-15T10:17:02+00:00"
         },
         {
             "name": "infection/abstract-testframework-adapter",
