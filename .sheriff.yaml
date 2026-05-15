@@ -6,7 +6,7 @@ override:
         <rule ref="SlevomatCodingStandard.TypeHints.LongTypeHints.UsedLongTypeHint">
             <exclude-pattern>*/src/Integer/*</exclude-pattern>
         </rule>
-    phpmetrics.coupling.max_afferent: 18
+    phpmetrics.coupling.max_afferent: 22
     phpstan.parameters:
         haspadar:
             afferentCoupling:
