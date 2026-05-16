@@ -19,6 +19,8 @@ namespace Primus\Text;
  */
 final readonly class Concatenated extends TextEnvelope
 {
+    private const string SEPARATOR = '';
+
     /**
      * Ctor.
      *
@@ -26,6 +28,6 @@ final readonly class Concatenated extends TextEnvelope
      */
     public function __construct(Text ...$parts)
     {
-        parent::__construct(new Joined('', array_values($parts)));
+        parent::__construct(new Joined(self::SEPARATOR, array_values($parts)));
     }
 }
