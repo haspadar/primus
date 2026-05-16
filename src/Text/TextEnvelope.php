@@ -8,8 +8,6 @@ use Override;
 
 /**
  * Envelope for {@see Text}, delegating all calls to the origin.
- *
- * @phpstan-ignore haspadar.afferentCoupling (base for every Text decorator; high coupling is intrinsic to the Envelope pattern)
  */
 abstract readonly class TextEnvelope implements Text
 {
