@@ -21,10 +21,8 @@
     ],
     "minimum-stability": "stable",
     "require": {
-        "php": "~8.3.16 || ~8.4.3 || ~8.5.0"
-    },
-    "require-dev": {
-        "haspadar/sheriff": "^0.29"
+        "php": "~8.3.16 || ~8.4.3 || ~8.5.0",
+        "haspadar/sheriff": "^0.30"
     },
     "scripts": {
         "update-sheriff": "bash -c 'COMPOSER_ROOT_VERSION=$(git describe --tags --abbrev=0 | sed s/^v//) composer update haspadar/sheriff -W'"

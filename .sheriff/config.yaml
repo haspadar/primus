@@ -107,6 +107,8 @@ defaults:
       afferentCoupling:
         ignoreInterfaces: true
         excludedClasses: []
+      prohibitStaticMethods:
+        allowNamedConstructors: true
 
   phpunit.cli: true
   phpunit.php_options: "-d memory_limit=1G"
