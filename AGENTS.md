@@ -76,7 +76,7 @@ new decorators — extend it to inherit interface compliance for free.
   consumption. Wrappers `DecimalOf`, `DecimalOfFloat`, `DecimalOfInt`,
   `DecimalOfScalar` (lazy from a `Scalar<numeric-string>`). Binary
   aggregates `SumOf`, `MultOf`, `MaxOf`, `MinOf`, `DivOf`, `ModOf`, and
-  unary `Abs` take an explicit `int $scale`. `DecimalEnvelope` base class
+  unary `Abs` each take an explicit `int $scale`. `DecimalEnvelope` base class
   removes projection boilerplate from aggregates. `Sticky` composes
   `Number\Sticky` and adds a numeric-string slot.
 
