@@ -4,11 +4,14 @@ declare(strict_types=1);
 
 namespace Primus\Text;
 
-use Override;
 use Primus\Func\Func;
+use Primus\Scalar\ScalarOf;
 
 /**
  * Text with its value transformed by a function.
+ *
+ * Stores no extra fields — the function is captured inside a lazy scalar
+ * and the envelope delegates every projection to it.
  *
  * Example:
  *     $text = new Mapped(
@@ -25,14 +28,12 @@ final readonly class Mapped extends TextEnvelope
      * @param Text $origin The text whose value is transformed.
      * @param Func<string, string> $func The transformation function.
      */
-    public function __construct(Text $origin, private Func $func)
+    public function __construct(Text $origin, Func $func)
     {
-        parent::__construct($origin);
-    }
-
-    #[Override]
-    public function value(): string
-    {
-        return $this->func->apply($this->origin->value());
+        parent::__construct(
+            TextOf::ofScalar(
+                new ScalarOf(static fn(): string => $func->apply($origin->value())),
+            ),
+        );
     }
 }
