@@ -13,6 +13,7 @@
   "ignores": [
     "vendor/**",
     "tests/**",
-    ".git/**"
+    ".git/**",
+    "docs/**"
   ]
 }

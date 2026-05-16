@@ -4,6 +4,7 @@ ignore: |
   vendor/**
   tests/**
   .git/**
+  docs/**
   .sheriff/**/html/**
   .sheriff/**/coverage-report/**
 
