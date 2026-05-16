@@ -13,7 +13,7 @@ use Primus\Scalar\ScalarOf;
  * If the text length does not exceed the limit, it is returned unchanged.
  *
  * Example:
- *     $text = new Abbreviated(new TextOf('Hello, world!'), 8);
+ *     $text = new Abbreviated(TextOf::ofString('Hello, world!'), 8);
  *     echo $text->value(); // 'Hello, w…'
  */
 final readonly class Abbreviated extends TextEnvelope
@@ -27,7 +27,7 @@ final readonly class Abbreviated extends TextEnvelope
     public function __construct(Text $origin, int $limit = 50)
     {
         parent::__construct(
-            new TextOfScalar(
+            TextOf::ofScalar(
                 new ScalarOf(
                     static function () use ($origin, $limit): string {
                         if ($limit <= 0) {
