@@ -33,9 +33,19 @@ final class TextOfTest extends TestCase
     #[Test]
     public function ofScalarDefersStringResolutionUntilValueCall(): void
     {
-        self::assertThat(
-            TextOf::ofScalar(new ScalarOf(static fn(): string => 'lazy')),
-            new HasTextValue('lazy'),
+        $resolved = false;
+        $text = TextOf::ofScalar(
+            new ScalarOf(
+                static function () use (&$resolved): string {
+                    $resolved = true;
+
+                    return 'lazy';
+                },
+            ),
         );
+
+        self::assertFalse($resolved);
+        self::assertThat($text, new HasTextValue('lazy'));
+        self::assertTrue($resolved);
     }
 }
