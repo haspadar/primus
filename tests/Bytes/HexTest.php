@@ -35,13 +35,13 @@ final class HexTest extends TestCase
     #[Test]
     public function decodesHexBackToOriginal(): void
     {
-        $this->assertSame('hi', (new HexDecoded(new TextOf('6869')))->value());
+        $this->assertSame('hi', (new HexDecoded(TextOf::ofString('6869')))->value());
     }
 
     #[Test]
     public function decodesEmptyStringToEmptyBytes(): void
     {
-        $this->assertSame('', (new HexDecoded(new TextOf('')))->value());
+        $this->assertSame('', (new HexDecoded(TextOf::ofString('')))->value());
     }
 
     #[Test]
@@ -50,7 +50,7 @@ final class HexTest extends TestCase
         $bytes = "\x00\x01\xff\xfe";
         $this->assertSame(
             $bytes,
-            (new HexDecoded(new TextOf((new HexEncoded(new BytesOf($bytes)))->value())))->value(),
+            (new HexDecoded(TextOf::ofString((new HexEncoded(new BytesOf($bytes)))->value())))->value(),
         );
     }
 
@@ -59,7 +59,7 @@ final class HexTest extends TestCase
     {
         $this->expectException(InvalidArgumentException::class);
 
-        (new HexDecoded(new TextOf('abc')))->value();
+        (new HexDecoded(TextOf::ofString('abc')))->value();
     }
 
     #[Test]
@@ -67,6 +67,6 @@ final class HexTest extends TestCase
     {
         $this->expectException(InvalidArgumentException::class);
 
-        (new HexDecoded(new TextOf('zz')))->value();
+        (new HexDecoded(TextOf::ofString('zz')))->value();
     }
 }

@@ -13,7 +13,7 @@ use Primus\Func\FuncOf;
  *
  * Example:
  *     $text = new Replaced(
- *         new TextOf('<b>Hello & bye</b>'),
+ *         TextOf::ofString('<b>Hello & bye</b>'),
  *         ['<b>', '</b>', '&'],
  *         ['', '', 'and']
  *     );

@@ -104,7 +104,7 @@ These rules describe how Primus objects behave. Code that uses Primus
 must respect them, otherwise it will not type-check, will fail the
 project's lint gates, or will surprise the caller at runtime.
 
-1. **Construction never executes work.** `new Trimmed(new TextOf($s))`
+1. **Construction never executes work.** `new Trimmed(TextOf::ofString($s))`
    does no string work. Computation happens only when `value()` (or
    `asInt()`/`asFloat()`/`exec()`/etc.) is called.
 
@@ -137,7 +137,7 @@ project's lint gates, or will surprise the caller at runtime.
 Patterns that look reasonable but are wrong for Primus:
 
 - **Do not call computation methods inside a constructor.**
-  `new Trimmed((new TextOf($s))->value())` is wrong — the inner call
+  `new Trimmed((TextOf::ofString($s))->value())` is wrong — the inner call
   eagerly extracts the value and breaks composition. Pass the decorator
   object, not its result.
 
@@ -152,8 +152,12 @@ Patterns that look reasonable but are wrong for Primus:
   application logic, that's a higher-level concern — handle it with
   `Ternary`, `Or_`, or explicit branching in caller code.
 
-- **Do not introduce static factory methods.** `Trimmed::of($s)` is not
-  a Primus pattern. Use the constructor.
+- **Static methods are reserved for named constructors.** A class whose
+  only static methods return `self` (or `static`) — wrapping different
+  input forms (`TextOf::ofString`, `TextOf::ofScalar`) — is the sanctioned
+  PHP analogue of overloaded constructors in Cactoos Java. Anything else
+  static (helper methods, factories returning unrelated types, `Trimmed::of`)
+  is still forbidden.
 
 ---
 
@@ -211,7 +215,7 @@ use Override;
  * <Optional second paragraph with the "why".>
  *
  * Example:
- *     $value = (new MyDecorator(new TextOf('input')))->value();
+ *     $value = (new MyDecorator(TextOf::ofString('input')))->value();
  *     // expected output
  */
 final readonly class MyDecorator implements Text
@@ -260,7 +264,7 @@ final class MyDecoratorTest extends TestCase
     {
         $this->assertSame(
             'expected',
-            (new MyDecorator(new TextOf('input')))->value(),
+            (new MyDecorator(TextOf::ofString('input')))->value(),
         );
     }
 }
@@ -320,10 +324,13 @@ you can argue an exception when it really makes sense.
   (`Constant`, `Ternary`, `FuncWithFallback`) at the boundary where the
   optionality is decided.
 
-- **No `static` methods or properties.**
+- **No `static` methods or properties beyond named constructors.**
   Static means "behaviour owned by a class, not an instance". You lose
   substitution: you can't swap `Trimmed::of($s)` for a test double.
-  Constructors are the only construction path.
+  The only sanctioned exception is named constructors — static methods
+  returning `self`/`static` that wrap different input forms (`TextOf::ofString`,
+  `TextOf::ofScalar`), playing the role of overloaded constructors absent
+  from PHP. Any other static is still forbidden.
 
 - **No procedural helpers, no mutable state.**
   Functions that take an array and mutate it (`sort()`, `array_push()`,

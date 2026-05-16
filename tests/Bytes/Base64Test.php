@@ -29,13 +29,13 @@ final class Base64Test extends TestCase
     #[Test]
     public function decodesBase64BackToOriginal(): void
     {
-        $this->assertSame('hello', (new Base64Decoded(new TextOf('aGVsbG8=')))->value());
+        $this->assertSame('hello', (new Base64Decoded(TextOf::ofString('aGVsbG8=')))->value());
     }
 
     #[Test]
     public function decodesEmptyStringToEmptyBytes(): void
     {
-        $this->assertSame('', (new Base64Decoded(new TextOf('')))->value());
+        $this->assertSame('', (new Base64Decoded(TextOf::ofString('')))->value());
     }
 
     #[Test]
@@ -44,7 +44,7 @@ final class Base64Test extends TestCase
         $bytes = "\x00\x01\xff\xfe";
         $this->assertSame(
             $bytes,
-            (new Base64Decoded(new TextOf((new Base64Encoded(new BytesOf($bytes)))->value())))->value(),
+            (new Base64Decoded(TextOf::ofString((new Base64Encoded(new BytesOf($bytes)))->value())))->value(),
         );
     }
 
@@ -53,6 +53,6 @@ final class Base64Test extends TestCase
     {
         $this->expectException(InvalidArgumentException::class);
 
-        (new Base64Decoded(new TextOf('not_valid!!!')))->value();
+        (new Base64Decoded(TextOf::ofString('not_valid!!!')))->value();
     }
 }

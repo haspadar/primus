@@ -17,7 +17,7 @@ final class LengthOfTextTest extends TestCase
     public function returnsLengthFiveWhenTextIsAscii(): void
     {
         self::assertThat(
-            new TextOf('hello'),
+            TextOf::ofString('hello'),
             new HasSize(5)
         );
     }
@@ -26,7 +26,7 @@ final class LengthOfTextTest extends TestCase
     public function returnsLengthFiveWhenTextContainsDiacritics(): void
     {
         self::assertThat(
-            new TextOf('àéîöü'),
+            TextOf::ofString('àéîöü'),
             new HasSize(5)
         );
     }
@@ -35,7 +35,7 @@ final class LengthOfTextTest extends TestCase
     public function returnsZeroWhenTextIsEmpty(): void
     {
         self::assertThat(
-            new TextOf(''),
+            TextOf::ofString(''),
             new HasSize(0)
         );
     }

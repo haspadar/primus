@@ -12,7 +12,7 @@ use Primus\Func\Func;
  *
  * Example:
  *     $text = new Mapped(
- *         new TextOf('hello'),
+ *         TextOf::ofString('hello'),
  *         new FuncOf(strtoupper(...)),
  *     );
  *     echo $text->value(); // 'HELLO'

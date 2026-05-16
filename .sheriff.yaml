@@ -1,5 +1,9 @@
 # Sheriff configuration. All available keys and their defaults are in .sheriff/config.yaml.
 
+append:
+    infra.exclude:
+        - docs
+
 override:
     php_cs_fixer.extend: "        'phpdoc_types' => ['groups' => ['meta', 'simple', 'alias'], 'exclude' => ['scalar', 'integer']],"
     phpmetrics.coupling.max_afferent: 22

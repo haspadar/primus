@@ -40,7 +40,7 @@ final class CountingDecimal implements Decimal
     #[Override]
     public function asText(): Text
     {
-        return new TextOf($this->value);
+        return TextOf::ofString($this->value);
     }
 
     #[Override]

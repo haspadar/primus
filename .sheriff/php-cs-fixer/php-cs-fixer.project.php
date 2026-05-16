@@ -10,7 +10,7 @@ $rules = require __DIR__ . '/php-cs-fixer.php';
 $rules->setFinder(
     Finder::create()
         ->in([__DIR__ . '/../..'])
-        ->exclude(['vendor','tests','.git']),
+        ->exclude(['vendor','tests','.git','docs']),
 )->setCacheFile(__DIR__ . '/.php-cs-fixer.cache');
 
 return $rules;

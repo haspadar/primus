@@ -20,7 +20,7 @@ final class TrimmedRightTest extends TestCase
     public function removesTrailingSpacesOnly(): void
     {
         self::assertThat(
-            new TrimmedRight(new TextOf('  hello world   ')),
+            new TrimmedRight(TextOf::ofString('  hello world   ')),
             new HasTextValue('  hello world'),
             'TrimmedRight must remove trailing spaces only'
         );
@@ -30,7 +30,7 @@ final class TrimmedRightTest extends TestCase
     public function returnsSameTextWhenNoTrailingSpaces(): void
     {
         self::assertThat(
-            new TrimmedRight(new TextOf('world')),
+            new TrimmedRight(TextOf::ofString('world')),
             new HasTextValue('world'),
             'TrimmedRight must return the same text when there are no trailing spaces'
         );
@@ -40,7 +40,7 @@ final class TrimmedRightTest extends TestCase
     public function removesUnicodeWhitespace(): void
     {
         self::assertThat(
-            new TrimmedRight(new TextOf("Hello  ")),
+            new TrimmedRight(TextOf::ofString("Hello  ")),
             new HasTextValue('Hello'),
             'TrimmedRight must remove unicode whitespace'
         );
@@ -50,7 +50,7 @@ final class TrimmedRightTest extends TestCase
     public function returnsEmptyWhenOnlySpaces(): void
     {
         self::assertThat(
-            new TrimmedRight(new TextOf('   ')),
+            new TrimmedRight(TextOf::ofString('   ')),
             new HasTextValue(''),
             'TrimmedRight must return an empty string when the original text consists only of spaces'
         );
@@ -60,7 +60,7 @@ final class TrimmedRightTest extends TestCase
     public function keepsLeadingSpacesIntact(): void
     {
         self::assertThat(
-            new TrimmedRight(new TextOf('  hi')),
+            new TrimmedRight(TextOf::ofString('  hi')),
             new HasTextValue('  hi'),
             'TrimmedRight must keep leading spaces intact'
         );
@@ -70,7 +70,7 @@ final class TrimmedRightTest extends TestCase
     public function throwsExceptionOnMalformedUtf8(): void
     {
         self::assertThat(
-            (new TrimmedRight(new TextOf("\xC3"))),
+            (new TrimmedRight(TextOf::ofString("\xC3"))),
             new ThrowsValue(InvalidArgumentException::class),
             'TrimmedRight must throw an exception on malformed UTF-8 input'
         );

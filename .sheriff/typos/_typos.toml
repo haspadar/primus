@@ -9,4 +9,5 @@ extend-exclude = [
     "vendor/",
     "tests/",
     ".git/",
+    "docs/",
 ]

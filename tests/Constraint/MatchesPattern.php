@@ -13,7 +13,7 @@ use Primus\Text\Text;
  *
  * Example:
  * self::assertThat(
- *     new TextOf('hello'),
+ *     TextOf::ofString('hello'),
  *     new MatchesPattern('/^h.*o$/')
  * );
  *

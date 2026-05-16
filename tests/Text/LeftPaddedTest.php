@@ -18,7 +18,7 @@ final class LeftPaddedTest extends TestCase
     public function padsTextOnLeft(): void
     {
         self::assertThat(
-            new LeftPadded(new TextOf('foo'), 6, '.'),
+            new LeftPadded(TextOf::ofString('foo'), 6, '.'),
             new HasTextValue('...foo')
         );
     }
@@ -27,7 +27,7 @@ final class LeftPaddedTest extends TestCase
     public function returnsOriginalWhenLengthIsShorter(): void
     {
         self::assertThat(
-            new LeftPadded(new TextOf('foobar'), 3, '.'),
+            new LeftPadded(TextOf::ofString('foobar'), 3, '.'),
             new HasTextValue('foobar')
         );
     }
@@ -36,7 +36,7 @@ final class LeftPaddedTest extends TestCase
     public function padsWithSpacesByDefault(): void
     {
         self::assertThat(
-            new LeftPadded(new TextOf('bar'), 6, ' '),
+            new LeftPadded(TextOf::ofString('bar'), 6, ' '),
             new HasTextValue('   bar')
         );
     }
@@ -45,7 +45,7 @@ final class LeftPaddedTest extends TestCase
     public function handlesEmptyText(): void
     {
         self::assertThat(
-            new LeftPadded(new TextOf(''), 6, '.'),
+            new LeftPadded(TextOf::ofString(''), 6, '.'),
             new HasTextValue('......')
         );
     }

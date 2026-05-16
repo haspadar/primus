@@ -20,7 +20,7 @@ final class NormalizedTest extends TestCase
     public function replacesMultipleSpacesWithSingleOne(): void
     {
         self::assertThat(
-            new Normalized(new TextOf('Hello   world')),
+            new Normalized(TextOf::ofString('Hello   world')),
             new HasTextValue('Hello world'),
             'Normalized must replace multiple spaces with a single one'
         );
@@ -30,7 +30,7 @@ final class NormalizedTest extends TestCase
     public function replacesTabsAndNewlinesWithSingleSpace(): void
     {
         self::assertThat(
-            new Normalized(new TextOf("A\tB\nC")),
+            new Normalized(TextOf::ofString("A\tB\nC")),
             new HasTextValue('A B C'),
             'Normalized must replace tabs and newlines with a single space'
         );
@@ -40,7 +40,7 @@ final class NormalizedTest extends TestCase
     public function trimsLeadingAndTrailingSpaces(): void
     {
         self::assertThat(
-            new Normalized(new TextOf("   Hello world   ")),
+            new Normalized(TextOf::ofString("   Hello world   ")),
             new HasTextValue('Hello world'),
             'Normalized must trim leading and trailing spaces'
         );
@@ -50,7 +50,7 @@ final class NormalizedTest extends TestCase
     public function worksWithUnicodeWhitespace(): void
     {
         self::assertThat(
-            new Normalized(new TextOf("α β  γ")),
+            new Normalized(TextOf::ofString("α β  γ")),
             new HasTextValue('α β γ'),
             'Normalized must work with unicode whitespace'
         );
@@ -60,7 +60,7 @@ final class NormalizedTest extends TestCase
     public function returnsEmptyStringWhenOnlyWhitespace(): void
     {
         self::assertThat(
-            new Normalized(new TextOf(" \n\t ")),
+            new Normalized(TextOf::ofString(" \n\t ")),
             new HasTextValue(''),
             'Normalized must return an empty string when the original text consists only of whitespace'
         );
@@ -70,7 +70,7 @@ final class NormalizedTest extends TestCase
     public function throwsExceptionOnMalformedUtf8(): void
     {
         self::assertThat(
-            new Normalized(new TextOf("\xC3")),
+            new Normalized(TextOf::ofString("\xC3")),
             new ThrowsValue(InvalidArgumentException::class),
             'Normalized must throw an exception on malformed UTF-8 input'
         );

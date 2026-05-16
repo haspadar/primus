@@ -18,7 +18,7 @@ final class ReplacedTest extends TestCase
     public function replacesSingleSubstring(): void
     {
         self::assertThat(
-            new Replaced(new TextOf('Hello, world!'), 'world', 'friend'),
+            new Replaced(TextOf::ofString('Hello, world!'), 'world', 'friend'),
             new HasTextValue('Hello, friend!')
         );
     }
@@ -28,7 +28,7 @@ final class ReplacedTest extends TestCase
     {
         self::assertThat(
             new Replaced(
-                new TextOf('<b>Hello & bye</b>'),
+                TextOf::ofString('<b>Hello & bye</b>'),
                 ['<b>', '</b>', '&'],
                 ['', '', 'and']
             ),
@@ -40,7 +40,7 @@ final class ReplacedTest extends TestCase
     public function returnsOriginalTextWhenNoMatches(): void
     {
         self::assertThat(
-            new Replaced(new TextOf('unchanged'), 'zzz', 'xxx'),
+            new Replaced(TextOf::ofString('unchanged'), 'zzz', 'xxx'),
             new HasTextValue('unchanged')
         );
     }
@@ -49,7 +49,7 @@ final class ReplacedTest extends TestCase
     public function handlesEmptyText(): void
     {
         self::assertThat(
-            new Replaced(new TextOf(''), 'a', 'b'),
+            new Replaced(TextOf::ofString(''), 'a', 'b'),
             new HasTextValue('')
         );
     }

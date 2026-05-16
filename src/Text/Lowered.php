@@ -12,7 +12,7 @@ use Primus\Func\FuncOf;
  * Converts the given text to lowercase using multibyte support.
  *
  * Example:
- *     $text = new Lowered(new TextOf('CAFÉ & TÜRKİYE'));
+ *     $text = new Lowered(TextOf::ofString('CAFÉ & TÜRKİYE'));
  *     echo $text->value(); // 'café & türkiye'
  */
 final readonly class Lowered extends TextEnvelope
