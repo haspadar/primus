@@ -26,3 +26,5 @@ parameters:
                 - Primus\Func\FuncOf
                 - Primus\Scalar\ScalarOf
             maxAfferent: 10
+        prohibitStaticMethods:
+            allowNamedConstructors: true
