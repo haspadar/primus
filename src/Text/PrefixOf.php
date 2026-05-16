@@ -23,6 +23,8 @@ use Primus\Func\FuncOf;
  */
 final readonly class PrefixOf extends TextEnvelope
 {
+    private const string ENCODING = 'UTF-8';
+
     /**
      * Ctor.
      *
@@ -36,10 +38,10 @@ final readonly class PrefixOf extends TextEnvelope
                 $origin,
                 new FuncOf(
                     static function (string $s) use ($boundary): string {
-                        $position = mb_strpos($s, $boundary->value(), 0, 'UTF-8');
+                        $position = mb_strpos($s, $boundary->value(), 0, self::ENCODING);
 
                         return is_int($position)
-                            ? mb_substr($s, 0, $position, 'UTF-8')
+                            ? mb_substr($s, 0, $position, self::ENCODING)
                             : $s;
                     },
                 ),

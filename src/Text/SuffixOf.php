@@ -23,6 +23,9 @@ use Primus\Func\FuncOf;
  */
 final readonly class SuffixOf extends TextEnvelope
 {
+    private const string ENCODING = 'UTF-8';
+    private const string EMPTY = '';
+
     /**
      * Ctor.
      *
@@ -37,17 +40,17 @@ final readonly class SuffixOf extends TextEnvelope
                 new FuncOf(
                     static function (string $s) use ($boundary): string {
                         $boundaryValue = $boundary->value();
-                        $position = mb_strpos($s, $boundaryValue, 0, 'UTF-8');
+                        $position = mb_strpos($s, $boundaryValue, 0, self::ENCODING);
 
                         if (!is_int($position)) {
-                            return '';
+                            return self::EMPTY;
                         }
 
                         return mb_substr(
                             $s,
-                            $position + mb_strlen($boundaryValue, 'UTF-8'),
+                            $position + mb_strlen($boundaryValue, self::ENCODING),
                             null,
-                            'UTF-8',
+                            self::ENCODING,
                         );
                     },
                 ),

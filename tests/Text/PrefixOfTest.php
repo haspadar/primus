@@ -83,4 +83,16 @@ final class PrefixOfTest extends TestCase
             new HasTextValue('hello')
         );
     }
+
+    #[Test]
+    public function returnsEmptyForEmptyOrigin(): void
+    {
+        self::assertThat(
+            new PrefixOf(
+                TextOf::ofString(''),
+                TextOf::ofString('@'),
+            ),
+            new HasTextValue('')
+        );
+    }
 }

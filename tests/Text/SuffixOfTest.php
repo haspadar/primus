@@ -83,4 +83,16 @@ final class SuffixOfTest extends TestCase
             new HasTextValue('ривет')
         );
     }
+
+    #[Test]
+    public function returnsEmptyForEmptyOrigin(): void
+    {
+        self::assertThat(
+            new SuffixOf(
+                TextOf::ofString(''),
+                TextOf::ofString('@'),
+            ),
+            new HasTextValue('')
+        );
+    }
 }
