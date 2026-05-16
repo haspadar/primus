@@ -104,7 +104,7 @@ These rules describe how Primus objects behave. Code that uses Primus
 must respect them, otherwise it will not type-check, will fail the
 project's lint gates, or will surprise the caller at runtime.
 
-1. **Construction never executes work.** `new Trimmed(new TextOf($s))`
+1. **Construction never executes work.** `new Trimmed(TextOf::ofString($s))`
    does no string work. Computation happens only when `value()` (or
    `asInt()`/`asFloat()`/`exec()`/etc.) is called.
 
@@ -137,7 +137,7 @@ project's lint gates, or will surprise the caller at runtime.
 Patterns that look reasonable but are wrong for Primus:
 
 - **Do not call computation methods inside a constructor.**
-  `new Trimmed((new TextOf($s))->value())` is wrong — the inner call
+  `new Trimmed((TextOf::ofString($s))->value())` is wrong — the inner call
   eagerly extracts the value and breaks composition. Pass the decorator
   object, not its result.
 
@@ -215,7 +215,7 @@ use Override;
  * <Optional second paragraph with the "why".>
  *
  * Example:
- *     $value = (new MyDecorator(new TextOf('input')))->value();
+ *     $value = (new MyDecorator(TextOf::ofString('input')))->value();
  *     // expected output
  */
 final readonly class MyDecorator implements Text
@@ -264,7 +264,7 @@ final class MyDecoratorTest extends TestCase
     {
         $this->assertSame(
             'expected',
-            (new MyDecorator(new TextOf('input')))->value(),
+            (new MyDecorator(TextOf::ofString('input')))->value(),
         );
     }
 }
