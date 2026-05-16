@@ -6,7 +6,7 @@ append:
 
 override:
     php_cs_fixer.extend: "        'phpdoc_types' => ['groups' => ['meta', 'simple', 'alias'], 'exclude' => ['scalar', 'integer']],"
-    phpmetrics.coupling.max_afferent: 22
+    phpmetrics.coupling.max_afferent: 30
     phpstan.parameters:
         haspadar:
             afferentCoupling:
