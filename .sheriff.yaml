@@ -12,6 +12,7 @@ override:
             afferentCoupling:
                 maxAfferent: 10
                 ignoreInterfaces: true
+                ignoreAbstract: true
                 excludedClasses:
                     - Primus\Text\TextOf
                     - Primus\Text\Mapped
