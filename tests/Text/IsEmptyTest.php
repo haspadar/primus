@@ -17,7 +17,7 @@ final class IsEmptyTest extends TestCase
     public function returnsTrueWhenTextIsFalsy(string $input): void
     {
         $this->assertTrue(
-            (new IsEmpty(new TextOf($input)))->value(),
+            (new IsEmpty(TextOf::ofString($input)))->value(),
             'Expected true for PHP-falsy string: "' . $input . '"'
         );
     }
@@ -27,7 +27,7 @@ final class IsEmptyTest extends TestCase
     public function returnsFalseWhenTextIsTruthy(string $input): void
     {
         $this->assertFalse(
-            (new IsEmpty(new TextOf($input)))->value(),
+            (new IsEmpty(TextOf::ofString($input)))->value(),
             'Expected false for PHP-truthy string: "' . \addcslashes($input, "\t\n\r") . '"'
         );
     }

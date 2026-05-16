@@ -18,7 +18,7 @@ final class WithoutTagsTest extends TestCase
     public function returnsSanitizedTextWhenHtmlTagsArePresent(): void
     {
         self::assertThat(
-            new WithoutTags(new TextOf('<script>alert("XSS")</script><b>bold</b> & "quote"')),
+            new WithoutTags(TextOf::ofString('<script>alert("XSS")</script><b>bold</b> & "quote"')),
             new HasTextValue('alert("XSS")bold & "quote"')
         );
     }
@@ -27,7 +27,7 @@ final class WithoutTagsTest extends TestCase
     public function returnsSameTextWhenInputIsPlain(): void
     {
         self::assertThat(
-            new WithoutTags(new TextOf('safe text 123')),
+            new WithoutTags(TextOf::ofString('safe text 123')),
             new HasTextValue('safe text 123')
         );
     }

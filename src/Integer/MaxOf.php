@@ -52,6 +52,6 @@ final readonly class MaxOf implements Integer
     #[Override]
     public function asText(): Text
     {
-        return new TextOf((string) $this->asInt());
+        return TextOf::ofString((string) $this->asInt());
     }
 }

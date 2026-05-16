@@ -12,7 +12,7 @@ use Primus\Func\FuncOf;
  * Pads the text to the specified length with the given character using {@see str_pad()}.
  *
  * Example:
- *     $text = new RightPadded(new TextOf('foo'), 6, '.');
+ *     $text = new RightPadded(TextOf::ofString('foo'), 6, '.');
  *     echo $text->value(); // 'foo...'
  */
 final readonly class RightPadded extends TextEnvelope

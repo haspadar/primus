@@ -19,7 +19,7 @@ final class JoinedTest extends TestCase
     public function joinsTextsWithSeparator(): void
     {
         self::assertThat(
-            new Joined(', ', [new TextOf('a'), new TextOf('b'), new TextOf('c')]),
+            new Joined(', ', [TextOf::ofString('a'), TextOf::ofString('b'), TextOf::ofString('c')]),
             new HasTextValue('a, b, c')
         );
     }
@@ -28,7 +28,7 @@ final class JoinedTest extends TestCase
     public function joinsWithoutSeparator(): void
     {
         self::assertThat(
-            new Joined('', [new TextOf('a'), new TextOf('b'), new TextOf('c')]),
+            new Joined('', [TextOf::ofString('a'), TextOf::ofString('b'), TextOf::ofString('c')]),
             new HasTextValue('abc')
         );
     }
@@ -37,7 +37,7 @@ final class JoinedTest extends TestCase
     public function joinsSingleText(): void
     {
         self::assertThat(
-            new Joined(', ', [new TextOf('solo')]),
+            new Joined(', ', [TextOf::ofString('solo')]),
             new HasTextValue('solo')
         );
     }

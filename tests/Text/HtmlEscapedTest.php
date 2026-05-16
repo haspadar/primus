@@ -18,7 +18,7 @@ final class HtmlEscapedTest extends TestCase
     public function escapesSpecialCharacters(): void
     {
         self::assertThat(
-            new HtmlEscaped(new TextOf('<b>John & "Jane"</b>')),
+            new HtmlEscaped(TextOf::ofString('<b>John & "Jane"</b>')),
             new HasTextValue('&lt;b&gt;John &amp; &quot;Jane&quot;&lt;/b&gt;')
         );
     }
@@ -27,7 +27,7 @@ final class HtmlEscapedTest extends TestCase
     public function leavesPlainTextUntouched(): void
     {
         self::assertThat(
-            new HtmlEscaped(new TextOf('Hello world')),
+            new HtmlEscaped(TextOf::ofString('Hello world')),
             new HasTextValue('Hello world')
         );
     }
@@ -36,7 +36,7 @@ final class HtmlEscapedTest extends TestCase
     public function handlesEmptyString(): void
     {
         self::assertThat(
-            new HtmlEscaped(new TextOf('')),
+            new HtmlEscaped(TextOf::ofString('')),
             new HasTextValue('')
         );
     }

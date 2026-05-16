@@ -18,7 +18,7 @@ final class TrimmedTest extends TestCase
     public function returnsTextWithoutLeadingAndTrailingSpaces(): void
     {
         self::assertThat(
-            new Trimmed(new TextOf('  hello  world  ')),
+            new Trimmed(TextOf::ofString('  hello  world  ')),
             new HasTextValue('hello  world')
         );
     }
@@ -27,7 +27,7 @@ final class TrimmedTest extends TestCase
     public function returnsEmptyStringWhenInputIsWhitespaceOnly(): void
     {
         self::assertThat(
-            new Trimmed(new TextOf('   ')),
+            new Trimmed(TextOf::ofString('   ')),
             new HasTextValue('')
         );
     }

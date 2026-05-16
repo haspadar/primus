@@ -12,7 +12,7 @@ use Primus\Func\FuncOf;
  * Converts the given text to uppercase using multibyte support.
  *
  * Example:
- *     $text = new Uppered(new TextOf('touché résumé'));
+ *     $text = new Uppered(TextOf::ofString('touché résumé'));
  *     echo $text->value(); // 'TOUCHÉ RÉSUMÉ'
  */
 final readonly class Uppered extends TextEnvelope

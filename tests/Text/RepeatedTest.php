@@ -18,7 +18,7 @@ final class RepeatedTest extends TestCase
     public function repeatsTextMultipleTimes(): void
     {
         self::assertThat(
-            new Repeated(new TextOf('xo'), 3),
+            new Repeated(TextOf::ofString('xo'), 3),
             new HasTextValue('xoxoxo')
         );
     }
@@ -27,7 +27,7 @@ final class RepeatedTest extends TestCase
     public function returnsEmptyWhenCountIsZero(): void
     {
         self::assertThat(
-            new Repeated(new TextOf('abc'), 0),
+            new Repeated(TextOf::ofString('abc'), 0),
             new HasTextValue('')
         );
     }
@@ -36,7 +36,7 @@ final class RepeatedTest extends TestCase
     public function returnsEmptyWhenCountIsNegative(): void
     {
         self::assertThat(
-            new Repeated(new TextOf('abc'), -2),
+            new Repeated(TextOf::ofString('abc'), -2),
             new HasTextValue('')
         );
     }
@@ -45,7 +45,7 @@ final class RepeatedTest extends TestCase
     public function repeatsEmptyText(): void
     {
         self::assertThat(
-            new Repeated(new TextOf(''), 5),
+            new Repeated(TextOf::ofString(''), 5),
             new HasTextValue('')
         );
     }
@@ -54,7 +54,7 @@ final class RepeatedTest extends TestCase
     public function repeatsSingleCharacter(): void
     {
         self::assertThat(
-            new Repeated(new TextOf('a'), 5),
+            new Repeated(TextOf::ofString('a'), 5),
             new HasTextValue('aaaaa')
         );
     }
@@ -63,7 +63,7 @@ final class RepeatedTest extends TestCase
     public function repeatsUnicodeText(): void
     {
         self::assertThat(
-            new Repeated(new TextOf('🔥'), 3),
+            new Repeated(TextOf::ofString('🔥'), 3),
             new HasTextValue('🔥🔥🔥')
         );
     }

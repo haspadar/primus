@@ -11,7 +11,7 @@ use Primus\Text\Text;
  * Asserts that {@see Text} has the expected string value.
  *
  * Example:
- * self::assertThat(new TextOf('foo'), new HasTextValue('foo'));
+ * self::assertThat(TextOf::ofString('foo'), new HasTextValue('foo'));
  *
  */
 final class HasTextValue extends Constraint

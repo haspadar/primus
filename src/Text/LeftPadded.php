@@ -13,7 +13,7 @@ use Primus\Func\FuncOf;
  * with the given character using {@see str_pad()}.
  *
  * Example:
- *     $text = new LeftPadded(new TextOf('foo'), 6, '.');
+ *     $text = new LeftPadded(TextOf::ofString('foo'), 6, '.');
  *     echo $text->value(); // '...foo'
  */
 final readonly class LeftPadded extends TextEnvelope
