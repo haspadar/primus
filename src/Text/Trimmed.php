@@ -27,7 +27,7 @@ final readonly class Trimmed extends TextEnvelope
         parent::__construct(
             new Mapped(
                 $origin,
-                new FuncOf(static fn(string $s): string => trim($s)),
+                new FuncOf(trim(...)),
             ),
         );
     }
