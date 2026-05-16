@@ -6,28 +6,36 @@ namespace Primus\Tests\Text;
 
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
+use Primus\Scalar\ScalarOf;
 use Primus\Tests\Constraint\HasTextValue;
 use Primus\Text\TextOf;
 
-/**
- */
 final class TextOfTest extends TestCase
 {
     #[Test]
-    public function returnsOriginalTextWhenValueIsRequested(): void
+    public function ofStringExposesPlainStringAsTextValue(): void
     {
         self::assertThat(
-            new TextOf('hello'),
-            new HasTextValue('hello')
+            TextOf::ofString('hello'),
+            new HasTextValue('hello'),
         );
     }
 
     #[Test]
-    public function castsToStringCorrectly(): void
+    public function ofStringPreservesArbitraryStringContent(): void
     {
         self::assertThat(
-            new TextOf('world'),
-            new HasTextValue('world')
+            TextOf::ofString('world'),
+            new HasTextValue('world'),
+        );
+    }
+
+    #[Test]
+    public function ofScalarDefersStringResolutionUntilValueCall(): void
+    {
+        self::assertThat(
+            TextOf::ofScalar(new ScalarOf(static fn(): string => 'lazy')),
+            new HasTextValue('lazy'),
         );
     }
 }

@@ -4,23 +4,49 @@ declare(strict_types=1);
 
 namespace Primus\Text;
 
-use Override;
+use Primus\Scalar\Scalar;
+use Primus\Scalar\ScalarOf;
 
 /**
- * Text of a plain string.
+ * Convenience factory wrapping different sources as Text.
+ *
+ * Each named constructor reduces its input to a {@see TextOfScalar} and
+ * passes it to the envelope, so every form is lazy and composable through
+ * the same delegate.
+ *
+ * Example:
+ *     TextOf::ofString('hello'); // eager string
+ *     TextOf::ofScalar(new ScalarOf(fn() => 'hello')); // deferred
  */
-final readonly class TextOf implements Text
+final readonly class TextOf extends TextEnvelope
 {
     /**
      * Ctor.
      *
+     * @param Text $origin The text to delegate to.
+     */
+    private function __construct(Text $origin)
+    {
+        parent::__construct($origin);
+    }
+
+    /**
+     * Wraps a native string.
+     *
      * @param string $value The string to wrap.
      */
-    public function __construct(private string $value) {}
-
-    #[Override]
-    public function value(): string
+    public static function ofString(string $value): self
     {
-        return $this->value;
+        return new self(new TextOfScalar(new ScalarOf(static fn(): string => $value)));
+    }
+
+    /**
+     * Wraps a Scalar producing a string.
+     *
+     * @param Scalar<string> $scalar The deferred string source.
+     */
+    public static function ofScalar(Scalar $scalar): self
+    {
+        return new self(new TextOfScalar($scalar));
     }
 }
