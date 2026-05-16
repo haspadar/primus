@@ -257,6 +257,37 @@ $total = (new SumOf(
 // 42
 ```
 
+## Decimals
+
+To wrap an arbitrary-precision decimal value:
+
+```php
+$d = new DecimalOf('100000000000000.000001');
+$d->asString(); // "100000000000000.000001" — exact, beyond float53
+$d->asText()->value(); // "100000000000000.000001"
+```
+
+Float and int sources stay exact at their own precision:
+
+```php
+(new DecimalOfFloat(0.3))->asString(); // "0.3"
+(new DecimalOfInt(42))->asString();    // "42"
+```
+
+To do bcmath arithmetic at a chosen scale (digits past the decimal point):
+
+```php
+$sum = new SumOf(
+    new DecimalOf('0.1'),
+    new DecimalOf('0.2'),
+    1,
+);
+$sum->asString(); // "0.3"
+
+$ratio = new DivOf(new DecimalOf('1'), new DecimalOf('3'), 4);
+$ratio->asString(); // "0.3333"
+```
+
 ## Time
 
 To wrap an existing timestamp and format it:
