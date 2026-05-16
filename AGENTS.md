@@ -70,6 +70,16 @@ new decorators — extend it to inherit interface compliance for free.
   `IntegerOf`, `SumOf`, `MultOf`, `MaxOf`, `MinOf`, `DivOf` (truncating),
   `ModOf`, `Abs`, `Sticky` (delegates caching to `Number\Sticky`).
 
+- **`Primus\Decimal`** — arbitrary-precision decimal primitives backed
+  by bcmath. `Decimal` interface (marker extending `Number`) with a
+  fourth projection `asString(): numeric-string` ready for bcmath
+  consumption. Wrappers `DecimalOf`, `DecimalOfFloat`, `DecimalOfInt`,
+  `DecimalOfScalar` (lazy from a `Scalar<numeric-string>`). Binary
+  aggregates `SumOf`, `MultOf`, `MaxOf`, `MinOf`, `DivOf`, `ModOf`, and
+  unary `Abs` each take an explicit `int $scale`. `DecimalEnvelope` base class
+  removes projection boilerplate from aggregates. `Sticky` composes
+  `Number\Sticky` and adds a numeric-string slot.
+
 - **`Primus\Time`** — `DateTimeImmutable` wrappers.
   `Time` interface, `TimeOf` (wrap a string or `DateTimeImmutable`),
   `Iso` (format as ISO 8601 string). Sources of the current moment stay
