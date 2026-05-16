@@ -5,8 +5,9 @@ declare(strict_types=1);
 namespace Primus\Number;
 
 use Override;
+use Primus\Scalar\ScalarOf;
 use Primus\Text\Text;
-use Primus\Text\TextOf;
+use Primus\Text\TextOfScalar;
 
 /**
  * Cached version of a {@see Number}.
@@ -57,7 +58,7 @@ final class Sticky implements Number
      */
     public function __construct(private readonly Number $origin)
     {
-        $this->textStored = new TextOf('');
+        $this->textStored = new TextOfScalar(new ScalarOf(static fn(): string => ''));
     }
 
     #[Override]
