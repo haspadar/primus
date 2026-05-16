@@ -27,7 +27,7 @@ final readonly class WithoutTags extends TextEnvelope
         parent::__construct(
             new Mapped(
                 $origin,
-                new FuncOf(static fn(string $s): string => strip_tags($s)),
+                new FuncOf(strip_tags(...)),
             ),
         );
     }
