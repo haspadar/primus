@@ -21,6 +21,8 @@ use Primus\Scalar\ScalarOf;
  */
 final readonly class IsBlank extends ScalarEnvelope
 {
+    private const string BLANK_PATTERN = '/(*UCP)^\s*$/u';
+
     /**
      * Ctor.
      *
@@ -30,7 +32,7 @@ final readonly class IsBlank extends ScalarEnvelope
     {
         parent::__construct(
             new ScalarOf(
-                static fn(): bool => preg_match('/^\s*$/u', $text->value()) === 1,
+                static fn(): bool => preg_match(self::BLANK_PATTERN, $text->value()) === 1,
             ),
         );
     }

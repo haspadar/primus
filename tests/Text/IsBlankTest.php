@@ -36,6 +36,12 @@ final class IsBlankTest extends TestCase
     }
 
     #[Test]
+    public function returnsTrueForUnicodeLineAndParagraphSeparators(): void
+    {
+        self::assertTrue((new IsBlank(TextOf::ofString("\u{2028}\u{2029}")))->value());
+    }
+
+    #[Test]
     public function returnsFalseForNonBlankString(): void
     {
         self::assertFalse((new IsBlank(TextOf::ofString('hello')))->value());
