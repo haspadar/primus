@@ -15,7 +15,7 @@ use Primus\Scalar\ScalarOf;
  * other sequences.
  *
  * Example:
- *     $has = new Contains(TextOf::ofString('hello world'), TextOf::ofString('lo wo'));
+ *     $has = new Contains(TextOf::str('hello world'), TextOf::str('lo wo'));
  *     echo $has->value(); // true
  *
  * @extends ScalarEnvelope<bool>

@@ -11,7 +11,7 @@ namespace Primus\Text;
  * and leaves the rest of the text unchanged.
  *
  * Example:
- *     $text = new Capitalized(TextOf::ofString('hello'));
+ *     $text = new Capitalized(TextOf::str('hello'));
  *     echo $text->value(); // 'Hello'
  */
 final readonly class Capitalized extends TextEnvelope

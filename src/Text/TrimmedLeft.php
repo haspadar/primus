@@ -11,7 +11,7 @@ use Primus\Func\FuncOf;
  * Text with whitespace removed from the left side.
  *
  * Example:
- *     $text = new TrimmedLeft(TextOf::ofString(" hello "));
+ *     $text = new TrimmedLeft(TextOf::str(" hello "));
  *     echo $text->value(); // 'hello '
  */
 final readonly class TrimmedLeft extends TextEnvelope

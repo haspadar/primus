@@ -16,8 +16,8 @@ use Primus\Func\FuncOf;
  *
  * Example:
  *     $domain = new SuffixOf(
- *         TextOf::ofString('user@example.com'),
- *         TextOf::ofString('@'),
+ *         TextOf::str('user@example.com'),
+ *         TextOf::str('@'),
  *     );
  *     echo $domain->value(); // 'example.com'
  */

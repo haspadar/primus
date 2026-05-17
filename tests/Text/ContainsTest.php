@@ -15,7 +15,7 @@ final class ContainsTest extends TestCase
     public function returnsTrueWhenNeedleIsInside(): void
     {
         self::assertTrue(
-            (new Contains(TextOf::ofString('hello world'), TextOf::ofString('lo wo')))->value(),
+            (new Contains(TextOf::str('hello world'), TextOf::str('lo wo')))->value(),
         );
     }
 
@@ -23,7 +23,7 @@ final class ContainsTest extends TestCase
     public function returnsTrueWhenNeedleIsAtStart(): void
     {
         self::assertTrue(
-            (new Contains(TextOf::ofString('hello world'), TextOf::ofString('hello')))->value(),
+            (new Contains(TextOf::str('hello world'), TextOf::str('hello')))->value(),
         );
     }
 
@@ -31,7 +31,7 @@ final class ContainsTest extends TestCase
     public function returnsTrueWhenNeedleIsAtEnd(): void
     {
         self::assertTrue(
-            (new Contains(TextOf::ofString('hello world'), TextOf::ofString('world')))->value(),
+            (new Contains(TextOf::str('hello world'), TextOf::str('world')))->value(),
         );
     }
 
@@ -39,7 +39,7 @@ final class ContainsTest extends TestCase
     public function returnsFalseWhenNeedleIsAbsent(): void
     {
         self::assertFalse(
-            (new Contains(TextOf::ofString('hello world'), TextOf::ofString('xyz')))->value(),
+            (new Contains(TextOf::str('hello world'), TextOf::str('xyz')))->value(),
         );
     }
 
@@ -47,7 +47,7 @@ final class ContainsTest extends TestCase
     public function returnsTrueWhenNeedleIsEmpty(): void
     {
         self::assertTrue(
-            (new Contains(TextOf::ofString('hello'), TextOf::ofString('')))->value(),
+            (new Contains(TextOf::str('hello'), TextOf::str('')))->value(),
         );
     }
 
@@ -55,7 +55,7 @@ final class ContainsTest extends TestCase
     public function respectsUtf8MultibyteCharacters(): void
     {
         self::assertTrue(
-            (new Contains(TextOf::ofString('привет мир'), TextOf::ofString('ет ми')))->value(),
+            (new Contains(TextOf::str('привет мир'), TextOf::str('ет ми')))->value(),
         );
     }
 }

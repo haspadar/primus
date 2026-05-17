@@ -17,8 +17,8 @@ final class SuffixOfTest extends TestCase
     {
         self::assertThat(
             new SuffixOf(
-                TextOf::ofString('user@example.com'),
-                TextOf::ofString('@'),
+                TextOf::str('user@example.com'),
+                TextOf::str('@'),
             ),
             new HasTextValue('example.com')
         );
@@ -29,8 +29,8 @@ final class SuffixOfTest extends TestCase
     {
         self::assertThat(
             new SuffixOf(
-                TextOf::ofString('plainstring'),
-                TextOf::ofString('@'),
+                TextOf::str('plainstring'),
+                TextOf::str('@'),
             ),
             new HasTextValue('')
         );
@@ -41,8 +41,8 @@ final class SuffixOfTest extends TestCase
     {
         self::assertThat(
             new SuffixOf(
-                TextOf::ofString('head@'),
-                TextOf::ofString('@'),
+                TextOf::str('head@'),
+                TextOf::str('@'),
             ),
             new HasTextValue('')
         );
@@ -53,8 +53,8 @@ final class SuffixOfTest extends TestCase
     {
         self::assertThat(
             new SuffixOf(
-                TextOf::ofString('a/b/c'),
-                TextOf::ofString('/'),
+                TextOf::str('a/b/c'),
+                TextOf::str('/'),
             ),
             new HasTextValue('b/c')
         );
@@ -65,8 +65,8 @@ final class SuffixOfTest extends TestCase
     {
         self::assertThat(
             new SuffixOf(
-                TextOf::ofString('café/мир'),
-                TextOf::ofString('/'),
+                TextOf::str('café/мир'),
+                TextOf::str('/'),
             ),
             new HasTextValue('мир')
         );
@@ -77,8 +77,8 @@ final class SuffixOfTest extends TestCase
     {
         self::assertThat(
             new SuffixOf(
-                TextOf::ofString('helloпривет'),
-                TextOf::ofString('п'),
+                TextOf::str('helloпривет'),
+                TextOf::str('п'),
             ),
             new HasTextValue('ривет')
         );
@@ -89,8 +89,8 @@ final class SuffixOfTest extends TestCase
     {
         self::assertThat(
             new SuffixOf(
-                TextOf::ofString(''),
-                TextOf::ofString('@'),
+                TextOf::str(''),
+                TextOf::str('@'),
             ),
             new HasTextValue('')
         );

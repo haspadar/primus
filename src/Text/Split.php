@@ -13,7 +13,7 @@ use Primus\Scalar\Scalar;
  * Produces an iterable of {@see Text} segments separated by the given delimiter.
  *
  * Example:
- *     $parts = new Split(',', TextOf::ofString('a,b,c'));
+ *     $parts = new Split(',', TextOf::str('a,b,c'));
  *     foreach ($parts->value() as $text) {
  *         echo $text->value(); // a, b, c
  *     }
@@ -34,7 +34,7 @@ final readonly class Split implements Scalar
     public function value(): iterable
     {
         foreach (explode($this->delimiter, $this->origin->value()) as $part) {
-            yield TextOf::ofString($part);
+            yield TextOf::str($part);
         }
     }
 }

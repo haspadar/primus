@@ -54,7 +54,7 @@ composer require haspadar/primus
   retry/logging — things you can't do with a procedural chain.
 
   ```php
-  $headline = new Lowered(new Trimmed(new TextOf($raw)));
+  $headline = new Lowered(new Trimmed(TextOf::str($raw)));
   $cached   = new Sticky(new ScalarOf(fn () => $headline->value()));
   // No work done yet.
   ```
@@ -100,14 +100,14 @@ composer require haspadar/primus
 To trim and lowercase:
 
 ```php
-$text = (new Lowered(new Trimmed(new TextOf('  Hello  '))))->value();
+$text = (new Lowered(new Trimmed(TextOf::str('  Hello  '))))->value();
 // "hello"
 ```
 
 To take a substring:
 
 ```php
-$text = (new Sub(new TextOf('Hello, world!'), 0, 5))->value();
+$text = (new Sub(TextOf::str('Hello, world!'), 0, 5))->value();
 // "Hello"
 ```
 

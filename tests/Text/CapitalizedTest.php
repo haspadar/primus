@@ -18,7 +18,7 @@ final class CapitalizedTest extends TestCase
     public function capitalizesFirstCharacter(): void
     {
         self::assertThat(
-            new Capitalized(TextOf::ofString('hello')),
+            new Capitalized(TextOf::str('hello')),
             new HasTextValue('Hello'),
             'Capitalized must capitalize the first character'
         );
@@ -28,7 +28,7 @@ final class CapitalizedTest extends TestCase
     public function leavesAlreadyCapitalizedTextUnchanged(): void
     {
         self::assertThat(
-            new Capitalized(TextOf::ofString('World')),
+            new Capitalized(TextOf::str('World')),
             new HasTextValue('World'),
             'Capitalized must leave already capitalized text unchanged'
         );
@@ -38,7 +38,7 @@ final class CapitalizedTest extends TestCase
     public function worksWithMultibyteCharacters(): void
     {
         self::assertThat(
-            new Capitalized(TextOf::ofString('ёлка')),
+            new Capitalized(TextOf::str('ёлка')),
             new HasTextValue('Ёлка'),
             'Capitalized must work with multibyte characters'
         );
@@ -48,7 +48,7 @@ final class CapitalizedTest extends TestCase
     public function returnsEmptyStringWhenInputIsEmpty(): void
     {
         self::assertThat(
-            new Capitalized(TextOf::ofString('')),
+            new Capitalized(TextOf::str('')),
             new HasTextValue(''),
             'Capitalized must return an empty string when the input is empty'
         );
@@ -58,7 +58,7 @@ final class CapitalizedTest extends TestCase
     public function capitalizesOnlyFirstCharacter(): void
     {
         self::assertThat(
-            new Capitalized(TextOf::ofString('hello WORLD')),
+            new Capitalized(TextOf::str('hello WORLD')),
             new HasTextValue('Hello WORLD'),
             'Capitalized must capitalize only the first character'
         );

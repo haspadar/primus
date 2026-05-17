@@ -14,7 +14,7 @@ use Primus\Scalar\ScalarOf;
  * namely '' and '0'. Any other string yields false.
  *
  * Example:
- *     $empty = new IsEmpty(TextOf::ofString('0'));
+ *     $empty = new IsEmpty(TextOf::str('0'));
  *     echo $empty->value(); // true
  *
  * @extends ScalarEnvelope<bool>

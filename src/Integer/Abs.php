@@ -43,6 +43,6 @@ final readonly class Abs implements Integer
     #[Override]
     public function asText(): Text
     {
-        return TextOf::ofString((string) $this->asInt());
+        return TextOf::str((string) $this->asInt());
     }
 }

@@ -15,8 +15,8 @@ use Primus\Scalar\ScalarOf;
  * the same delegate.
  *
  * Example:
- *     TextOf::ofString('hello'); // eager string
- *     TextOf::ofScalar(new ScalarOf(fn() => 'hello')); // deferred
+ *     TextOf::str('hello'); // eager string
+ *     TextOf::scalar(new ScalarOf(fn() => 'hello')); // deferred
  */
 final readonly class TextOf extends TextEnvelope
 {
@@ -35,7 +35,7 @@ final readonly class TextOf extends TextEnvelope
      *
      * @param string $value The string to wrap.
      */
-    public static function ofString(string $value): self
+    public static function str(string $value): self
     {
         return new self(new TextOfScalar(new ScalarOf(static fn(): string => $value)));
     }
@@ -45,7 +45,7 @@ final readonly class TextOf extends TextEnvelope
      *
      * @param Scalar<string> $scalar The deferred string source.
      */
-    public static function ofScalar(Scalar $scalar): self
+    public static function scalar(Scalar $scalar): self
     {
         return new self(new TextOfScalar($scalar));
     }

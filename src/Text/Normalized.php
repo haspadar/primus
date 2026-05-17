@@ -14,7 +14,7 @@ use Primus\Scalar\ScalarOf;
  * with a single space and trims leading/trailing whitespace.
  *
  * Example:
- *     $text = new Normalized(TextOf::ofString(" Hello \n\t world "));
+ *     $text = new Normalized(TextOf::str(" Hello \n\t world "));
  *     echo $text->value(); // 'Hello world'
  */
 final readonly class Normalized extends TextEnvelope
@@ -27,7 +27,7 @@ final readonly class Normalized extends TextEnvelope
     public function __construct(Text $origin)
     {
         parent::__construct(
-            TextOf::ofScalar(
+            TextOf::scalar(
                 new ScalarOf(
                     static fn(): string => preg_replace('/\s+/u', ' ', trim($origin->value()))
                         ?? throw new InvalidArgumentException('Malformed UTF-8 input'),

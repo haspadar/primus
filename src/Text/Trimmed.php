@@ -12,7 +12,7 @@ use Primus\Func\FuncOf;
  * Applies {@see trim()} to the original text.
  *
  * Example:
- *     $text = new Trimmed(TextOf::ofString(' hello '));
+ *     $text = new Trimmed(TextOf::str(' hello '));
  *     echo $text->value(); // 'hello'
  */
 final readonly class Trimmed extends TextEnvelope

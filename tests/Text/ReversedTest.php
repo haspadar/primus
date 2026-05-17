@@ -16,7 +16,7 @@ final class ReversedTest extends TestCase
     public function returnsCharactersInReverseOrder(): void
     {
         self::assertThat(
-            new Reversed(TextOf::ofString('hello')),
+            new Reversed(TextOf::str('hello')),
             new HasTextValue('olleh')
         );
     }
@@ -25,7 +25,7 @@ final class ReversedTest extends TestCase
     public function returnsEmptyForEmptyText(): void
     {
         self::assertThat(
-            new Reversed(TextOf::ofString('')),
+            new Reversed(TextOf::str('')),
             new HasTextValue('')
         );
     }
@@ -34,7 +34,7 @@ final class ReversedTest extends TestCase
     public function preservesMultibyteCharactersAsWholeUnits(): void
     {
         self::assertThat(
-            new Reversed(TextOf::ofString('café')),
+            new Reversed(TextOf::str('café')),
             new HasTextValue('éfac')
         );
     }
@@ -43,7 +43,7 @@ final class ReversedTest extends TestCase
     public function reversesCyrillicTextByCodepoint(): void
     {
         self::assertThat(
-            new Reversed(TextOf::ofString('привет')),
+            new Reversed(TextOf::str('привет')),
             new HasTextValue('тевирп')
         );
     }
@@ -52,7 +52,7 @@ final class ReversedTest extends TestCase
     public function reversesByCodepointNotGraphemeCluster(): void
     {
         self::assertThat(
-            new Reversed(TextOf::ofString("cafe\u{0301}")),
+            new Reversed(TextOf::str("cafe\u{0301}")),
             new HasTextValue("\u{0301}efac")
         );
     }

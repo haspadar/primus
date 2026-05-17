@@ -10,7 +10,7 @@ use Primus\Func\FuncOf;
  * Escaped {@see Text} safe for HTML rendering.
  *
  * Example:
- *     $text = new HtmlEscaped(TextOf::ofString('<b>"A & B"</b>'));
+ *     $text = new HtmlEscaped(TextOf::str('<b>"A & B"</b>'));
  *     echo $text->value(); // &lt;b&gt;&quot;A &amp; B&quot;&lt;/b&gt;
  */
 final readonly class HtmlEscaped extends TextEnvelope

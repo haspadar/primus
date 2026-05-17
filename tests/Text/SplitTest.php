@@ -18,7 +18,7 @@ final class SplitTest extends TestCase
     public function splitsTextByDelimiter(): void
     {
         self::assertThat(
-            (new Split(',', TextOf::ofString('a,b,c')))->value(),
+            (new Split(',', TextOf::str('a,b,c')))->value(),
             new HasTextValues(['a', 'b', 'c'])
         );
     }
@@ -27,7 +27,7 @@ final class SplitTest extends TestCase
     public function returnsSinglePartWhenDelimiterNotFound(): void
     {
         self::assertThat(
-            (new Split(',', TextOf::ofString('abc')))->value(),
+            (new Split(',', TextOf::str('abc')))->value(),
             new HasTextValues(['abc'])
         );
     }
@@ -36,7 +36,7 @@ final class SplitTest extends TestCase
     public function handlesEmptyString(): void
     {
         self::assertThat(
-            (new Split(',', TextOf::ofString('')))->value(),
+            (new Split(',', TextOf::str('')))->value(),
             new HasTextValues([''])
         );
     }
@@ -45,7 +45,7 @@ final class SplitTest extends TestCase
     public function worksWithMultibyteDelimiter(): void
     {
         self::assertThat(
-            (new Split('—', TextOf::ofString('a—b—c')))->value(),
+            (new Split('—', TextOf::str('a—b—c')))->value(),
             new HasTextValues(['a', 'b', 'c'])
         );
     }
@@ -54,7 +54,7 @@ final class SplitTest extends TestCase
     public function consecutiveDelimitersProduceEmptyParts(): void
     {
         self::assertThat(
-            (new Split(',', TextOf::ofString('a,,b,')))->value(),
+            (new Split(',', TextOf::str('a,,b,')))->value(),
             new HasTextValues(['a', '', 'b', ''])
         );
     }

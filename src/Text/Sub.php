@@ -13,7 +13,7 @@ use Primus\Func\FuncOf;
  * Equivalent to {@see mb_substr($text, $start, PHP_INT_MAX, 'UTF-8')}.
  *
  * Example:
- *     $text = new Sub(TextOf::ofString('hello world'), 0, 5);
+ *     $text = new Sub(TextOf::str('hello world'), 0, 5);
  *     echo $text->value(); // 'hello'
  */
 final readonly class Sub extends TextEnvelope

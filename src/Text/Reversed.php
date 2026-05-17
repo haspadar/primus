@@ -17,7 +17,7 @@ use Primus\Func\FuncOf;
  * character. Pre-normalize to NFC if grapheme stability is required.
  *
  * Example:
- *     $text = new Reversed(TextOf::ofString('café'));
+ *     $text = new Reversed(TextOf::str('café'));
  *     echo $text->value(); // 'éfac'
  */
 final readonly class Reversed extends TextEnvelope

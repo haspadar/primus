@@ -15,7 +15,7 @@ use Primus\Scalar\ScalarOf;
  * other sequences.
  *
  * Example:
- *     $starts = new StartsWith(TextOf::ofString('hello world'), TextOf::ofString('hello'));
+ *     $starts = new StartsWith(TextOf::str('hello world'), TextOf::str('hello'));
  *     echo $starts->value(); // true
  *
  * @extends ScalarEnvelope<bool>
