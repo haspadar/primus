@@ -6,7 +6,7 @@ namespace Primus\Map;
 
 use Generator;
 use Override;
-use Primus\Func\Predicate;
+use Primus\Func\Func;
 
 /**
  * Map of pairs whose values match a predicate.
@@ -14,7 +14,7 @@ use Primus\Func\Predicate;
  * Example:
  *     $map = new Filtered(
  *         new MapOf(['a' => 10, 'b' => 5, 'c' => 40]),
- *         new PredicateOf(fn (int $v): bool => $v > 10),
+ *         new FuncOf(fn (int $v): bool => $v > 10),
  *     );
  *     foreach ($map as $key => $value) {
  *         echo "$key=$value ";
@@ -31,9 +31,9 @@ final readonly class Filtered extends MapEnvelope
      * Ctor.
      *
      * @param Map<K, V> $origin The map whose pairs are filtered.
-     * @param Predicate<V> $predicate The predicate that selects values.
+     * @param Func<V, bool> $predicate The predicate that selects values.
      */
-    public function __construct(Map $origin, private Predicate $predicate)
+    public function __construct(Map $origin, private Func $predicate)
     {
         parent::__construct($origin);
     }

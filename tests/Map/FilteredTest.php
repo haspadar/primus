@@ -7,7 +7,6 @@ namespace Primus\Tests\Map;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Primus\Func\FuncOf;
-use Primus\Func\PredicateOf;
 use Primus\Map\Filtered;
 use Primus\Map\Mapped;
 use Primus\Map\MapOf;
@@ -21,7 +20,7 @@ final class FilteredTest extends TestCase
             ['c' => 40, 'e' => 50],
             (new Filtered(
                 new MapOf(['a' => 10, 'b' => 5, 'c' => 40, 'd' => 3, 'e' => 50]),
-                new PredicateOf(static fn (int $v): bool => $v > 10),
+                new FuncOf(static fn (int $v): bool => $v > 10),
             ))->value(),
         );
     }
@@ -33,7 +32,7 @@ final class FilteredTest extends TestCase
             ['banana' => 6, 'cherry' => 6],
             (new Filtered(
                 new MapOf(['apple' => 5, 'banana' => 6, 'cherry' => 6]),
-                new PredicateOf(static fn (int $v): bool => $v > 5),
+                new FuncOf(static fn (int $v): bool => $v > 5),
             ))->value(),
         );
     }
@@ -45,7 +44,7 @@ final class FilteredTest extends TestCase
             0,
             new Filtered(
                 new MapOf(['a' => 1, 'b' => 2]),
-                new PredicateOf(static fn (int $v): bool => $v > 100),
+                new FuncOf(static fn (int $v): bool => $v > 100),
             ),
         );
     }
@@ -57,7 +56,7 @@ final class FilteredTest extends TestCase
             2,
             new Filtered(
                 new MapOf(['a' => 1, 'b' => 2, 'c' => 3, 'd' => 4]),
-                new PredicateOf(static fn (int $v): bool => $v % 2 === 0),
+                new FuncOf(static fn (int $v): bool => $v % 2 === 0),
             ),
         );
     }
@@ -68,7 +67,7 @@ final class FilteredTest extends TestCase
         $source = new MapOf(['a' => 1, 'b' => 2, 'c' => 3]);
         $filtered = new Filtered(
             $source,
-            new PredicateOf(static fn (int $v): bool => $v > 1),
+            new FuncOf(static fn (int $v): bool => $v > 1),
         );
         $filtered->value();
         $this->assertSame(['b' => 2, 'c' => 3], iterator_to_array($filtered));
@@ -85,7 +84,7 @@ final class FilteredTest extends TestCase
                     new MapOf(['a' => 1, 'b' => 2, 'c' => 3]),
                     new FuncOf(static fn (int $v): int => $v * 100),
                 ),
-                new PredicateOf(static fn (int $v): bool => $v > 100),
+                new FuncOf(static fn (int $v): bool => $v > 100),
             ))->value(),
         );
     }
@@ -97,7 +96,7 @@ final class FilteredTest extends TestCase
             0,
             new Filtered(
                 new MapOf([]),
-                new PredicateOf(static fn (int $v): bool => $v > 0),
+                new FuncOf(static fn (int $v): bool => $v > 0),
             ),
         );
     }

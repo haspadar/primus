@@ -6,7 +6,7 @@ namespace Primus\List;
 
 use Generator;
 use Override;
-use Primus\Func\Predicate;
+use Primus\Func\Func;
 
 /**
  * List of elements that match a predicate.
@@ -14,7 +14,7 @@ use Primus\Func\Predicate;
  * Example:
  *     $list = new Filtered(
  *         new ListOf(10, 5, 40, 3),
- *         new PredicateOf(fn (int $x): bool => $x > 10),
+ *         new FuncOf(fn (int $x): bool => $x > 10),
  *     );
  *     foreach ($list as $value) {
  *         echo $value . ' '; // 40
@@ -29,9 +29,9 @@ final readonly class Filtered extends ListEnvelope
      * Ctor.
      *
      * @param List_<T> $origin The list whose elements are filtered.
-     * @param Predicate<T> $predicate The predicate that selects elements.
+     * @param Func<T, bool> $predicate The predicate that selects elements.
      */
-    public function __construct(List_ $origin, private Predicate $predicate)
+    public function __construct(List_ $origin, private Func $predicate)
     {
         parent::__construct($origin);
     }

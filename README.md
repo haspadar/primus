@@ -31,7 +31,7 @@ Primus reads top to bottom — each step is a named object:
 (new Sorted(
     new Filtered(
         new ListOf(3, 1, 4, 1, 5),
-        new PredicateOf(fn (int $x) => $x > 2),
+        new FuncOf(fn (int $x) => $x > 2),
     ),
 ))->value();
 ```
@@ -119,7 +119,7 @@ To filter and sort:
 $big = (new Sorted(
     new Filtered(
         new ListOf(3, 1, 4, 1, 5, 9, 2, 6),
-        new PredicateOf(static fn (int $x): bool => $x > 2),
+        new FuncOf(static fn (int $x): bool => $x > 2),
     ),
 ))->value();
 // [3, 4, 5, 6, 9]

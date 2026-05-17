@@ -6,7 +6,7 @@ namespace Primus\Tests\List;
 
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
-use Primus\Func\PredicateOf;
+use Primus\Func\FuncOf;
 use Primus\List\Filtered;
 use Primus\List\ListOf;
 use Primus\List\Reversed;
@@ -20,7 +20,7 @@ final class FilteredTest extends TestCase
             [40, 50],
             (new Filtered(
                 new ListOf(10, 5, 40, 3, 50),
-                new PredicateOf(static fn (int $x): bool => $x > 10),
+                new FuncOf(static fn (int $x): bool => $x > 10),
             ))->value(),
         );
     }
@@ -32,7 +32,7 @@ final class FilteredTest extends TestCase
             ['banana', 'cherry'],
             (new Filtered(
                 new ListOf('apple', 'banana', 'cherry'),
-                new PredicateOf(static fn (string $x): bool => strlen($x) > 5),
+                new FuncOf(static fn (string $x): bool => strlen($x) > 5),
             ))->value(),
         );
     }
@@ -44,7 +44,7 @@ final class FilteredTest extends TestCase
             0,
             new Filtered(
                 new ListOf(1, 2, 3),
-                new PredicateOf(static fn (int $x): bool => $x > 100),
+                new FuncOf(static fn (int $x): bool => $x > 100),
             ),
         );
     }
@@ -56,7 +56,7 @@ final class FilteredTest extends TestCase
             2,
             new Filtered(
                 new ListOf(1, 2, 3, 4),
-                new PredicateOf(static fn (int $x): bool => $x % 2 === 0),
+                new FuncOf(static fn (int $x): bool => $x % 2 === 0),
             ),
         );
     }
@@ -67,7 +67,7 @@ final class FilteredTest extends TestCase
         $source = new ListOf(1, 2, 3, 4);
         $filtered = new Filtered(
             $source,
-            new PredicateOf(static fn (int $x): bool => $x > 2),
+            new FuncOf(static fn (int $x): bool => $x > 2),
         );
         $filtered->value();
         iterator_to_array($filtered);
@@ -82,7 +82,7 @@ final class FilteredTest extends TestCase
             (new Reversed(
                 new Filtered(
                     new ListOf(1, 2, 3, 4),
-                    new PredicateOf(static fn (int $x): bool => $x > 2),
+                    new FuncOf(static fn (int $x): bool => $x > 2),
                 ),
             ))->value(),
         );

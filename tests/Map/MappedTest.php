@@ -7,7 +7,6 @@ namespace Primus\Tests\Map;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Primus\Func\FuncOf;
-use Primus\Func\PredicateOf;
 use Primus\Map\Filtered;
 use Primus\Map\Mapped;
 use Primus\Map\MapOf;
@@ -74,7 +73,7 @@ final class MappedTest extends TestCase
             (new Mapped(
                 new Filtered(
                     new MapOf(['a' => 1, 'b' => 2, 'c' => 3]),
-                    new PredicateOf(static fn (int $v): bool => $v > 2),
+                    new FuncOf(static fn (int $v): bool => $v > 2),
                 ),
                 new FuncOf(static fn (int $v): int => $v * 10),
             ))->value(),
