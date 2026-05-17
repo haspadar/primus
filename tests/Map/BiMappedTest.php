@@ -7,7 +7,7 @@ namespace Primus\Tests\Map;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Primus\Func\BiFuncOf;
-use Primus\Func\PredicateOf;
+use Primus\Func\FuncOf;
 use Primus\Map\BiMapped;
 use Primus\Map\Filtered;
 use Primus\Map\MapOf;
@@ -74,7 +74,7 @@ final class BiMappedTest extends TestCase
             (new BiMapped(
                 new Filtered(
                     new MapOf(['later' => 3, 'urgent' => 8]),
-                    new PredicateOf(static fn (int $value): bool => $value > 5),
+                    new FuncOf(static fn (int $value): bool => $value > 5),
                 ),
                 new BiFuncOf(static fn (string $key, int $value): string => "$key:$value"),
             ))->value(),

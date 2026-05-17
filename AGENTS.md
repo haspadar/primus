@@ -96,9 +96,9 @@ cycle. Compose through the documented public surface instead.
   on the caller (`new BytesOf(random_bytes(...))`).
 
 - **`Primus\Func`** — function-as-object primitives.
-  `Func<I, O>` (`apply()`), `Proc<X>` (`exec()`, side-effect), `Predicate`
-  (boolean check), plus `FuncOf`, `BiFunc`/`BiFuncOf`, `ProcOf`,
-  `BiProc`/`BiProcOf`, `PredicateOf`, `StickyFunc`, `FuncWithFallback`,
+  `Func<I, O>` (`apply()`; use `Func<T, bool>` for boolean predicates),
+  `Proc<X>` (`exec()`, side-effect), plus `FuncOf`, `BiFunc`/`BiFuncOf`,
+  `ProcOf`, `BiProc`/`BiProcOf`, `StickyFunc`, `FuncWithFallback`,
   `Repeated`, `ForEach_` (iterate a `List_` with a `Proc`), `FuncEnvelope`.
 
 ---
@@ -131,7 +131,7 @@ project's lint gates, or will surprise the caller at runtime.
 
 5. **Interfaces are the substitution points.** Anywhere a class accepts
    `Text`, `Bytes`, `List_<T>`, `Map<K, V>`, `Scalar<T>`, `Number`,
-   `Time`, `Func<I, O>`, `Proc<X>`, or `Predicate`, you can pass any
+   `Time`, `Func<I, O>`, or `Proc<X>`, you can pass any
    implementation — including a test stub built from a literal value via
    `TextOf` / `BytesOf` / `ListOf` / `Constant`.
 

@@ -22,7 +22,7 @@ use Traversable;
  * self::assertThat(
  *     new Filtered(
  *         new IteratorOf([1, 2, 3, 4]),
- *         new PredicateOf(fn (int $x): bool => $x > 2),
+ *         new FuncOf(fn (int $x): bool => $x > 2),
  *     ),
  *     new HasKeyValuePairs([2 => 3, 3 => 4])
  * );
