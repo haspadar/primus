@@ -10,7 +10,9 @@ use Primus\Bytes\Bytes;
 use Primus\Bytes\BytesOf;
 use Primus\Scalar\ScalarOf;
 use Primus\Tests\Constraint\HasTextValue;
+use Error;
 use Primus\Text\TextOf;
+use RuntimeException;
 
 final class TextOfTest extends TestCase
 {
@@ -98,5 +100,45 @@ final class TextOfTest extends TestCase
         self::assertFalse($resolved);
         self::assertThat($text, new HasTextValue('late'));
         self::assertTrue($resolved);
+    }
+
+    #[Test]
+    public function throwableValueContainsExceptionClassName(): void
+    {
+        $error = new RuntimeException('boom');
+
+        self::assertStringContainsString('RuntimeException', TextOf::throwable($error)->value());
+    }
+
+    #[Test]
+    public function throwableValueContainsExceptionMessage(): void
+    {
+        $error = new RuntimeException('boom: details');
+
+        self::assertStringContainsString('boom: details', TextOf::throwable($error)->value());
+    }
+
+    #[Test]
+    public function throwableValueContainsStackTraceHeader(): void
+    {
+        $error = new RuntimeException('boom');
+
+        self::assertStringContainsString('Stack trace', TextOf::throwable($error)->value());
+    }
+
+    #[Test]
+    public function throwableValueContainsOriginFile(): void
+    {
+        $error = new RuntimeException('boom');
+
+        self::assertStringContainsString(__FILE__, TextOf::throwable($error)->value());
+    }
+
+    #[Test]
+    public function throwableValueAcceptsNonExceptionErrors(): void
+    {
+        $error = new Error('boom');
+
+        self::assertStringContainsString('Error', TextOf::throwable($error)->value());
     }
 }

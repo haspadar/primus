@@ -7,6 +7,7 @@ namespace Primus\Text;
 use Primus\Bytes\Bytes;
 use Primus\Scalar\Scalar;
 use Primus\Scalar\ScalarOf;
+use Throwable;
 
 /**
  * Convenience factory wrapping different sources as Text.
@@ -24,6 +25,7 @@ use Primus\Scalar\ScalarOf;
  *     TextOf::str('hello'); // eager string
  *     TextOf::scalar(new ScalarOf(fn() => 'hello')); // deferred
  *     TextOf::bytes(new BytesOf('hello')); // bytes wrapped as text
+ *     TextOf::throwable(new RuntimeException('boom')); // exception serialized
  */
 final readonly class TextOf extends TextEnvelope
 {
@@ -66,12 +68,32 @@ final readonly class TextOf extends TextEnvelope
      * consumers.
      *
      * @param Bytes $bytes The byte sequence to wrap as text.
-     * @psalm-api Public factory; psalm currently scans only src/, so this
-     *     annotation suppresses PossiblyUnusedMethod until an in-src consumer
-     *     (e.g. a future Base64-decoded Text decorator) replaces it.
+     * @psalm-api Public factory; psalm scans only src/, so this annotation
+     *     suppresses PossiblyUnusedMethod until an in-src consumer (e.g.
+     *     a future Base64-decoded Text decorator) replaces it.
      */
     public static function bytes(Bytes $bytes): self
     {
         return new self(new TextOfScalar(new ScalarOf(static fn(): string => $bytes->value())));
+    }
+
+    /**
+     * Wraps a {@see Throwable} as Text via its default string representation.
+     *
+     * The throwable is serialized through PHP's `(string)` cast on first
+     * {@see Text::value()} call, yielding the throwable's class, message,
+     * origin file:line at throw time and the full stack trace. Useful for
+     * logging or composing error messages without manually formatting.
+     *
+     * Note: the resulting string contains the full stack trace including
+     * absolute file paths and frame arguments. Do not expose it on
+     * user-visible surfaces — it is intended for server-side logs only.
+     *
+     * @param Throwable $error The exception or error to serialize.
+     * @psalm-api Public factory (see bytes()).
+     */
+    public static function throwable(Throwable $error): self
+    {
+        return new self(new TextOfScalar(new ScalarOf(static fn(): string => (string) $error)));
     }
 }
