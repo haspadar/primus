@@ -9,6 +9,17 @@ use Primus\Scalar\Scalar;
 
 /**
  * Text based on a scalar producing a string.
+ *
+ * @internal Internal delegate of {@see TextOf::scalar()}. Callers should
+ *     compose text from a {@see Scalar} through `TextOf::scalar(...)`
+ *     instead of instantiating this class directly. Cactoos exposes its
+ *     equivalent publicly to support value equality through `equals()`;
+ *     Primus does not model Text identity, so a public surface here would
+ *     be redundant.
+ *
+ * Example:
+ *     $text = TextOf::scalar(new ScalarOf(static fn(): string => 'hello'));
+ *     echo $text->value(); // 'hello'
  */
 final readonly class TextOfScalar implements Text
 {

@@ -37,12 +37,17 @@ for the full inventory and read the PHPDoc on each class. Most namespaces
 also have an `<Namespace>Envelope` abstract class that simplifies writing
 new decorators — extend it to inherit interface compliance for free.
 
+Classes marked `@internal` in PHPDoc (e.g. delegates of named-constructor
+factories) are reachable via autoload but are not part of the public API.
+They are omitted from the lists below and may change without a deprecation
+cycle. Compose through the documented public surface instead.
+
 - **`Primus\Text`** — string operations.
   `TextOf`, `Trimmed`, `TrimmedLeft`, `TrimmedRight`, `Lowered`, `Uppered`,
   `Sub`, `HtmlEscaped`, `WithoutTags`, `Mapped` (string→string transform),
   `Joined`, `Repeated`, `Replaced`, `Split`, `Capitalized`, `Normalized`,
   `Abbreviated`, `LeftPadded`, `RightPadded`, `IsEmpty`, `LengthOfText`,
-  `RandomText`, `TextOfScalar`, `TextEnvelope`.
+  `RandomText`, `TextEnvelope`.
 
 - **`Primus\List`** — ordered list operations over `List_<T>` (the
   trailing underscore avoids the reserved keyword).
