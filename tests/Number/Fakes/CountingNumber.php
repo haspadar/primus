@@ -47,6 +47,6 @@ final class CountingNumber implements Number
     {
         ++$this->textCalls;
 
-        return TextOf::ofString($this->textValue);
+        return TextOf::str($this->textValue);
     }
 }

@@ -18,7 +18,7 @@ final class RightPaddedTest extends TestCase
     public function returnsTextPaddedWithZerosToRight(): void
     {
         self::assertThat(
-            new RightPadded(TextOf::ofString('12'), 5, '0'),
+            new RightPadded(TextOf::str('12'), 5, '0'),
             new HasTextValue('12000')
         );
     }
@@ -27,7 +27,7 @@ final class RightPaddedTest extends TestCase
     public function returnsTextPaddedWithSpacesToRight(): void
     {
         self::assertThat(
-            new RightPadded(TextOf::ofString('abc'), 6, ' '),
+            new RightPadded(TextOf::str('abc'), 6, ' '),
             new HasTextValue('abc   ')
         );
     }
@@ -36,7 +36,7 @@ final class RightPaddedTest extends TestCase
     public function returnsSameTextWhenLengthExceedsPadding(): void
     {
         self::assertThat(
-            new RightPadded(TextOf::ofString('foobar'), 4, '*'),
+            new RightPadded(TextOf::str('foobar'), 4, '*'),
             new HasTextValue('foobar')
         );
     }
@@ -45,7 +45,7 @@ final class RightPaddedTest extends TestCase
     public function returnsPaddingOnlyWhenTextIsEmpty(): void
     {
         self::assertThat(
-            new RightPadded(TextOf::ofString(''), 3, '.'),
+            new RightPadded(TextOf::str(''), 3, '.'),
             new HasTextValue('...')
         );
     }

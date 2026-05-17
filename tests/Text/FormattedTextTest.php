@@ -16,7 +16,7 @@ final class FormattedTextTest extends TestCase
     public function substitutesStringArgument(): void
     {
         self::assertThat(
-            new FormattedText(TextOf::ofString('Hello, %s!'), 'world'),
+            new FormattedText(TextOf::str('Hello, %s!'), 'world'),
             new HasTextValue('Hello, world!')
         );
     }
@@ -25,7 +25,7 @@ final class FormattedTextTest extends TestCase
     public function substitutesIntAndFloatArguments(): void
     {
         self::assertThat(
-            new FormattedText(TextOf::ofString('%d items at %.2f each'), 5, 3.5),
+            new FormattedText(TextOf::str('%d items at %.2f each'), 5, 3.5),
             new HasTextValue('5 items at 3.50 each')
         );
     }
@@ -34,7 +34,7 @@ final class FormattedTextTest extends TestCase
     public function returnsPatternUnchangedWhenNoPlaceholders(): void
     {
         self::assertThat(
-            new FormattedText(TextOf::ofString('no placeholders here')),
+            new FormattedText(TextOf::str('no placeholders here')),
             new HasTextValue('no placeholders here')
         );
     }
@@ -43,7 +43,7 @@ final class FormattedTextTest extends TestCase
     public function honoursPositionalSpecifiers(): void
     {
         self::assertThat(
-            new FormattedText(TextOf::ofString('%2$s %1$s'), 'world', 'hello'),
+            new FormattedText(TextOf::str('%2$s %1$s'), 'world', 'hello'),
             new HasTextValue('hello world')
         );
     }
@@ -52,7 +52,7 @@ final class FormattedTextTest extends TestCase
     public function preservesMultibyteCharactersInPatternAndArguments(): void
     {
         self::assertThat(
-            new FormattedText(TextOf::ofString('café %s'), 'привет'),
+            new FormattedText(TextOf::str('café %s'), 'привет'),
             new HasTextValue('café привет')
         );
     }

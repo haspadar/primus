@@ -16,7 +16,7 @@ use Primus\Text\Text;
  * InvalidArgumentException.
  *
  * Example:
- *     $bytes = new HexDecoded(TextOf::ofString("6869"));
+ *     $bytes = new HexDecoded(TextOf::str("6869"));
  *     $bytes->value(); // "hi"
  */
 final readonly class HexDecoded implements Bytes

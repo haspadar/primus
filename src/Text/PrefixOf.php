@@ -16,8 +16,8 @@ use Primus\Func\FuncOf;
  *
  * Example:
  *     $login = new PrefixOf(
- *         TextOf::ofString('user@example.com'),
- *         TextOf::ofString('@'),
+ *         TextOf::str('user@example.com'),
+ *         TextOf::str('@'),
  *     );
  *     echo $login->value(); // 'user'
  */

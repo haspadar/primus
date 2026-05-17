@@ -18,7 +18,7 @@ final class SubTest extends TestCase
     public function returnsSubstringWithinRange(): void
     {
         self::assertThat(
-            new Sub(TextOf::ofString('abcdefg'), 2, 3),
+            new Sub(TextOf::str('abcdefg'), 2, 3),
             new HasTextValue('cde')
         );
     }
@@ -27,7 +27,7 @@ final class SubTest extends TestCase
     public function returnsSubstringToEndWhenLengthNotLimited(): void
     {
         self::assertThat(
-            new Sub(TextOf::ofString('abcdefg'), 3),
+            new Sub(TextOf::str('abcdefg'), 3),
             new HasTextValue('defg')
         );
     }
@@ -36,7 +36,7 @@ final class SubTest extends TestCase
     public function handlesMultibyteEmojiCorrectly(): void
     {
         self::assertThat(
-            new Sub(TextOf::ofString('😀bcdef'), 0, 2),
+            new Sub(TextOf::str('😀bcdef'), 0, 2),
             new HasTextValue('😀b')
         );
     }

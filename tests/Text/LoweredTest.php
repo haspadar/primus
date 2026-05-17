@@ -18,7 +18,7 @@ final class LoweredTest extends TestCase
     public function returnsLowercaseWhenTextIsUppercase(): void
     {
         self::assertThat(
-            new Lowered(TextOf::ofString('HELLO')),
+            new Lowered(TextOf::str('HELLO')),
             new HasTextValue('hello')
         );
     }
@@ -27,7 +27,7 @@ final class LoweredTest extends TestCase
     public function returnsLowercaseWhenTextIsMixedCase(): void
     {
         self::assertThat(
-            new Lowered(TextOf::ofString('HeLLo WoRLD')),
+            new Lowered(TextOf::str('HeLLo WoRLD')),
             new HasTextValue('hello world')
         );
     }
@@ -36,7 +36,7 @@ final class LoweredTest extends TestCase
     public function returnsLowercaseWhenTextContainsDiacritics(): void
     {
         self::assertThat(
-            new Lowered(TextOf::ofString('ÀÉÎÖÜ')),
+            new Lowered(TextOf::str('ÀÉÎÖÜ')),
             new HasTextValue('àéîöü')
         );
     }

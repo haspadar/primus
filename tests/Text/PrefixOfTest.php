@@ -17,8 +17,8 @@ final class PrefixOfTest extends TestCase
     {
         self::assertThat(
             new PrefixOf(
-                TextOf::ofString('user@example.com'),
-                TextOf::ofString('@'),
+                TextOf::str('user@example.com'),
+                TextOf::str('@'),
             ),
             new HasTextValue('user')
         );
@@ -29,8 +29,8 @@ final class PrefixOfTest extends TestCase
     {
         self::assertThat(
             new PrefixOf(
-                TextOf::ofString('plainstring'),
-                TextOf::ofString('@'),
+                TextOf::str('plainstring'),
+                TextOf::str('@'),
             ),
             new HasTextValue('plainstring')
         );
@@ -41,8 +41,8 @@ final class PrefixOfTest extends TestCase
     {
         self::assertThat(
             new PrefixOf(
-                TextOf::ofString('@tail'),
-                TextOf::ofString('@'),
+                TextOf::str('@tail'),
+                TextOf::str('@'),
             ),
             new HasTextValue('')
         );
@@ -53,8 +53,8 @@ final class PrefixOfTest extends TestCase
     {
         self::assertThat(
             new PrefixOf(
-                TextOf::ofString('a/b/c'),
-                TextOf::ofString('/'),
+                TextOf::str('a/b/c'),
+                TextOf::str('/'),
             ),
             new HasTextValue('a')
         );
@@ -65,8 +65,8 @@ final class PrefixOfTest extends TestCase
     {
         self::assertThat(
             new PrefixOf(
-                TextOf::ofString('café/мир'),
-                TextOf::ofString('/'),
+                TextOf::str('café/мир'),
+                TextOf::str('/'),
             ),
             new HasTextValue('café')
         );
@@ -77,8 +77,8 @@ final class PrefixOfTest extends TestCase
     {
         self::assertThat(
             new PrefixOf(
-                TextOf::ofString('helloпривет'),
-                TextOf::ofString('п'),
+                TextOf::str('helloпривет'),
+                TextOf::str('п'),
             ),
             new HasTextValue('hello')
         );
@@ -89,8 +89,8 @@ final class PrefixOfTest extends TestCase
     {
         self::assertThat(
             new PrefixOf(
-                TextOf::ofString(''),
-                TextOf::ofString('@'),
+                TextOf::str(''),
+                TextOf::str('@'),
             ),
             new HasTextValue('')
         );

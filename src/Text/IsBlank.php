@@ -14,7 +14,7 @@ use Primus\Scalar\ScalarOf;
  * non-breaking spaces, line/paragraph separators, etc.) as blank.
  *
  * Example:
- *     $blank = new IsBlank(TextOf::ofString(" \t\n"));
+ *     $blank = new IsBlank(TextOf::str(" \t\n"));
  *     echo $blank->value(); // true
  *
  * @extends ScalarEnvelope<bool>

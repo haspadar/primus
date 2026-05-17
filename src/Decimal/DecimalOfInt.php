@@ -43,7 +43,7 @@ final readonly class DecimalOfInt implements Decimal
     #[Override]
     public function asText(): Text
     {
-        return TextOf::ofString((string) $this->value);
+        return TextOf::str((string) $this->value);
     }
 
     #[Override]

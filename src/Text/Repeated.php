@@ -10,7 +10,7 @@ use Primus\Func\FuncOf;
  * Text repeated multiple times.
  *
  * Example:
- *     $text = new Repeated(TextOf::ofString('xo'), 3);
+ *     $text = new Repeated(TextOf::str('xo'), 3);
  *     echo $text->value(); // 'xoxoxo'
  */
 final readonly class Repeated extends TextEnvelope

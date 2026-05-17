@@ -18,7 +18,7 @@ final class UpperedTest extends TestCase
     public function returnsUppercaseWhenTextIsLowercase(): void
     {
         self::assertThat(
-            new Uppered(TextOf::ofString('hello')),
+            new Uppered(TextOf::str('hello')),
             new HasTextValue('HELLO')
         );
     }
@@ -27,7 +27,7 @@ final class UpperedTest extends TestCase
     public function returnsUppercaseWhenTextIsMixedCase(): void
     {
         self::assertThat(
-            new Uppered(TextOf::ofString('HeLLo WoRLD')),
+            new Uppered(TextOf::str('HeLLo WoRLD')),
             new HasTextValue('HELLO WORLD')
         );
     }
@@ -36,7 +36,7 @@ final class UpperedTest extends TestCase
     public function returnsUppercaseWhenTextContainsDiacritics(): void
     {
         self::assertThat(
-            new Uppered(TextOf::ofString('àéîöü')),
+            new Uppered(TextOf::str('àéîöü')),
             new HasTextValue('ÀÉÎÖÜ')
         );
     }
@@ -45,7 +45,7 @@ final class UpperedTest extends TestCase
     public function returnsEmptyStringWhenInputIsEmpty(): void
     {
         self::assertThat(
-            new Uppered(TextOf::ofString('')),
+            new Uppered(TextOf::str('')),
             new HasTextValue('')
         );
     }
@@ -54,7 +54,7 @@ final class UpperedTest extends TestCase
     public function returnsSameTextWhenAlreadyUppercase(): void
     {
         self::assertThat(
-            new Uppered(TextOf::ofString('ALREADY')),
+            new Uppered(TextOf::str('ALREADY')),
             new HasTextValue('ALREADY')
         );
     }
@@ -63,7 +63,7 @@ final class UpperedTest extends TestCase
     public function leavesSpecialCharactersUnchanged(): void
     {
         self::assertThat(
-            new Uppered(TextOf::ofString('test@123!')),
+            new Uppered(TextOf::str('test@123!')),
             new HasTextValue('TEST@123!')
         );
     }
@@ -72,7 +72,7 @@ final class UpperedTest extends TestCase
     public function returnsSameWhenTextContainsOnlyWhitespace(): void
     {
         self::assertThat(
-            new Uppered(TextOf::ofString('   ')),
+            new Uppered(TextOf::str('   ')),
             new HasTextValue('   ')
         );
     }

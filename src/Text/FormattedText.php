@@ -23,7 +23,7 @@ use Primus\Func\FuncOf;
  *
  * Example:
  *     $text = new FormattedText(
- *         TextOf::ofString('Hello, %s! You have %d messages.'),
+ *         TextOf::str('Hello, %s! You have %d messages.'),
  *         'world',
  *         5,
  *     );

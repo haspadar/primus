@@ -15,7 +15,7 @@ final class StartsWithTest extends TestCase
     public function returnsTrueWhenHaystackStartsWithNeedle(): void
     {
         self::assertTrue(
-            (new StartsWith(TextOf::ofString('hello world'), TextOf::ofString('hello')))->value(),
+            (new StartsWith(TextOf::str('hello world'), TextOf::str('hello')))->value(),
         );
     }
 
@@ -23,7 +23,7 @@ final class StartsWithTest extends TestCase
     public function returnsFalseWhenHaystackDoesNotStartWithNeedle(): void
     {
         self::assertFalse(
-            (new StartsWith(TextOf::ofString('hello world'), TextOf::ofString('world')))->value(),
+            (new StartsWith(TextOf::str('hello world'), TextOf::str('world')))->value(),
         );
     }
 
@@ -31,7 +31,7 @@ final class StartsWithTest extends TestCase
     public function returnsTrueWhenNeedleIsEmpty(): void
     {
         self::assertTrue(
-            (new StartsWith(TextOf::ofString('hello'), TextOf::ofString('')))->value(),
+            (new StartsWith(TextOf::str('hello'), TextOf::str('')))->value(),
         );
     }
 
@@ -39,7 +39,7 @@ final class StartsWithTest extends TestCase
     public function returnsFalseWhenNeedleIsLongerThanHaystack(): void
     {
         self::assertFalse(
-            (new StartsWith(TextOf::ofString('hi'), TextOf::ofString('hello')))->value(),
+            (new StartsWith(TextOf::str('hi'), TextOf::str('hello')))->value(),
         );
     }
 
@@ -47,7 +47,7 @@ final class StartsWithTest extends TestCase
     public function returnsTrueOnExactMatch(): void
     {
         self::assertTrue(
-            (new StartsWith(TextOf::ofString('abc'), TextOf::ofString('abc')))->value(),
+            (new StartsWith(TextOf::str('abc'), TextOf::str('abc')))->value(),
         );
     }
 
@@ -55,7 +55,7 @@ final class StartsWithTest extends TestCase
     public function respectsUtf8MultibyteCharacters(): void
     {
         self::assertTrue(
-            (new StartsWith(TextOf::ofString('привет мир'), TextOf::ofString('привет')))->value(),
+            (new StartsWith(TextOf::str('привет мир'), TextOf::str('привет')))->value(),
         );
     }
 }

@@ -15,7 +15,7 @@ use Primus\Scalar\ScalarOf;
  *
  * Example:
  *     $text = new Mapped(
- *         TextOf::ofString('hello'),
+ *         TextOf::str('hello'),
  *         new FuncOf(strtoupper(...)),
  *     );
  *     echo $text->value(); // 'HELLO'
@@ -31,7 +31,7 @@ final readonly class Mapped extends TextEnvelope
     public function __construct(Text $origin, Func $func)
     {
         parent::__construct(
-            TextOf::ofScalar(
+            TextOf::scalar(
                 new ScalarOf(static fn(): string => $func->apply($origin->value())),
             ),
         );

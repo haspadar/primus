@@ -30,7 +30,7 @@ final readonly class RandomText extends TextEnvelope
         string $alphabet = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789',
     ) {
         parent::__construct(
-            TextOf::ofScalar(
+            TextOf::scalar(
                 new Sticky(
                     new ScalarOf(
                         static function () use ($length, $alphabet): string {

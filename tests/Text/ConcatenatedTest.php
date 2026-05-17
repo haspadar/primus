@@ -17,8 +17,8 @@ final class ConcatenatedTest extends TestCase
     {
         self::assertThat(
             new Concatenated(
-                TextOf::ofString('hello, '),
-                TextOf::ofString('world'),
+                TextOf::str('hello, '),
+                TextOf::str('world'),
             ),
             new HasTextValue('hello, world')
         );
@@ -29,9 +29,9 @@ final class ConcatenatedTest extends TestCase
     {
         self::assertThat(
             new Concatenated(
-                TextOf::ofString('a'),
-                TextOf::ofString('b'),
-                TextOf::ofString('c'),
+                TextOf::str('a'),
+                TextOf::str('b'),
+                TextOf::str('c'),
             ),
             new HasTextValue('abc')
         );
@@ -51,9 +51,9 @@ final class ConcatenatedTest extends TestCase
     {
         self::assertThat(
             new Concatenated(
-                TextOf::ofString('café'),
-                TextOf::ofString(' & '),
-                TextOf::ofString('привет'),
+                TextOf::str('café'),
+                TextOf::str(' & '),
+                TextOf::str('привет'),
             ),
             new HasTextValue('café & привет')
         );
@@ -63,7 +63,7 @@ final class ConcatenatedTest extends TestCase
     public function joinsSingleTextUnchanged(): void
     {
         self::assertThat(
-            new Concatenated(TextOf::ofString('only')),
+            new Concatenated(TextOf::str('only')),
             new HasTextValue('only')
         );
     }

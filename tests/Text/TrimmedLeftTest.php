@@ -18,7 +18,7 @@ final class TrimmedLeftTest extends TestCase
     public function removesLeadingSpacesOnly(): void
     {
         self::assertThat(
-            new TrimmedLeft(TextOf::ofString('   hello world  ')),
+            new TrimmedLeft(TextOf::str('   hello world  ')),
             new HasTextValue('hello world  '),
             'TrimmedLeft must remove leading spaces only'
         );
@@ -28,7 +28,7 @@ final class TrimmedLeftTest extends TestCase
     public function returnsSameTextWhenNoLeadingSpaces(): void
     {
         self::assertThat(
-            new TrimmedLeft(TextOf::ofString('hello')),
+            new TrimmedLeft(TextOf::str('hello')),
             new HasTextValue('hello'),
             'TrimmedLeft must return the same text when there are no leading spaces'
         );
@@ -38,7 +38,7 @@ final class TrimmedLeftTest extends TestCase
     public function removesUnicodeWhitespace(): void
     {
         self::assertThat(
-            new TrimmedLeft(TextOf::ofString("  Hello")), // em spaces (U+2003)
+            new TrimmedLeft(TextOf::str("  Hello")), // em spaces (U+2003)
             new HasTextValue('Hello'),
             'TrimmedLeft must remove unicode whitespace'
         );
@@ -48,7 +48,7 @@ final class TrimmedLeftTest extends TestCase
     public function returnsEmptyWhenOnlySpaces(): void
     {
         self::assertThat(
-            new TrimmedLeft(TextOf::ofString('   ')),
+            new TrimmedLeft(TextOf::str('   ')),
             new HasTextValue(''),
             'TrimmedLeft must return an empty string when the original text consists only of spaces'
         );
@@ -58,7 +58,7 @@ final class TrimmedLeftTest extends TestCase
     public function keepsTrailingSpacesIntact(): void
     {
         self::assertThat(
-            new TrimmedLeft(TextOf::ofString(' hi  ')),
+            new TrimmedLeft(TextOf::str(' hi  ')),
             new HasTextValue('hi  '),
             'TrimmedLeft must keep trailing spaces intact'
         );

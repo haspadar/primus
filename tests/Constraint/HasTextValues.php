@@ -12,7 +12,7 @@ use Primus\Text\Text;
  *
  * Example:
  * self::assertThat(
- *     [TextOf::ofString('a'), TextOf::ofString('b')],
+ *     [TextOf::str('a'), TextOf::str('b')],
  *     new HasTextValues(['a', 'b'])
  * );
  *

@@ -12,7 +12,7 @@ use Primus\Text\Text;
  * Asserts that a {@see Text} has the expected length.
  *
  * Example:
- * self::assertThat(TextOf::ofString('abc'), new HasSize(3));
+ * self::assertThat(TextOf::str('abc'), new HasSize(3));
  *
  * Output on failure:
  * Failed asserting that text has length 5

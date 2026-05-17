@@ -13,28 +13,28 @@ use Primus\Text\TextOf;
 final class TextOfTest extends TestCase
 {
     #[Test]
-    public function ofStringExposesPlainStringAsTextValue(): void
+    public function strExposesPlainStringAsTextValue(): void
     {
         self::assertThat(
-            TextOf::ofString('hello'),
+            TextOf::str('hello'),
             new HasTextValue('hello'),
         );
     }
 
     #[Test]
-    public function ofStringPreservesArbitraryStringContent(): void
+    public function strPreservesArbitraryStringContent(): void
     {
         self::assertThat(
-            TextOf::ofString('world'),
+            TextOf::str('world'),
             new HasTextValue('world'),
         );
     }
 
     #[Test]
-    public function ofScalarDefersStringResolutionUntilValueCall(): void
+    public function scalarDefersStringResolutionUntilValueCall(): void
     {
         $resolved = false;
-        $text = TextOf::ofScalar(
+        $text = TextOf::scalar(
             new ScalarOf(
                 static function () use (&$resolved): string {
                     $resolved = true;

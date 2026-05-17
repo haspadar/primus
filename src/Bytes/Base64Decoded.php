@@ -15,7 +15,7 @@ use Primus\Text\Text;
  * rejects access with InvalidArgumentException.
  *
  * Example:
- *     $bytes = new Base64Decoded(TextOf::ofString("aGVsbG8="));
+ *     $bytes = new Base64Decoded(TextOf::str("aGVsbG8="));
  *     $bytes->value(); // "hello"
  */
 final readonly class Base64Decoded implements Bytes

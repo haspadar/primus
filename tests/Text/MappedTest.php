@@ -19,7 +19,7 @@ final class MappedTest extends TestCase
     public function appliesFunctionToOriginValue(): void
     {
         self::assertThat(
-            new Mapped(TextOf::ofString('hello'), new FuncOf(strtoupper(...))),
+            new Mapped(TextOf::str('hello'), new FuncOf(strtoupper(...))),
             new HasTextValue('HELLO'),
         );
     }
@@ -29,7 +29,7 @@ final class MappedTest extends TestCase
     {
         $calls = 0;
         new Mapped( // NOSONAR — instantiation is the subject under test for the lazy contract
-            TextOf::ofString('x'),
+            TextOf::str('x'),
             new FuncOf(static function (string $s) use (&$calls): string {
                 $calls++;
 
@@ -45,7 +45,7 @@ final class MappedTest extends TestCase
     {
         $calls = 0;
         $mapped = new Mapped(
-            TextOf::ofString('x'),
+            TextOf::str('x'),
             new FuncOf(static function (string $s) use (&$calls): string {
                 $calls++;
 

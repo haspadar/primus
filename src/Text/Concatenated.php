@@ -12,8 +12,8 @@ namespace Primus\Text;
  *
  * Example:
  *     $text = new Concatenated(
- *         TextOf::ofString('hello, '),
- *         TextOf::ofString('world'),
+ *         TextOf::str('hello, '),
+ *         TextOf::str('world'),
  *     );
  *     echo $text->value(); // 'hello, world'
  */

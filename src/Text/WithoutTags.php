@@ -12,7 +12,7 @@ use Primus\Func\FuncOf;
  * Strips all HTML tags from the origin text using {@see strip_tags()}.
  *
  * Example:
- *     $text = new WithoutTags(TextOf::ofString('<b>John & "Jane"</b>'));
+ *     $text = new WithoutTags(TextOf::str('<b>John & "Jane"</b>'));
  *     echo $text->value(); // 'John & "Jane"'
  */
 final readonly class WithoutTags extends TextEnvelope

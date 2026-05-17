@@ -15,7 +15,7 @@ final class EndsWithTest extends TestCase
     public function returnsTrueWhenHaystackEndsWithNeedle(): void
     {
         self::assertTrue(
-            (new EndsWith(TextOf::ofString('hello world'), TextOf::ofString('world')))->value(),
+            (new EndsWith(TextOf::str('hello world'), TextOf::str('world')))->value(),
         );
     }
 
@@ -23,7 +23,7 @@ final class EndsWithTest extends TestCase
     public function returnsFalseWhenHaystackDoesNotEndWithNeedle(): void
     {
         self::assertFalse(
-            (new EndsWith(TextOf::ofString('hello world'), TextOf::ofString('hello')))->value(),
+            (new EndsWith(TextOf::str('hello world'), TextOf::str('hello')))->value(),
         );
     }
 
@@ -31,7 +31,7 @@ final class EndsWithTest extends TestCase
     public function returnsTrueWhenNeedleIsEmpty(): void
     {
         self::assertTrue(
-            (new EndsWith(TextOf::ofString('hello'), TextOf::ofString('')))->value(),
+            (new EndsWith(TextOf::str('hello'), TextOf::str('')))->value(),
         );
     }
 
@@ -39,7 +39,7 @@ final class EndsWithTest extends TestCase
     public function returnsFalseWhenNeedleIsLongerThanHaystack(): void
     {
         self::assertFalse(
-            (new EndsWith(TextOf::ofString('hi'), TextOf::ofString('hello')))->value(),
+            (new EndsWith(TextOf::str('hi'), TextOf::str('hello')))->value(),
         );
     }
 
@@ -47,7 +47,7 @@ final class EndsWithTest extends TestCase
     public function returnsTrueOnExactMatch(): void
     {
         self::assertTrue(
-            (new EndsWith(TextOf::ofString('abc'), TextOf::ofString('abc')))->value(),
+            (new EndsWith(TextOf::str('abc'), TextOf::str('abc')))->value(),
         );
     }
 
@@ -55,7 +55,7 @@ final class EndsWithTest extends TestCase
     public function respectsUtf8MultibyteCharacters(): void
     {
         self::assertTrue(
-            (new EndsWith(TextOf::ofString('привет мир'), TextOf::ofString('мир')))->value(),
+            (new EndsWith(TextOf::str('привет мир'), TextOf::str('мир')))->value(),
         );
     }
 }
