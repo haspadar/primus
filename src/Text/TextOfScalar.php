@@ -16,6 +16,10 @@ use Primus\Scalar\Scalar;
  *     equivalent publicly to support value equality through `equals()`;
  *     Primus does not model Text identity, so a public surface here would
  *     be redundant.
+ *
+ * Example:
+ *     $text = TextOf::scalar(new ScalarOf(static fn(): string => 'hello'));
+ *     echo $text->value(); // 'hello'
  */
 final readonly class TextOfScalar implements Text
 {
