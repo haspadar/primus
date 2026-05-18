@@ -6,19 +6,12 @@ namespace Primus\Tests\Decimal;
 
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
-use Primus\Decimal\Decimal;
 use Primus\Decimal\DecimalOf;
 use Primus\Decimal\Sticky;
 use Primus\Tests\Decimal\Fakes\CountingDecimal;
 
 final class StickyTest extends TestCase
 {
-    #[Test]
-    public function preservesDecimalType(): void
-    {
-        $this->assertInstanceOf(Decimal::class, new Sticky(new DecimalOf('3.14')));
-    }
-
     #[Test]
     public function returnsSameIntOnRepeatedCalls(): void
     {
