@@ -4,12 +4,17 @@ declare(strict_types=1);
 
 namespace Primus\Tests\Constraint;
 
-use Closure;
 use PHPUnit\Framework\Constraint\Constraint;
 use Throwable;
 
 /**
- * Asserts that invoking a {@see Closure} throws a specific exception type.
+ * Asserts that invoking a zero-argument callable throws a specific exception
+ * type.
+ *
+ * The historic name keeps `Closure` for compatibility, but the contract
+ * accepts any callable (closures, `[$object, 'method']`, invokable objects).
+ * Cached diagnostic fields are reset at the start of every evaluation so a
+ * reused constraint instance never leaks state from a previous match.
  *
  * Example:
  * self::assertThat(
@@ -39,13 +44,18 @@ final class ThrowsClosure extends Constraint
     }
 
     /**
-     * @param Closure $other
+     * @param callable(): mixed $other
      */
     protected function matches($other): bool
     {
+        $this->caughtException = null;
+        $this->exceptionThrown = false;
+        if (!is_callable($other)) {
+            return false;
+        }
+
         try {
             $other();
-            $this->exceptionThrown = false;
             return false;
         } catch (Throwable $e) {
             $this->caughtException = $e;
@@ -57,12 +67,15 @@ final class ThrowsClosure extends Constraint
 
     protected function failureDescription($other): string
     {
-        return "closure {$this->toString()}";
+        return "callable {$this->toString()}";
     }
 
     protected function additionalFailureDescription($other): string
     {
         if (!$this->exceptionThrown) {
+            if ($this->caughtException === null && !is_callable($other)) {
+                return "\nExpected: callable\nBut was:  " . get_debug_type($other);
+            }
             return "\nExpected exception: {$this->expected}\nBut no exception was thrown.";
         }
 
