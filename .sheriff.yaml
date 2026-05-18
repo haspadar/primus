@@ -6,7 +6,6 @@ append:
 
 override:
     php_cs_fixer.extend: "        'phpdoc_types' => ['groups' => ['meta', 'simple', 'alias'], 'exclude' => ['scalar', 'integer']],"
-    phpmetrics.coupling.max_afferent: 40
     phpstan.parameters:
         haspadar:
             afferentCoupling:
@@ -18,6 +17,8 @@ override:
                     - Primus\Text\Mapped
                     - Primus\Func\FuncOf
                     - Primus\Scalar\ScalarOf
+            tooManyFields:
+                maxFields: 7
     phpunit.testsuites.unit: ["../../tests"]
     phpunit.testsuites.integration: []
     ci.pr.max_lines_changed: 500

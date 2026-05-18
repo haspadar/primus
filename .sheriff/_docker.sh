@@ -7,7 +7,7 @@ if ! command -v docker >/dev/null 2>&1; then
 fi
 
 PROJECT_ROOT="$(pwd)"
-DEFAULT_IMAGE="ghcr.io/haspadar/sheriff-infra@sha256:3c15f3419f6e417c345fe22eded042146a11cdba4cd9032cdc4355f7036215d0"
+DEFAULT_IMAGE="ghcr.io/haspadar/sheriff-infra@sha256:e64d3f39bdd00e8734e2e4311a5be91b6365757dd7b5fe385451c71af4899147"
 IMAGE="${SHERIFF_INFRA_IMAGE:-$DEFAULT_IMAGE}"
 
 docker run --rm \
