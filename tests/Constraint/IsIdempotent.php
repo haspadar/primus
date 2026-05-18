@@ -4,12 +4,11 @@ declare(strict_types=1);
 
 namespace Primus\Tests\Constraint;
 
-use Closure;
 use PHPUnit\Framework\Constraint\Constraint;
 
 /**
- * Asserts that a zero-argument {@see Closure} returns the expected value on
- * each of two consecutive invocations.
+ * Asserts that a zero-argument callable returns the expected value on each
+ * of two consecutive invocations.
  *
  * Captures the «one-assert-per-test» Angry Tests rule for memoization-style
  * checks where the SUT must produce the same value across repeated calls
@@ -17,7 +16,7 @@ use PHPUnit\Framework\Constraint\Constraint;
  *
  * Comparison is strict identity (`===`). Beware that `NAN === NAN` is
  * `false` and that two distinct value-objects with equal contents compare
- * unequal — supply a Closure that returns the same instance/scalar both
+ * unequal — supply a callable that returns the same instance/scalar both
  * times.
  *
  * Example:
@@ -34,7 +33,7 @@ final class IsIdempotent extends Constraint
     /** @var mixed The value produced by the second invocation. */
     private mixed $second = null;
 
-    /** @var bool Whether the Closure was actually invoked (i.e. it had the right type). */
+    /** @var bool Whether the callable was actually invoked (i.e. it had the right type). */
     private bool $invoked = false;
 
     public function __construct(private readonly mixed $expected) {}
@@ -48,11 +47,14 @@ final class IsIdempotent extends Constraint
     }
 
     /**
-     * @param Closure(): mixed $other
+     * @param callable(): mixed $other
      */
     protected function matches($other): bool
     {
-        if (!$other instanceof Closure) {
+        $this->first = null;
+        $this->second = null;
+        $this->invoked = false;
+        if (!is_callable($other)) {
             return false;
         }
         $this->first = $other();
@@ -64,13 +66,13 @@ final class IsIdempotent extends Constraint
 
     protected function failureDescription($other): string
     {
-        return 'closure ' . $this->toString();
+        return 'callable ' . $this->toString();
     }
 
     protected function additionalFailureDescription($other): string
     {
         if (!$this->invoked) {
-            return "\nExpected: Closure\nBut was:  " . get_debug_type($other);
+            return "\nExpected: callable\nBut was:  " . get_debug_type($other);
         }
         $expectedRepr = $this->exporter()->export($this->expected);
         $firstRepr = $this->exporter()->export($this->first);
