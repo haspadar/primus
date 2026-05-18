@@ -8,6 +8,7 @@ use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Primus\Decimal\DecimalOf;
 use Primus\Decimal\Sticky;
+use Primus\Tests\Constraint\IsIdempotent;
 use Primus\Tests\Decimal\Fakes\CountingDecimal;
 
 final class StickyTest extends TestCase
@@ -17,8 +18,10 @@ final class StickyTest extends TestCase
     {
         $sticky = new Sticky(new DecimalOf('3.14'));
 
-        $this->assertSame(3, $sticky->asInt());
-        $this->assertSame(3, $sticky->asInt());
+        self::assertThat(
+            static fn(): int => $sticky->asInt(),
+            new IsIdempotent(3),
+        );
     }
 
     #[Test]
@@ -26,8 +29,10 @@ final class StickyTest extends TestCase
     {
         $sticky = new Sticky(new DecimalOf('3.14'));
 
-        $this->assertSame(3.14, $sticky->asFloat());
-        $this->assertSame(3.14, $sticky->asFloat());
+        self::assertThat(
+            static fn(): float => $sticky->asFloat(),
+            new IsIdempotent(3.14),
+        );
     }
 
     #[Test]
@@ -35,8 +40,10 @@ final class StickyTest extends TestCase
     {
         $sticky = new Sticky(new DecimalOf('3.14'));
 
-        $this->assertSame('3.14', $sticky->asString());
-        $this->assertSame('3.14', $sticky->asString());
+        self::assertThat(
+            static fn(): string => $sticky->asString(),
+            new IsIdempotent('3.14'),
+        );
     }
 
     #[Test]
@@ -49,6 +56,6 @@ final class StickyTest extends TestCase
         $sticky->asString();
         $sticky->asString();
 
-        $this->assertSame(1, $origin->stringCalls);
+        self::assertSame(1, $origin->stringCalls);
     }
 }

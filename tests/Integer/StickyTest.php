@@ -8,6 +8,7 @@ use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Primus\Integer\IntegerOf;
 use Primus\Integer\Sticky;
+use Primus\Tests\Constraint\IsIdempotent;
 
 final class StickyTest extends TestCase
 {
@@ -16,8 +17,10 @@ final class StickyTest extends TestCase
     {
         $sticky = new Sticky(new IntegerOf(42));
 
-        $this->assertSame(42, $sticky->asInt());
-        $this->assertSame(42, $sticky->asInt());
+        self::assertThat(
+            static fn(): int => $sticky->asInt(),
+            new IsIdempotent(42),
+        );
     }
 
     #[Test]
@@ -25,8 +28,9 @@ final class StickyTest extends TestCase
     {
         $sticky = new Sticky(new IntegerOf(42));
 
-        $this->assertSame(42.0, $sticky->asFloat());
-        $this->assertSame(42.0, $sticky->asFloat());
+        self::assertThat(
+            static fn(): float => $sticky->asFloat(),
+            new IsIdempotent(42.0),
+        );
     }
-
 }
