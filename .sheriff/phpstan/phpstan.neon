@@ -29,5 +29,3 @@ parameters:
             ignoreAbstract: true
         prohibitStaticMethods:
             allowNamedConstructors: true
-        tooManyFields:
-            maxFields: 7

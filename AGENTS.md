@@ -67,13 +67,13 @@ cycle. Compose through the documented public surface instead.
 
 - **`Primus\Number`** — root numeric contract.
   `Number` interface with three projections (`asInt()`, `asFloat()`,
-  `asText()`), plus `Sticky` (memoize the projections; reused by family
-  decorators through composition).
+  `asText()`). Memoization is provided per-family, not at this level —
+  see `Integer\Sticky` and `Decimal\Sticky`.
 
 - **`Primus\Integer`** — whole-number primitives backed by native PHP
   int arithmetic. `Integer` interface (marker extending `Number`),
   `IntegerOf`, `SumOf`, `MultOf`, `MaxOf`, `MinOf`, `DivOf` (truncating),
-  `ModOf`, `Abs`, `Sticky` (delegates caching to `Number\Sticky`).
+  `ModOf`, `Abs`, `Sticky` (caches `asInt`, derives `asFloat`/`asText`).
 
 - **`Primus\Decimal`** — arbitrary-precision decimal primitives backed
   by bcmath. `Decimal` interface (marker extending `Number`) with a
@@ -82,8 +82,8 @@ cycle. Compose through the documented public surface instead.
   `DecimalOfScalar` (lazy from a `Scalar<numeric-string>`). Binary
   aggregates `SumOf`, `MultOf`, `MaxOf`, `MinOf`, `DivOf`, `ModOf`, and
   unary `Abs` each take an explicit `int $scale`. `DecimalEnvelope` base class
-  removes projection boilerplate from aggregates. `Sticky` composes
-  `Number\Sticky` and adds a numeric-string slot.
+  removes projection boilerplate from aggregates. `Sticky` caches the
+  numeric-string projection and derives the other accessors from it.
 
 - **`Primus\Time`** — `DateTimeImmutable` wrappers.
   `Time` interface, `TimeOf` (wrap a string or `DateTimeImmutable`),
@@ -118,8 +118,8 @@ project's lint gates, or will surprise the caller at runtime.
    feeds a non-deterministic source (e.g. `new BytesOf(random_bytes(16))`
    that is read by the parent decorator on every projection) will see
    different results per call. To freeze a result, wrap in `Sticky`
-   (per-namespace memoizer: `Scalar\Sticky`, `Number\Sticky`,
-   `Func\StickyFunc`).
+   (per-namespace memoizer: `Scalar\Sticky`, `Integer\Sticky`,
+   `Decimal\Sticky`, `Func\StickyFunc`).
 
 3. **No `null` ever crosses an API boundary.** Constructors take concrete
    typed values; computation methods return concrete typed values.

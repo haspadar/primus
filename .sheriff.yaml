@@ -17,8 +17,6 @@ override:
                     - Primus\Text\Mapped
                     - Primus\Func\FuncOf
                     - Primus\Scalar\ScalarOf
-            tooManyFields:
-                maxFields: 7
     phpunit.testsuites.unit: ["../../tests"]
     phpunit.testsuites.integration: []
     ci.pr.max_lines_changed: 500

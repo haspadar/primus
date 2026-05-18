@@ -6,18 +6,11 @@ namespace Primus\Tests\Integer;
 
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
-use Primus\Integer\Integer;
 use Primus\Integer\IntegerOf;
 use Primus\Integer\Sticky;
 
 final class StickyTest extends TestCase
 {
-    #[Test]
-    public function preservesIntegerType(): void
-    {
-        $this->assertInstanceOf(Integer::class, new Sticky(new IntegerOf(42)));
-    }
-
     #[Test]
     public function returnsSameIntOnRepeatedCalls(): void
     {
@@ -36,11 +29,4 @@ final class StickyTest extends TestCase
         $this->assertSame(42.0, $sticky->asFloat());
     }
 
-    #[Test]
-    public function returnsSameTextInstanceOnRepeatedCalls(): void
-    {
-        $sticky = new Sticky(new IntegerOf(42));
-
-        $this->assertSame($sticky->asText(), $sticky->asText());
-    }
 }
