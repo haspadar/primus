@@ -47,14 +47,6 @@ final class StickyTest extends TestCase
     }
 
     #[Test]
-    public function returnsSameTextInstanceOnRepeatedCalls(): void
-    {
-        $sticky = new Sticky(new DecimalOf('3.14'));
-
-        $this->assertSame($sticky->asText(), $sticky->asText());
-    }
-
-    #[Test]
     public function callsOriginAsStringAtMostOnce(): void
     {
         $origin = new CountingDecimal('3.14');

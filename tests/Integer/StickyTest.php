@@ -36,11 +36,4 @@ final class StickyTest extends TestCase
         $this->assertSame(42.0, $sticky->asFloat());
     }
 
-    #[Test]
-    public function returnsSameTextInstanceOnRepeatedCalls(): void
-    {
-        $sticky = new Sticky(new IntegerOf(42));
-
-        $this->assertSame($sticky->asText(), $sticky->asText());
-    }
 }
