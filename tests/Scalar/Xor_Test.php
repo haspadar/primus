@@ -4,16 +4,12 @@ declare(strict_types=1);
 
 namespace Primus\Tests\Scalar;
 
-use InvalidArgumentException;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Primus\Scalar\ScalarOf;
 use Primus\Scalar\Xor_;
 use Primus\Tests\Constraint\HasScalarBoolValue;
-use Primus\Tests\Constraint\ThrowsValue;
 
-/**
- */
 final class Xor_Test extends TestCase
 {
     #[Test]
@@ -70,12 +66,11 @@ final class Xor_Test extends TestCase
     }
 
     #[Test]
-    public function throwsWhenNoConditionsProvided(): void
+    public function returnsFalseForEmptyParity(): void
     {
         self::assertThat(
-            new ScalarOf(fn () => (new Xor_())->value()),
-            new ThrowsValue(InvalidArgumentException::class),
-            'Xor must throw an exception when no conditions are provided'
+            new Xor_(),
+            new HasScalarBoolValue(false),
         );
     }
 }
