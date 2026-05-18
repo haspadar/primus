@@ -21,6 +21,8 @@ defaults:
 
   ci.sheriff_bin: "vendor/bin/sheriff"
   ci.pr.max_lines_changed: 250
+  ci.infra_checks: ["actionlint", "hadolint", "markdownlint", "yamllint", "typos", "shellcheck", "jsonlint"]
+  ci.php_checks: ["phpcs", "phpstan", "psalm", "phpmd", "phpmetrics"]
 
   coverage.patch.target: 80
   coverage.patch.threshold: 5
@@ -33,7 +35,7 @@ defaults:
   coderabbit.cloud: true
   coderabbit.cli: false
 
-  docker.image: "ghcr.io/haspadar/sheriff-infra@sha256:3c15f3419f6e417c345fe22eded042146a11cdba4cd9032cdc4355f7036215d0"
+  docker.image: "ghcr.io/haspadar/sheriff-infra@sha256:e64d3f39bdd00e8734e2e4311a5be91b6365757dd7b5fe385451c71af4899147"
 
   actionlint.cli: true
 
@@ -62,7 +64,7 @@ defaults:
   phpcs.cli: true
   phpcs.extend: ""
 
-  phpmd.cli: true
+  phpmd.cli: false
   phpmd.class_complexity: 50
   phpmd.class_length: 200
   phpmd.cyclomatic: 10
@@ -72,7 +74,7 @@ defaults:
   phpmd.method_length: 50
   phpmd.npath: 200
 
-  phpmetrics.cli: true
+  phpmetrics.cli: false
   phpmetrics.extensions: ["php"]
   phpmetrics.complexity.max_cyclomatic_per_method: 10
   phpmetrics.complexity.max_weighted_methods_per_class: 20
