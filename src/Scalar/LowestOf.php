@@ -46,15 +46,7 @@ final readonly class LowestOf extends ScalarEnvelope
                         throw new UnderflowException('Cannot pick the smallest element from an empty list');
                     }
 
-                    $best = $items[0];
-
-                    for ($index = 1; $index < count($items); $index++) {
-                        if ($items[$index] < $best) {
-                            $best = $items[$index];
-                        }
-                    }
-
-                    return $best;
+                    return min($items);
                 },
             ),
         );
