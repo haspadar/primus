@@ -4,19 +4,21 @@ declare(strict_types=1);
 
 namespace Primus\Scalar;
 
-use InvalidArgumentException;
-
 /**
  * Logical XOR over multiple {@see Scalar<bool>}.
  *
- * Returns true only if an odd number of conditions are true.
+ * Returns `true` when an odd number of conditions evaluate to `true`. Unlike
+ * AND and OR, XOR cannot short-circuit — every scalar must be inspected to
+ * compute the parity. An empty argument list returns `false` (parity zero).
  *
  * Example:
- *     $scalar = new Xor_(
- *         new ScalarOf(fn() => true),
- *         new ScalarOf(fn() => false)
+ *     $xor = new Xor_(
+ *         new Constant(true),
+ *         new Constant(false),
  *     );
- *     echo $scalar->value(); // true
+ *     echo $xor->value() ? 'odd' : 'even'; // 'odd'
+ *
+ *     (new Xor_())->value(); // false — empty parity
  *
  * @extends ScalarEnvelope<bool>
  */
@@ -31,13 +33,14 @@ final readonly class Xor_ extends ScalarEnvelope
     {
         parent::__construct(
             new ScalarOf(
-                static fn(): bool => match (count($conditions)) {
-                    0 => throw new InvalidArgumentException('Xor requires at least one condition'),
-                    default => array_reduce(
-                        $conditions,
-                        static fn(bool $carry, Scalar $cond): bool => $carry xor $cond->value(),
-                        false,
-                    ),
+                static function () use ($conditions): bool {
+                    $parity = false;
+
+                    foreach ($conditions as $condition) {
+                        $parity = ($parity xor $condition->value());
+                    }
+
+                    return $parity;
                 },
             ),
         );
