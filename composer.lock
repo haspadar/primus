@@ -4,8 +4,9 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f83b203535fcbff761c7416b98cbc0a2",
-    "packages": [
+    "content-hash": "ee18290d52aa511a7091d4c8578226ee",
+    "packages": [],
+    "packages-dev": [
         {
             "name": "amphp/amp",
             "version": "v3.1.1",
@@ -1814,16 +1815,16 @@
         },
         {
             "name": "haspadar/phpstan-rules",
-            "version": "v0.51.1",
+            "version": "v0.52.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/haspadar/phpstan-rules.git",
-                "reference": "5ce29874c716d34c2b2d275d73741e580bba82b9"
+                "reference": "adb92b54bcde1a07e10a5daee57119c9e1d199a2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/haspadar/phpstan-rules/zipball/5ce29874c716d34c2b2d275d73741e580bba82b9",
-                "reference": "5ce29874c716d34c2b2d275d73741e580bba82b9",
+                "url": "https://api.github.com/repos/haspadar/phpstan-rules/zipball/adb92b54bcde1a07e10a5daee57119c9e1d199a2",
+                "reference": "adb92b54bcde1a07e10a5daee57119c9e1d199a2",
                 "shasum": ""
             },
             "require": {
@@ -1861,28 +1862,28 @@
             "description": "PHPStan design rules for immutability and structure",
             "support": {
                 "issues": "https://github.com/haspadar/phpstan-rules/issues",
-                "source": "https://github.com/haspadar/phpstan-rules/tree/v0.51.1"
+                "source": "https://github.com/haspadar/phpstan-rules/tree/v0.52.0"
             },
-            "time": "2026-05-18T12:34:05+00:00"
+            "time": "2026-05-19T06:52:08+00:00"
         },
         {
             "name": "haspadar/sheriff",
-            "version": "v0.31.1",
+            "version": "v0.32.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/haspadar/sheriff.git",
-                "reference": "0f57ec47accfca42353b92cf2dd1cc6c8dd4320a"
+                "reference": "9838dd14f03a273fdae783181586fe7ed55c9ee2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/haspadar/sheriff/zipball/0f57ec47accfca42353b92cf2dd1cc6c8dd4320a",
-                "reference": "0f57ec47accfca42353b92cf2dd1cc6c8dd4320a",
+                "url": "https://api.github.com/repos/haspadar/sheriff/zipball/9838dd14f03a273fdae783181586fe7ed55c9ee2",
+                "reference": "9838dd14f03a273fdae783181586fe7ed55c9ee2",
                 "shasum": ""
             },
             "require": {
                 "friendsofphp/php-cs-fixer": "^3.95",
                 "haspadar/phpstan-rules": ">=0.36 <1.0.0",
-                "infection/infection": "^0.32.0",
+                "infection/infection": "^0.33.0",
                 "kubawerlos/php-cs-fixer-custom-fixers": "^3.36",
                 "php": "~8.3.16 || ~8.4.3 || ~8.5.0",
                 "phpmd/phpmd": "^2.15",
@@ -1929,9 +1930,9 @@
             "description": "Picky standards for PHP projects",
             "support": {
                 "issues": "https://github.com/haspadar/sheriff/issues",
-                "source": "https://github.com/haspadar/sheriff/tree/v0.31.1"
+                "source": "https://github.com/haspadar/sheriff/tree/v0.32.0"
             },
-            "time": "2026-05-18T13:41:33+00:00"
+            "time": "2026-05-19T09:35:54+00:00"
         },
         {
             "name": "infection/abstract-testframework-adapter",
@@ -2056,21 +2057,21 @@
         },
         {
             "name": "infection/include-interceptor",
-            "version": "0.2.5",
+            "version": "1.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/infection/include-interceptor.git",
-                "reference": "0cc76d95a79d9832d74e74492b0a30139904bdf7"
+                "reference": "c083331bc0cd1cd319ac1b7a08e3ad4a34aa7992"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/infection/include-interceptor/zipball/0cc76d95a79d9832d74e74492b0a30139904bdf7",
-                "reference": "0cc76d95a79d9832d74e74492b0a30139904bdf7",
+                "url": "https://api.github.com/repos/infection/include-interceptor/zipball/c083331bc0cd1cd319ac1b7a08e3ad4a34aa7992",
+                "reference": "c083331bc0cd1cd319ac1b7a08e3ad4a34aa7992",
                 "shasum": ""
             },
             "require-dev": {
                 "friendsofphp/php-cs-fixer": "^2.16",
-                "infection/infection": "^0.15.0",
+                "infection/infection": "^0.19.0",
                 "phan/phan": "^2.4 || ^3",
                 "php-coveralls/php-coveralls": "^2.2",
                 "phpstan/phpstan": "^0.12.8",
@@ -2096,7 +2097,7 @@
             "description": "Stream Wrapper: Include Interceptor. Allows to replace included (autoloaded) file with another one.",
             "support": {
                 "issues": "https://github.com/infection/include-interceptor/issues",
-                "source": "https://github.com/infection/include-interceptor/tree/0.2.5"
+                "source": "https://github.com/infection/include-interceptor/tree/1.0.0"
             },
             "funding": [
                 {
@@ -2108,20 +2109,20 @@
                     "type": "open_collective"
                 }
             ],
-            "time": "2021-08-09T10:03:57+00:00"
+            "time": "2024-05-03T21:48:06+00:00"
         },
         {
             "name": "infection/infection",
-            "version": "0.32.7",
+            "version": "0.33.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/infection/infection.git",
-                "reference": "066ee69f1e8e6dec8965a79d5ba020656c590b5e"
+                "reference": "afa08ff0feb21fac9f8351c9c6a6856f0ef58fdb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/infection/infection/zipball/066ee69f1e8e6dec8965a79d5ba020656c590b5e",
-                "reference": "066ee69f1e8e6dec8965a79d5ba020656c590b5e",
+                "url": "https://api.github.com/repos/infection/infection/zipball/afa08ff0feb21fac9f8351c9c6a6856f0ef58fdb",
+                "reference": "afa08ff0feb21fac9f8351c9c6a6856f0ef58fdb",
                 "shasum": ""
             },
             "require": {
@@ -2135,7 +2136,7 @@
                 "fidry/cpu-core-counter": "^1.0",
                 "infection/abstract-testframework-adapter": "^0.5.0",
                 "infection/extension-installer": "^0.1.0",
-                "infection/include-interceptor": "^0.2.5",
+                "infection/include-interceptor": "^0.2.5 || ^1.0.0",
                 "infection/mutator": "^0.4",
                 "justinrainbow/json-schema": "^6.0",
                 "nikic/php-parser": "^5.6.2",
@@ -2234,7 +2235,7 @@
             ],
             "support": {
                 "issues": "https://github.com/infection/infection/issues",
-                "source": "https://github.com/infection/infection/tree/0.32.7"
+                "source": "https://github.com/infection/infection/tree/0.33.1"
             },
             "funding": [
                 {
@@ -2246,7 +2247,7 @@
                     "type": "open_collective"
                 }
             ],
-            "time": "2026-04-23T21:11:41+00:00"
+            "time": "2026-05-17T17:44:47+00:00"
         },
         {
             "name": "infection/mutator",
@@ -8631,7 +8632,6 @@
             "time": "2026-04-11T10:33:05+00:00"
         }
     ],
-    "packages-dev": [],
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {},
