@@ -46,7 +46,7 @@ cycle. Compose through the documented public surface instead.
   `TextOf`, `Trimmed`, `TrimmedLeft`, `TrimmedRight`, `Lowered`, `Uppered`,
   `Sub`, `HtmlEscaped`, `WithoutTags`, `Mapped` (string→string transform),
   `Joined`, `Repeated`, `Replaced`, `Split`, `Capitalized`, `Normalized`,
-  `Abbreviated`, `LeftPadded`, `RightPadded`, `IsEmpty`, `LengthOfText`,
+  `Abbreviated`, `LeftPadded`, `RightPadded`, `IsEmpty`,
   `RandomText`, `TextEnvelope`.
 
 - **`Primus\List`** — ordered list operations over `List_<T>` (the
@@ -63,7 +63,10 @@ cycle. Compose through the documented public surface instead.
 - **`Primus\Scalar`** — generic `Scalar<T>` plus boolean and control
   primitives.
   `ScalarOf`, `Constant`, `Sticky` (memoize), `Ternary`, `And_`, `Or_`,
-  `Not`, `Xor_`, `RootCause` (unwrap a Throwable chain), `ScalarEnvelope`.
+  `Not`, `Xor_`, `RootCause` (unwrap a Throwable chain), `FirstOf`,
+  `ItemAt`, `HighestOf`, `LowestOf`, `Reduced`, `Folded`, `BoolOf`,
+  `LengthOf` (length of Text via `::text`, or any array/Countable via
+  `::ofCountable`), `ScalarEnvelope`.
 
 - **`Primus\Number`** — root numeric contract.
   `Number` interface with three projections (`asInt()`, `asFloat()`,
