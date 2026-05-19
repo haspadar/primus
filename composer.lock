@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ee18290d52aa511a7091d4c8578226ee",
+    "content-hash": "f8dedbbd71d0e31e1d3e363c7a96311b",
     "packages": [],
     "packages-dev": [
         {
@@ -1815,16 +1815,16 @@
         },
         {
             "name": "haspadar/phpstan-rules",
-            "version": "v0.52.0",
+            "version": "v0.52.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/haspadar/phpstan-rules.git",
-                "reference": "adb92b54bcde1a07e10a5daee57119c9e1d199a2"
+                "reference": "13391b5fabc81559010935c02ee01f8ede91a288"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/haspadar/phpstan-rules/zipball/adb92b54bcde1a07e10a5daee57119c9e1d199a2",
-                "reference": "adb92b54bcde1a07e10a5daee57119c9e1d199a2",
+                "url": "https://api.github.com/repos/haspadar/phpstan-rules/zipball/13391b5fabc81559010935c02ee01f8ede91a288",
+                "reference": "13391b5fabc81559010935c02ee01f8ede91a288",
                 "shasum": ""
             },
             "require": {
@@ -1862,22 +1862,22 @@
             "description": "PHPStan design rules for immutability and structure",
             "support": {
                 "issues": "https://github.com/haspadar/phpstan-rules/issues",
-                "source": "https://github.com/haspadar/phpstan-rules/tree/v0.52.0"
+                "source": "https://github.com/haspadar/phpstan-rules/tree/v0.52.1"
             },
-            "time": "2026-05-19T06:52:08+00:00"
+            "time": "2026-05-19T14:06:31+00:00"
         },
         {
             "name": "haspadar/sheriff",
-            "version": "v0.32.0",
+            "version": "v0.32.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/haspadar/sheriff.git",
-                "reference": "9838dd14f03a273fdae783181586fe7ed55c9ee2"
+                "reference": "bb735a07a049a2d171b805643f8f6cb9e551b0a6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/haspadar/sheriff/zipball/9838dd14f03a273fdae783181586fe7ed55c9ee2",
-                "reference": "9838dd14f03a273fdae783181586fe7ed55c9ee2",
+                "url": "https://api.github.com/repos/haspadar/sheriff/zipball/bb735a07a049a2d171b805643f8f6cb9e551b0a6",
+                "reference": "bb735a07a049a2d171b805643f8f6cb9e551b0a6",
                 "shasum": ""
             },
             "require": {
@@ -1930,9 +1930,9 @@
             "description": "Picky standards for PHP projects",
             "support": {
                 "issues": "https://github.com/haspadar/sheriff/issues",
-                "source": "https://github.com/haspadar/sheriff/tree/v0.32.0"
+                "source": "https://github.com/haspadar/sheriff/tree/v0.32.1"
             },
-            "time": "2026-05-19T09:35:54+00:00"
+            "time": "2026-05-19T15:00:58+00:00"
         },
         {
             "name": "infection/abstract-testframework-adapter",

@@ -111,7 +111,6 @@ defaults:
         excludedClasses: []
       prohibitStaticMethods:
         allowNamedConstructors: true
-        onlyPublic: true
 
   phpunit.cli: true
   phpunit.php_options: "-d memory_limit=1G"
