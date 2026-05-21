@@ -66,7 +66,7 @@ cycle. Compose through the documented public surface instead.
   `Not`, `Xor_`, `RootCause` (unwrap a Throwable chain), `FirstOf`,
   `ItemAt`, `HighestOf`, `LowestOf`, `Reduced`, `Folded`, `BoolOf`,
   `LengthOf` (length of Text via `::text`, or any array/Countable via
-  `::ofCountable`), `ScalarEnvelope`.
+  `::countable`), `ScalarEnvelope`.
 
 - **`Primus\Number`** — root numeric contract.
   `Number` interface with three projections (`asInt()`, `asFloat()`,
@@ -166,6 +166,15 @@ Patterns that look reasonable but are wrong for Primus:
   PHP analogue of overloaded constructors in Cactoos Java. Anything else
   static (helper methods, factories returning unrelated types, `Trimmed::of`)
   is still forbidden.
+
+- **Named constructor naming follows the class suffix.** Exactly one
+  indicator of "of"-semantics belongs in any factory call. If the class
+  name ends with `Of`, the factory carries no `of` prefix:
+  `TextOf::scalar(...)`, `LengthOf::text(...)`, `MapOf::pair(...)`. If
+  the class name does not end with `Of`, the factory takes the prefix:
+  `Joined::ofStrings(...)`, `Ternary::ofBool(...)`,
+  `ItemAt::ofList(...)`. Forms like `LengthOf::ofCountable` or
+  `Joined::strings` mix or omit the indicator and are forbidden.
 
 ---
 

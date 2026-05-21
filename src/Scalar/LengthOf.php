@@ -13,15 +13,15 @@ use Primus\Text\Text;
  * Named constructors dispatch on the source family:
  *
  * - `LengthOf::text(Text)` — count of Unicode codepoints via `mb_strlen`.
- * - `LengthOf::ofCountable(array|Countable)` — count of elements via `count()`.
+ * - `LengthOf::countable(array|Countable)` — count of elements via `count()`.
  *
  * Each form re-evaluates the source on every {@see Scalar::value()}
  * call — wrap in {@see Sticky} to memoize.
  *
  * Example:
  *     LengthOf::text(TextOf::str('Café Noël'))->value(); // 9
- *     LengthOf::ofCountable(new ListOf(1, 2, 3))->value(); // 3
- *     LengthOf::ofCountable(['a' => 1, 'b' => 2])->value(); // 2
+ *     LengthOf::countable(new ListOf(1, 2, 3))->value(); // 3
+ *     LengthOf::countable(['a' => 1, 'b' => 2])->value(); // 2
  *
  * @extends ScalarEnvelope<int>
  */
@@ -56,7 +56,7 @@ final readonly class LengthOf extends ScalarEnvelope
      * @param array<array-key, mixed>|Countable $countable Source collection
      * @psalm-api
      */
-    public static function ofCountable(array|Countable $countable): self
+    public static function countable(array|Countable $countable): self
     {
         return new self(
             new ScalarOf(static fn(): int => count($countable)),
