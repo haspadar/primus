@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Primus\Tests\Text;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Primus\Tests\Constraint\HasTextValue;
@@ -89,4 +90,59 @@ final class JoinedTest extends TestCase
 
         self::assertSame(2, $calls);
     }
+
+    #[Test]
+    public function ofStringsJoinsNativeStringsWithSeparator(): void
+    {
+        self::assertThat(
+            Joined::ofStrings(', ', 'a', 'b', 'c'),
+            new HasTextValue('a, b, c')
+        );
+    }
+
+    #[Test]
+    public function ofStringsJoinsSingleNativeString(): void
+    {
+        self::assertThat(
+            Joined::ofStrings(', ', 'solo'),
+            new HasTextValue('solo')
+        );
+    }
+
+    #[Test]
+    public function ofStringsProducesEmptyResultWithoutParts(): void
+    {
+        self::assertThat(
+            Joined::ofStrings(', '),
+            new HasTextValue('')
+        );
+    }
+
+    #[Test]
+    #[DataProvider('joinedInputs')]
+    public function ofStringsAgreesWithTextFormOnEveryInput(string $separator, array $parts): void
+    {
+        $texts = array_map(static fn(string $p): Text => TextOf::str($p), $parts);
+
+        self::assertSame(
+            (new Joined($separator, $texts))->value(),
+            Joined::ofStrings($separator, ...$parts)->value(),
+        );
+    }
+
+    /**
+     * @return array<string, array{string, list<string>}>
+     */
+    public static function joinedInputs(): array
+    {
+        return [
+            'empty parts' => [', ', []],
+            'single part' => [', ', ['solo']],
+            'multiple parts' => [', ', ['a', 'b', 'c']],
+            'empty separator' => ['', ['a', 'b', 'c']],
+            'multibyte parts' => [' & ', ['café', 'привет']],
+            'multichar separator' => [' -- ', ['a', 'b']],
+        ];
+    }
+
 }
