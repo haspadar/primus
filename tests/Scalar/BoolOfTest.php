@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Primus\Tests\Scalar;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\Attributes\TestWith;
 use PHPUnit\Framework\TestCase;
@@ -21,11 +22,9 @@ final class BoolOfTest extends TestCase
     #[TestWith(['on'])]
     #[TestWith(['ON'])]
     #[TestWith(['1'])]
-    public function parsesCanonicalTrueLiterals(string $input): void
+    public function strParsesCanonicalTrueLiterals(string $input): void
     {
-        self::assertTrue(
-            (new BoolOf(TextOf::str($input)))->value(),
-        );
+        self::assertTrue(BoolOf::str($input)->value());
     }
 
     #[Test]
@@ -36,39 +35,62 @@ final class BoolOfTest extends TestCase
     #[TestWith(['off'])]
     #[TestWith(['OFF'])]
     #[TestWith(['0'])]
-    public function parsesCanonicalFalseLiterals(string $input): void
+    public function strParsesCanonicalFalseLiterals(string $input): void
     {
-        self::assertFalse(
-            (new BoolOf(TextOf::str($input)))->value(),
-        );
+        self::assertFalse(BoolOf::str($input)->value());
     }
 
     #[Test]
-    public function returnsFalseForArbitraryNonBooleanText(): void
+    public function strReturnsFalseForArbitraryNonBooleanInput(): void
     {
-        self::assertFalse(
-            (new BoolOf(TextOf::str('garbage')))->value(),
-        );
+        self::assertFalse(BoolOf::str('garbage')->value());
     }
 
     #[Test]
-    public function returnsFalseForEmptyText(): void
+    public function strReturnsFalseForEmptyInput(): void
     {
-        self::assertFalse(
-            (new BoolOf(TextOf::str('')))->value(),
-        );
+        self::assertFalse(BoolOf::str('')->value());
     }
 
     #[Test]
-    public function toleratesSurroundingWhitespace(): void
+    public function strToleratesSurroundingWhitespace(): void
     {
-        self::assertTrue(
-            (new BoolOf(TextOf::str(' true ')))->value(),
-        );
+        self::assertTrue(BoolOf::str(' true ')->value());
     }
 
     #[Test]
-    public function defersTextResolutionUntilValueCall(): void
+    #[DataProvider('parsingInputs')]
+    public function textFormAgreesWithStringFormOnEveryInput(string $input): void
+    {
+        self::assertSame(
+            BoolOf::str($input)->value(),
+            BoolOf::text(TextOf::str($input))->value(),
+        );
+    }
+
+    /**
+     * @return array<string, array{string}>
+     */
+    public static function parsingInputs(): array
+    {
+        return [
+            'true literal' => ['true'],
+            'false literal' => ['false'],
+            'yes' => ['yes'],
+            'no' => ['no'],
+            'on' => ['on'],
+            'off' => ['off'],
+            'one' => ['1'],
+            'zero' => ['0'],
+            'arbitrary garbage' => ['garbage'],
+            'empty string' => [''],
+            'whitespace padded true' => [' true '],
+            'whitespace padded garbage' => ['  garbage  '],
+        ];
+    }
+
+    #[Test]
+    public function textFormDefersResolutionUntilValueCall(): void
     {
         $resolved = false;
         $text = TextOf::scalar(
@@ -80,7 +102,7 @@ final class BoolOfTest extends TestCase
                 },
             ),
         );
-        $flag = new BoolOf($text);
+        $flag = BoolOf::text($text);
 
         self::assertFalse($resolved);
         self::assertTrue($flag->value());
