@@ -34,7 +34,7 @@ final class LengthOfTest extends TestCase
     {
         self::assertSame(
             3,
-            LengthOf::ofCountable(new ListOf(1, 2, 3))->value(),
+            LengthOf::countable(new ListOf(1, 2, 3))->value(),
         );
     }
 
@@ -43,20 +43,20 @@ final class LengthOfTest extends TestCase
     {
         self::assertSame(
             2,
-            LengthOf::ofCountable(new MapOf(['a' => 1, 'b' => 2]))->value(),
+            LengthOf::countable(new MapOf(['a' => 1, 'b' => 2]))->value(),
         );
     }
 
     #[Test]
     public function countsPlainArrayAsCountable(): void
     {
-        self::assertSame(4, LengthOf::ofCountable([10, 20, 30, 40])->value());
+        self::assertSame(4, LengthOf::countable([10, 20, 30, 40])->value());
     }
 
     #[Test]
     public function returnsZeroForEmptyArray(): void
     {
-        self::assertSame(0, LengthOf::ofCountable([])->value());
+        self::assertSame(0, LengthOf::countable([])->value());
     }
 
     #[Test]
