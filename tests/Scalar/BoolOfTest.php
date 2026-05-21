@@ -75,11 +75,17 @@ final class BoolOfTest extends TestCase
     {
         return [
             'true literal' => ['true'],
+            'TRUE literal' => ['TRUE'],
             'false literal' => ['false'],
+            'FALSE literal' => ['FALSE'],
             'yes' => ['yes'],
+            'YES' => ['YES'],
             'no' => ['no'],
+            'NO' => ['NO'],
             'on' => ['on'],
+            'ON' => ['ON'],
             'off' => ['off'],
+            'OFF' => ['OFF'],
             'one' => ['1'],
             'zero' => ['0'],
             'arbitrary garbage' => ['garbage'],
