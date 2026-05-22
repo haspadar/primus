@@ -10,8 +10,17 @@ namespace Primus\Text;
  * Converts only the first character to uppercase
  * and leaves the rest of the text unchanged.
  *
+ * Construction forms:
+ *
+ * - `new Capitalized(Text)` — wrap an existing {@see Text} value.
+ * - `Capitalized::ofString(string)` — shortcut that wraps a native string in
+ *   {@see TextOf::str()} before capitalising.
+ *
  * Example:
  *     $text = new Capitalized(TextOf::str('hello'));
+ *     echo $text->value(); // 'Hello'
+ *
+ *     $text = Capitalized::ofString('hello');
  *     echo $text->value(); // 'Hello'
  */
 final readonly class Capitalized extends TextEnvelope
@@ -29,5 +38,16 @@ final readonly class Capitalized extends TextEnvelope
                 new Sub($origin, 1),
             ]),
         );
+    }
+
+    /**
+     * Capitalises a native string.
+     *
+     * @param string $value The string to capitalise.
+     * @psalm-api
+     */
+    public static function ofString(string $value): self
+    {
+        return new self(TextOf::str($value));
     }
 }

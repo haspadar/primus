@@ -4,14 +4,13 @@ declare(strict_types=1);
 
 namespace Primus\Tests\Text;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Primus\Tests\Constraint\HasTextValue;
 use Primus\Text\Capitalized;
 use Primus\Text\TextOf;
 
-/**
- */
 final class CapitalizedTest extends TestCase
 {
     #[Test]
@@ -62,5 +61,39 @@ final class CapitalizedTest extends TestCase
             new HasTextValue('Hello WORLD'),
             'Capitalized must capitalize only the first character'
         );
+    }
+
+    #[Test]
+    public function ofStringCapitalisesNativeString(): void
+    {
+        self::assertThat(
+            Capitalized::ofString('hello'),
+            new HasTextValue('Hello')
+        );
+    }
+
+    #[Test]
+    #[DataProvider('inputs')]
+    public function ofStringAgreesWithTextFormOnEveryInput(string $input): void
+    {
+        self::assertSame(
+            (new Capitalized(TextOf::str($input)))->value(),
+            Capitalized::ofString($input)->value(),
+        );
+    }
+
+    /**
+     * @return array<string, array{string}>
+     */
+    public static function inputs(): array
+    {
+        return [
+            'empty string' => [''],
+            'lowercase word' => ['hello'],
+            'already capitalised' => ['World'],
+            'multibyte first char' => ['ёлка'],
+            'mixed case after first' => ['hello WORLD'],
+            'single char' => ['x'],
+        ];
     }
 }
