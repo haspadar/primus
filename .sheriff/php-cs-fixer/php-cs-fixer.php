@@ -106,6 +106,18 @@ return (new PhpCsFixer\Config())
         // PHP 8.4 compatibility: keep parentheses around `new` expressions
         // so tools based on pdepend (phpmd) can still parse the code
         'new_expression_parentheses' => ['use_parentheses' => true],
+
+        // PHPUnit
+        'php_unit_test_case_static_method_calls' => ['call_type' => 'self'],
+        'php_unit_dedicate_assert' => true,
+        'php_unit_mock_short_will_return' => true,
+        'php_unit_method_casing' => true,
+        'php_unit_data_provider_static' => true,
+        'php_unit_data_provider_name' => true,
+        'php_unit_data_provider_return_type' => true,
+        'php_unit_attributes' => true,
+        'php_unit_strict' => true,
+        'php_unit_set_up_tear_down_visibility' => true,
         'phpdoc_types' => ['groups' => ['meta', 'simple', 'alias'], 'exclude' => ['scalar', 'integer']],
     ]))
     ->setUnsupportedPhpVersionAllowed(true);
