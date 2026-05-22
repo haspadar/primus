@@ -69,4 +69,26 @@ final class HexTest extends TestCase
 
         (new HexDecoded(TextOf::str('zz')))->value();
     }
+
+    #[Test]
+    public function encodedOfFactoryAgreesWithPrimaryConstructor(): void
+    {
+        $bytes = new BytesOf('hi');
+
+        $this->assertSame(
+            (new HexEncoded($bytes))->value(),
+            HexEncoded::of($bytes)->value(),
+        );
+    }
+
+    #[Test]
+    public function decodedOfFactoryAgreesWithPrimaryConstructor(): void
+    {
+        $text = TextOf::str('6869');
+
+        $this->assertSame(
+            (new HexDecoded($text))->value(),
+            HexDecoded::of($text)->value(),
+        );
+    }
 }

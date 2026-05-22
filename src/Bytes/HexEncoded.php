@@ -12,8 +12,13 @@ use Primus\Text\Text;
  *
  * Each byte becomes two hex digits; the result has even length.
  *
+ * Construction forms:
+ *
+ * - `new HexEncoded(Bytes)` — wrap an existing {@see Bytes} value.
+ * - `HexEncoded::of(Bytes)` — named-constructor alias of the primary ctor.
+ *
  * Example:
- *     $text = new HexEncoded(new BytesOf("hi"));
+ *     $text = HexEncoded::of(new BytesOf("hi"));
  *     $text->value(); // "6869"
  */
 final readonly class HexEncoded implements Text
@@ -24,6 +29,17 @@ final readonly class HexEncoded implements Text
      * @param Bytes $origin The bytes to encode.
      */
     public function __construct(private Bytes $origin) {}
+
+    /**
+     * Encodes raw {@see Bytes} into a lowercase hexadecimal text.
+     *
+     * @param Bytes $bytes The bytes to encode.
+     * @psalm-api
+     */
+    public static function of(Bytes $bytes): self
+    {
+        return new self($bytes);
+    }
 
     #[Override]
     public function value(): string

@@ -43,4 +43,15 @@ final class Sha256Test extends TestCase
 
         $this->assertSame($sha->value(), $sha->value());
     }
+
+    #[Test]
+    public function ofFactoryAgreesWithPrimaryConstructor(): void
+    {
+        $bytes = new BytesOf('hello');
+
+        $this->assertSame(
+            (new Sha256($bytes))->value(),
+            Sha256::of($bytes)->value(),
+        );
+    }
 }
