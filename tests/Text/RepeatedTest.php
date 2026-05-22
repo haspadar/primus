@@ -4,14 +4,13 @@ declare(strict_types=1);
 
 namespace Primus\Tests\Text;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Primus\Tests\Constraint\HasTextValue;
 use Primus\Text\Repeated;
 use Primus\Text\TextOf;
 
-/**
- */
 final class RepeatedTest extends TestCase
 {
     #[Test]
@@ -66,5 +65,39 @@ final class RepeatedTest extends TestCase
             new Repeated(TextOf::str('🔥'), 3),
             new HasTextValue('🔥🔥🔥')
         );
+    }
+
+    #[Test]
+    public function ofStringRepeatsNativeString(): void
+    {
+        self::assertThat(
+            Repeated::ofString('xo', 3),
+            new HasTextValue('xoxoxo')
+        );
+    }
+
+    #[Test]
+    #[DataProvider('inputs')]
+    public function ofStringAgreesWithTextFormOnEveryInput(string $value, int $count): void
+    {
+        self::assertSame(
+            (new Repeated(TextOf::str($value), $count))->value(),
+            Repeated::ofString($value, $count)->value(),
+        );
+    }
+
+    /**
+     * @return array<string, array{string, int}>
+     */
+    public static function inputs(): array
+    {
+        return [
+            'multiple repeats' => ['xo', 3],
+            'zero count' => ['abc', 0],
+            'negative count' => ['abc', -2],
+            'empty input' => ['', 5],
+            'single char' => ['a', 5],
+            'unicode' => ['🔥', 3],
+        ];
     }
 }
