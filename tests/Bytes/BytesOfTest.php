@@ -27,4 +27,13 @@ final class BytesOfTest extends TestCase
     {
         $this->assertSame("\x00\x01\xff", (new BytesOf("\x00\x01\xff"))->value());
     }
+
+    #[Test]
+    public function strFactoryAgreesWithPrimaryConstructor(): void
+    {
+        $this->assertSame(
+            (new BytesOf("\x00\x01\xff"))->value(),
+            BytesOf::str("\x00\x01\xff")->value(),
+        );
+    }
 }

@@ -43,4 +43,15 @@ final class Md5Test extends TestCase
 
         $this->assertSame($md5->value(), $md5->value());
     }
+
+    #[Test]
+    public function ofFactoryAgreesWithPrimaryConstructor(): void
+    {
+        $bytes = new BytesOf('hello');
+
+        $this->assertSame(
+            (new Md5($bytes))->value(),
+            Md5::of($bytes)->value(),
+        );
+    }
 }

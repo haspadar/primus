@@ -55,4 +55,26 @@ final class Base64Test extends TestCase
 
         (new Base64Decoded(TextOf::str('not_valid!!!')))->value();
     }
+
+    #[Test]
+    public function encodedOfFactoryAgreesWithPrimaryConstructor(): void
+    {
+        $bytes = new BytesOf('hello');
+
+        $this->assertSame(
+            (new Base64Encoded($bytes))->value(),
+            Base64Encoded::of($bytes)->value(),
+        );
+    }
+
+    #[Test]
+    public function decodedOfFactoryAgreesWithPrimaryConstructor(): void
+    {
+        $text = TextOf::str('aGVsbG8=');
+
+        $this->assertSame(
+            (new Base64Decoded($text))->value(),
+            Base64Decoded::of($text)->value(),
+        );
+    }
 }

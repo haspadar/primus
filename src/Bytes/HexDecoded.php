@@ -15,8 +15,13 @@ use Primus\Text\Text;
  * length or any non-hex character rejects access with
  * InvalidArgumentException.
  *
+ * Construction forms:
+ *
+ * - `new HexDecoded(Text)` — wrap an existing {@see Text} value.
+ * - `HexDecoded::of(Text)` — named-constructor alias of the primary ctor.
+ *
  * Example:
- *     $bytes = new HexDecoded(TextOf::str("6869"));
+ *     $bytes = HexDecoded::of(TextOf::str("6869"));
  *     $bytes->value(); // "hi"
  */
 final readonly class HexDecoded implements Bytes
@@ -27,6 +32,17 @@ final readonly class HexDecoded implements Bytes
      * @param Text $origin The hexadecimal text to decode.
      */
     public function __construct(private Text $origin) {}
+
+    /**
+     * Decodes a hexadecimal {@see Text} into raw bytes.
+     *
+     * @param Text $text The hexadecimal text to decode.
+     * @psalm-api
+     */
+    public static function of(Text $text): self
+    {
+        return new self($text);
+    }
 
     #[Override]
     public function value(): string
