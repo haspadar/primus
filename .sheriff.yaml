@@ -17,6 +17,7 @@ override:
                     - Primus\Text\Mapped
                     - Primus\Func\FuncOf
                     - Primus\Scalar\ScalarOf
-    phpunit.testsuites.unit: ["../../tests"]
+    # Empty subdirectory: tests live directly under php.tests (tests/),
+    # not in tests/Unit. Sheriff appends the subdir, so "" resolves to tests/.
+    phpunit.testsuites.unit: [""]
     phpunit.testsuites.integration: []
-    ci.pr.max_lines_changed: 500

@@ -36,6 +36,6 @@
         }
     },
     "require-dev": {
-        "haspadar/sheriff": "^0.32.1"
+        "haspadar/sheriff": "^0.33"
     }
 }

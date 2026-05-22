@@ -11,6 +11,8 @@
 
 defaults:
   php.src: ["src"]
+  php.tests: ["tests"]
+  php.exclude: ["vendor", ".git"]
   infra.exclude: ["vendor", "tests", ".git"]
   php.versions: ["8.3"]
   envs: {}
@@ -20,7 +22,6 @@ defaults:
   check.slow: ["infection", "sonar"]
 
   ci.sheriff_bin: "vendor/bin/sheriff"
-  ci.pr.max_lines_changed: 250
   ci.infra_checks: ["actionlint", "hadolint", "markdownlint", "yamllint", "typos", "shellcheck", "jsonlint"]
   ci.php_checks: ["phpcs", "phpstan", "psalm", "phpmd", "phpmetrics"]
 
@@ -94,7 +95,7 @@ defaults:
 
   phpstan.cli: true
   phpstan.memory: "1G"
-  phpstan.neon_includes: ["../../vendor/phpstan/phpstan-strict-rules/rules.neon", "../../vendor/haspadar/phpstan-rules/rules.neon"]
+  phpstan.neon_includes: ["../../vendor/phpstan/phpstan-strict-rules/rules.neon", "../../vendor/phpstan/phpstan-phpunit/extension.neon", "../../vendor/phpstan/phpstan-phpunit/rules.neon", "../../vendor/haspadar/phpstan-rules/rules.neon"]
   phpstan.parameters:
     level: 9
     errorFormat: table
@@ -114,8 +115,9 @@ defaults:
 
   phpunit.cli: true
   phpunit.php_options: "-d memory_limit=1G"
-  phpunit.testsuites.unit: ["../../tests/Unit"]
-  phpunit.testsuites.integration: ["../../tests/Integration"]
+  # phpunit.testsuites.* values are subdirectories of php.tests, not full paths
+  phpunit.testsuites.unit: ["Unit"]
+  phpunit.testsuites.integration: ["Integration"]
 
   psalm.cli: true
   psalm.error_level: 1
@@ -140,7 +142,6 @@ defaults:
   sonar.cli: false
   sonar.organization: ""
   sonar.projectKey: ""
-  sonar.tests: ["tests"]
   sonar.exclusions: []
   sonar.php.coverage.reportPaths: [".sheriff/codecov/coverage.xml"]
 

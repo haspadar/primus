@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f8dedbbd71d0e31e1d3e363c7a96311b",
+    "content-hash": "3594c20d8bb3d25c88eb765c1e00c0ec",
     "packages": [],
     "packages-dev": [
         {
@@ -1868,16 +1868,16 @@
         },
         {
             "name": "haspadar/sheriff",
-            "version": "v0.32.1",
+            "version": "v0.33.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/haspadar/sheriff.git",
-                "reference": "bb735a07a049a2d171b805643f8f6cb9e551b0a6"
+                "reference": "a10f358aafe2b830882789ebc82588a2fb363a54"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/haspadar/sheriff/zipball/bb735a07a049a2d171b805643f8f6cb9e551b0a6",
-                "reference": "bb735a07a049a2d171b805643f8f6cb9e551b0a6",
+                "url": "https://api.github.com/repos/haspadar/sheriff/zipball/a10f358aafe2b830882789ebc82588a2fb363a54",
+                "reference": "a10f358aafe2b830882789ebc82588a2fb363a54",
                 "shasum": ""
             },
             "require": {
@@ -1889,8 +1889,10 @@
                 "phpmd/phpmd": "^2.15",
                 "phpmetrics/phpmetrics": "^2.9",
                 "phpstan/phpstan": "^2.1",
+                "phpstan/phpstan-phpunit": "^2.0",
                 "phpstan/phpstan-strict-rules": "^2.0",
                 "phpunit/phpunit": "^12.0",
+                "psalm/plugin-phpunit": "^0.19.7",
                 "slevomat/coding-standard": "^8.28",
                 "squizlabs/php_codesniffer": "^4.0",
                 "symfony/process": "^7.0",
@@ -1930,9 +1932,9 @@
             "description": "Picky standards for PHP projects",
             "support": {
                 "issues": "https://github.com/haspadar/sheriff/issues",
-                "source": "https://github.com/haspadar/sheriff/tree/v0.32.1"
+                "source": "https://github.com/haspadar/sheriff/tree/v0.33.0"
             },
-            "time": "2026-05-19T15:00:58+00:00"
+            "time": "2026-05-22T15:41:44+00:00"
         },
         {
             "name": "infection/abstract-testframework-adapter",
@@ -3600,6 +3602,62 @@
             "time": "2026-05-18T11:57:34+00:00"
         },
         {
+            "name": "phpstan/phpstan-phpunit",
+            "version": "2.0.16",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/phpstan/phpstan-phpunit.git",
+                "reference": "6ab598e1bc106e6827fd346ae4a12b4a5d634c32"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/phpstan/phpstan-phpunit/zipball/6ab598e1bc106e6827fd346ae4a12b4a5d634c32",
+                "reference": "6ab598e1bc106e6827fd346ae4a12b4a5d634c32",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.4 || ^8.0",
+                "phpstan/phpstan": "^2.1.32"
+            },
+            "conflict": {
+                "phpunit/phpunit": "<7.0"
+            },
+            "require-dev": {
+                "nikic/php-parser": "^5",
+                "php-parallel-lint/php-parallel-lint": "^1.2",
+                "phpstan/phpstan-deprecation-rules": "^2.0",
+                "phpstan/phpstan-strict-rules": "^2.0",
+                "phpunit/phpunit": "^9.6"
+            },
+            "type": "phpstan-extension",
+            "extra": {
+                "phpstan": {
+                    "includes": [
+                        "extension.neon",
+                        "rules.neon"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "PHPStan\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "PHPUnit extensions and rules for PHPStan",
+            "keywords": [
+                "static analysis"
+            ],
+            "support": {
+                "issues": "https://github.com/phpstan/phpstan-phpunit/issues",
+                "source": "https://github.com/phpstan/phpstan-phpunit/tree/2.0.16"
+            },
+            "time": "2026-02-14T09:05:21+00:00"
+        },
+        {
             "name": "phpstan/phpstan-strict-rules",
             "version": "2.0.11",
             "source": {
@@ -4084,6 +4142,64 @@
                 }
             ],
             "time": "2026-05-13T03:56:57+00:00"
+        },
+        {
+            "name": "psalm/plugin-phpunit",
+            "version": "0.19.7",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/psalm/psalm-plugin-phpunit.git",
+                "reference": "143f9d5e049fffcdbc0da3fbb99f6149f9d3e2dc"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/psalm/psalm-plugin-phpunit/zipball/143f9d5e049fffcdbc0da3fbb99f6149f9d3e2dc",
+                "reference": "143f9d5e049fffcdbc0da3fbb99f6149f9d3e2dc",
+                "shasum": ""
+            },
+            "require": {
+                "ext-simplexml": "*",
+                "php": ">=8.1",
+                "vimeo/psalm": "dev-master || ^6.10.0"
+            },
+            "conflict": {
+                "phpspec/prophecy": "<1.20.0",
+                "phpspec/prophecy-phpunit": "<2.3.0",
+                "phpunit/phpunit": "<8.5.1"
+            },
+            "require-dev": {
+                "php": "^7.3 || ^8.0",
+                "phpunit/phpunit": "^10.0 || ^11.0 || ^12.0",
+                "squizlabs/php_codesniffer": "^3.3.1",
+                "weirdan/prophecy-shim": "^1.0 || ^2.0"
+            },
+            "type": "psalm-plugin",
+            "extra": {
+                "psalm": {
+                    "pluginClass": "Psalm\\PhpUnitPlugin\\Plugin"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Psalm\\PhpUnitPlugin\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Matt Brown",
+                    "email": "github@muglug.com"
+                }
+            ],
+            "description": "Psalm plugin for PHPUnit",
+            "support": {
+                "issues": "https://github.com/psalm/psalm-plugin-phpunit/issues",
+                "source": "https://github.com/psalm/psalm-plugin-phpunit/tree/0.19.7"
+            },
+            "time": "2025-03-31T18:49:55+00:00"
         },
         {
             "name": "psr/clock",
