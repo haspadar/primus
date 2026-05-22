@@ -15,10 +15,15 @@ use Primus\Text\TextOf;
  * semantics (the result silently widens to float, breaking the int contract).
  * Callers are responsible for staying within PHP_INT_MAX.
  *
+ * Construction forms:
+ *
+ * - `new SumOf(Integer ...)` — wrap an existing variadic list of integers.
+ * - `SumOf::integers(Integer ...)` — named-constructor alias of the primary ctor.
+ *
  * Example:
- *     $sum = new SumOf(new IntegerOf(2), new IntegerOf(3));
+ *     $sum = SumOf::integers(IntegerOf::int(2), IntegerOf::int(3));
  *     $sum->asInt(); // 5
- *     (new SumOf())->asInt(); // 0 (additive identity)
+ *     SumOf::integers()->asInt(); // 0 (additive identity)
  */
 final readonly class SumOf implements Integer
 {
@@ -33,6 +38,17 @@ final readonly class SumOf implements Integer
     public function __construct(Integer ...$addends)
     {
         $this->addends = $addends;
+    }
+
+    /**
+     * Sums variadic {@see Integer} addends.
+     *
+     * @param Integer ...$integers The integers to add.
+     * @psalm-api
+     */
+    public static function integers(Integer ...$integers): self
+    {
+        return new self(...$integers);
     }
 
     #[Override]

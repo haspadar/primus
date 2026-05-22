@@ -14,8 +14,13 @@ use UnderflowException;
  *
  * Throws on an empty operand list — minimum is undefined without operands.
  *
+ * Construction forms:
+ *
+ * - `new MinOf(Integer ...)` — wrap an existing variadic list of integers.
+ * - `MinOf::integers(Integer ...)` — named-constructor alias of the primary ctor.
+ *
  * Example:
- *     $min = new MinOf(new IntegerOf(9), new IntegerOf(3), new IntegerOf(5));
+ *     $min = MinOf::integers(IntegerOf::int(9), IntegerOf::int(3), IntegerOf::int(5));
  *     $min->asInt(); // 3
  */
 final readonly class MinOf implements Integer
@@ -31,6 +36,17 @@ final readonly class MinOf implements Integer
     public function __construct(Integer ...$operands)
     {
         $this->operands = $operands;
+    }
+
+    /**
+     * Selects the minimum of variadic {@see Integer} operands.
+     *
+     * @param Integer ...$integers The integers to compare.
+     * @psalm-api
+     */
+    public static function integers(Integer ...$integers): self
+    {
+        return new self(...$integers);
     }
 
     #[Override]

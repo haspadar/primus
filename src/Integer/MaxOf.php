@@ -14,8 +14,13 @@ use UnderflowException;
  *
  * Throws on an empty operand list — maximum is undefined without operands.
  *
+ * Construction forms:
+ *
+ * - `new MaxOf(Integer ...)` — wrap an existing variadic list of integers.
+ * - `MaxOf::integers(Integer ...)` — named-constructor alias of the primary ctor.
+ *
  * Example:
- *     $max = new MaxOf(new IntegerOf(3), new IntegerOf(9), new IntegerOf(5));
+ *     $max = MaxOf::integers(IntegerOf::int(3), IntegerOf::int(9), IntegerOf::int(5));
  *     $max->asInt(); // 9
  */
 final readonly class MaxOf implements Integer
@@ -31,6 +36,17 @@ final readonly class MaxOf implements Integer
     public function __construct(Integer ...$operands)
     {
         $this->operands = $operands;
+    }
+
+    /**
+     * Selects the maximum of variadic {@see Integer} operands.
+     *
+     * @param Integer ...$integers The integers to compare.
+     * @psalm-api
+     */
+    public static function integers(Integer ...$integers): self
+    {
+        return new self(...$integers);
     }
 
     #[Override]

@@ -36,4 +36,15 @@ final class IsoTest extends TestCase
 
         $this->assertStringStartsWith('2026-05-12T00:00:00', $iso);
     }
+
+    #[Test]
+    public function ofFactoryAgreesWithPrimaryConstructor(): void
+    {
+        $time = new TimeOf('2026-05-12T10:00:00Z');
+
+        $this->assertSame(
+            (new Iso($time))->value(),
+            Iso::of($time)->value(),
+        );
+    }
 }

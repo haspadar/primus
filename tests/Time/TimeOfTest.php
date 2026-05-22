@@ -35,4 +35,13 @@ final class TimeOfTest extends TestCase
 
         $this->assertEquals($time->value(), $time->value());
     }
+
+    #[Test]
+    public function strFactoryAgreesWithPrimaryConstructor(): void
+    {
+        $this->assertEquals(
+            (new TimeOf('2026-05-12T10:00:00Z'))->value(),
+            TimeOf::str('2026-05-12T10:00:00Z')->value(),
+        );
+    }
 }

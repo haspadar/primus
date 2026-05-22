@@ -49,4 +49,15 @@ final class AbsTest extends TestCase
     {
         $this->assertSame('7', (new Abs(new IntegerOf(-7)))->asText()->value());
     }
+
+    #[Test]
+    public function ofIntegerFactoryAgreesWithPrimaryConstructor(): void
+    {
+        $integer = new IntegerOf(-7);
+
+        $this->assertSame(
+            (new Abs($integer))->asInt(),
+            Abs::ofInteger($integer)->asInt(),
+        );
+    }
 }

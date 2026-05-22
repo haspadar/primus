@@ -71,4 +71,16 @@ final class ModOfTest extends TestCase
 
         (new ModOf(new IntegerOf(1), new IntegerOf(0)))->asText();
     }
+
+    #[Test]
+    public function integersFactoryAgreesWithPrimaryConstructor(): void
+    {
+        $dividend = new IntegerOf(7);
+        $divisor = new IntegerOf(3);
+
+        $this->assertSame(
+            (new ModOf($dividend, $divisor))->asInt(),
+            ModOf::integers($dividend, $divisor)->asInt(),
+        );
+    }
 }

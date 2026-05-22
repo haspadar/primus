@@ -13,8 +13,13 @@ use Primus\Text\TextOf;
  *
  * Throws DivisionByZeroError on access when the divisor is zero.
  *
+ * Construction forms:
+ *
+ * - `new ModOf(Integer, Integer)` — wrap an existing pair of integers.
+ * - `ModOf::integers(Integer, Integer)` — named-constructor alias of the primary ctor.
+ *
  * Example:
- *     $mod = new ModOf(new IntegerOf(7), new IntegerOf(3));
+ *     $mod = ModOf::integers(IntegerOf::int(7), IntegerOf::int(3));
  *     $mod->asInt(); // 1
  */
 final readonly class ModOf implements Integer
@@ -22,15 +27,27 @@ final readonly class ModOf implements Integer
     /**
      * Ctor.
      *
+     * @param Integer $top The integer to divide.
+     * @param Integer $bottom The integer to divide by.
+     */
+    public function __construct(private Integer $top, private Integer $bottom) {}
+
+    /**
+     * Computes the remainder of dividing one {@see Integer} by another.
+     *
      * @param Integer $dividend The integer to divide.
      * @param Integer $divisor The integer to divide by.
+     * @psalm-api
      */
-    public function __construct(private Integer $dividend, private Integer $divisor) {}
+    public static function integers(Integer $dividend, Integer $divisor): self
+    {
+        return new self($dividend, $divisor);
+    }
 
     #[Override]
     public function asInt(): int
     {
-        return $this->dividend->asInt() % $this->divisor->asInt();
+        return $this->top->asInt() % $this->bottom->asInt();
     }
 
     #[Override]

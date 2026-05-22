@@ -15,10 +15,15 @@ use Primus\Text\TextOf;
  * semantics (the result silently widens to float, breaking the int contract).
  * Callers are responsible for staying within PHP_INT_MAX.
  *
+ * Construction forms:
+ *
+ * - `new MultOf(Integer ...)` — wrap an existing variadic list of integers.
+ * - `MultOf::integers(Integer ...)` — named-constructor alias of the primary ctor.
+ *
  * Example:
- *     $product = new MultOf(new IntegerOf(3), new IntegerOf(4));
+ *     $product = MultOf::integers(IntegerOf::int(3), IntegerOf::int(4));
  *     $product->asInt(); // 12
- *     (new MultOf())->asInt(); // 1 (multiplicative identity)
+ *     MultOf::integers()->asInt(); // 1 (multiplicative identity)
  */
 final readonly class MultOf implements Integer
 {
@@ -33,6 +38,17 @@ final readonly class MultOf implements Integer
     public function __construct(Integer ...$factors)
     {
         $this->factors = $factors;
+    }
+
+    /**
+     * Multiplies variadic {@see Integer} factors.
+     *
+     * @param Integer ...$integers The integers to multiply.
+     * @psalm-api
+     */
+    public static function integers(Integer ...$integers): self
+    {
+        return new self(...$integers);
     }
 
     #[Override]

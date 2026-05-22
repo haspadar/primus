@@ -33,4 +33,15 @@ final class StickyTest extends TestCase
             new IsIdempotent(42.0),
         );
     }
+
+    #[Test]
+    public function ofIntegerFactoryAgreesWithPrimaryConstructor(): void
+    {
+        $integer = new IntegerOf(42);
+
+        $this->assertSame(
+            (new Sticky($integer))->asInt(),
+            Sticky::ofInteger($integer)->asInt(),
+        );
+    }
 }
