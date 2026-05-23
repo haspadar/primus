@@ -16,7 +16,7 @@ final class RootCauseTest extends TestCase
     {
         $only = new RuntimeException('only');
 
-        $this->assertSame($only, (new RootCause($only))->value());
+        self::assertSame($only, (new RootCause($only))->value());
     }
 
     #[Test]
@@ -25,7 +25,7 @@ final class RootCauseTest extends TestCase
         $inner = new RuntimeException('inner');
         $outer = new RuntimeException('outer', 0, $inner);
 
-        $this->assertSame($inner, (new RootCause($outer))->value());
+        self::assertSame($inner, (new RootCause($outer))->value());
     }
 
     #[Test]
@@ -35,7 +35,7 @@ final class RootCauseTest extends TestCase
         $middle = new RuntimeException('middle', 0, $deepest);
         $outer = new RuntimeException('outer', 0, $middle);
 
-        $this->assertSame($deepest, (new RootCause($outer))->value());
+        self::assertSame($deepest, (new RootCause($outer))->value());
     }
 
     #[Test]
@@ -46,6 +46,18 @@ final class RootCauseTest extends TestCase
 
         $root = new RootCause($outer);
 
-        $this->assertSame($root->value(), $root->value());
+        self::assertSame($root->value(), $root->value());
+    }
+
+    #[Test]
+    public function ofThrowableFactoryAgreesWithPrimaryConstructor(): void
+    {
+        $inner = new RuntimeException('inner');
+        $outer = new RuntimeException('outer', 0, $inner);
+
+        self::assertSame(
+            (new RootCause($outer))->value(),
+            RootCause::ofThrowable($outer)->value(),
+        );
     }
 }

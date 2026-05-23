@@ -15,8 +15,13 @@ use Override;
  * This class is not thread-safe. To share cached data across objects,
  * use an external cache or synchronization mechanism.
  *
+ * Construction forms:
+ *
+ * - `new Sticky(Scalar)` — wrap a {@see Scalar} value.
+ * - `Sticky::ofScalar(Scalar)` — named-constructor alias of the primary ctor.
+ *
  * Example:
- *     $scalar = new Sticky(new ScalarOf(fn() => time()));
+ *     $scalar = Sticky::ofScalar(new ScalarOf(fn() => time()));
  *     echo $scalar->value(); // computed once
  *     echo $scalar->value(); // cached value
  *
@@ -41,6 +46,19 @@ final class Sticky implements Scalar
      * @param Scalar<T> $origin The scalar whose value is cached.
      */
     public function __construct(private readonly Scalar $origin) {}
+
+    /**
+     * Memoises the value of a {@see Scalar}.
+     *
+     * @template U
+     * @param Scalar<U> $scalar The scalar whose value is cached.
+     * @return self<U>
+     * @psalm-api
+     */
+    public static function ofScalar(Scalar $scalar): self
+    {
+        return new self($scalar);
+    }
 
     #[Override]
     public function value()
