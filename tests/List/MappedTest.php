@@ -78,4 +78,16 @@ final class MappedTest extends TestCase
             ))->value(),
         );
     }
+
+    #[Test]
+    public function ofListFactoryAgreesWithPrimaryConstructor(): void
+    {
+        $list = new ListOf(1, 2, 3);
+        $mapper = new FuncOf(static fn(int $x): int => $x * 10);
+
+        self::assertSame(
+            (new Mapped($list, $mapper))->value(),
+            Mapped::ofList($list, $mapper)->value(),
+        );
+    }
 }

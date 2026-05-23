@@ -87,4 +87,16 @@ final class FilteredTest extends TestCase
             ))->value(),
         );
     }
+
+    #[Test]
+    public function ofListFactoryAgreesWithPrimaryConstructor(): void
+    {
+        $list = new ListOf(1, 2, 3, 4);
+        $selector = new FuncOf(static fn(int $x): bool => $x > 2);
+
+        self::assertSame(
+            (new Filtered($list, $selector))->value(),
+            Filtered::ofList($list, $selector)->value(),
+        );
+    }
 }

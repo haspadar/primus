@@ -11,8 +11,13 @@ use Primus\Func\Func;
 /**
  * List of elements that match a predicate.
  *
+ * Construction forms:
+ *
+ * - `new Filtered(List_, Func)` — wrap an existing {@see List_} and predicate.
+ * - `Filtered::ofList(List_, Func)` — named-constructor alias of the primary ctor.
+ *
  * Example:
- *     $list = new Filtered(
+ *     $list = Filtered::ofList(
  *         new ListOf(10, 5, 40, 3),
  *         new FuncOf(fn (int $x): bool => $x > 10),
  *     );
@@ -34,6 +39,20 @@ final readonly class Filtered extends ListEnvelope
     public function __construct(List_ $origin, private Func $predicate)
     {
         parent::__construct($origin);
+    }
+
+    /**
+     * Selects elements of a {@see List_} that match a predicate.
+     *
+     * @template U
+     * @param List_<U> $list The list whose elements are filtered.
+     * @param Func<U, bool> $selector The predicate that selects elements.
+     * @return self<U>
+     * @psalm-api
+     */
+    public static function ofList(List_ $list, Func $selector): self
+    {
+        return new self($list, $selector);
     }
 
     #[Override]

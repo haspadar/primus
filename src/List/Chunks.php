@@ -14,8 +14,13 @@ use Override;
  * configured size. The last chunk holds the remainder when the origin
  * size is not a multiple of the configured size.
  *
+ * Construction forms:
+ *
+ * - `new Chunks(List_, int)` — wrap an existing {@see List_} and chunk size.
+ * - `Chunks::ofList(List_, int)` — named-constructor alias of the primary ctor.
+ *
  * Example:
- *     $list = new Chunks(new ListOf(1, 2, 3, 4, 5), 2);
+ *     $list = Chunks::ofList(new ListOf(1, 2, 3, 4, 5), 2);
  *     foreach ($list as $chunk) {
  *         echo '[' . implode(',', $chunk->value()) . ']';
  *     }
@@ -33,6 +38,20 @@ final readonly class Chunks implements List_
      * @param positive-int $size The size of each chunk; the last chunk may be smaller.
      */
     public function __construct(private List_ $origin, private int $size) {}
+
+    /**
+     * Partitions a {@see List_} into fixed-size sub-lists.
+     *
+     * @template U
+     * @param List_<U> $list The list to partition.
+     * @param positive-int $capacity The size of each chunk; the last chunk may be smaller.
+     * @return self<U>
+     * @psalm-api
+     */
+    public static function ofList(List_ $list, int $capacity): self
+    {
+        return new self($list, $capacity);
+    }
 
     #[Override]
     public function value(): array

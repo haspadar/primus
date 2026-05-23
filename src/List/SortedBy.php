@@ -15,8 +15,13 @@ use Primus\Func\BiFunc;
  * or a positive integer when the first item should be ordered before, equal
  * to, or after the second item.
  *
+ * Construction forms:
+ *
+ * - `new SortedBy(List_, BiFunc)` — wrap an existing {@see List_} and comparator.
+ * - `SortedBy::ofList(List_, BiFunc)` — named-constructor alias of the primary ctor.
+ *
  * Example:
- *     $byLength = new SortedBy(
+ *     $byLength = SortedBy::ofList(
  *         new ListOf('alpha', 'pi', 'gamma'),
  *         new BiFuncOf(static fn(string $left, string $right): int
  *             => strlen($left) <=> strlen($right)),
@@ -37,6 +42,20 @@ final readonly class SortedBy extends ListEnvelope
     public function __construct(List_ $origin, private BiFunc $comparator)
     {
         parent::__construct($origin);
+    }
+
+    /**
+     * Orders a {@see List_} by an externally supplied pairwise comparator.
+     *
+     * @template U
+     * @param List_<U> $list The list to order.
+     * @param BiFunc<U, U, int> $order The pairwise comparator.
+     * @return self<U>
+     * @psalm-api
+     */
+    public static function ofList(List_ $list, BiFunc $order): self
+    {
+        return new self($list, $order);
     }
 
     #[Override]

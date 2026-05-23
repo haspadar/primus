@@ -99,4 +99,16 @@ final class SortedByTest extends TestCase
         iterator_to_array($sorted);
         $this->assertSame([3, 1, 2], $source->value());
     }
+
+    #[Test]
+    public function ofListFactoryAgreesWithPrimaryConstructor(): void
+    {
+        $list = new ListOf(3, 1, 2);
+        $order = new BiFuncOf(static fn(int $left, int $right): int => $left <=> $right);
+
+        self::assertSame(
+            (new SortedBy($list, $order))->value(),
+            SortedBy::ofList($list, $order)->value(),
+        );
+    }
 }

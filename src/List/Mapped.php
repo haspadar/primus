@@ -11,8 +11,13 @@ use Primus\Func\Func;
 /**
  * List with each element transformed by a function.
  *
+ * Construction forms:
+ *
+ * - `new Mapped(List_, Func)` — wrap an existing {@see List_} and mapper.
+ * - `Mapped::ofList(List_, Func)` — named-constructor alias of the primary ctor.
+ *
  * Example:
- *     $list = new Mapped(
+ *     $list = Mapped::ofList(
  *         new ListOf(1, 2, 3),
  *         new FuncOf(fn (int $x): int => $x * 10),
  *     );
@@ -34,6 +39,21 @@ final readonly class Mapped implements List_
      * @param Func<X, Y> $func The transformation function.
      */
     public function __construct(private List_ $origin, private Func $func) {}
+
+    /**
+     * Transforms each element of a {@see List_} through a {@see Func}.
+     *
+     * @template A
+     * @template B
+     * @param List_<A> $list The list whose elements are transformed.
+     * @param Func<A, B> $mapper The transformation function.
+     * @return self<A, B>
+     * @psalm-api
+     */
+    public static function ofList(List_ $list, Func $mapper): self
+    {
+        return new self($list, $mapper);
+    }
 
     #[Override]
     public function value(): array

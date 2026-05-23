@@ -105,4 +105,15 @@ final class ChunksTest extends TestCase
     {
         $this->assertCount(3, new Chunks(new ListOf(1, 2, 3, 4, 5), 2));
     }
+
+    #[Test]
+    public function ofListFactoryAgreesWithPrimaryConstructor(): void
+    {
+        $list = new ListOf(1, 2, 3, 4, 5);
+
+        self::assertEquals(
+            (new Chunks($list, 2))->value(),
+            Chunks::ofList($list, 2)->value(),
+        );
+    }
 }

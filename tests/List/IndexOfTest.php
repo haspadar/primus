@@ -62,4 +62,15 @@ final class IndexOfTest extends TestCase
             (new IndexOf(new ListOf('start', 'middle', 'end'), 'start'))->value(),
         );
     }
+
+    #[Test]
+    public function listFactoryAgreesWithPrimaryConstructor(): void
+    {
+        $list = new ListOf('start', 'middle', 'end');
+
+        self::assertSame(
+            (new IndexOf($list, 'middle'))->value(),
+            IndexOf::list($list, 'middle')->value(),
+        );
+    }
 }
