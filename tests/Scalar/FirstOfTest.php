@@ -106,4 +106,17 @@ final class FirstOfTest extends TestCase
         self::assertSame(2, $first->value());
         self::assertSame(2, $visited);
     }
+
+    #[Test]
+    public function listFactoryAgreesWithPrimaryConstructor(): void
+    {
+        $predicate = new FuncOf(static fn(int $n): bool => $n > 5);
+        $list = new ListOf(1, 3, 7, 10);
+        $fallback = new Constant(0);
+
+        self::assertSame(
+            (new FirstOf($predicate, $list, $fallback))->value(),
+            FirstOf::list($predicate, $list, $fallback)->value(),
+        );
+    }
 }

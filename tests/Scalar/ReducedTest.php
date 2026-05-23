@@ -109,4 +109,16 @@ final class ReducedTest extends TestCase
         self::assertSame(6, $sum->value());
         self::assertSame(3, $touched);
     }
+
+    #[Test]
+    public function ofListFactoryAgreesWithPrimaryConstructor(): void
+    {
+        $list = new ListOf(1, 2, 3, 4);
+        $reducer = new BiFuncOf(static fn(int $a, int $b): int => $a + $b);
+
+        self::assertSame(
+            (new Reduced($list, $reducer))->value(),
+            Reduced::ofList($list, $reducer)->value(),
+        );
+    }
 }

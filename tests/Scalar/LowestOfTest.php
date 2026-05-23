@@ -98,4 +98,15 @@ final class LowestOfTest extends TestCase
         self::assertSame(1, $bottom->value());
         self::assertSame(3, $touched);
     }
+
+    #[Test]
+    public function listFactoryAgreesWithPrimaryConstructor(): void
+    {
+        $list = new ListOf(7, 1, 3, 5);
+
+        self::assertSame(
+            (new LowestOf($list))->value(),
+            LowestOf::list($list)->value(),
+        );
+    }
 }

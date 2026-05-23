@@ -111,4 +111,15 @@ final class ItemAtTest extends TestCase
         self::assertTrue($touched);
     }
 
+    #[Test]
+    public function ofListFactoryAgreesWithPrimaryConstructor(): void
+    {
+        $list = new ListOf('a', 'b', 'c');
+        $fallback = new Constant('-');
+
+        self::assertSame(
+            (new ItemAt(1, $list, $fallback))->value(),
+            ItemAt::ofList(1, $list, $fallback)->value(),
+        );
+    }
 }

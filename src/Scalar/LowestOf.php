@@ -18,11 +18,16 @@ use Primus\List\List_;
  * {@see \UnderflowException} on first projection — there is no neutral
  * element for "smallest".
  *
+ * Construction forms:
+ *
+ * - `new LowestOf(List_)` — wrap an existing {@see List_}.
+ * - `LowestOf::list(List_)` — named-constructor alias of the primary ctor.
+ *
  * Example:
- *     $bottom = new LowestOf(new ListOf(7, 1, 3, 5));
+ *     $bottom = LowestOf::list(new ListOf(7, 1, 3, 5));
  *     echo $bottom->value(); // 1
  *
- *     $earliest = new LowestOf(new ListOf('orange', 'apple', 'banana'));
+ *     $earliest = LowestOf::list(new ListOf('orange', 'apple', 'banana'));
  *     echo $earliest->value(); // 'apple'
  *
  * @extends ScalarEnvelope<mixed>
@@ -49,5 +54,16 @@ final readonly class LowestOf extends ScalarEnvelope
                 }),
             ),
         );
+    }
+
+    /**
+     * Selects the smallest element of a {@see List_} of comparable values.
+     *
+     * @param List_<mixed> $list The list to scan.
+     * @psalm-api
+     */
+    public static function list(List_ $list): self
+    {
+        return new self($list);
     }
 }

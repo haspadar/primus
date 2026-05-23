@@ -98,4 +98,15 @@ final class HighestOfTest extends TestCase
         self::assertSame(3, $top->value());
         self::assertSame(3, $touched);
     }
+
+    #[Test]
+    public function listFactoryAgreesWithPrimaryConstructor(): void
+    {
+        $list = new ListOf(1, 7, 3, 5);
+
+        self::assertSame(
+            (new HighestOf($list))->value(),
+            HighestOf::list($list)->value(),
+        );
+    }
 }
