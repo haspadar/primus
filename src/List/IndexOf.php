@@ -11,8 +11,13 @@ use Primus\Scalar\ScalarOf;
 /**
  * Tells the position of the first strict-equal occurrence of a value in a list.
  *
+ * Construction forms:
+ *
+ * - `new IndexOf(List_, mixed)` — wrap a {@see List_} and the needle.
+ * - `IndexOf::list(List_, mixed)` — named-constructor alias of the primary ctor.
+ *
  * Example:
- *     $scalar = new IndexOf(new ListOf('a', 'b', 'c'), 'b');
+ *     $scalar = IndexOf::list(new ListOf('a', 'b', 'c'), 'b');
  *     echo $scalar->value(); // 1
  *
  * @template T
@@ -43,5 +48,19 @@ final readonly class IndexOf extends ScalarEnvelope
                 throw new OutOfBoundsException('Value not found in list');
             }),
         );
+    }
+
+    /**
+     * Locates the index of the first strict-equal occurrence of a value in a {@see List_}.
+     *
+     * @template U
+     * @param List_<U> $list The list to search in.
+     * @param U $needle The value to locate.
+     * @return self<U>
+     * @psalm-api
+     */
+    public static function list(List_ $list, mixed $needle): self
+    {
+        return new self($list, $needle);
     }
 }

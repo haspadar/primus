@@ -83,4 +83,15 @@ final class SlicedTest extends TestCase
         }
         $this->assertSame([2, 3], $collected);
     }
+
+    #[Test]
+    public function ofListFactoryAgreesWithPrimaryConstructor(): void
+    {
+        $list = new ListOf(1, 2, 3, 4, 5);
+
+        self::assertSame(
+            (new Sliced($list, 1, 2))->value(),
+            Sliced::ofList($list, 1, 2)->value(),
+        );
+    }
 }

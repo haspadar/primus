@@ -59,4 +59,15 @@ final class ContainsTest extends TestCase
             (new Contains(new ListOf(new \stdClass(), $object), $object))->value(),
         );
     }
+
+    #[Test]
+    public function ofListFactoryAgreesWithPrimaryConstructor(): void
+    {
+        $list = new ListOf(1, 2, 3);
+
+        self::assertSame(
+            (new Contains($list, 2))->value(),
+            Contains::ofList($list, 2)->value(),
+        );
+    }
 }
