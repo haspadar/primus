@@ -58,4 +58,25 @@ final class MultOfTest extends TestCase
     {
         $this->assertSame('12', (new MultOf(new IntegerOf(3), new IntegerOf(4)))->asText()->value());
     }
+
+    #[Test]
+    public function integersFactoryAgreesWithPrimaryConstructor(): void
+    {
+        $a = new IntegerOf(3);
+        $b = new IntegerOf(4);
+
+        $this->assertSame(
+            (new MultOf($a, $b))->asInt(),
+            MultOf::integers($a, $b)->asInt(),
+        );
+    }
+
+    #[Test]
+    public function integersFactoryAgreesWithPrimaryConstructorOnEmptyOperands(): void
+    {
+        $this->assertSame(
+            (new MultOf())->asInt(),
+            MultOf::integers()->asInt(),
+        );
+    }
 }

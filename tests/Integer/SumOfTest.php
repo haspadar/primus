@@ -52,4 +52,25 @@ final class SumOfTest extends TestCase
     {
         $this->assertSame('5', (new SumOf(new IntegerOf(2), new IntegerOf(3)))->asText()->value());
     }
+
+    #[Test]
+    public function integersFactoryAgreesWithPrimaryConstructor(): void
+    {
+        $a = new IntegerOf(2);
+        $b = new IntegerOf(3);
+
+        $this->assertSame(
+            (new SumOf($a, $b))->asInt(),
+            SumOf::integers($a, $b)->asInt(),
+        );
+    }
+
+    #[Test]
+    public function integersFactoryAgreesWithPrimaryConstructorOnEmptyOperands(): void
+    {
+        $this->assertSame(
+            (new SumOf())->asInt(),
+            SumOf::integers()->asInt(),
+        );
+    }
 }

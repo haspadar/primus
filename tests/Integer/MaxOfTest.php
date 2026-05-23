@@ -71,4 +71,16 @@ final class MaxOfTest extends TestCase
 
         (new MaxOf())->asText();
     }
+
+    #[Test]
+    public function integersFactoryAgreesWithPrimaryConstructor(): void
+    {
+        $a = new IntegerOf(3);
+        $b = new IntegerOf(9);
+
+        $this->assertSame(
+            (new MaxOf($a, $b))->asInt(),
+            MaxOf::integers($a, $b)->asInt(),
+        );
+    }
 }

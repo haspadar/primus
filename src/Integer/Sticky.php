@@ -24,6 +24,11 @@ use Primus\Text\TextOf;
  *     $cached->asInt(); // computed once, traverses the tree
  *     $cached->asInt(); // cached
  *     $cached->asFloat(); // derived from the cached int, no extra traversal
+ *
+ * Construction forms:
+ *
+ * - `new Sticky(Integer)` — wrap an existing {@see Integer} value.
+ * - `Sticky::ofInteger(Integer)` — named-constructor alias of the primary ctor.
  */
 final class Sticky implements Integer
 {
@@ -39,6 +44,17 @@ final class Sticky implements Integer
      * @param Integer $origin The integer whose projection is cached.
      */
     public function __construct(private readonly Integer $origin) {}
+
+    /**
+     * Memoises the projection of an {@see Integer}.
+     *
+     * @param Integer $integer The integer whose projection is cached.
+     * @psalm-api
+     */
+    public static function ofInteger(Integer $integer): self
+    {
+        return new self($integer);
+    }
 
     #[Override]
     public function asInt(): int

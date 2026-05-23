@@ -71,4 +71,16 @@ final class MinOfTest extends TestCase
 
         (new MinOf())->asText();
     }
+
+    #[Test]
+    public function integersFactoryAgreesWithPrimaryConstructor(): void
+    {
+        $a = new IntegerOf(9);
+        $b = new IntegerOf(3);
+
+        $this->assertSame(
+            (new MinOf($a, $b))->asInt(),
+            MinOf::integers($a, $b)->asInt(),
+        );
+    }
 }

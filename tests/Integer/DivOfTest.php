@@ -65,4 +65,16 @@ final class DivOfTest extends TestCase
 
         (new DivOf(new IntegerOf(1), new IntegerOf(0)))->asText();
     }
+
+    #[Test]
+    public function integersFactoryAgreesWithPrimaryConstructor(): void
+    {
+        $dividend = new IntegerOf(7);
+        $divisor = new IntegerOf(2);
+
+        $this->assertSame(
+            (new DivOf($dividend, $divisor))->asInt(),
+            DivOf::integers($dividend, $divisor)->asInt(),
+        );
+    }
 }

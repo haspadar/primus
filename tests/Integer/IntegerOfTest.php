@@ -57,4 +57,13 @@ final class IntegerOfTest extends TestCase
     {
         $this->assertSame('9007199254740993', (new IntegerOf(9007199254740993))->asText()->value());
     }
+
+    #[Test]
+    public function intFactoryAgreesWithPrimaryConstructor(): void
+    {
+        $this->assertSame(
+            (new IntegerOf(42))->asInt(),
+            IntegerOf::int(42)->asInt(),
+        );
+    }
 }
