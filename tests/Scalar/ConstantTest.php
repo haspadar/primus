@@ -35,4 +35,13 @@ final class ConstantTest extends TestCase
             'Constant must return the same value on subsequent calls'
         );
     }
+
+    #[Test]
+    public function ofValueFactoryAgreesWithPrimaryConstructor(): void
+    {
+        self::assertSame(
+            (new Constant('foo'))->value(),
+            Constant::ofValue('foo')->value(),
+        );
+    }
 }

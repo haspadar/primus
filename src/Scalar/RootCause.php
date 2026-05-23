@@ -13,8 +13,13 @@ use Throwable;
  * Walks getPrevious() until a Throwable without a previous one is reached and
  * returns it. For a Throwable without any cause, returns the input itself.
  *
+ * Construction forms:
+ *
+ * - `new RootCause(Throwable)` — wrap an existing Throwable.
+ * - `RootCause::ofThrowable(Throwable)` — named-constructor alias of the primary ctor.
+ *
  * Example:
- *     $root = new RootCause($outer);
+ *     $root = RootCause::ofThrowable($outer);
  *     $root->value(); // the innermost Throwable in the chain
  *
  * @implements Scalar<Throwable>
@@ -27,6 +32,17 @@ final readonly class RootCause implements Scalar
      * @param Throwable $origin The Throwable whose chain to unwrap.
      */
     public function __construct(private Throwable $origin) {}
+
+    /**
+     * Unwraps a Throwable chain to its deepest cause.
+     *
+     * @param Throwable $throwable The Throwable whose chain to unwrap.
+     * @psalm-api
+     */
+    public static function ofThrowable(Throwable $throwable): self
+    {
+        return new self($throwable);
+    }
 
     #[Override]
     public function value(): Throwable

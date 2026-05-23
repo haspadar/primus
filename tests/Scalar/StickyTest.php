@@ -35,4 +35,15 @@ final class StickyTest extends TestCase
             'Sticky must return the stored value'
         );
     }
+
+    #[Test]
+    public function ofScalarFactoryAgreesWithPrimaryConstructor(): void
+    {
+        $scalar = new ScalarOf(static fn(): int => 42);
+
+        self::assertSame(
+            (new Sticky($scalar))->value(),
+            Sticky::ofScalar($scalar)->value(),
+        );
+    }
 }

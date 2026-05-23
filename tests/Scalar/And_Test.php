@@ -56,4 +56,36 @@ final class And_Test extends TestCase
             new HasScalarBoolValue(true),
         );
     }
+
+    #[Test]
+    public function ofScalarsFactoryAgreesWithPrimaryConstructor(): void
+    {
+        $a = new ScalarOf(static fn(): bool => true);
+        $b = new ScalarOf(static fn(): bool => false);
+
+        self::assertSame(
+            (new And_($a, $b))->value(),
+            And_::ofScalars($a, $b)->value(),
+        );
+    }
+
+    #[Test]
+    public function ofScalarsFactoryAgreesWithPrimaryConstructorOnEmpty(): void
+    {
+        self::assertSame(
+            (new And_())->value(),
+            And_::ofScalars()->value(),
+        );
+    }
+
+    #[Test]
+    public function ofScalarsFactoryAgreesWithPrimaryConstructorOnSingleOperand(): void
+    {
+        $single = new ScalarOf(static fn(): bool => true);
+
+        self::assertSame(
+            (new And_($single))->value(),
+            And_::ofScalars($single)->value(),
+        );
+    }
 }

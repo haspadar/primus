@@ -11,15 +11,20 @@ namespace Primus\Scalar;
  * scalars are never asked for their value. An empty argument list returns
  * `false` (the identity of disjunction).
  *
+ * Construction forms:
+ *
+ * - `new Or_(Scalar ...)` — wrap a variadic list of {@see Scalar<bool>}.
+ * - `Or_::ofScalars(Scalar ...)` — named-constructor alias of the primary ctor.
+ *
  * Example:
- *     $or = new Or_(
+ *     $or = Or_::ofScalars(
  *         new Constant(false),
  *         new Constant(true),
  *         new Constant(false),
  *     );
  *     echo $or->value() ? 'any true' : 'all false'; // 'any true'
  *
- *     (new Or_())->value(); // false — no member is true
+ *     Or_::ofScalars()->value(); // false — no member is true
  *
  * @extends ScalarEnvelope<bool>
  */
@@ -45,5 +50,16 @@ final readonly class Or_ extends ScalarEnvelope
                 },
             ),
         );
+    }
+
+    /**
+     * Disjoins variadic {@see Scalar<bool>} conditions.
+     *
+     * @param Scalar<bool> ...$scalars The scalars to OR together.
+     * @psalm-api
+     */
+    public static function ofScalars(Scalar ...$scalars): self
+    {
+        return new self(...$scalars);
     }
 }

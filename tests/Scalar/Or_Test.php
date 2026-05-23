@@ -56,4 +56,36 @@ final class Or_Test extends TestCase
             new HasScalarBoolValue(false),
         );
     }
+
+    #[Test]
+    public function ofScalarsFactoryAgreesWithPrimaryConstructor(): void
+    {
+        $a = new ScalarOf(static fn(): bool => false);
+        $b = new ScalarOf(static fn(): bool => true);
+
+        self::assertSame(
+            (new Or_($a, $b))->value(),
+            Or_::ofScalars($a, $b)->value(),
+        );
+    }
+
+    #[Test]
+    public function ofScalarsFactoryAgreesWithPrimaryConstructorOnEmpty(): void
+    {
+        self::assertSame(
+            (new Or_())->value(),
+            Or_::ofScalars()->value(),
+        );
+    }
+
+    #[Test]
+    public function ofScalarsFactoryAgreesWithPrimaryConstructorOnSingleOperand(): void
+    {
+        $single = new ScalarOf(static fn(): bool => false);
+
+        self::assertSame(
+            (new Or_($single))->value(),
+            Or_::ofScalars($single)->value(),
+        );
+    }
 }

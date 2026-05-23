@@ -42,4 +42,17 @@ final class TernaryTest extends TestCase
             'Ternary must return the "no" value when the condition is false'
         );
     }
+
+    #[Test]
+    public function ofScalarsFactoryAgreesWithPrimaryConstructor(): void
+    {
+        $condition = new ScalarOf(static fn(): bool => true);
+        $truthy = new Constant('yes');
+        $falsy = new Constant('no');
+
+        self::assertSame(
+            (new Ternary($condition, $truthy, $falsy))->value(),
+            Ternary::ofScalars($condition, $truthy, $falsy)->value(),
+        );
+    }
 }

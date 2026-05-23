@@ -73,4 +73,36 @@ final class Xor_Test extends TestCase
             new HasScalarBoolValue(false),
         );
     }
+
+    #[Test]
+    public function ofScalarsFactoryAgreesWithPrimaryConstructor(): void
+    {
+        $a = new ScalarOf(static fn(): bool => true);
+        $b = new ScalarOf(static fn(): bool => false);
+
+        self::assertSame(
+            (new Xor_($a, $b))->value(),
+            Xor_::ofScalars($a, $b)->value(),
+        );
+    }
+
+    #[Test]
+    public function ofScalarsFactoryAgreesWithPrimaryConstructorOnEmpty(): void
+    {
+        self::assertSame(
+            (new Xor_())->value(),
+            Xor_::ofScalars()->value(),
+        );
+    }
+
+    #[Test]
+    public function ofScalarsFactoryAgreesWithPrimaryConstructorOnSingleOperand(): void
+    {
+        $single = new ScalarOf(static fn(): bool => true);
+
+        self::assertSame(
+            (new Xor_($single))->value(),
+            Xor_::ofScalars($single)->value(),
+        );
+    }
 }

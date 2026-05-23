@@ -16,8 +16,13 @@ use Override;
  * The closure is evaluated on every call to value() unless wrapped in a
  * caching decorator like Sticky.
  *
+ * Construction forms:
+ *
+ * - `new ScalarOf(Closure)` — wrap a zero-argument closure.
+ * - `ScalarOf::closure(Closure)` — named-constructor alias of the primary ctor.
+ *
  * Example:
- *     $scalar = new ScalarOf(fn() => 2 + 2);
+ *     $scalar = ScalarOf::closure(fn() => 2 + 2);
  *     echo $scalar->value(); // 4
  *
  * @template T
@@ -31,6 +36,19 @@ final readonly class ScalarOf implements Scalar
      * @param Closure(): T $closure The deferred computation.
      */
     public function __construct(private Closure $closure) {}
+
+    /**
+     * Wraps a zero-argument {@see Closure} as a deferred {@see Scalar}.
+     *
+     * @template U
+     * @param Closure(): U $body The deferred computation.
+     * @return self<U>
+     * @psalm-api
+     */
+    public static function closure(Closure $body): self
+    {
+        return new self($body);
+    }
 
     #[Override]
     public function value()

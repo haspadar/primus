@@ -33,4 +33,15 @@ final class NotTest extends TestCase
             'Not must return true when the condition is false'
         );
     }
+
+    #[Test]
+    public function ofScalarFactoryAgreesWithPrimaryConstructor(): void
+    {
+        $scalar = new ScalarOf(static fn(): bool => true);
+
+        self::assertSame(
+            (new Not($scalar))->value(),
+            Not::ofScalar($scalar)->value(),
+        );
+    }
 }

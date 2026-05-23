@@ -38,4 +38,15 @@ final class ScalarOfTest extends TestCase
             'ScalarOf must invoke the closure when value() is called'
         );
     }
+
+    #[Test]
+    public function closureFactoryAgreesWithPrimaryConstructor(): void
+    {
+        $closure = static fn(): int => 42;
+
+        self::assertSame(
+            (new ScalarOf($closure))->value(),
+            ScalarOf::closure($closure)->value(),
+        );
+    }
 }
