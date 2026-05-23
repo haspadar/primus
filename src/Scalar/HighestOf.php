@@ -18,11 +18,16 @@ use Primus\List\List_;
  * {@see \UnderflowException} on first projection — there is no neutral
  * element for "greatest".
  *
+ * Construction forms:
+ *
+ * - `new HighestOf(List_)` — wrap an existing {@see List_}.
+ * - `HighestOf::list(List_)` — named-constructor alias of the primary ctor.
+ *
  * Example:
- *     $top = new HighestOf(new ListOf(1, 7, 3, 5));
+ *     $top = HighestOf::list(new ListOf(1, 7, 3, 5));
  *     echo $top->value(); // 7
  *
- *     $latest = new HighestOf(new ListOf('apple', 'orange', 'banana'));
+ *     $latest = HighestOf::list(new ListOf('apple', 'orange', 'banana'));
  *     echo $latest->value(); // 'orange'
  *
  * @extends ScalarEnvelope<mixed>
@@ -49,5 +54,16 @@ final readonly class HighestOf extends ScalarEnvelope
                 }),
             ),
         );
+    }
+
+    /**
+     * Selects the greatest element of a {@see List_} of comparable values.
+     *
+     * @param List_<mixed> $list The list to scan.
+     * @psalm-api
+     */
+    public static function list(List_ $list): self
+    {
+        return new self($list);
     }
 }

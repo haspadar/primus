@@ -16,15 +16,20 @@ use Primus\List\List_;
  * rejected with {@see InvalidArgumentException} — use an explicit
  * `count(...) - n` expression if "from the end" is intended.
  *
+ * Construction forms:
+ *
+ * - `new ItemAt(int, List_, Scalar)` — wrap position, list and fallback.
+ * - `ItemAt::ofList(int, List_, Scalar)` — named-constructor alias of the primary ctor.
+ *
  * Example:
- *     $second = new ItemAt(
+ *     $second = ItemAt::ofList(
  *         1,
  *         new ListOf('a', 'b', 'c'),
  *         new Constant('-'),
  *     );
  *     echo $second->value(); // 'b'
  *
- *     $tenth = new ItemAt(
+ *     $tenth = ItemAt::ofList(
  *         10,
  *         new ListOf('a', 'b'),
  *         new Constant('-'),
@@ -68,5 +73,20 @@ final readonly class ItemAt extends ScalarEnvelope
                 },
             ),
         );
+    }
+
+    /**
+     * Selects the element at a zero-based position in a {@see List_}.
+     *
+     * @template U
+     * @param int $position The zero-based index of the element to return.
+     * @param List_<U> $list The list to look up the element in.
+     * @param Scalar<U> $fallback The value returned when the position is missing.
+     * @return self<U>
+     * @psalm-api
+     */
+    public static function ofList(int $position, List_ $list, Scalar $fallback): self
+    {
+        return new self($position, $list, $fallback);
     }
 }

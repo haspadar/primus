@@ -16,8 +16,13 @@ use UnderflowException;
  * An empty source raises {@see UnderflowException} on first projection —
  * there is no neutral element without an explicit seed.
  *
+ * Construction forms:
+ *
+ * - `new Reduced(List_, BiFunc)` — wrap list and reducer.
+ * - `Reduced::ofList(List_, BiFunc)` — named-constructor alias of the primary ctor.
+ *
  * Example:
- *     $sum = new Reduced(
+ *     $sum = Reduced::ofList(
  *         new ListOf(1, 2, 3, 4),
  *         new BiFuncOf(static fn(int $a, int $b): int => $a + $b),
  *     );
@@ -56,5 +61,19 @@ final readonly class Reduced extends ScalarEnvelope
                 },
             ),
         );
+    }
+
+    /**
+     * Left-folds a {@see List_} via a {@see BiFunc} accumulator without a seed.
+     *
+     * @template U
+     * @param List_<U> $list The list to fold.
+     * @param BiFunc<U, U, U> $reducer The accumulator function.
+     * @return self<U>
+     * @psalm-api
+     */
+    public static function ofList(List_ $list, BiFunc $reducer): self
+    {
+        return new self($list, $reducer);
     }
 }

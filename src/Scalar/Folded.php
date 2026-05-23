@@ -31,6 +31,11 @@ use Primus\List\List_;
  *     );
  *     echo $emptyDefaultsToSeed->value(); // 42
  *
+ * Construction forms:
+ *
+ * - `new Folded(Scalar, List_, BiFunc)` — wrap seed, list and reducer.
+ * - `Folded::ofSeed(Scalar, List_, BiFunc)` — named-constructor alias of the primary ctor.
+ *
  * @template X
  * @template T
  * @extends ScalarEnvelope<X>
@@ -59,5 +64,21 @@ final readonly class Folded extends ScalarEnvelope
                 },
             ),
         );
+    }
+
+    /**
+     * Left-folds a {@see List_} with an explicit seed accumulator.
+     *
+     * @template Y
+     * @template U
+     * @param Scalar<Y> $seed The initial accumulator value.
+     * @param List_<U> $list The list to fold.
+     * @param BiFunc<Y, U, Y> $reducer The accumulator function.
+     * @return self<Y, U>
+     * @psalm-api
+     */
+    public static function ofSeed(Scalar $seed, List_ $list, BiFunc $reducer): self
+    {
+        return new self($seed, $list, $reducer);
     }
 }

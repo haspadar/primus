@@ -117,4 +117,17 @@ final class FoldedTest extends TestCase
         self::assertSame(6, $folded->value());
         self::assertSame(3, $touched);
     }
+
+    #[Test]
+    public function ofSeedFactoryAgreesWithPrimaryConstructor(): void
+    {
+        $seed = new Constant(0);
+        $list = new ListOf(1, 2, 3);
+        $reducer = new BiFuncOf(static fn(int $a, int $b): int => $a + $b);
+
+        self::assertSame(
+            (new Folded($seed, $list, $reducer))->value(),
+            Folded::ofSeed($seed, $list, $reducer)->value(),
+        );
+    }
 }
