@@ -108,4 +108,15 @@ final class UniqueTest extends TestCase
 
         $this->expectNotToPerformAssertions();
     }
+
+    #[Test]
+    public function ofListFactoryAgreesWithPrimaryConstructor(): void
+    {
+        $list = new ListOf(1, 2, 1, 3, 2);
+
+        self::assertSame(
+            (new Unique($list))->value(),
+            Unique::ofList($list)->value(),
+        );
+    }
 }

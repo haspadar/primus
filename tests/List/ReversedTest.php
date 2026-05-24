@@ -57,4 +57,15 @@ final class ReversedTest extends TestCase
             (new Reversed(new Reversed(new ListOf(1, 2, 3))))->value(),
         );
     }
+
+    #[Test]
+    public function ofListFactoryAgreesWithPrimaryConstructor(): void
+    {
+        $list = new ListOf(1, 2, 3);
+
+        self::assertSame(
+            (new Reversed($list))->value(),
+            Reversed::ofList($list)->value(),
+        );
+    }
 }

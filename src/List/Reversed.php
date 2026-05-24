@@ -10,8 +10,13 @@ use Override;
 /**
  * List with elements in reverse order.
  *
+ * Construction forms:
+ *
+ * - `new Reversed(List_)` — wrap an existing {@see List_}.
+ * - `Reversed::ofList(List_)` — named-constructor alias of the primary ctor.
+ *
  * Example:
- *     $list = new Reversed(new ListOf(1, 2, 3));
+ *     $list = Reversed::ofList(new ListOf(1, 2, 3));
  *     foreach ($list as $value) {
  *         echo $value;
  *     }
@@ -22,6 +27,19 @@ use Override;
  */
 final readonly class Reversed extends ListEnvelope
 {
+    /**
+     * Reverses element order of a {@see List_}.
+     *
+     * @template U
+     * @param List_<U> $list The list whose elements are reversed.
+     * @return self<U>
+     * @psalm-api
+     */
+    public static function ofList(List_ $list): self
+    {
+        return new self($list);
+    }
+
     #[Override]
     public function value(): array
     {

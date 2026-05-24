@@ -96,4 +96,31 @@ final class RangeTest extends TestCase
     {
         $this->assertCount(4, new Range(1, 7, 2));
     }
+
+    #[Test]
+    public function ofBoundsFactoryAgreesWithPrimaryConstructor(): void
+    {
+        self::assertSame(
+            (new Range(1, 7, 2))->value(),
+            Range::ofBounds(1, 7, 2)->value(),
+        );
+    }
+
+    #[Test]
+    public function ofBoundsFactoryAgreesWithPrimaryConstructorForDefaultStep(): void
+    {
+        self::assertSame(
+            (new Range(1, 5))->value(),
+            Range::ofBounds(1, 5)->value(),
+        );
+    }
+
+    #[Test]
+    public function ofBoundsFactoryAgreesWithPrimaryConstructorForDescending(): void
+    {
+        self::assertSame(
+            (new Range(5, 1))->value(),
+            Range::ofBounds(5, 1)->value(),
+        );
+    }
 }

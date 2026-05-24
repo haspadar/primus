@@ -15,8 +15,13 @@ use Override;
  * The step is always positive; it is the absolute distance between
  * consecutive elements.
  *
+ * Construction forms:
+ *
+ * - `new Range(int, int, int = 1)` — wrap start, end and step.
+ * - `Range::ofBounds(int, int, int = 1)` — named-constructor alias of the primary ctor.
+ *
  * Example:
- *     $list = new Range(1, 7, 2);
+ *     $list = Range::ofBounds(1, 7, 2);
  *     foreach ($list as $value) {
  *         echo $value;
  *     }
@@ -34,6 +39,19 @@ final readonly class Range implements List_
      * @param int $step The positive distance between consecutive values.
      */
     public function __construct(private int $start, private int $end, private int $step = 1) {}
+
+    /**
+     * Builds a finite arithmetic sequence of integers between two endpoints.
+     *
+     * @param int $from The first value of the sequence.
+     * @param int $upto The last reachable value not crossing the endpoint.
+     * @param int $stride The positive distance between consecutive values.
+     * @psalm-api
+     */
+    public static function ofBounds(int $from, int $upto, int $stride = 1): self
+    {
+        return new self($from, $upto, $stride);
+    }
 
     #[Override]
     public function value(): array
