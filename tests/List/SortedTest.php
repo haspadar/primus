@@ -82,4 +82,15 @@ final class SortedTest extends TestCase
             (new Reversed(new Sorted(new ListOf(3, 1, 4, 5, 2))))->value(),
         );
     }
+
+    #[Test]
+    public function ofListFactoryAgreesWithPrimaryConstructor(): void
+    {
+        $list = new ListOf(3, 1, 2);
+
+        self::assertSame(
+            (new Sorted($list))->value(),
+            Sorted::ofList($list)->value(),
+        );
+    }
 }

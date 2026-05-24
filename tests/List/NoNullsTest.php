@@ -62,4 +62,15 @@ final class NoNullsTest extends TestCase
             (new Reversed(new NoNulls(new ListOf(1, 2, 3))))->value(),
         );
     }
+
+    #[Test]
+    public function ofListFactoryAgreesWithPrimaryConstructor(): void
+    {
+        $list = new ListOf(1, 2, 3);
+
+        self::assertSame(
+            (new NoNulls($list))->value(),
+            NoNulls::ofList($list)->value(),
+        );
+    }
 }

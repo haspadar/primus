@@ -14,8 +14,13 @@ use Override;
  * occurrences are dropped. Values are compared with `===`, so `0` and
  * `'0'` are treated as different.
  *
+ * Construction forms:
+ *
+ * - `new Unique(List_)` — wrap an existing {@see List_}.
+ * - `Unique::ofList(List_)` — named-constructor alias of the primary ctor.
+ *
  * Example:
- *     $list = new Unique(new ListOf(1, 2, 1, 3, 2));
+ *     $list = Unique::ofList(new ListOf(1, 2, 1, 3, 2));
  *     foreach ($list as $value) {
  *         echo $value;
  *     }
@@ -26,6 +31,19 @@ use Override;
  */
 final readonly class Unique extends ListEnvelope
 {
+    /**
+     * Removes duplicate values from a {@see List_} using strict equality.
+     *
+     * @template U
+     * @param List_<U> $list The list to deduplicate.
+     * @return self<U>
+     * @psalm-api
+     */
+    public static function ofList(List_ $list): self
+    {
+        return new self($list);
+    }
+
     #[Override]
     public function value(): array
     {

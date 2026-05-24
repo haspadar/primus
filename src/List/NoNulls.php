@@ -14,11 +14,29 @@ use Primus\RuntimeException;
  * Iteration throws when the source list contains a null element,
  * enforcing a non-null invariant by failing fast.
  *
+ * Construction forms:
+ *
+ * - `new NoNulls(List_)` — wrap an existing {@see List_}.
+ * - `NoNulls::ofList(List_)` — named-constructor alias of the primary ctor.
+ *
  * @template T
  * @extends ListEnvelope<T>
  */
 final readonly class NoNulls extends ListEnvelope
 {
+    /**
+     * Forbids null values in a {@see List_}, throwing on iteration when one is found.
+     *
+     * @template U
+     * @param List_<U> $list The list to guard against nulls.
+     * @return self<U>
+     * @psalm-api
+     */
+    public static function ofList(List_ $list): self
+    {
+        return new self($list);
+    }
+
     #[Override]
     public function value(): array
     {
