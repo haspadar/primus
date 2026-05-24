@@ -131,4 +131,25 @@ final class JoinedTest extends TestCase
             ))->value(),
         );
     }
+
+    #[Test]
+    public function ofListsFactoryAgreesWithPrimaryConstructor(): void
+    {
+        $a = new ListOf(1, 2);
+        $b = new ListOf(3, 4, 5);
+
+        self::assertSame(
+            (new Joined($a, $b))->value(),
+            Joined::ofLists($a, $b)->value(),
+        );
+    }
+
+    #[Test]
+    public function ofListsFactoryAgreesWithPrimaryConstructorForNoSources(): void
+    {
+        self::assertSame(
+            (new Joined())->value(),
+            Joined::ofLists()->value(),
+        );
+    }
 }

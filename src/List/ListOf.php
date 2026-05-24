@@ -10,8 +10,13 @@ use Override;
 /**
  * List of given values.
  *
+ * Construction forms:
+ *
+ * - `new ListOf(mixed, ...)` — wrap the given values.
+ * - `ListOf::items(mixed, ...)` — named-constructor alias of the primary ctor.
+ *
  * Example:
- *     $list = new ListOf(1, 2, 3);
+ *     $list = ListOf::items(1, 2, 3);
  *     echo count($list); // 3
  *
  * @template T
@@ -30,6 +35,19 @@ final readonly class ListOf implements List_
     public function __construct(mixed ...$items)
     {
         $this->items = $items;
+    }
+
+    /**
+     * Wraps a variadic sequence of values into a {@see List_}.
+     *
+     * @template U
+     * @param U ...$values The values to wrap.
+     * @return self<U>
+     * @psalm-api
+     */
+    public static function items(mixed ...$values): self
+    {
+        return new self(...$values);
     }
 
     #[Override]
