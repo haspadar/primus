@@ -11,8 +11,13 @@ use Primus\List\List_;
 /**
  * List of keys from a map.
  *
+ * Construction forms:
+ *
+ * - `new Keys(Map)` — wrap an existing {@see Map}.
+ * - `Keys::ofMap(Map)` — named-constructor alias of the primary ctor.
+ *
  * Example:
- *     $keys = new Keys(new MapOf(['a' => 1, 'b' => 2]));
+ *     $keys = Keys::ofMap(new MapOf(['a' => 1, 'b' => 2]));
  *     // ['a', 'b']
  *
  * @template K of array-key
@@ -27,6 +32,20 @@ final readonly class Keys implements List_
      * @param Map<K, V> $origin The map to read keys from.
      */
     public function __construct(private Map $origin) {}
+
+    /**
+     * Lists keys of a {@see Map}.
+     *
+     * @template L of array-key
+     * @template W
+     * @param Map<L, W> $map The map to read keys from.
+     * @return self<L, W>
+     * @psalm-api
+     */
+    public static function ofMap(Map $map): self
+    {
+        return new self($map);
+    }
 
     #[Override]
     public function value(): array

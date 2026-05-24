@@ -91,4 +91,16 @@ final class MappedTest extends TestCase
             ),
         );
     }
+
+    #[Test]
+    public function ofMapFactoryAgreesWithPrimaryConstructor(): void
+    {
+        $map = new MapOf(['a' => 1, 'b' => 2]);
+        $mapper = new FuncOf(static fn(int $v): int => $v * 10);
+
+        self::assertSame(
+            (new Mapped($map, $mapper))->value(),
+            Mapped::ofMap($map, $mapper)->value(),
+        );
+    }
 }

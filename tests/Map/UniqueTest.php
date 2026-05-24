@@ -80,4 +80,15 @@ final class UniqueTest extends TestCase
     {
         $this->assertCount(2, new Unique(new MapOf(['a' => 1, 'b' => 1, 'c' => 2])));
     }
+
+    #[Test]
+    public function ofMapFactoryAgreesWithPrimaryConstructor(): void
+    {
+        $map = new MapOf(['a' => 1, 'b' => 1, 'c' => 2]);
+
+        self::assertSame(
+            (new Unique($map))->value(),
+            Unique::ofMap($map)->value(),
+        );
+    }
 }

@@ -11,8 +11,13 @@ use Primus\Func\Func;
 /**
  * Map with each value transformed by a function while preserving keys.
  *
+ * Construction forms:
+ *
+ * - `new Mapped(Map, Func)` — wrap an existing {@see Map} and the value mapper.
+ * - `Mapped::ofMap(Map, Func)` — named-constructor alias of the primary ctor.
+ *
  * Example:
- *     $map = new Mapped(
+ *     $map = Mapped::ofMap(
  *         new MapOf(['a' => 1, 'b' => 2]),
  *         new FuncOf(fn (int $v): int => $v * 10),
  *     );
@@ -35,6 +40,22 @@ final readonly class Mapped implements Map
      * @param Func<V, W> $func The transformation function.
      */
     public function __construct(private Map $origin, private Func $func) {}
+
+    /**
+     * Transforms each value of a {@see Map} through a {@see Func}, keeping keys.
+     *
+     * @template L of array-key
+     * @template A
+     * @template B
+     * @param Map<L, A> $map The map whose values are transformed.
+     * @param Func<A, B> $mapper The transformation function.
+     * @return self<L, A, B>
+     * @psalm-api
+     */
+    public static function ofMap(Map $map, Func $mapper): self
+    {
+        return new self($map, $mapper);
+    }
 
     #[Override]
     public function value(): array

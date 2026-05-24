@@ -61,4 +61,15 @@ final class NoNullsTest extends TestCase
             (new NoNulls(new NoNulls(new MapOf(['a' => 1, 'b' => 2]))))->value(),
         );
     }
+
+    #[Test]
+    public function ofMapFactoryAgreesWithPrimaryConstructor(): void
+    {
+        $map = new MapOf(['a' => 1, 'b' => 2]);
+
+        self::assertSame(
+            (new NoNulls($map))->value(),
+            NoNulls::ofMap($map)->value(),
+        );
+    }
 }

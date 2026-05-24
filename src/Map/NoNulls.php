@@ -14,12 +14,31 @@ use Primus\RuntimeException;
  * Any access (value, count, foreach) throws when the source map contains
  * a null value, enforcing a non-null invariant by failing fast.
  *
+ * Construction forms:
+ *
+ * - `new NoNulls(Map)` — wrap an existing {@see Map}.
+ * - `NoNulls::ofMap(Map)` — named-constructor alias of the primary ctor.
+ *
  * @template K of array-key
  * @template V
  * @extends MapEnvelope<K, V>
  */
 final readonly class NoNulls extends MapEnvelope
 {
+    /**
+     * Forbids null values in a {@see Map}, throwing on access when one is found.
+     *
+     * @template L of array-key
+     * @template W
+     * @param Map<L, W> $map The map to guard against nulls.
+     * @return self<L, W>
+     * @psalm-api
+     */
+    public static function ofMap(Map $map): self
+    {
+        return new self($map);
+    }
+
     #[Override]
     public function value(): array
     {
