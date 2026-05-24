@@ -72,4 +72,15 @@ final class SortedTest extends TestCase
         iterator_to_array($sorted);
         $this->assertSame(['b' => 3, 'a' => 1, 'c' => 2], $source->value());
     }
+
+    #[Test]
+    public function ofMapFactoryAgreesWithPrimaryConstructor(): void
+    {
+        $map = new MapOf(['b' => 3, 'a' => 1, 'c' => 2]);
+
+        self::assertSame(
+            (new Sorted($map))->value(),
+            Sorted::ofMap($map)->value(),
+        );
+    }
 }

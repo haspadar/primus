@@ -77,4 +77,15 @@ final class ValuesTest extends TestCase
         iterator_to_array($values);
         $this->assertSame(['a' => 1, 'b' => 2], $source->value());
     }
+
+    #[Test]
+    public function ofMapFactoryAgreesWithPrimaryConstructor(): void
+    {
+        $map = new MapOf(['a' => 1, 'b' => 2]);
+
+        self::assertSame(
+            (new Values($map))->value(),
+            Values::ofMap($map)->value(),
+        );
+    }
 }

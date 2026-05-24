@@ -15,8 +15,13 @@ use Override;
  * `===`, so `0` and `'0'` are treated as different. The kept entries
  * retain their original keys from the origin map.
  *
+ * Construction forms:
+ *
+ * - `new Unique(Map)` — wrap an existing {@see Map}.
+ * - `Unique::ofMap(Map)` — named-constructor alias of the primary ctor.
+ *
  * Example:
- *     $map = new Unique(new MapOf(['a' => 1, 'b' => 2, 'c' => 1]));
+ *     $map = Unique::ofMap(new MapOf(['a' => 1, 'b' => 2, 'c' => 1]));
  *     foreach ($map as $key => $value) {
  *         echo "$key=$value ";
  *     }
@@ -28,6 +33,20 @@ use Override;
  */
 final readonly class Unique extends MapEnvelope
 {
+    /**
+     * Removes duplicate values from a {@see Map} using strict equality, keys preserved.
+     *
+     * @template L of array-key
+     * @template W
+     * @param Map<L, W> $map The map to deduplicate.
+     * @return self<L, W>
+     * @psalm-api
+     */
+    public static function ofMap(Map $map): self
+    {
+        return new self($map);
+    }
+
     #[Override]
     public function value(): array
     {
