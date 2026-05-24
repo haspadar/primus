@@ -137,4 +137,27 @@ final class IntersectionTest extends TestCase
             new Intersection(new ListOf(1, 2, 3), new ListOf(2, 3, 4)),
         );
     }
+
+    #[Test]
+    public function ofListsFactoryAgreesWithPrimaryConstructor(): void
+    {
+        $source = new ListOf(1, 2, 3, 4);
+        $required = new ListOf(2, 3, 5);
+
+        self::assertSame(
+            (new Intersection($source, $required))->value(),
+            Intersection::ofLists($source, $required)->value(),
+        );
+    }
+
+    #[Test]
+    public function ofListsFactoryAgreesWithPrimaryConstructorWithoutOthers(): void
+    {
+        $source = new ListOf(1, 2, 3);
+
+        self::assertSame(
+            (new Intersection($source))->value(),
+            Intersection::ofLists($source)->value(),
+        );
+    }
 }

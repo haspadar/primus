@@ -14,8 +14,13 @@ use Override;
  * are treated as different. Order and duplicates of the first origin
  * are preserved for kept values; keys are renumbered from zero.
  *
+ * Construction forms:
+ *
+ * - `new Difference(List_, List_, ...)` — wrap the first list and the excluded lists.
+ * - `Difference::ofLists(List_, List_, ...)` — named-constructor alias of the primary ctor.
+ *
  * Example:
- *     $list = new Difference(
+ *     $list = Difference::ofLists(
  *         new ListOf(1, 2, 3, 4),
  *         new ListOf(2, 4),
  *     );
@@ -41,6 +46,20 @@ final readonly class Difference implements List_
     public function __construct(private List_ $first, List_ ...$excluded)
     {
         $this->excluded = $excluded;
+    }
+
+    /**
+     * Subtracts values of one or more {@see List_} from the first list.
+     *
+     * @template U
+     * @param List_<U> $source The list to draw values from.
+     * @param List_<U> ...$removed Lists whose values remove matches from the source.
+     * @return self<U>
+     * @psalm-api
+     */
+    public static function ofLists(List_ $source, List_ ...$removed): self
+    {
+        return new self($source, ...$removed);
     }
 
     #[Override]

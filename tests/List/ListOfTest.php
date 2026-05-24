@@ -41,4 +41,33 @@ final class ListOfTest extends TestCase
     {
         $this->assertCount(0, new ListOf());
     }
+
+    #[Test]
+    public function itemsFactoryAgreesWithPrimaryConstructor(): void
+    {
+        self::assertSame(
+            (new ListOf(1, 2, 3))->value(),
+            ListOf::items(1, 2, 3)->value(),
+        );
+    }
+
+    #[Test]
+    public function itemsFactoryAgreesWithPrimaryConstructorForMixedValues(): void
+    {
+        $object = new \stdClass();
+
+        self::assertSame(
+            (new ListOf(1, 'two', null, $object))->value(),
+            ListOf::items(1, 'two', null, $object)->value(),
+        );
+    }
+
+    #[Test]
+    public function itemsFactoryAgreesWithPrimaryConstructorForNoValues(): void
+    {
+        self::assertSame(
+            (new ListOf())->value(),
+            ListOf::items()->value(),
+        );
+    }
 }

@@ -123,4 +123,27 @@ final class DifferenceTest extends TestCase
             new Difference(new ListOf(1, 2, 3), new ListOf(2)),
         );
     }
+
+    #[Test]
+    public function ofListsFactoryAgreesWithPrimaryConstructor(): void
+    {
+        $source = new ListOf(1, 2, 3, 4);
+        $excluded = new ListOf(2, 4);
+
+        self::assertSame(
+            (new Difference($source, $excluded))->value(),
+            Difference::ofLists($source, $excluded)->value(),
+        );
+    }
+
+    #[Test]
+    public function ofListsFactoryAgreesWithPrimaryConstructorWithoutExcluded(): void
+    {
+        $source = new ListOf(1, 2, 3);
+
+        self::assertSame(
+            (new Difference($source))->value(),
+            Difference::ofLists($source)->value(),
+        );
+    }
 }
