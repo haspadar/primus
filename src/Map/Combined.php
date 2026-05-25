@@ -15,8 +15,13 @@ use Primus\RuntimeException;
  * Pairs are formed by zipping the keys list with the values list at the same positions.
  * Sources of different lengths fail fast on first observation.
  *
+ * Construction forms:
+ *
+ * - `new Combined(List_, List_)` — wrap the keys list and the values list.
+ * - `Combined::ofLists(List_, List_)` — named-constructor alias of the primary ctor.
+ *
  * Example:
- *     $map = new Combined(
+ *     $map = Combined::ofLists(
  *         new ListOf('a', 'b', 'c'),
  *         new ListOf(1, 2, 3),
  *     );
@@ -34,6 +39,20 @@ final readonly class Combined implements Map
      * @param List_<V> $values Source list of values, parallel to $keys.
      */
     public function __construct(private List_ $keys, private List_ $values) {}
+
+    /**
+     * Zips a list of keys with a parallel list of values into a {@see Map}.
+     *
+     * @template W
+     * @param List_<array-key> $names Source list of keys.
+     * @param List_<W> $items Source list of values, parallel to $names.
+     * @return self<W>
+     * @psalm-api
+     */
+    public static function ofLists(List_ $names, List_ $items): self
+    {
+        return new self($names, $items);
+    }
 
     #[Override]
     public function value(): array

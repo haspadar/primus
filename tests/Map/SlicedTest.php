@@ -92,4 +92,26 @@ final class SlicedTest extends TestCase
             new Sliced(new MapOf(['a' => 1, 'b' => 2, 'c' => 3, 'd' => 4]), 1, 2),
         );
     }
+
+    #[Test]
+    public function ofMapFactoryAgreesWithPrimaryConstructor(): void
+    {
+        $map = new MapOf(['a' => 1, 'b' => 2, 'c' => 3, 'd' => 4]);
+
+        self::assertSame(
+            (new Sliced($map, 1, 2))->value(),
+            Sliced::ofMap($map, 1, 2)->value(),
+        );
+    }
+
+    #[Test]
+    public function ofMapFactoryAgreesWithPrimaryConstructorForDefaultLength(): void
+    {
+        $map = new MapOf(['a' => 1, 'b' => 2, 'c' => 3]);
+
+        self::assertSame(
+            (new Sliced($map, 1))->value(),
+            Sliced::ofMap($map, 1)->value(),
+        );
+    }
 }

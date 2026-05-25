@@ -12,8 +12,13 @@ use Primus\RuntimeException;
 /**
  * Map of pairs picked from row arrays where the index column supplies keys and the value column supplies values.
  *
+ * Construction forms:
+ *
+ * - `new PluckedBy(List_, int|string, int|string)` — wrap a list of rows with key and value columns.
+ * - `PluckedBy::ofList(List_, int|string, int|string)` — named-constructor alias of the primary ctor.
+ *
  * Example:
- *     $byId = new PluckedBy(
+ *     $byId = PluckedBy::ofList(
  *         new ListOf(
  *             ['id' => 1, 'name' => 'Alice'],
  *             ['id' => 2, 'name' => 'Bob'],
@@ -40,6 +45,20 @@ final readonly class PluckedBy implements Map
         private int|string $index,
         private int|string $column,
     ) {}
+
+    /**
+     * Picks pairs from rows in a {@see List_} using an index column for keys and a value column for values.
+     *
+     * @param List_<array<array-key, mixed>> $rows Source list of row arrays.
+     * @param array-key $tag Row column supplying pair keys.
+     * @param array-key $field Row column supplying pair values.
+     * @return self<mixed>
+     * @psalm-api
+     */
+    public static function ofList(List_ $rows, int|string $tag, int|string $field): self
+    {
+        return new self($rows, $tag, $field);
+    }
 
     #[Override]
     public function value(): array

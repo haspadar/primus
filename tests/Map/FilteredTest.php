@@ -100,4 +100,16 @@ final class FilteredTest extends TestCase
             ),
         );
     }
+
+    #[Test]
+    public function ofMapFactoryAgreesWithPrimaryConstructor(): void
+    {
+        $map = new MapOf(['a' => 10, 'b' => 5, 'c' => 40]);
+        $selector = new FuncOf(static fn(int $v): bool => $v > 10);
+
+        self::assertSame(
+            (new Filtered($map, $selector))->value(),
+            Filtered::ofMap($map, $selector)->value(),
+        );
+    }
 }

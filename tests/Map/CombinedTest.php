@@ -141,4 +141,16 @@ final class CombinedTest extends TestCase
         $this->assertSame(['a', 'b'], $keys->value());
         $this->assertSame([1, 2], $values->value());
     }
+
+    #[Test]
+    public function ofListsFactoryAgreesWithPrimaryConstructor(): void
+    {
+        $keys = new ListOf('a', 'b', 'c');
+        $values = new ListOf(1, 2, 3);
+
+        self::assertSame(
+            (new Combined($keys, $values))->value(),
+            Combined::ofLists($keys, $values)->value(),
+        );
+    }
 }

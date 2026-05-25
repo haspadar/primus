@@ -15,8 +15,13 @@ use Override;
  * extends to the end, negative length stops that many positions before
  * the end.
  *
+ * Construction forms:
+ *
+ * - `new Sliced(Map, int, int = PHP_INT_MAX)` — wrap a map with offset and length.
+ * - `Sliced::ofMap(Map, int, int = PHP_INT_MAX)` — named-constructor alias of the primary ctor.
+ *
  * Example:
- *     $map = new Sliced(new MapOf(['a' => 1, 'b' => 2, 'c' => 3]), 1);
+ *     $map = Sliced::ofMap(new MapOf(['a' => 1, 'b' => 2, 'c' => 3]), 1);
  *     foreach ($map as $key => $value) {
  *         echo "$key=$value ";
  *     }
@@ -41,6 +46,22 @@ final readonly class Sliced extends MapEnvelope
         private int $length = PHP_INT_MAX,
     ) {
         parent::__construct($origin);
+    }
+
+    /**
+     * Exposes a contiguous slice of a {@see Map} while preserving keys.
+     *
+     * @template L of array-key
+     * @template W
+     * @param Map<L, W> $map The map to slice.
+     * @param int $start The starting position; negative counts from the end.
+     * @param int $count The maximum number of entries; defaults to extending to the end.
+     * @return self<L, W>
+     * @psalm-api
+     */
+    public static function ofMap(Map $map, int $start, int $count = PHP_INT_MAX): self
+    {
+        return new self($map, $start, $count);
     }
 
     #[Override]

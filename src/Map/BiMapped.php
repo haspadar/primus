@@ -11,8 +11,13 @@ use Primus\Func\BiFunc;
 /**
  * Map with each value transformed by a function of key and value while preserving keys.
  *
+ * Construction forms:
+ *
+ * - `new BiMapped(Map, BiFunc)` — wrap an existing {@see Map} and pair mapper.
+ * - `BiMapped::ofMap(Map, BiFunc)` — named-constructor alias of the primary ctor.
+ *
  * Example:
- *     $map = new BiMapped(
+ *     $map = BiMapped::ofMap(
  *         new MapOf(['a' => 1, 'b' => 2]),
  *         new BiFuncOf(fn (string $key, int $value): string => "$key=$value"),
  *     );
@@ -35,6 +40,22 @@ final readonly class BiMapped implements Map
      * @param BiFunc<K, V, W> $func The transformation function.
      */
     public function __construct(private Map $origin, private BiFunc $func) {}
+
+    /**
+     * Transforms each value of a {@see Map} through a key/value {@see BiFunc}, keeping keys.
+     *
+     * @template L of array-key
+     * @template A
+     * @template B
+     * @param Map<L, A> $map The map whose values are transformed.
+     * @param BiFunc<L, A, B> $mapper The transformation function.
+     * @return self<L, A, B>
+     * @psalm-api
+     */
+    public static function ofMap(Map $map, BiFunc $mapper): self
+    {
+        return new self($map, $mapper);
+    }
 
     #[Override]
     public function value(): array

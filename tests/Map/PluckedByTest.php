@@ -194,4 +194,18 @@ final class PluckedByTest extends TestCase
         iterator_to_array($plucked);
         $this->assertSame($rows, $source->value());
     }
+
+    #[Test]
+    public function ofListFactoryAgreesWithPrimaryConstructor(): void
+    {
+        $rows = new ListOf(
+            ['id' => 1, 'name' => 'Alice'],
+            ['id' => 2, 'name' => 'Bob'],
+        );
+
+        self::assertSame(
+            (new PluckedBy($rows, 'id', 'name'))->value(),
+            PluckedBy::ofList($rows, 'id', 'name')->value(),
+        );
+    }
 }

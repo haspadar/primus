@@ -100,4 +100,16 @@ final class BiFilteredTest extends TestCase
         $this->assertCount(0, $filtered);
         $this->assertSame([], iterator_to_array($filtered));
     }
+
+    #[Test]
+    public function ofMapFactoryAgreesWithPrimaryConstructor(): void
+    {
+        $map = new MapOf(['a' => 1, 'b' => 2, 'c' => 3]);
+        $selector = new BiFuncOf(static fn(string $k, int $v): bool => $v > 1);
+
+        self::assertSame(
+            (new BiFiltered($map, $selector))->value(),
+            BiFiltered::ofMap($map, $selector)->value(),
+        );
+    }
 }
