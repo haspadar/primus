@@ -66,4 +66,15 @@ final class StickyFuncTest extends TestCase
 
         self::assertThat($calls, new HasCallCount(1));
     }
+
+    #[Test]
+    public function ofFuncFactoryAgreesWithPrimaryConstructor(): void
+    {
+        $source = new FuncOf(static fn(int $x): int => $x * 2);
+
+        self::assertSame(
+            (new StickyFunc($source))->apply(5),
+            StickyFunc::ofFunc($source)->apply(5),
+        );
+    }
 }

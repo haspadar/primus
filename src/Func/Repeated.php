@@ -10,8 +10,13 @@ use Primus\RuntimeException;
 /**
  * Func applied multiple times sequentially.
  *
+ * Construction forms:
+ *
+ * - `new Repeated(Func, int)` — wrap a function with a repetition count.
+ * - `Repeated::ofFunc(Func, int)` — named-constructor alias of the primary ctor.
+ *
  * Example:
- *     $func = new Repeated(
+ *     $func = Repeated::ofFunc(
  *         new FuncOf(fn(int $x): int => $x + 1),
  *         3
  *     );
@@ -29,6 +34,20 @@ final readonly class Repeated implements Func
      * @param int $times Number of sequential applications.
      */
     public function __construct(private Func $origin, private int $times) {}
+
+    /**
+     * Applies a {@see Func} multiple times sequentially.
+     *
+     * @template U
+     * @param Func<U, U> $source The function to repeat.
+     * @param int $count Number of sequential applications.
+     * @return self<U>
+     * @psalm-api
+     */
+    public static function ofFunc(Func $source, int $count): self
+    {
+        return new self($source, $count);
+    }
 
     #[Override]
     public function apply(mixed $input): mixed

@@ -18,4 +18,15 @@ final class FuncOfTest extends TestCase
         $func = new FuncOf(fn (int $x): int => $x * 2);
         self::assertSame(6, $func->apply(3), 'Doubles input value');
     }
+
+    #[Test]
+    public function closureFactoryAgreesWithPrimaryConstructor(): void
+    {
+        $source = static fn(int $x): int => $x * 2;
+
+        self::assertSame(
+            (new FuncOf($source))->apply(3),
+            FuncOf::closure($source)->apply(3),
+        );
+    }
 }

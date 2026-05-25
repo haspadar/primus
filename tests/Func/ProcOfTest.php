@@ -27,4 +27,22 @@ final class ProcOfTest extends TestCase
             'ProcOf must execute the closure exactly once'
         );
     }
+
+    #[Test]
+    public function closureFactoryAgreesWithPrimaryConstructor(): void
+    {
+        $primary = 0;
+        $factory = 0;
+        $closurePrimary = static function (int $x) use (&$primary): void {
+            $primary = $x * 2;
+        };
+        $closureFactory = static function (int $x) use (&$factory): void {
+            $factory = $x * 2;
+        };
+
+        (new ProcOf($closurePrimary))->exec(5);
+        ProcOf::closure($closureFactory)->exec(5);
+
+        self::assertSame($primary, $factory);
+    }
 }

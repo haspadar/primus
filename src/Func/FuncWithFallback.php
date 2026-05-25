@@ -9,6 +9,11 @@ use Throwable;
 /**
  * Func with fallback.
  *
+ * Construction forms:
+ *
+ * - `new FuncWithFallback(Func, Func)` — wrap the primary and fallback functions.
+ * - `FuncWithFallback::ofFunc(Func, Func)` — named-constructor alias of the primary ctor.
+ *
  * @template I
  * @template O
  * @extends FuncEnvelope<I, O>
@@ -39,5 +44,20 @@ final readonly class FuncWithFallback extends FuncEnvelope
                 },
             ),
         );
+    }
+
+    /**
+     * Wraps a primary {@see Func} with a fallback used on exception.
+     *
+     * @template A
+     * @template B
+     * @param Func<A, B> $primary The primary function.
+     * @param Func<A, B> $rescue The fallback function used on exception.
+     * @return self<A, B>
+     * @psalm-api
+     */
+    public static function ofFunc(Func $primary, Func $rescue): self
+    {
+        return new self($primary, $rescue);
     }
 }

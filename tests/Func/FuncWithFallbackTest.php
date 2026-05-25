@@ -41,4 +41,16 @@ final class FuncWithFallbackTest extends TestCase
             'FuncWithFallback must return the fallback result when an exception is thrown'
         );
     }
+
+    #[Test]
+    public function ofFuncFactoryAgreesWithPrimaryConstructor(): void
+    {
+        $primary = new FuncOf(static fn(int $x): int => $x * 2);
+        $rescue = new FuncOf(static fn(int $x): int => $x);
+
+        self::assertSame(
+            (new FuncWithFallback($primary, $rescue))->apply(5),
+            FuncWithFallback::ofFunc($primary, $rescue)->apply(5),
+        );
+    }
 }

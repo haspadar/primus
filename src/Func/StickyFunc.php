@@ -12,8 +12,13 @@ use Override;
  * Stores results of previous calls. Key is derived via `serialize($input)`,
  * which uniquely represents scalars, arrays, and objects.
  *
+ * Construction forms:
+ *
+ * - `new StickyFunc(Func)` — wrap a function to cache its results.
+ * - `StickyFunc::ofFunc(Func)` — named-constructor alias of the primary ctor.
+ *
  * Example:
- *     $doubled = new StickyFunc(new FuncOf(fn(int $x): int => $x * 2));
+ *     $doubled = StickyFunc::ofFunc(new FuncOf(fn(int $x): int => $x * 2));
  *     echo $doubled->apply(5); // 10
  *     echo $doubled->apply(5); // cached
  *
@@ -35,6 +40,20 @@ final class StickyFunc implements Func
      * @param Func<X, Y> $origin The function whose results are cached.
      */
     public function __construct(private readonly Func $origin) {}
+
+    /**
+     * Wraps a {@see Func} to cache its results per input.
+     *
+     * @template A
+     * @template B
+     * @param Func<A, B> $source The function whose results are cached.
+     * @return self<A, B>
+     * @psalm-api
+     */
+    public static function ofFunc(Func $source): self
+    {
+        return new self($source);
+    }
 
     #[Override]
     public function apply(mixed $input): mixed

@@ -22,4 +22,15 @@ final class BiFuncOfTest extends TestCase
             'BiFuncOf must apply the closure to two inputs'
         );
     }
+
+    #[Test]
+    public function closureFactoryAgreesWithPrimaryConstructor(): void
+    {
+        $source = static fn(int $a, int $b): int => $a + $b;
+
+        self::assertSame(
+            (new BiFuncOf($source))->apply(3, 4),
+            BiFuncOf::closure($source)->apply(3, 4),
+        );
+    }
 }
