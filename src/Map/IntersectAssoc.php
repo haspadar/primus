@@ -15,8 +15,13 @@ use Override;
  * origin holds the same key with a strict-equal value; same key with
  * a different value drops the pair.
  *
+ * Construction forms:
+ *
+ * - `new IntersectAssoc(Map, Map, ...)` — wrap the first map and the others.
+ * - `IntersectAssoc::ofMaps(Map, Map, ...)` — named-constructor alias of the primary ctor.
+ *
  * Example:
- *     $map = new IntersectAssoc(
+ *     $map = IntersectAssoc::ofMaps(
  *         new MapOf(['a' => 1, 'b' => 2, 'c' => 3]),
  *         new MapOf(['a' => 1, 'b' => 99, 'c' => 3]),
  *     );
@@ -43,6 +48,21 @@ final readonly class IntersectAssoc implements Map
     public function __construct(private Map $first, Map ...$others)
     {
         $this->others = $others;
+    }
+
+    /**
+     * Keeps pairs whose key/value exists in every other {@see Map}.
+     *
+     * @template L of array-key
+     * @template W
+     * @param Map<L, W> $source The map to draw pairs from.
+     * @param Map<L, W> ...$matched Maps whose key/value pairs must contain a strict-equal copy.
+     * @return self<L, W>
+     * @psalm-api
+     */
+    public static function ofMaps(Map $source, Map ...$matched): self
+    {
+        return new self($source, ...$matched);
     }
 
     #[Override]

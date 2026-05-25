@@ -141,4 +141,27 @@ final class IntersectTest extends TestCase
         $this->assertSame(['a' => 1, 'b' => 2], $first->value());
         $this->assertSame(['b' => 99], $required->value());
     }
+
+    #[Test]
+    public function ofMapsFactoryAgreesWithPrimaryConstructor(): void
+    {
+        $source = new MapOf(['a' => 1, 'b' => 2, 'c' => 3]);
+        $pinned = new MapOf(['b' => 99, 'c' => 0]);
+
+        self::assertSame(
+            (new Intersect($source, $pinned))->value(),
+            Intersect::ofMaps($source, $pinned)->value(),
+        );
+    }
+
+    #[Test]
+    public function ofMapsFactoryAgreesWithPrimaryConstructorWithoutPinned(): void
+    {
+        $source = new MapOf(['a' => 1, 'b' => 2]);
+
+        self::assertSame(
+            (new Intersect($source))->value(),
+            Intersect::ofMaps($source)->value(),
+        );
+    }
 }

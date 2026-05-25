@@ -129,4 +129,27 @@ final class DiffAssocTest extends TestCase
             ),
         );
     }
+
+    #[Test]
+    public function ofMapsFactoryAgreesWithPrimaryConstructor(): void
+    {
+        $source = new MapOf(['a' => 1, 'b' => 2, 'c' => 3]);
+        $excluded = new MapOf(['a' => 1, 'b' => 99]);
+
+        self::assertSame(
+            (new DiffAssoc($source, $excluded))->value(),
+            DiffAssoc::ofMaps($source, $excluded)->value(),
+        );
+    }
+
+    #[Test]
+    public function ofMapsFactoryAgreesWithPrimaryConstructorWithoutExcluded(): void
+    {
+        $source = new MapOf(['a' => 1, 'b' => 2]);
+
+        self::assertSame(
+            (new DiffAssoc($source))->value(),
+            DiffAssoc::ofMaps($source)->value(),
+        );
+    }
 }

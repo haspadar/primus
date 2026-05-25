@@ -141,4 +141,27 @@ final class DiffTest extends TestCase
         $this->assertSame(['a' => 1, 'b' => 2], $first->value());
         $this->assertSame(['b' => 99], $excluded->value());
     }
+
+    #[Test]
+    public function ofMapsFactoryAgreesWithPrimaryConstructor(): void
+    {
+        $source = new MapOf(['a' => 1, 'b' => 2, 'c' => 3]);
+        $excluded = new MapOf(['b' => 99]);
+
+        self::assertSame(
+            (new Diff($source, $excluded))->value(),
+            Diff::ofMaps($source, $excluded)->value(),
+        );
+    }
+
+    #[Test]
+    public function ofMapsFactoryAgreesWithPrimaryConstructorWithoutExcluded(): void
+    {
+        $source = new MapOf(['a' => 1, 'b' => 2]);
+
+        self::assertSame(
+            (new Diff($source))->value(),
+            Diff::ofMaps($source)->value(),
+        );
+    }
 }

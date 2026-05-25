@@ -10,8 +10,13 @@ use Override;
 /**
  * Map keeping pairs of the first source whose keys are present in every other source.
  *
+ * Construction forms:
+ *
+ * - `new Intersect(Map, Map, ...)` — wrap the first map and the required maps.
+ * - `Intersect::ofMaps(Map, Map, ...)` — named-constructor alias of the primary ctor.
+ *
  * Example:
- *     $intersect = new Intersect(
+ *     $intersect = Intersect::ofMaps(
  *         new MapOf(['a' => 1, 'b' => 2, 'c' => 3]),
  *         new MapOf(['b' => 99, 'c' => 0]),
  *         new MapOf(['c' => 7, 'd' => 1]),
@@ -36,6 +41,21 @@ final readonly class Intersect implements Map
     public function __construct(private Map $first, Map ...$required)
     {
         $this->required = $required;
+    }
+
+    /**
+     * Keeps pairs whose keys exist in every other {@see Map}.
+     *
+     * @template L of array-key
+     * @template W
+     * @param Map<L, W> $source The map to draw pairs from.
+     * @param Map<L, mixed> ...$pinned Maps whose keys must contain a source key for it to be kept.
+     * @return self<L, W>
+     * @psalm-api
+     */
+    public static function ofMaps(Map $source, Map ...$pinned): self
+    {
+        return new self($source, ...$pinned);
     }
 
     #[Override]

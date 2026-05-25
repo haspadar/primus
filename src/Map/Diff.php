@@ -10,8 +10,13 @@ use Override;
 /**
  * Map keeping pairs of the first source whose keys are absent from all other sources.
  *
+ * Construction forms:
+ *
+ * - `new Diff(Map, Map, ...)` — wrap the first map and the excluded maps.
+ * - `Diff::ofMaps(Map, Map, ...)` — named-constructor alias of the primary ctor.
+ *
  * Example:
- *     $diff = new Diff(
+ *     $diff = Diff::ofMaps(
  *         new MapOf(['a' => 1, 'b' => 2, 'c' => 3]),
  *         new MapOf(['b' => 99]),
  *         new MapOf(['c' => 0]),
@@ -36,6 +41,21 @@ final readonly class Diff implements Map
     public function __construct(private Map $first, Map ...$excluded)
     {
         $this->excluded = $excluded;
+    }
+
+    /**
+     * Subtracts pairs whose keys appear in any other {@see Map} from the first map.
+     *
+     * @template L of array-key
+     * @template W
+     * @param Map<L, W> $source The map to draw pairs from.
+     * @param Map<L, mixed> ...$removed Maps whose keys remove pairs from the source.
+     * @return self<L, W>
+     * @psalm-api
+     */
+    public static function ofMaps(Map $source, Map ...$removed): self
+    {
+        return new self($source, ...$removed);
     }
 
     #[Override]
