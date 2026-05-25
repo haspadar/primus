@@ -10,8 +10,13 @@ use Override;
 /**
  * Map merged from several source maps with last-wins precedence on key conflicts.
  *
+ * Construction forms:
+ *
+ * - `new Merged(Map, ...)` — wrap the source maps to merge.
+ * - `Merged::ofMaps(Map, ...)` — named-constructor alias of the primary ctor.
+ *
  * Example:
- *     $merged = new Merged(
+ *     $merged = Merged::ofMaps(
  *         new MapOf(['a' => 1, 'b' => 2]),
  *         new MapOf(['b' => 99, 'c' => 3]),
  *     );
@@ -34,6 +39,20 @@ final readonly class Merged implements Map
     public function __construct(Map ...$sources)
     {
         $this->sources = $sources;
+    }
+
+    /**
+     * Merges several {@see Map} into one with last-wins precedence on key conflicts.
+     *
+     * @template L of array-key
+     * @template W
+     * @param Map<L, W> ...$parts The maps to merge; later sources override earlier ones.
+     * @return self<L, W>
+     * @psalm-api
+     */
+    public static function ofMaps(Map ...$parts): self
+    {
+        return new self(...$parts);
     }
 
     #[Override]

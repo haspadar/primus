@@ -92,4 +92,25 @@ final class MergedTest extends TestCase
             ))->value(),
         );
     }
+
+    #[Test]
+    public function ofMapsFactoryAgreesWithPrimaryConstructor(): void
+    {
+        $a = new MapOf(['a' => 1, 'b' => 2]);
+        $b = new MapOf(['b' => 99, 'c' => 3]);
+
+        self::assertSame(
+            (new Merged($a, $b))->value(),
+            Merged::ofMaps($a, $b)->value(),
+        );
+    }
+
+    #[Test]
+    public function ofMapsFactoryAgreesWithPrimaryConstructorForNoSources(): void
+    {
+        self::assertSame(
+            (new Merged())->value(),
+            Merged::ofMaps()->value(),
+        );
+    }
 }

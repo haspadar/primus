@@ -143,4 +143,27 @@ final class IntersectAssocTest extends TestCase
             ),
         );
     }
+
+    #[Test]
+    public function ofMapsFactoryAgreesWithPrimaryConstructor(): void
+    {
+        $source = new MapOf(['a' => 1, 'b' => 2, 'c' => 3]);
+        $matched = new MapOf(['a' => 1, 'b' => 99, 'c' => 3]);
+
+        self::assertSame(
+            (new IntersectAssoc($source, $matched))->value(),
+            IntersectAssoc::ofMaps($source, $matched)->value(),
+        );
+    }
+
+    #[Test]
+    public function ofMapsFactoryAgreesWithPrimaryConstructorWithoutMatched(): void
+    {
+        $source = new MapOf(['a' => 1, 'b' => 2]);
+
+        self::assertSame(
+            (new IntersectAssoc($source))->value(),
+            IntersectAssoc::ofMaps($source)->value(),
+        );
+    }
 }

@@ -15,8 +15,13 @@ use Override;
  * pairs where another origin holds the same key with a strict-equal
  * value are dropped; same key with a different value is kept.
  *
+ * Construction forms:
+ *
+ * - `new DiffAssoc(Map, Map, ...)` — wrap the first map and the excluded maps.
+ * - `DiffAssoc::ofMaps(Map, Map, ...)` — named-constructor alias of the primary ctor.
+ *
  * Example:
- *     $map = new DiffAssoc(
+ *     $map = DiffAssoc::ofMaps(
  *         new MapOf(['a' => 1, 'b' => 2, 'c' => 3]),
  *         new MapOf(['a' => 1, 'b' => 99]),
  *     );
@@ -43,6 +48,21 @@ final readonly class DiffAssoc implements Map
     public function __construct(private Map $first, Map ...$excluded)
     {
         $this->excluded = $excluded;
+    }
+
+    /**
+     * Subtracts pairs whose key/value matches any other {@see Map} from the first map.
+     *
+     * @template L of array-key
+     * @template W
+     * @param Map<L, W> $source The map to draw pairs from.
+     * @param Map<L, W> ...$removed Maps whose key/value pairs remove matches from the source.
+     * @return self<L, W>
+     * @psalm-api
+     */
+    public static function ofMaps(Map $source, Map ...$removed): self
+    {
+        return new self($source, ...$removed);
     }
 
     #[Override]

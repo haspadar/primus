@@ -40,4 +40,22 @@ final class MapOfTest extends TestCase
     {
         $this->assertCount(0, new MapOf([]));
     }
+
+    #[Test]
+    public function pairsFactoryAgreesWithPrimaryConstructor(): void
+    {
+        self::assertSame(
+            (new MapOf(['a' => 1, 'b' => 2]))->value(),
+            MapOf::pairs(['a' => 1, 'b' => 2])->value(),
+        );
+    }
+
+    #[Test]
+    public function pairsFactoryAgreesWithPrimaryConstructorForEmpty(): void
+    {
+        self::assertSame(
+            (new MapOf([]))->value(),
+            MapOf::pairs([])->value(),
+        );
+    }
 }

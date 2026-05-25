@@ -10,8 +10,13 @@ use Override;
 /**
  * Map built from an associative array.
  *
+ * Construction forms:
+ *
+ * - `new MapOf(array)` — wrap the given associative array.
+ * - `MapOf::pairs(array)` — named-constructor alias of the primary ctor.
+ *
  * Example:
- *     $map = new MapOf(['a' => 1, 'b' => 2]);
+ *     $map = MapOf::pairs(['a' => 1, 'b' => 2]);
  *     echo count($map); // 2
  *
  * @template K of array-key
@@ -26,6 +31,20 @@ final readonly class MapOf implements Map
      * @param array<K, V> $pairs The associative array to wrap.
      */
     public function __construct(private array $pairs) {}
+
+    /**
+     * Wraps an associative array into a {@see Map}.
+     *
+     * @template L of array-key
+     * @template W
+     * @param array<L, W> $entries The associative array to wrap.
+     * @return self<L, W>
+     * @psalm-api
+     */
+    public static function pairs(array $entries): self
+    {
+        return new self($entries);
+    }
 
     #[Override]
     public function value(): array
