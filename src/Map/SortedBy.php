@@ -15,8 +15,13 @@ use Primus\Func\BiFunc;
  * or a positive integer when the first value should be ordered before, equal
  * to, or after the second value.
  *
+ * Construction forms:
+ *
+ * - `new SortedBy(Map, BiFunc)` — wrap an existing {@see Map} and value comparator.
+ * - `SortedBy::ofMap(Map, BiFunc)` — named-constructor alias of the primary ctor.
+ *
  * Example:
- *     $byLength = new SortedBy(
+ *     $byLength = SortedBy::ofMap(
  *         new MapOf(['x' => 'alpha', 'y' => 'pi', 'z' => 'gamma']),
  *         new BiFuncOf(static fn(string $left, string $right): int
  *             => strlen($left) <=> strlen($right)),
@@ -38,6 +43,21 @@ final readonly class SortedBy extends MapEnvelope
     public function __construct(Map $origin, private BiFunc $comparator)
     {
         parent::__construct($origin);
+    }
+
+    /**
+     * Sorts pairs of a {@see Map} by an externally supplied value comparator, keys preserved.
+     *
+     * @template L of array-key
+     * @template W
+     * @param Map<L, W> $map The map to order.
+     * @param BiFunc<W, W, int> $order The value-pair comparator.
+     * @return self<L, W>
+     * @psalm-api
+     */
+    public static function ofMap(Map $map, BiFunc $order): self
+    {
+        return new self($map, $order);
     }
 
     #[Override]

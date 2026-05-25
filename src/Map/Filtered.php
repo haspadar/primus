@@ -11,8 +11,13 @@ use Primus\Func\Func;
 /**
  * Map of pairs whose values match a predicate.
  *
+ * Construction forms:
+ *
+ * - `new Filtered(Map, Func)` — wrap an existing {@see Map} and value predicate.
+ * - `Filtered::ofMap(Map, Func)` — named-constructor alias of the primary ctor.
+ *
  * Example:
- *     $map = new Filtered(
+ *     $map = Filtered::ofMap(
  *         new MapOf(['a' => 10, 'b' => 5, 'c' => 40]),
  *         new FuncOf(fn (int $v): bool => $v > 10),
  *     );
@@ -36,6 +41,21 @@ final readonly class Filtered extends MapEnvelope
     public function __construct(Map $origin, private Func $predicate)
     {
         parent::__construct($origin);
+    }
+
+    /**
+     * Selects pairs of a {@see Map} whose values match a predicate.
+     *
+     * @template L of array-key
+     * @template W
+     * @param Map<L, W> $map The map whose pairs are filtered.
+     * @param Func<W, bool> $selector The predicate that selects values.
+     * @return self<L, W>
+     * @psalm-api
+     */
+    public static function ofMap(Map $map, Func $selector): self
+    {
+        return new self($map, $selector);
     }
 
     #[Override]

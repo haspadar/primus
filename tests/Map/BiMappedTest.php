@@ -92,4 +92,16 @@ final class BiMappedTest extends TestCase
             ),
         );
     }
+
+    #[Test]
+    public function ofMapFactoryAgreesWithPrimaryConstructor(): void
+    {
+        $map = new MapOf(['a' => 1, 'b' => 2]);
+        $mapper = new BiFuncOf(static fn(string $k, int $v): string => "$k=$v");
+
+        self::assertSame(
+            (new BiMapped($map, $mapper))->value(),
+            BiMapped::ofMap($map, $mapper)->value(),
+        );
+    }
 }

@@ -99,4 +99,16 @@ final class SortedByTest extends TestCase
         iterator_to_array($sorted);
         $this->assertSame(['b' => 3, 'a' => 1, 'c' => 2], $source->value());
     }
+
+    #[Test]
+    public function ofMapFactoryAgreesWithPrimaryConstructor(): void
+    {
+        $map = new MapOf(['b' => 3, 'a' => 1, 'c' => 2]);
+        $order = new BiFuncOf(static fn(int $left, int $right): int => $left <=> $right);
+
+        self::assertSame(
+            (new SortedBy($map, $order))->value(),
+            SortedBy::ofMap($map, $order)->value(),
+        );
+    }
 }

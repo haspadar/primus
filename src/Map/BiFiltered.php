@@ -11,8 +11,13 @@ use Primus\Func\BiFunc;
 /**
  * Map of pairs whose key and value match a function.
  *
+ * Construction forms:
+ *
+ * - `new BiFiltered(Map, BiFunc)` — wrap an existing {@see Map} and pair predicate.
+ * - `BiFiltered::ofMap(Map, BiFunc)` — named-constructor alias of the primary ctor.
+ *
  * Example:
- *     $map = new BiFiltered(
+ *     $map = BiFiltered::ofMap(
  *         new MapOf(['adult' => 19, 'minor' => 12]),
  *         new BiFuncOf(fn (string $key, int $value): bool => $key === 'adult' && $value >= 18),
  *     );
@@ -36,6 +41,21 @@ final readonly class BiFiltered extends MapEnvelope
     public function __construct(Map $origin, private BiFunc $predicate)
     {
         parent::__construct($origin);
+    }
+
+    /**
+     * Selects pairs of a {@see Map} whose key and value match a predicate.
+     *
+     * @template L of array-key
+     * @template W
+     * @param Map<L, W> $map The map whose pairs are filtered.
+     * @param BiFunc<L, W, bool> $selector The function that selects pairs.
+     * @return self<L, W>
+     * @psalm-api
+     */
+    public static function ofMap(Map $map, BiFunc $selector): self
+    {
+        return new self($map, $selector);
     }
 
     #[Override]
