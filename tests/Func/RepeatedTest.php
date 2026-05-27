@@ -82,4 +82,15 @@ final class RepeatedTest extends TestCase
             'Repeated must reject zero-times constructor argument',
         );
     }
+
+    #[Test]
+    public function ofFuncFactoryAgreesWithPrimaryConstructor(): void
+    {
+        $source = new FuncOf(static fn(int $x): int => $x + 1);
+
+        self::assertSame(
+            (new Repeated($source, 3))->apply(5),
+            Repeated::ofFunc($source, 3)->apply(5),
+        );
+    }
 }

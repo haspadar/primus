@@ -42,4 +42,27 @@ final class ForEach_Test extends TestCase
         $this->assertSame(0, $calls);
     }
 
+    #[Test]
+    public function ofListFactoryAgreesWithPrimaryConstructor(): void
+    {
+        $primary = [];
+        $factory = [];
+        $list = new ListOf('a', 'b');
+
+        (new ForEach_(
+            $list,
+            new ProcOf(static function (string $s) use (&$primary): void {
+                $primary[] = $s;
+            }),
+        ))->exec();
+        ForEach_::ofList(
+            $list,
+            new ProcOf(static function (string $s) use (&$factory): void {
+                $factory[] = $s;
+            }),
+        )->exec();
+
+        self::assertSame($primary, $factory);
+    }
+
 }
