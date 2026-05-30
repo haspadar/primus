@@ -145,4 +145,24 @@ final class JoinedTest extends TestCase
         ];
     }
 
+    #[Test]
+    public function ofTextsFactoryAgreesWithPrimaryConstructor(): void
+    {
+        $parts = [TextOf::str('a'), TextOf::str('b'), TextOf::str('c')];
+
+        self::assertSame(
+            (new Joined(', ', $parts))->value(),
+            Joined::ofTexts(', ', $parts)->value(),
+        );
+    }
+
+    #[Test]
+    public function ofTextsFactoryAgreesWithPrimaryConstructorForEmptyParts(): void
+    {
+        self::assertSame(
+            (new Joined(', ', []))->value(),
+            Joined::ofTexts(', ', [])->value(),
+        );
+    }
+
 }

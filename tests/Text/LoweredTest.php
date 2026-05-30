@@ -73,4 +73,15 @@ final class LoweredTest extends TestCase
             'cyrillic' => ['ПРИВЕТ'],
         ];
     }
+
+    #[Test]
+    public function ofTextFactoryAgreesWithPrimaryConstructor(): void
+    {
+        $source = TextOf::str('CAFÉ');
+
+        self::assertSame(
+            (new Lowered($source))->value(),
+            Lowered::ofText($source)->value(),
+        );
+    }
 }

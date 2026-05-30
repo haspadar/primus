@@ -100,4 +100,15 @@ final class RepeatedTest extends TestCase
             'unicode' => ['🔥', 3],
         ];
     }
+
+    #[Test]
+    public function ofTextFactoryAgreesWithPrimaryConstructor(): void
+    {
+        $source = TextOf::str('xo');
+
+        self::assertSame(
+            (new Repeated($source, 3))->value(),
+            Repeated::ofText($source, 3)->value(),
+        );
+    }
 }

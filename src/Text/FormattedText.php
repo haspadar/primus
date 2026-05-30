@@ -25,11 +25,13 @@ use Primus\Func\FuncOf;
  *
  * - `new FormattedText(Text, int|float|string ...)` — wrap an existing
  *   {@see Text} pattern.
+ * - `FormattedText::ofText(Text, int|float|string ...)` — named-constructor alias
+ *   of the primary ctor.
  * - `FormattedText::ofString(string, int|float|string ...)` — shortcut that
  *   wraps a native string pattern in {@see TextOf::str()} before formatting.
  *
  * Example:
- *     $text = new FormattedText(
+ *     $text = FormattedText::ofText(
  *         TextOf::str('Hello, %s! You have %d messages.'),
  *         'world',
  *         5,
@@ -55,6 +57,18 @@ final readonly class FormattedText extends TextEnvelope
                 new FuncOf(static fn(string $p): string => sprintf($p, ...$arguments)),
             ),
         );
+    }
+
+    /**
+     * Formats a {@see Text} pattern with the given arguments.
+     *
+     * @param Text $template The sprintf pattern.
+     * @param int|float|string ...$values The values substituted into the pattern.
+     * @psalm-api
+     */
+    public static function ofText(Text $template, int|float|string ...$values): self
+    {
+        return new self($template, ...$values);
     }
 
     /**

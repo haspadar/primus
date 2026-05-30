@@ -22,4 +22,15 @@ final class TextOfScalarTest extends TestCase
             new HasTextValue('hello')
         );
     }
+
+    #[Test]
+    public function scalarFactoryAgreesWithPrimaryConstructor(): void
+    {
+        $scalar = new ScalarOf(static fn(): string => 'hello');
+
+        self::assertSame(
+            (new TextOfScalar($scalar))->value(),
+            TextOfScalar::scalar($scalar)->value(),
+        );
+    }
 }

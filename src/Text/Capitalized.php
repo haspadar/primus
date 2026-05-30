@@ -13,11 +13,12 @@ namespace Primus\Text;
  * Construction forms:
  *
  * - `new Capitalized(Text)` — wrap an existing {@see Text} value.
+ * - `Capitalized::ofText(Text)` — named-constructor alias of the primary ctor.
  * - `Capitalized::ofString(string)` — shortcut that wraps a native string in
  *   {@see TextOf::str()} before capitalising.
  *
  * Example:
- *     $text = new Capitalized(TextOf::str('hello'));
+ *     $text = Capitalized::ofText(TextOf::str('hello'));
  *     echo $text->value(); // 'Hello'
  *
  *     $text = Capitalized::ofString('hello');
@@ -38,6 +39,17 @@ final readonly class Capitalized extends TextEnvelope
                 new Sub($origin, 1),
             ]),
         );
+    }
+
+    /**
+     * Capitalises a {@see Text}.
+     *
+     * @param Text $source The text to capitalise.
+     * @psalm-api
+     */
+    public static function ofText(Text $source): self
+    {
+        return new self($source);
     }
 
     /**

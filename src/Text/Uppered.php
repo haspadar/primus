@@ -14,11 +14,12 @@ use Primus\Func\FuncOf;
  * Construction forms:
  *
  * - `new Uppered(Text)` — wrap an existing {@see Text} value.
+ * - `Uppered::ofText(Text)` — named-constructor alias of the primary ctor.
  * - `Uppered::ofString(string)` — shortcut that wraps a native string in
  *   {@see TextOf::str()} before uppercasing.
  *
  * Example:
- *     $text = new Uppered(TextOf::str('touché résumé'));
+ *     $text = Uppered::ofText(TextOf::str('touché résumé'));
  *     echo $text->value(); // 'TOUCHÉ RÉSUMÉ'
  *
  *     $text = Uppered::ofString('touché résumé');
@@ -39,6 +40,17 @@ final readonly class Uppered extends TextEnvelope
                 new FuncOf(static fn(string $s): string => mb_strtoupper($s, 'UTF-8')),
             ),
         );
+    }
+
+    /**
+     * Uppercases a {@see Text}.
+     *
+     * @param Text $source The text to uppercase.
+     * @psalm-api
+     */
+    public static function ofText(Text $source): self
+    {
+        return new self($source);
     }
 
     /**

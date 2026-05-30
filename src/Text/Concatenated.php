@@ -13,11 +13,12 @@ namespace Primus\Text;
  * Construction forms:
  *
  * - `new Concatenated(Text ...)` — concatenate variadic {@see Text} parts.
+ * - `Concatenated::ofTexts(Text ...)` — named-constructor alias of the primary ctor.
  * - `Concatenated::ofStrings(string ...)` — shortcut that wraps each native
  *   string in {@see TextOf::str()} before concatenating.
  *
  * Example:
- *     $text = new Concatenated(
+ *     $text = Concatenated::ofTexts(
  *         TextOf::str('hello, '),
  *         TextOf::str('world'),
  *     );
@@ -38,6 +39,17 @@ final readonly class Concatenated extends TextEnvelope
     public function __construct(Text ...$parts)
     {
         parent::__construct(new Joined(self::SEPARATOR, array_values($parts)));
+    }
+
+    /**
+     * Concatenates {@see Text} parts in argument order.
+     *
+     * @param Text ...$pieces The texts to concatenate.
+     * @psalm-api
+     */
+    public static function ofTexts(Text ...$pieces): self
+    {
+        return new self(...$pieces);
     }
 
     /**

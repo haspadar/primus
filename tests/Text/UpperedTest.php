@@ -111,4 +111,15 @@ final class UpperedTest extends TestCase
             'cyrillic' => ['привет'],
         ];
     }
+
+    #[Test]
+    public function ofTextFactoryAgreesWithPrimaryConstructor(): void
+    {
+        $source = TextOf::str('touché');
+
+        self::assertSame(
+            (new Uppered($source))->value(),
+            Uppered::ofText($source)->value(),
+        );
+    }
 }

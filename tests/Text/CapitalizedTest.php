@@ -96,4 +96,15 @@ final class CapitalizedTest extends TestCase
             'single char' => ['x'],
         ];
     }
+
+    #[Test]
+    public function ofTextFactoryAgreesWithPrimaryConstructor(): void
+    {
+        $source = TextOf::str('hello');
+
+        self::assertSame(
+            (new Capitalized($source))->value(),
+            Capitalized::ofText($source)->value(),
+        );
+    }
 }
