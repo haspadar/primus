@@ -24,13 +24,13 @@ final class TextOfScalarTest extends TestCase
     }
 
     #[Test]
-    public function scalarFactoryAgreesWithPrimaryConstructor(): void
+    public function ofScalarFactoryAgreesWithPrimaryConstructor(): void
     {
         $scalar = new ScalarOf(static fn(): string => 'hello');
 
         self::assertSame(
             (new TextOfScalar($scalar))->value(),
-            TextOfScalar::scalar($scalar)->value(),
+            TextOfScalar::ofScalar($scalar)->value(),
         );
     }
 }

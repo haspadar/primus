@@ -24,16 +24,16 @@ use Primus\Scalar\Sticky;
  */
 final readonly class RandomText extends TextEnvelope
 {
+    private const string DEFAULT_ALPHABET = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+
     /**
      * Ctor.
      *
      * @param int $length The length of the generated text.
      * @param string $alphabet The characters to pick from.
      */
-    public function __construct(
-        int $length,
-        string $alphabet = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789',
-    ) {
+    public function __construct(int $length, string $alphabet = self::DEFAULT_ALPHABET)
+    {
         parent::__construct(
             TextOf::scalar(
                 new Sticky(
@@ -60,14 +60,12 @@ final readonly class RandomText extends TextEnvelope
     /**
      * Builds a random text of the given length from the alphabet.
      *
-     * @param int $size The length of the generated text.
-     * @param string $charset The characters to pick from.
+     * @param int $length The length of the generated text.
+     * @param string $alphabet The characters to pick from.
      * @psalm-api
      */
-    public static function ofLength(
-        int $size,
-        string $charset = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789',
-    ): self {
-        return new self($size, $charset);
+    public static function ofLength(int $length, string $alphabet = self::DEFAULT_ALPHABET): self
+    {
+        return new self($length, $alphabet);
     }
 }

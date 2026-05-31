@@ -20,7 +20,7 @@ use Primus\Scalar\Scalar;
  * Construction forms:
  *
  * - `new TextOfScalar(Scalar)` — wrap a scalar producing a string.
- * - `TextOfScalar::scalar(Scalar)` — named-constructor alias of the primary ctor.
+ * - `TextOfScalar::ofScalar(Scalar)` — named-constructor alias of the primary ctor.
  *
  * Example:
  *     $text = TextOf::scalar(new ScalarOf(static fn(): string => 'hello'));
@@ -41,7 +41,7 @@ final readonly class TextOfScalar implements Text
      * @param Scalar<string> $source The scalar producing the string value.
      * @psalm-api
      */
-    public static function scalar(Scalar $source): self
+    public static function ofScalar(Scalar $source): self
     {
         return new self($source);
     }
