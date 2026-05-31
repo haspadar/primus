@@ -63,34 +63,36 @@ final class SplitTest extends TestCase
     public function ofTextFactoryAgreesWithPrimaryConstructor(): void
     {
         $source = TextOf::str('a,b,c');
+        $primary = [];
 
-        self::assertSame(
-            self::collect((new Split(',', $source))->value()),
-            self::collect(Split::ofText(',', $source)->value()),
-        );
+        foreach ((new Split(',', $source))->value() as $part) {
+            $primary[] = $part->value();
+        }
+
+        $factory = [];
+
+        foreach (Split::ofText(',', $source)->value() as $part) {
+            $factory[] = $part->value();
+        }
+
+        self::assertSame($primary, $factory);
     }
 
     #[Test]
     public function ofStringFactoryAgreesWithPrimaryConstructor(): void
     {
-        self::assertSame(
-            self::collect((new Split(',', TextOf::str('a,b,c')))->value()),
-            self::collect(Split::ofString(',', 'a,b,c')->value()),
-        );
-    }
+        $primary = [];
 
-    /**
-     * @param iterable<\Primus\Text\Text> $parts
-     * @return list<string>
-     */
-    private static function collect(iterable $parts): array
-    {
-        $result = [];
-
-        foreach ($parts as $part) {
-            $result[] = $part->value();
+        foreach ((new Split(',', TextOf::str('a,b,c')))->value() as $part) {
+            $primary[] = $part->value();
         }
 
-        return $result;
+        $factory = [];
+
+        foreach (Split::ofString(',', 'a,b,c')->value() as $part) {
+            $factory[] = $part->value();
+        }
+
+        self::assertSame($primary, $factory);
     }
 }
