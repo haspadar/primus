@@ -14,11 +14,12 @@ use Primus\Func\FuncOf;
  * Construction forms:
  *
  * - `new Lowered(Text)` — wrap an existing {@see Text} value.
+ * - `Lowered::ofText(Text)` — named-constructor alias of the primary ctor.
  * - `Lowered::ofString(string)` — shortcut that wraps a native string in
  *   {@see TextOf::str()} before lowercasing.
  *
  * Example:
- *     $text = new Lowered(TextOf::str('CAFÉ & TÜRKİYE'));
+ *     $text = Lowered::ofText(TextOf::str('CAFÉ & TÜRKİYE'));
  *     echo $text->value(); // 'café & türkiye'
  *
  *     $text = Lowered::ofString('CAFÉ & TÜRKİYE');
@@ -39,6 +40,17 @@ final readonly class Lowered extends TextEnvelope
                 new FuncOf(static fn(string $s): string => mb_strtolower($s, 'UTF-8')),
             ),
         );
+    }
+
+    /**
+     * Lowercases a {@see Text}.
+     *
+     * @param Text $source The text to lowercase.
+     * @psalm-api
+     */
+    public static function ofText(Text $source): self
+    {
+        return new self($source);
     }
 
     /**

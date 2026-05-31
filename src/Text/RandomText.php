@@ -13,22 +13,27 @@ use Primus\Scalar\Sticky;
  * Creates a text of a given length composed of characters
  * from the specified alphabet.
  *
+ * Construction forms:
+ *
+ * - `new RandomText(int, string = ...)` — generate a random text of given length.
+ * - `RandomText::ofLength(int, string = ...)` — named-constructor alias of the primary ctor.
+ *
  * Example:
- *     $text = new RandomText(8);
+ *     $text = RandomText::ofLength(8);
  *     echo $text->value(); // e.g. 'aZ8mKp2Q'
  */
 final readonly class RandomText extends TextEnvelope
 {
+    private const string DEFAULT_ALPHABET = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+
     /**
      * Ctor.
      *
      * @param int $length The length of the generated text.
      * @param string $alphabet The characters to pick from.
      */
-    public function __construct(
-        int $length,
-        string $alphabet = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789',
-    ) {
+    public function __construct(int $length, string $alphabet = self::DEFAULT_ALPHABET)
+    {
         parent::__construct(
             TextOf::scalar(
                 new Sticky(
@@ -50,5 +55,17 @@ final readonly class RandomText extends TextEnvelope
                 ),
             ),
         );
+    }
+
+    /**
+     * Builds a random text of the given length from the alphabet.
+     *
+     * @param int $length The length of the generated text.
+     * @param string $alphabet The characters to pick from.
+     * @psalm-api
+     */
+    public static function ofLength(int $length, string $alphabet = self::DEFAULT_ALPHABET): self
+    {
+        return new self($length, $alphabet);
     }
 }

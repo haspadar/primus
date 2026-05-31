@@ -84,4 +84,22 @@ final class RandomTextTest extends TestCase
 
         self::assertSame($text->value(), $text->value());
     }
+
+    #[Test]
+    public function ofLengthFactoryAgreesWithPrimaryConstructorOnSize(): void
+    {
+        self::assertSame(
+            mb_strlen((new RandomText(8))->value(), 'UTF-8'),
+            mb_strlen(RandomText::ofLength(8)->value(), 'UTF-8'),
+        );
+    }
+
+    #[Test]
+    public function ofLengthFactoryAgreesWithPrimaryConstructorOnAlphabet(): void
+    {
+        self::assertMatchesRegularExpression(
+            '/^[abc]+$/',
+            RandomText::ofLength(8, 'abc')->value(),
+        );
+    }
 }

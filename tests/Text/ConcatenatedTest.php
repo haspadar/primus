@@ -123,4 +123,25 @@ final class ConcatenatedTest extends TestCase
             'empty string parts' => [['a', '', 'b']],
         ];
     }
+
+    #[Test]
+    public function ofTextsFactoryAgreesWithPrimaryConstructor(): void
+    {
+        $a = TextOf::str('hello, ');
+        $b = TextOf::str('world');
+
+        self::assertSame(
+            (new Concatenated($a, $b))->value(),
+            Concatenated::ofTexts($a, $b)->value(),
+        );
+    }
+
+    #[Test]
+    public function ofTextsFactoryAgreesWithPrimaryConstructorForNoParts(): void
+    {
+        self::assertSame(
+            (new Concatenated())->value(),
+            Concatenated::ofTexts()->value(),
+        );
+    }
 }

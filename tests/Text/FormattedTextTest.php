@@ -90,4 +90,15 @@ final class FormattedTextTest extends TestCase
             'multibyte' => ['café %s', ['привет']],
         ];
     }
+
+    #[Test]
+    public function ofTextFactoryAgreesWithPrimaryConstructor(): void
+    {
+        $pattern = TextOf::str('Hello, %s! You have %d messages.');
+
+        self::assertSame(
+            (new FormattedText($pattern, 'world', 5))->value(),
+            FormattedText::ofText($pattern, 'world', 5)->value(),
+        );
+    }
 }

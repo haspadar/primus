@@ -12,11 +12,12 @@ use Primus\Func\FuncOf;
  * Construction forms:
  *
  * - `new Repeated(Text, int)` — wrap an existing {@see Text} value.
+ * - `Repeated::ofText(Text, int)` — named-constructor alias of the primary ctor.
  * - `Repeated::ofString(string, int)` — shortcut that wraps a native string in
  *   {@see TextOf::str()} before repeating.
  *
  * Example:
- *     $text = new Repeated(TextOf::str('xo'), 3);
+ *     $text = Repeated::ofText(TextOf::str('xo'), 3);
  *     echo $text->value(); // 'xoxoxo'
  *
  *     $text = Repeated::ofString('xo', 3);
@@ -38,6 +39,18 @@ final readonly class Repeated extends TextEnvelope
                 new FuncOf(static fn(string $s): string => str_repeat($s, max(0, $count))),
             ),
         );
+    }
+
+    /**
+     * Repeats a {@see Text}.
+     *
+     * @param Text $source The text to repeat.
+     * @param int $times The number of repetitions.
+     * @psalm-api
+     */
+    public static function ofText(Text $source, int $times): self
+    {
+        return new self($source, $times);
     }
 
     /**

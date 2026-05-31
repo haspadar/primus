@@ -12,11 +12,12 @@ use Primus\Scalar\ScalarOf;
  * Construction forms:
  *
  * - `new Joined(string, list<Text>)` — join an array of {@see Text} parts.
+ * - `Joined::ofTexts(string, list<Text>)` — named-constructor alias of the primary ctor.
  * - `Joined::ofStrings(string, string ...)` — shortcut that wraps each
  *   native string in {@see TextOf::str()} before joining.
  *
  * Example:
- *     $text = new Joined(', ', [TextOf::str('a'), TextOf::str('b'), TextOf::str('c')]);
+ *     $text = Joined::ofTexts(', ', [TextOf::str('a'), TextOf::str('b'), TextOf::str('c')]);
  *     echo $text->value(); // 'a, b, c'
  *
  *     $text = Joined::ofStrings(', ', 'a', 'b', 'c');
@@ -43,6 +44,18 @@ final readonly class Joined extends TextEnvelope
                 )),
             ),
         );
+    }
+
+    /**
+     * Joins {@see Text} parts with a separator.
+     *
+     * @param string $glue The glue inserted between parts.
+     * @param list<Text> $pieces The texts to join.
+     * @psalm-api
+     */
+    public static function ofTexts(string $glue, array $pieces): self
+    {
+        return new self($glue, $pieces);
     }
 
     /**
