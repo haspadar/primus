@@ -49,4 +49,24 @@ final class LeftPaddedTest extends TestCase
             new HasTextValue('......')
         );
     }
+
+    #[Test]
+    public function ofTextFactoryAgreesWithPrimaryConstructor(): void
+    {
+        $source = TextOf::str('foo');
+
+        self::assertSame(
+            (new LeftPadded($source, 6, '.'))->value(),
+            LeftPadded::ofText($source, 6, '.')->value(),
+        );
+    }
+
+    #[Test]
+    public function ofStringFactoryAgreesWithPrimaryConstructor(): void
+    {
+        self::assertSame(
+            (new LeftPadded(TextOf::str('foo'), 6, '.'))->value(),
+            LeftPadded::ofString('foo', 6, '.')->value(),
+        );
+    }
 }

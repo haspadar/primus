@@ -40,4 +40,24 @@ final class HtmlEscapedTest extends TestCase
             new HasTextValue('')
         );
     }
+
+    #[Test]
+    public function ofTextFactoryAgreesWithPrimaryConstructor(): void
+    {
+        $source = TextOf::str('<b>A & B</b>');
+
+        self::assertSame(
+            (new HtmlEscaped($source))->value(),
+            HtmlEscaped::ofText($source)->value(),
+        );
+    }
+
+    #[Test]
+    public function ofStringFactoryAgreesWithPrimaryConstructor(): void
+    {
+        self::assertSame(
+            (new HtmlEscaped(TextOf::str('<b>A & B</b>')))->value(),
+            HtmlEscaped::ofString('<b>A & B</b>')->value(),
+        );
+    }
 }

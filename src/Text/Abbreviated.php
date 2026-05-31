@@ -12,8 +12,15 @@ use Primus\Scalar\ScalarOf;
  * Truncates the origin text to a maximum length and appends an ellipsis.
  * If the text length does not exceed the limit, it is returned unchanged.
  *
+ * Construction forms:
+ *
+ * - `new Abbreviated(Text, int = 50)` — wrap an existing {@see Text} value.
+ * - `Abbreviated::ofText(Text, int = 50)` — named-constructor alias of the primary ctor.
+ * - `Abbreviated::ofString(string, int = 50)` — shortcut that wraps a native
+ *   string in {@see TextOf::str()} before abbreviating.
+ *
  * Example:
- *     $text = new Abbreviated(TextOf::str('Hello, world!'), 8);
+ *     $text = Abbreviated::ofText(TextOf::str('Hello, world!'), 8);
  *     echo $text->value(); // 'Hello, w…'
  */
 final readonly class Abbreviated extends TextEnvelope
@@ -43,5 +50,29 @@ final readonly class Abbreviated extends TextEnvelope
                 ),
             ),
         );
+    }
+
+    /**
+     * Abbreviates a {@see Text} to the given length.
+     *
+     * @param Text $source The text to abbreviate.
+     * @param int $limit The maximum length of the result.
+     * @psalm-api
+     */
+    public static function ofText(Text $source, int $limit = 50): self
+    {
+        return new self($source, $limit);
+    }
+
+    /**
+     * Abbreviates a native string to the given length.
+     *
+     * @param string $value The string to abbreviate.
+     * @param int $limit The maximum length of the result.
+     * @psalm-api
+     */
+    public static function ofString(string $value, int $limit = 50): self
+    {
+        return new self(TextOf::str($value), $limit);
     }
 }

@@ -63,4 +63,24 @@ final class TrimmedLeftTest extends TestCase
             'TrimmedLeft must keep trailing spaces intact'
         );
     }
+
+    #[Test]
+    public function ofTextFactoryAgreesWithPrimaryConstructor(): void
+    {
+        $source = TextOf::str(' hello ');
+
+        self::assertSame(
+            (new TrimmedLeft($source))->value(),
+            TrimmedLeft::ofText($source)->value(),
+        );
+    }
+
+    #[Test]
+    public function ofStringFactoryAgreesWithPrimaryConstructor(): void
+    {
+        self::assertSame(
+            (new TrimmedLeft(TextOf::str(' hello ')))->value(),
+            TrimmedLeft::ofString(' hello ')->value(),
+        );
+    }
 }

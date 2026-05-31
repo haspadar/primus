@@ -31,4 +31,24 @@ final class WithoutTagsTest extends TestCase
             new HasTextValue('safe text 123')
         );
     }
+
+    #[Test]
+    public function ofTextFactoryAgreesWithPrimaryConstructor(): void
+    {
+        $source = TextOf::str('<b>A & B</b>');
+
+        self::assertSame(
+            (new WithoutTags($source))->value(),
+            WithoutTags::ofText($source)->value(),
+        );
+    }
+
+    #[Test]
+    public function ofStringFactoryAgreesWithPrimaryConstructor(): void
+    {
+        self::assertSame(
+            (new WithoutTags(TextOf::str('<b>A & B</b>')))->value(),
+            WithoutTags::ofString('<b>A & B</b>')->value(),
+        );
+    }
 }

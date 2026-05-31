@@ -83,4 +83,35 @@ final class AbbreviatedTest extends TestCase
             'Abbreviated must return an empty string when the limit is zero'
         );
     }
+
+    #[Test]
+    public function ofTextFactoryAgreesWithPrimaryConstructor(): void
+    {
+        $source = TextOf::str('Hello, world!');
+
+        self::assertSame(
+            (new Abbreviated($source, 8))->value(),
+            Abbreviated::ofText($source, 8)->value(),
+        );
+    }
+
+    #[Test]
+    public function ofStringFactoryAgreesWithPrimaryConstructor(): void
+    {
+        self::assertSame(
+            (new Abbreviated(TextOf::str('Hello, world!'), 8))->value(),
+            Abbreviated::ofString('Hello, world!', 8)->value(),
+        );
+    }
+
+    #[Test]
+    public function ofTextFactoryAgreesWithPrimaryConstructorForDefaultLimit(): void
+    {
+        $source = TextOf::str('short');
+
+        self::assertSame(
+            (new Abbreviated($source))->value(),
+            Abbreviated::ofText($source)->value(),
+        );
+    }
 }

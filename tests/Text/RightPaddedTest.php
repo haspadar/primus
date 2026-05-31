@@ -49,4 +49,24 @@ final class RightPaddedTest extends TestCase
             new HasTextValue('...')
         );
     }
+
+    #[Test]
+    public function ofTextFactoryAgreesWithPrimaryConstructor(): void
+    {
+        $source = TextOf::str('foo');
+
+        self::assertSame(
+            (new RightPadded($source, 6, '.'))->value(),
+            RightPadded::ofText($source, 6, '.')->value(),
+        );
+    }
+
+    #[Test]
+    public function ofStringFactoryAgreesWithPrimaryConstructor(): void
+    {
+        self::assertSame(
+            (new RightPadded(TextOf::str('foo'), 6, '.'))->value(),
+            RightPadded::ofString('foo', 6, '.')->value(),
+        );
+    }
 }
