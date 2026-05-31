@@ -14,11 +14,15 @@ use Primus\Func\FuncOf;
  * Position lookup and slicing use {@see mb_strpos()} and {@see mb_substr()},
  * so multibyte characters are preserved as whole units.
  *
+ * Construction forms:
+ *
+ * - `new PrefixOf(Text, Text)` — wrap origin and boundary as {@see Text}.
+ * - `PrefixOf::texts(Text, Text)` — named-constructor alias of the primary ctor.
+ * - `PrefixOf::strings(string, string)` — shortcut that wraps native strings
+ *   in {@see TextOf::str()} before slicing.
+ *
  * Example:
- *     $login = new PrefixOf(
- *         TextOf::str('user@example.com'),
- *         TextOf::str('@'),
- *     );
+ *     $login = PrefixOf::strings('user@example.com', '@');
  *     echo $login->value(); // 'user'
  */
 final readonly class PrefixOf extends TextEnvelope
@@ -47,5 +51,29 @@ final readonly class PrefixOf extends TextEnvelope
                 ),
             ),
         );
+    }
+
+    /**
+     * Extracts the prefix before a boundary in a {@see Text}.
+     *
+     * @param Text $source The text to split.
+     * @param Text $boundary The text that marks the split point.
+     * @psalm-api
+     */
+    public static function texts(Text $source, Text $boundary): self
+    {
+        return new self($source, $boundary);
+    }
+
+    /**
+     * Extracts the prefix before a boundary in a native string.
+     *
+     * @param string $value The string to split.
+     * @param string $boundary The string that marks the split point.
+     * @psalm-api
+     */
+    public static function strings(string $value, string $boundary): self
+    {
+        return new self(TextOf::str($value), TextOf::str($boundary));
     }
 }

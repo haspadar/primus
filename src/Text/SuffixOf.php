@@ -14,11 +14,15 @@ use Primus\Func\FuncOf;
  * use {@see mb_strpos()} and {@see mb_substr()}, so multibyte characters are
  * preserved as whole units.
  *
+ * Construction forms:
+ *
+ * - `new SuffixOf(Text, Text)` — wrap origin and boundary as {@see Text}.
+ * - `SuffixOf::texts(Text, Text)` — named-constructor alias of the primary ctor.
+ * - `SuffixOf::strings(string, string)` — shortcut that wraps native strings
+ *   in {@see TextOf::str()} before slicing.
+ *
  * Example:
- *     $domain = new SuffixOf(
- *         TextOf::str('user@example.com'),
- *         TextOf::str('@'),
- *     );
+ *     $domain = SuffixOf::strings('user@example.com', '@');
  *     echo $domain->value(); // 'example.com'
  */
 final readonly class SuffixOf extends TextEnvelope
@@ -56,5 +60,29 @@ final readonly class SuffixOf extends TextEnvelope
                 ),
             ),
         );
+    }
+
+    /**
+     * Extracts the suffix after a boundary in a {@see Text}.
+     *
+     * @param Text $source The text to split.
+     * @param Text $boundary The text that marks the split point.
+     * @psalm-api
+     */
+    public static function texts(Text $source, Text $boundary): self
+    {
+        return new self($source, $boundary);
+    }
+
+    /**
+     * Extracts the suffix after a boundary in a native string.
+     *
+     * @param string $value The string to split.
+     * @param string $boundary The string that marks the split point.
+     * @psalm-api
+     */
+    public static function strings(string $value, string $boundary): self
+    {
+        return new self(TextOf::str($value), TextOf::str($boundary));
     }
 }

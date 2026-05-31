@@ -95,4 +95,25 @@ final class PrefixOfTest extends TestCase
             new HasTextValue('')
         );
     }
+
+    #[Test]
+    public function textsFactoryAgreesWithPrimaryConstructor(): void
+    {
+        $source = TextOf::str('user@example.com');
+        $boundary = TextOf::str('@');
+
+        self::assertSame(
+            (new PrefixOf($source, $boundary))->value(),
+            PrefixOf::texts($source, $boundary)->value(),
+        );
+    }
+
+    #[Test]
+    public function stringsFactoryAgreesWithPrimaryConstructor(): void
+    {
+        self::assertSame(
+            (new PrefixOf(TextOf::str('user@example.com'), TextOf::str('@')))->value(),
+            PrefixOf::strings('user@example.com', '@')->value(),
+        );
+    }
 }

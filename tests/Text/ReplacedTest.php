@@ -53,4 +53,24 @@ final class ReplacedTest extends TestCase
             new HasTextValue('')
         );
     }
+
+    #[Test]
+    public function ofTextFactoryAgreesWithPrimaryConstructor(): void
+    {
+        $source = TextOf::str('hello world');
+
+        self::assertSame(
+            (new Replaced($source, 'world', 'PHP'))->value(),
+            Replaced::ofText($source, 'world', 'PHP')->value(),
+        );
+    }
+
+    #[Test]
+    public function ofStringFactoryAgreesWithPrimaryConstructor(): void
+    {
+        self::assertSame(
+            (new Replaced(TextOf::str('hello world'), 'world', 'PHP'))->value(),
+            Replaced::ofString('hello world', 'world', 'PHP')->value(),
+        );
+    }
 }

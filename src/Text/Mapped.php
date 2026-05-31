@@ -13,8 +13,13 @@ use Primus\Scalar\ScalarOf;
  * Stores no extra fields — the function is captured inside a lazy scalar
  * and the envelope delegates every projection to it.
  *
+ * Construction forms:
+ *
+ * - `new Mapped(Text, Func)` — wrap an existing {@see Text} value and mapper.
+ * - `Mapped::ofText(Text, Func)` — named-constructor alias of the primary ctor.
+ *
  * Example:
- *     $text = new Mapped(
+ *     $text = Mapped::ofText(
  *         TextOf::str('hello'),
  *         new FuncOf(strtoupper(...)),
  *     );
@@ -35,5 +40,17 @@ final readonly class Mapped extends TextEnvelope
                 new ScalarOf(static fn(): string => $func->apply($origin->value())),
             ),
         );
+    }
+
+    /**
+     * Transforms the value of a {@see Text} through a {@see Func}.
+     *
+     * @param Text $source The text whose value is transformed.
+     * @param Func<string, string> $mapper The transformation function.
+     * @psalm-api
+     */
+    public static function ofText(Text $source, Func $mapper): self
+    {
+        return new self($source, $mapper);
     }
 }

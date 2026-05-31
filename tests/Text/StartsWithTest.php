@@ -58,4 +58,25 @@ final class StartsWithTest extends TestCase
             (new StartsWith(TextOf::str('привет мир'), TextOf::str('привет')))->value(),
         );
     }
+
+    #[Test]
+    public function ofTextsFactoryAgreesWithPrimaryConstructor(): void
+    {
+        $haystack = TextOf::str('hello world');
+        $needle = TextOf::str('hello');
+
+        self::assertSame(
+            (new StartsWith($haystack, $needle))->value(),
+            StartsWith::ofTexts($haystack, $needle)->value(),
+        );
+    }
+
+    #[Test]
+    public function ofStringsFactoryAgreesWithPrimaryConstructor(): void
+    {
+        self::assertSame(
+            (new StartsWith(TextOf::str('hello world'), TextOf::str('hello')))->value(),
+            StartsWith::ofStrings('hello world', 'hello')->value(),
+        );
+    }
 }

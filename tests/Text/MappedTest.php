@@ -56,4 +56,16 @@ final class MappedTest extends TestCase
 
         self::assertSame(1, $calls);
     }
+
+    #[Test]
+    public function ofTextFactoryAgreesWithPrimaryConstructor(): void
+    {
+        $source = TextOf::str('hello');
+        $mapper = new FuncOf(strtoupper(...));
+
+        self::assertSame(
+            (new Mapped($source, $mapper))->value(),
+            Mapped::ofText($source, $mapper)->value(),
+        );
+    }
 }

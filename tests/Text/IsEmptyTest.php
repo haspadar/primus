@@ -52,4 +52,24 @@ final class IsEmptyTest extends TestCase
             'double zero' => ['00'],
         ];
     }
+
+    #[Test]
+    public function ofTextFactoryAgreesWithPrimaryConstructor(): void
+    {
+        $source = TextOf::str('');
+
+        self::assertSame(
+            (new IsEmpty($source))->value(),
+            IsEmpty::ofText($source)->value(),
+        );
+    }
+
+    #[Test]
+    public function ofStringFactoryAgreesWithPrimaryConstructor(): void
+    {
+        self::assertSame(
+            (new IsEmpty(TextOf::str('0')))->value(),
+            IsEmpty::ofString('0')->value(),
+        );
+    }
 }

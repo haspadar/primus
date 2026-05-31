@@ -58,4 +58,24 @@ final class IsBlankTest extends TestCase
     {
         self::assertFalse((new IsBlank(TextOf::str('привет')))->value());
     }
+
+    #[Test]
+    public function ofTextFactoryAgreesWithPrimaryConstructor(): void
+    {
+        $source = TextOf::str(" \t\n");
+
+        self::assertSame(
+            (new IsBlank($source))->value(),
+            IsBlank::ofText($source)->value(),
+        );
+    }
+
+    #[Test]
+    public function ofStringFactoryAgreesWithPrimaryConstructor(): void
+    {
+        self::assertSame(
+            (new IsBlank(TextOf::str(" \t\n")))->value(),
+            IsBlank::ofString(" \t\n")->value(),
+        );
+    }
 }

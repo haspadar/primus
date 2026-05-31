@@ -14,8 +14,15 @@ use Primus\Scalar\ScalarOf;
  * for UTF-8 because UTF-8 sequences cannot overlap byte boundaries of
  * other sequences.
  *
+ * Construction forms:
+ *
+ * - `new StartsWith(Text, Text)` — wrap haystack and prefix as {@see Text}.
+ * - `StartsWith::ofTexts(Text, Text)` — named-constructor alias of the primary ctor.
+ * - `StartsWith::ofStrings(string, string)` — shortcut that wraps native strings
+ *   in {@see TextOf::str()} before checking.
+ *
  * Example:
- *     $starts = new StartsWith(TextOf::str('hello world'), TextOf::str('hello'));
+ *     $starts = StartsWith::ofStrings('hello world', 'hello');
  *     echo $starts->value(); // true
  *
  * @extends ScalarEnvelope<bool>
@@ -35,5 +42,29 @@ final readonly class StartsWith extends ScalarEnvelope
                 static fn(): bool => str_starts_with($haystack->value(), $needle->value()),
             ),
         );
+    }
+
+    /**
+     * Tells whether a {@see Text} starts with a prefix.
+     *
+     * @param Text $haystack The text to inspect.
+     * @param Text $needle The prefix to look for.
+     * @psalm-api
+     */
+    public static function ofTexts(Text $haystack, Text $needle): self
+    {
+        return new self($haystack, $needle);
+    }
+
+    /**
+     * Tells whether a native string starts with a prefix.
+     *
+     * @param string $haystack The string to inspect.
+     * @param string $needle The prefix to look for.
+     * @psalm-api
+     */
+    public static function ofStrings(string $haystack, string $needle): self
+    {
+        return new self(TextOf::str($haystack), TextOf::str($needle));
     }
 }
