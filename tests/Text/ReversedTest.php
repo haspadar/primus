@@ -56,4 +56,24 @@ final class ReversedTest extends TestCase
             new HasTextValue("\u{0301}efac")
         );
     }
+
+    #[Test]
+    public function ofTextFactoryAgreesWithPrimaryConstructor(): void
+    {
+        $source = TextOf::str('café');
+
+        self::assertSame(
+            (new Reversed($source))->value(),
+            Reversed::ofText($source)->value(),
+        );
+    }
+
+    #[Test]
+    public function ofStringFactoryAgreesWithPrimaryConstructor(): void
+    {
+        self::assertSame(
+            (new Reversed(TextOf::str('café')))->value(),
+            Reversed::ofString('café')->value(),
+        );
+    }
 }

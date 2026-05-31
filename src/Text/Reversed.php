@@ -16,8 +16,15 @@ use Primus\Func\FuncOf;
  * (NFD form, e.g. "e" + U+0301) are reordered separately from their base
  * character. Pre-normalize to NFC if grapheme stability is required.
  *
+ * Construction forms:
+ *
+ * - `new Reversed(Text)` — wrap an existing {@see Text} value.
+ * - `Reversed::ofText(Text)` — named-constructor alias of the primary ctor.
+ * - `Reversed::ofString(string)` — shortcut that wraps a native string in
+ *   {@see TextOf::str()} before reversing.
+ *
  * Example:
- *     $text = new Reversed(TextOf::str('café'));
+ *     $text = Reversed::ofText(TextOf::str('café'));
  *     echo $text->value(); // 'éfac'
  */
 final readonly class Reversed extends TextEnvelope
@@ -37,5 +44,27 @@ final readonly class Reversed extends TextEnvelope
                 ),
             ),
         );
+    }
+
+    /**
+     * Reverses character order in a {@see Text}.
+     *
+     * @param Text $source The text to reverse.
+     * @psalm-api
+     */
+    public static function ofText(Text $source): self
+    {
+        return new self($source);
+    }
+
+    /**
+     * Reverses character order in a native string.
+     *
+     * @param string $value The string to reverse.
+     * @psalm-api
+     */
+    public static function ofString(string $value): self
+    {
+        return new self(TextOf::str($value));
     }
 }

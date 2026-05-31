@@ -31,4 +31,24 @@ final class TrimmedTest extends TestCase
             new HasTextValue('')
         );
     }
+
+    #[Test]
+    public function ofTextFactoryAgreesWithPrimaryConstructor(): void
+    {
+        $source = TextOf::str(' hello ');
+
+        self::assertSame(
+            (new Trimmed($source))->value(),
+            Trimmed::ofText($source)->value(),
+        );
+    }
+
+    #[Test]
+    public function ofStringFactoryAgreesWithPrimaryConstructor(): void
+    {
+        self::assertSame(
+            (new Trimmed(TextOf::str(' hello ')))->value(),
+            Trimmed::ofString(' hello ')->value(),
+        );
+    }
 }

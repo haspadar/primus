@@ -75,4 +75,24 @@ final class TrimmedRightTest extends TestCase
             'TrimmedRight must throw an exception on malformed UTF-8 input'
         );
     }
+
+    #[Test]
+    public function ofTextFactoryAgreesWithPrimaryConstructor(): void
+    {
+        $source = TextOf::str(' hello ');
+
+        self::assertSame(
+            (new TrimmedRight($source))->value(),
+            TrimmedRight::ofText($source)->value(),
+        );
+    }
+
+    #[Test]
+    public function ofStringFactoryAgreesWithPrimaryConstructor(): void
+    {
+        self::assertSame(
+            (new TrimmedRight(TextOf::str(' hello ')))->value(),
+            TrimmedRight::ofString(' hello ')->value(),
+        );
+    }
 }

@@ -75,4 +75,24 @@ final class NormalizedTest extends TestCase
             'Normalized must throw an exception on malformed UTF-8 input'
         );
     }
+
+    #[Test]
+    public function ofTextFactoryAgreesWithPrimaryConstructor(): void
+    {
+        $source = TextOf::str(" Hello \n\t world ");
+
+        self::assertSame(
+            (new Normalized($source))->value(),
+            Normalized::ofText($source)->value(),
+        );
+    }
+
+    #[Test]
+    public function ofStringFactoryAgreesWithPrimaryConstructor(): void
+    {
+        self::assertSame(
+            (new Normalized(TextOf::str(" Hello \n\t world ")))->value(),
+            Normalized::ofString(" Hello \n\t world ")->value(),
+        );
+    }
 }
