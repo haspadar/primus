@@ -25,13 +25,15 @@ use Primus\Scalar\ScalarOf;
  */
 final readonly class Abbreviated extends TextEnvelope
 {
+    private const int DEFAULT_LIMIT = 50;
+
     /**
      * Ctor.
      *
      * @param Text $origin The text to abbreviate.
      * @param int $limit The maximum length of the result.
      */
-    public function __construct(Text $origin, int $limit = 50)
+    public function __construct(Text $origin, int $limit = self::DEFAULT_LIMIT)
     {
         parent::__construct(
             TextOf::scalar(
@@ -59,7 +61,7 @@ final readonly class Abbreviated extends TextEnvelope
      * @param int $limit The maximum length of the result.
      * @psalm-api
      */
-    public static function ofText(Text $source, int $limit = 50): self
+    public static function ofText(Text $source, int $limit = self::DEFAULT_LIMIT): self
     {
         return new self($source, $limit);
     }
@@ -71,7 +73,7 @@ final readonly class Abbreviated extends TextEnvelope
      * @param int $limit The maximum length of the result.
      * @psalm-api
      */
-    public static function ofString(string $value, int $limit = 50): self
+    public static function ofString(string $value, int $limit = self::DEFAULT_LIMIT): self
     {
         return new self(TextOf::str($value), $limit);
     }
