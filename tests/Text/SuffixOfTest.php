@@ -95,4 +95,25 @@ final class SuffixOfTest extends TestCase
             new HasTextValue('')
         );
     }
+
+    #[Test]
+    public function textsFactoryAgreesWithPrimaryConstructor(): void
+    {
+        $source = TextOf::str('user@example.com');
+        $boundary = TextOf::str('@');
+
+        self::assertSame(
+            (new SuffixOf($source, $boundary))->value(),
+            SuffixOf::texts($source, $boundary)->value(),
+        );
+    }
+
+    #[Test]
+    public function stringsFactoryAgreesWithPrimaryConstructor(): void
+    {
+        self::assertSame(
+            (new SuffixOf(TextOf::str('user@example.com'), TextOf::str('@')))->value(),
+            SuffixOf::strings('user@example.com', '@')->value(),
+        );
+    }
 }

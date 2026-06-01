@@ -58,4 +58,41 @@ final class SplitTest extends TestCase
             new HasTextValues(['a', '', 'b', ''])
         );
     }
+
+    #[Test]
+    public function ofTextFactoryAgreesWithPrimaryConstructor(): void
+    {
+        $source = TextOf::str('a,b,c');
+        $primary = [];
+
+        foreach ((new Split(',', $source))->value() as $part) {
+            $primary[] = $part->value();
+        }
+
+        $factory = [];
+
+        foreach (Split::ofText(',', $source)->value() as $part) {
+            $factory[] = $part->value();
+        }
+
+        self::assertSame($primary, $factory);
+    }
+
+    #[Test]
+    public function ofStringFactoryAgreesWithPrimaryConstructor(): void
+    {
+        $primary = [];
+
+        foreach ((new Split(',', TextOf::str('a,b,c')))->value() as $part) {
+            $primary[] = $part->value();
+        }
+
+        $factory = [];
+
+        foreach (Split::ofString(',', 'a,b,c')->value() as $part) {
+            $factory[] = $part->value();
+        }
+
+        self::assertSame($primary, $factory);
+    }
 }

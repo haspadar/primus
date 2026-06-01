@@ -58,4 +58,25 @@ final class EndsWithTest extends TestCase
             (new EndsWith(TextOf::str('привет мир'), TextOf::str('мир')))->value(),
         );
     }
+
+    #[Test]
+    public function ofTextsFactoryAgreesWithPrimaryConstructor(): void
+    {
+        $haystack = TextOf::str('hello world');
+        $needle = TextOf::str('world');
+
+        self::assertSame(
+            (new EndsWith($haystack, $needle))->value(),
+            EndsWith::ofTexts($haystack, $needle)->value(),
+        );
+    }
+
+    #[Test]
+    public function ofStringsFactoryAgreesWithPrimaryConstructor(): void
+    {
+        self::assertSame(
+            (new EndsWith(TextOf::str('hello world'), TextOf::str('world')))->value(),
+            EndsWith::ofStrings('hello world', 'world')->value(),
+        );
+    }
 }

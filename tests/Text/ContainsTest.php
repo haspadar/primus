@@ -58,4 +58,25 @@ final class ContainsTest extends TestCase
             (new Contains(TextOf::str('привет мир'), TextOf::str('ет ми')))->value(),
         );
     }
+
+    #[Test]
+    public function ofTextsFactoryAgreesWithPrimaryConstructor(): void
+    {
+        $haystack = TextOf::str('hello world');
+        $needle = TextOf::str('lo wo');
+
+        self::assertSame(
+            (new Contains($haystack, $needle))->value(),
+            Contains::ofTexts($haystack, $needle)->value(),
+        );
+    }
+
+    #[Test]
+    public function ofStringsFactoryAgreesWithPrimaryConstructor(): void
+    {
+        self::assertSame(
+            (new Contains(TextOf::str('hello world'), TextOf::str('lo wo')))->value(),
+            Contains::ofStrings('hello world', 'lo wo')->value(),
+        );
+    }
 }

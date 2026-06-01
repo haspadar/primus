@@ -40,4 +40,24 @@ final class SubTest extends TestCase
             new HasTextValue('😀b')
         );
     }
+
+    #[Test]
+    public function ofTextFactoryAgreesWithPrimaryConstructor(): void
+    {
+        $source = TextOf::str('hello world');
+
+        self::assertSame(
+            (new Sub($source, 0, 5))->value(),
+            Sub::ofText($source, 0, 5)->value(),
+        );
+    }
+
+    #[Test]
+    public function ofStringFactoryAgreesWithPrimaryConstructor(): void
+    {
+        self::assertSame(
+            (new Sub(TextOf::str('hello world'), 0, 5))->value(),
+            Sub::ofString('hello world', 0, 5)->value(),
+        );
+    }
 }
